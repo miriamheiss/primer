@@ -233,17 +233,17 @@ You should have done the following:
 
   - Installed the *latest* versions of R and RStudio.
 
-  - Installed, from CRAN, the **remotes** package:
-
-```{r, eval = FALSE}
-install.packages("remotes")
-```
-
   - Installed, from Github, the **primer.tutorials** package:
 
 ```{r, eval = FALSE}
 remotes::install_github("PPBDS/primer.tutorials")
 ```
+
+  - Run this command to set up RStudio:
+  
+```{r, eval = FALSE}
+primer.tutorials::prep_rstudio_settings()
+``` 
 
   - Learned some basic terminology that will help you when you read the rest of the *Primer*.
 
