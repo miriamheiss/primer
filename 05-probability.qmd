@@ -17,13 +17,6 @@ library(gtsummary)
 library(patchwork)
 ```
 
-<!-- Yuhan: Once I try to renv:restore terra package didn't seems to work. -->
-
-<!-- Yuhan: In addition, when I try to download the package rgl it doesn't seems to work. Maybe this is the problem? -->
-
-<!-- Yuhan: testing for git push. -->
-
-<!-- For some reason, this now fails regularly with an error like "Error: C stack usage  8727068 is too close to the limit". Something has changed since June 2021. Highest priority is fixing this. Googling around it seems like others have seen this problem. Google also suggests that the cause is a recursive function call of some kind. For now, I have commented out the three or four places where plot_gg() is used. That has made the problem go away, but at the cost of losing our cool 3D plots. -->
 
 <!-- Major change is that each example needs to have a simple question. Then it needs a DGM. Then we use the DGM to answer the question.  -->
 
@@ -58,7 +51,7 @@ library(patchwork)
 
 The central tension, and opportunity, in data science is the interplay between the *data* and the *science*, between our empirical observations and the models which we use to understand them. Probability is the language we use to explore that interplay; it connects models to data, and data to models.
 
-What does it mean that Trump had a *30% chance* of winning election in the fall of 2016? That there is a *90% probability* of rain today? That the dice at the casino are *fair*? 
+What does it mean that Donald Trump had a *30% chance* of winning election in the fall of 2016? That there is a *90% probability* of rain today? That the dice at the casino are *fair*? 
 
 Probability quantifies uncertainty. Think of *probability* as a proportion. The probability of an event occurring is a number from 0 to 1, where 0 means that the event is impossible and 1 means that the event is 100% certain.
 
@@ -74,7 +67,7 @@ $$
 \rho_{die\ roll\ is\ 1,\ 2\ or\ 3} = 0.5
 $$
 
-We will rarely write out the full definition of the event with the $\rho$ symbol.  Instead, we will define an event "a" as when a rolled die equals 1, 2 or 3 and, then, write 
+We will rarely write out the full definition of the event with the $\rho$ symbol.  Instead, we will define an event *a* as the case when one rolled die equals 1, 2 or 3 and, then, write 
 
 $$\rho_a = 0.5$$
 
@@ -249,7 +242,9 @@ Assume that a probability distribution is created by a *probability function*, a
 
 We discuss three types of probability distributions: *empirical*, *mathematical*, and *posterior*. 
 
-The key difference between a *distribution*, as we have explored them in @sec-distributions, and a *probability* distribution is the requirement that the sum of the probabilities of the individual outcomes must be exactly 1. There is no such requirement for a distribution in general. But any distribution can be turned into a probability distribution by "normalizing" it.  In this context, we will often refer to a distribution which is not (yet) a probability distribution as an "unnormalized" distribution.  
+The key difference between a *distribution*, as we have explored them in @sec-distributions, and a *probability* distribution is the requirement that the sum of the probabilities of the individual outcomes must be exactly 1. There is no such requirement for a distribution in general. But any distribution can be turned into a probability distribution by "normalizing" it.  In this context, we will often refer to a distribution which is not (yet) a probability distribution as an "unnormalized" distribution.
+
+<!-- Should we be using the symbol rho and then speaking "PT"? -->
 
 Pay attention to notation. Recall that when we are talking about a specific probability (represented by a single value), we will use $\rho$ (the Greek letter "rho") with a *subscript* which specifies the exact outcome of which it is the probability. For instance, $\rho_h = 0.5$ denotes the probability of getting heads on a coin toss when the coin is fair. $\rho_t$ --- spoken as "PT" or "P sub T" or "P tails" --- denotes the probability of getting tails on a coin toss. However, when we are referring to the entire probability distribution over a set of outcomes, we will use $P()$. For example, the probability distribution of a coin toss is $P(\text{coin})$. That is, $P(\text{coin})$ is composed of the two specific probabilities (50% and 50%) mapped from the two values in the domain (Heads and Tails). Similarly, $P(\text{sum of two dice})$ is the probability distribution over the set of 11 outcomes (2 through 12) which are possible when you take the sum of two dice. $P(\text{sum of two dice})$ is made up of 11 numbers --- $\rho_2$,  $\rho_3$, ..., $\rho_{12}$ --- each representing the unknown probability that the sum will equal their value. That is, $\rho_2$ is the probability of rolling a 2.
 
@@ -264,7 +259,7 @@ An *empirical distribution* is based on data. You can think of this as the proba
 
 In this simulation, there are 56 heads and 44 tails. The outcome will vary every time we run the simulation, but the proportion of heads to tails should not be too different if this coin is fair.
 
-```{r}
+```{r, echo = FALSE}
 # We are flipping one fair coin a hundreds times. We need to get the same result
 # each time we create this graphic because we want the results to match the
 # description in the text. Using set.seed() guarantees that the random results
@@ -319,7 +314,7 @@ We sometimes do not know that the probability of heads and the probability of ta
 
 $$ P(Y = y) = \begin{cases} \rho_H &\text{for }y= \text{Heads}\\ \rho_T &\text{for }y= \text{Tails} \end{cases}$$
 
-Yet, we know that, by definition, $\rho_H + \rho_T = 1$, so we can rewrite the above asL
+Yet, we know that, by definition, $\rho_H + \rho_T = 1$, so we can rewrite the above as:
 
 $$ P(Y = y) = \begin{cases} \rho_H &\text{for }y= \text{Heads}\\ 1- \rho_H &\text{for }y= \text{Tails} \end{cases}$$
 
@@ -361,6 +356,8 @@ ggplot(aes(x = results)) +
   theme_classic()
 ```
 
+The fact that you friend wants to bet on heads suggests to you that the coin is not fair.
+
 The full terminology is mathematical (or empirical or posterior) *probability* distribution. But we will often shorten this to just mathematical (or empirical or posterior) distribution. The word "probability" is understood, even if it is not present.
 
 <!-- DK: Not sure I like this. Maybe use `rbinom(n = 10, size = 13, prob = 0.5)` instead? Maybe show both? -->
@@ -388,7 +385,7 @@ tibble(toss_1 = rbinom(n = 1000, size = 1, prob = 0.5),
   summarize(chance = mean(three_heads))
 ```
 
-This is close enough to the correct answer of $1/8$th. If we increase the sample size, we will get closer to the truth. 
+This is close to the correct answer of $1/8$th. If we increase the number of draws, we will get closer to the truth. 
 
 This is our first example of using a data generating mechanism --- meaning `rbinom()` --- to answer a question. We will see many more in the chapters to come.
 
@@ -397,7 +394,7 @@ This is our first example of using a data generating mechanism --- meaning `rbin
 
 We get an *empirical distribution* by rolling two dice a hundred times, either by hand or with a computer simulation. The result is not identical to the mathematical distribution because of the inherent randomness of the real world and/or of simulation. 
 
-```{r}
+```{r, echo = FALSE}
 # In the coin example, we create the vector ahead of time, and then assigned
 # that vector to a tibble. There was nothing wrong with that approach. And we
 # could do the same thing here. But the use of map_* functions is more powerful,
@@ -419,8 +416,7 @@ emp_dist_dice <- tibble(ID = 1:100) |>
          x = "Outcome\nSum of Two Die",
          y = "Probability") +
     scale_x_continuous(breaks = seq(2, 12, 1), labels = 2:12) +
-    scale_y_continuous(labels = 
-                         scales::percent_format(accuracy = 1)) +
+    scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
     theme_classic()
 
 emp_dist_dice
@@ -1678,11 +1674,14 @@ A probability distribution is not always easy to work with. It is a complex obje
 
 
 ```{r, echo = FALSE}
-# DK: This code is a mess! Please fix!
+# DK: This code is a mess! Please fix! Store this data locally so that we can
+# run it when not connected to the internet.
 
-# Have to include otherwise shows up coloumns specification.
+# Have to include otherwise shows up columns specification.
 
-z <- read_csv("https://raw.githubusercontent.com/PPBDS/primer/master/05-probability/data/election-forecasts-2020/prez_1.csv", 
+
+
+z <- read_csv("./05-probability/data/election-forecasts-2020/prez_1.csv",
               col_types = cols(cycle = col_double(),
                                branch = col_character(),
                                model = col_character(),
@@ -1697,18 +1696,18 @@ z <- read_csv("https://raw.githubusercontent.com/PPBDS/primer/master/05-probabil
                                timestamp = col_character(),
                                simulations = col_double()
                                )) |>
-       select(evprob_chal, total_ev)  |> 
-       rename(prob = evprob_chal, electoral_votes = total_ev) |> 
-       mutate(obs = round(prob * 1000000))  |> 
-       select(-prob) |> 
-       uncount(weights = obs) |> 
+       select(evprob_chal, total_ev)  |>
+       rename(prob = evprob_chal, electoral_votes = total_ev) |>
+       mutate(obs = round(prob * 1000000))  |>
+       select(-prob) |>
+       uncount(weights = obs) |>
        pull(electoral_votes)
 
 
 
 draws <- tibble(ID = 1:1000000,
-                electoral_votes = as.integer(sample(z)))                     
-                          
+                electoral_votes = as.integer(sample(z)))
+
 ```
 
 ```{r}

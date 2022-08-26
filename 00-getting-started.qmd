@@ -4,7 +4,9 @@ The world confronts us. Make decisions we must.
 
 ### Installing R and RStudio {.unnumbered}
 
-```{r, echo = FALSE, fig.cap = "Analogy of difference between R and RStudio."}
+<!-- Change the graphic so that the words are the top are: "R is like car's engine." and "RStudio is like a car's dashboard." -->
+
+```{r, echo = FALSE}
 knitr::include_graphics("00-getting-started/images/R_vs_RStudio_1.png")
 ```
 

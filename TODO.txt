@@ -1,5 +1,8 @@
 # Priorities
 
+
+Store all data locally so that we can run everything when not connected to the internet. Maybe also don't require live connections in Chapter 3? See discussion in Data tutorials.
+
 Fix this warning:
 
 [WARNING] Citeproc: Citation with no printed form: 
