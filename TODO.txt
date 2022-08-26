@@ -14,6 +14,8 @@ Figure out what quarto.yml settings are defaults and get rid of those. Explain o
 
 Shotcut key in tutorials produces %>% instead of |>
 
+Might be cool to figure out all the places which, implicitly, mention the current year (like 2022 in RCM chapter) as well as, implicitly, future years --- and then automatically generate them based on a default value given somewhere. Then, in four months, we change 2022 to 2023 --- maybe via "parameters" --- and everything just works.
+
 Lots of tutorials, like Webscraping, don't provide the button for easy use of previous answer.
 
 I dislike it when Run Code does not produce anything even when the answer is correct. How should we deal with this? Might at least warn students that no output is expected.
