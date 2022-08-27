@@ -209,7 +209,7 @@ Observe that `urn` has `r scales::comma(nrow(urn))` rows, meaning that the urn c
 
 Note that in this section, we used the variable `bead_ID` to keep track of each bead in our urn, while in the last section we used `group_ID` to keep track of the samples drawn by the 33 individual teams. This is a better strategy than naming both variables `ID`, as it would be much more likely for us to get them confused later on. 
 
-Our virtual urn needs a virtual shovel. We use `slice_sample()` and list-column mapping wizardry learned in @sec-rlist-columns-and-map-functions to take a sample of 50 beads from our virtual urn.  
+Our virtual urn needs a virtual shovel. We use `slice_sample()` and some list-column mapping wizardry learned in @sec-rlist-columns-and-map-functions to take a sample of 50 beads from our virtual urn.  
 
 ```{r}
 # Define trial_ID as one instance of us sampling 50 beads from the urn. When

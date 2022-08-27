@@ -47,6 +47,9 @@ library(patchwork)
 <!-- Rethinking Chapter 2. Garden of forking data is just excellent stuff. -->
 <!-- Bayesian Workshop -->
 
+<!-- Get rid of list-columns stuff? -->
+
+
 > The usual touchstone of whether what someone asserts is mere persuasion or at least a subjective conviction, i.e., firm belief, is betting. Often someone pronounces his propositions with such confident and inflexible defiance that he seems to have entirely laid aside all concern for error. A bet disconcerts him. Sometimes he reveals that he is persuaded enough for one ducat but not for ten. For he would happily bet one, but at ten he suddenly becomes aware of what he had not previously noticed, namely that it is quite possible that he has erred. -— Immanuel Kant, *Critique of Pure Reason*
 
 The central tension, and opportunity, in data science is the interplay between the *data* and the *science*, between our empirical observations and the models which we use to understand them. Probability is the language we use to explore that interplay; it connects models to data, and data to models.
@@ -356,7 +359,7 @@ ggplot(aes(x = results)) +
   theme_classic()
 ```
 
-The fact that you friend wants to bet on heads suggests to you that the coin is not fair.
+The fact that your friend wants to bet on heads suggests to you that the coin is not fair. Does it *prove* that the coin is unfair? No! Much depends on the sort of person you think your friend is. *Your* posterior probability distribution is *your* opinion, based on *your* experiences and belief. *My* posterior probability distribution will often be (very) different.
 
 The full terminology is mathematical (or empirical or posterior) *probability* distribution. But we will often shorten this to just mathematical (or empirical or posterior) distribution. The word "probability" is understood, even if it is not present.
 
@@ -385,9 +388,18 @@ tibble(toss_1 = rbinom(n = 1000, size = 1, prob = 0.5),
   summarize(chance = mean(three_heads))
 ```
 
-This is close to the correct answer of $1/8$th. If we increase the number of draws, we will get closer to the truth. 
+This is close to the "correct" answer of $1/8$th. If we increase the number of draws, we will get closer to the "truth." The reason for the quotation marks around "correct" and "truth" is that we are uncertain. We don't know the *true* probability distribution for this coin. If this coin is a trick coin --- like the one we expect our friend to have brought to school --- then the odds of three heads in a row would be much higher:
 
-This is our first example of using a data generating mechanism --- meaning `rbinom()` --- to answer a question. We will see many more in the chapters to come.
+
+```{r}
+tibble(toss_1 = rbinom(n = 1000, size = 1, prob = 0.95),
+       toss_2 = rbinom(n = 1000, size = 1, prob = 0.95),
+       toss_3 = rbinom(n = 1000, size = 1, prob = 0.95)) |> 
+  mutate(three_heads = toss_1 + toss_2 + toss_3 == 3) |> 
+  summarize(chance = mean(three_heads))
+```
+
+This is our first example of using a *data generating mechanism* --- meaning `rbinom()` --- to answer a question. We will see many more in the chapters to come.
 
 
 ### Rolling two dice
@@ -453,7 +465,7 @@ $$ P(Y = y) = \begin{cases} \dfrac{y-1}{36} &\text{for }y=1,2,3,4,5,6 \\ \dfrac{
 
 
 
-The *posterior distribution* for rolling two dice a hundred times depends on your beliefs. If you take the dice from your Monopoly set, you have reason to believe that the assumptions underlying the mathematical distribution are true. However, if you walk into a crooked casino and a host asks you to play craps, you might be suspicious, just as in the "flipping a coin example" the word "suspicious" means you no longer trust the "population" where the mathematical and empircal distribution drawn their data from. For example, in craps, a come-out roll of 7 and 11 is a "natural," resulting in a win for the "shooter" and a loss for the casino. You might expect those numbers to occur less often than they would with fair dice. Meanwhile, a come-out roll of 2, 3 or 12 is a loss for the shooter. You might also expect values like 2, 3 and 12 to occur more frequently. Your posterior distribution might look like this:
+The *posterior distribution* for rolling two dice a hundred times depends on your beliefs. If you take the dice from your Monopoly set, you have reason to believe that the assumptions underlying the mathematical distribution are true. However, if you walk into a crooked casino and a host asks you to play craps, you might be suspicious, just as in the flipping a coin example above. The word "suspicious" means that you suspect that the data generating mechanism for these dice is not like that for honest dice. For example, in craps, a "come-out" roll of 7 and 11 is a "natural," resulting in a win for the "shooter" and a loss for the casino. You might expect those numbers to occur less often than they would with fair dice. Meanwhile, a come-out roll of 2, 3 or 12 is a loss for the shooter. You might also expect values like 2, 3 and 12 to occur more frequently. Your posterior distribution might look like this:
 
 ```{r, echo = FALSE}
 # Hard code our posterior about the crooked casino.
@@ -479,20 +491,23 @@ tibble(results = c(rep(2, 15), rep(3, 15), rep(4, 7),
 
 Someone less suspicious of the casino would have a posterior distribution which looks more like the mathematical distribution.
 
+<!-- Add a question and then the solution here. -->
+
 ### Presidential elections
 
 Now let's say we are building probability distributions for political events, like a presidential election. We want to know the probability that Democratic candidate wins X electoral votes, where X comes from the range of possible outcomes: 0 to 538. (The total number of electoral votes in US elections since 1964 is 538.)
 
-The *empirical distribution* in this case could involve looking into past elections in the United States and counting the number of electoral votes that the Democrats won in each. For the empirical distribution, we create a tibble with electoral vote results from past elections. Looking at elections since 1964, we can observe that the number of electoral votes that the Democrats received in each one is different. Given that we only have 15 entries, it is difficult to draw conclusions or make predictions based off of this empirical distribution.
+The *empirical distribution* in this case could involve looking into past elections in the United States and counting the number of electoral votes that the Democrats won in each. For the empirical distribution, we create a tibble with electoral vote results from past elections. Looking at elections since 1964, we can observe that the number of electoral votes that the Democrats received in each one is different. Given that we only have 15 observations, it is difficult to draw conclusions or make predictions based off of this empirical distribution.
 
 
 ```{r, echo = FALSE}
 # Votes are since 1964, for Democratic candidate
 
-mydata <- tibble(electoral_votes = c(486,191,17,297,49,13,111,370,379,
-                      266,251,365,332,227,306))
+mydata <- tibble(electoral_votes = c(486, 191, 17, 297, 49, 13, 111, 
+                                     370, 379, 266, 251, 365, 332, 
+                                     227, 306))
 
-#306 is electoral votes for Joe Biden in 2020 presidential election.
+# 306 is electoral votes for Joe Biden in 2020 presidential election.
 
 ggplot(mydata, aes(x = electoral_votes)) +
   geom_histogram(aes(y = after_stat(count/sum(count))), 
@@ -513,7 +528,9 @@ We can build a *mathematical distribution* for X which assumes that the chances 
 
 ```{r, echo = FALSE}
 # rep(3,8) means there are 8 states that have 3 electoral votes, via the same for the rest of the code chunck.
-# We use c() to make the rep() functions together, so that we can use it in tibble().
+# We use c() to make the rep() functions together, so that we can use it in tibble(). 
+
+# I think these electoral votes are for 2016. Probably should update them for post 2020 census.
 
 ev <- c(rep(3, 8), rep(4, 5), rep(5, 3), rep(6, 6), rep(7, 3), rep(8,2),
         rep(9, 3), rep(10, 4), rep(11, 4), 12, 13, 14, 15, rep(16, 2), 18, 20 , 20, 19, 29, 38, 55)
@@ -537,9 +554,9 @@ ggplot(data = result, aes(total)) +
 
 ```
 
-If our assumptions about this mathematical distribution are correct (they are not), then as the sample size increase, the empirical distribution should look more and more similar to the our mathematical distribution. 
+If our assumptions about this mathematical distribution are correct (they are not!), then as the sample size increase, the empirical distribution should look more and more similar to the our mathematical distribution. 
 
-However, the data from past elections is more than enough to demonstrate that the assumptions of the mathematical probability distribution above do not work for electoral votes. The model assumes that the Democrats have a 50% chance of receiving each of the 538 votes. Just looking at the mathematical probability distribution, we can observe that receiving 13 or 17 or 486 votes out of 538 would be extreme and almost impossible if the mathematical model were accurate. However, our empirical distribution shows that such extreme outcomes are quite common. Presidential elections have resulted in much bigger victories or defeats than this distribution seems to allow for.
+However, the data from past elections is more than enough to demonstrate that the assumptions of the mathematical probability distribution above do not work for electoral votes. The model assumes that the Democrats have a 50% chance of receiving each of the 538 votes. Just looking at the mathematical probability distribution, we can observe that receiving 13 or 17 or 486 votes out of 538 would be extreme and almost impossible if the mathematical model were accurate. However, our empirical distribution shows that such extreme outcomes are quite common. Presidential elections have resulted in much bigger victories or defeats than this mathematical distribution seems to allow for, thereby demonstrating that our assumptions are false.
 
 
 The *posterior distribution* of electoral votes is a popular topic, and an area of strong disagreement, among data scientists. Consider this posterior from *FiveThirtyEight*.
@@ -581,13 +598,13 @@ read_csv("./05-probability/data/election-forecasts-2020/prez_1.csv",
 ```
 
 
-Here is a posterior from the FiveThirtyEight website from August 13, 2020. This was created using the same data as the above distribution, but simply displayed differently. For each electoral result, the height of the bar represents the probability that a given event will occur. However, there are no lablels y-axis telling us what the specific probability of each outcome is. And that is OK! The specific values are not that useful. If we removed the labels on our y-axes, would it matter?
+Below is a posterior probability distribution from the FiveThirtyEight website for August 13, 2020. This was created using the same data as the above distribution, but simply displayed differently. For each electoral result, the height of the bar represents the probability that a given event will occur. However, there are no lablels on the y-axis telling us what the specific probability of each outcome is. And that is OK! The specific values are not that useful. If we removed the labels on our y-axes, would it matter?
 
 ```{r, echo = FALSE, caption = "FiveThirtyEight Posterior from August 13, 2020"}
 knitr::include_graphics("05-probability/images/fivethirtyeight.png")
 ```
 
-Here is the posterior from *The Economist*, also from August 13, 2020. This looks confusing at first because they chose to merge the axes for Republican and Democratic electoral votes. We can tell that *The Economist* was less optimistic, relative to *FiveThirtyEight*, about Trump's chances in the election.
+Below is the posterior probability distribution from *The Economist*, also from August 13, 2020. This looks confusing at first because they chose to combine the axes for Republican and Democratic electoral votes. *The Economist* was less optimistic, relative to *FiveThirtyEight*, about Trump's chances in the election.
 
 ```{r, echo = FALSE, caption = "Economist Posterior from August 13, 2020"}
 knitr::include_graphics("05-probability/images/economist_aug13.png")
@@ -599,14 +616,18 @@ These two models, built by smart people using similar data sources, have reached
 knitr::include_graphics("05-probability/images/538_versus_Economist.png")
 ```
 
-There are many political science questions you could explore with posterior distributions. They can relate to the past, present, or future.
+There are many questions you could explore with posterior distributions. They can relate to the past, present, or future.
 
 * Past: How many electoral votes would Hilary Clinton have won if she had picked a different VP?
-* Present: What are the total campaign donations from Harvard faculty?
+* Present: What are the total campaign donations from Simmons faculty?
 * Future: How many electoral votes will the Democratic candidate for president win in 2024?
+
+<!-- Add a question and then use a dgm to answer it. -->
 
 
 ### Height
+
+<!-- This section is poorly written, but at least it begins with a question. -->
 
 Question: *What is the height of the next adult male we will meet?*
 
@@ -615,10 +636,10 @@ The three examples above are all *discrete* probability distributions, meaning t
 All the characteristics for discrete probability distributions which we reviewed above apply just as much to continuous probability distributions. For example, we can create mathematical, empirical and posterior probability distributions for continuous outcomes just as we did for discrete outcomes.
 
 
-The *empirical distribution* involves using data from the National Health and Nutrition Examination Survey (NHANES). What we are doing here is instead making an model by ourself using some mathematical formula, we use the actual data, we can get the data from either simulated by our own like in the "flipping a coin" and "Rolling two dice" scenario, or we used the data from someone else, like the presidential election and this scenario. 
+The *empirical distribution* involves using data from the National Health and Nutrition Examination Survey (NHANES). 
 
 ```{r echo = FALSE}
-# Use nhanes dataset for this exercise, filter out Adult Male.
+# Use nhanes dataset for this exercise, filter for Adult Male.
 
 nhanes |>
   filter(gender == "Male", age >= 18) |>
@@ -665,7 +686,7 @@ tibble(height = rnorm(1000000, mean = 175, sd = 9)) |>
 
 Again, the Normal distribution which is an probability distribution that is symmetric about the mean is described by this formula. 
 
-$$y_i \sim N(\mu, \sigma^2)$$. 
+$$y_i \sim N(\mu, \sigma^2)$$
 
 Each value $y_i$ is drawn from a normal distribution with parameters $\mu$ for the mean and $\sigma$ for the standard deviation. If the mathematical assumptions are correct in this case the two parameters $\mu$ and $\sigma$, then as our sample size increases, the empirical probability distribution will look more and more like the mathematical distribution. 
 
@@ -723,11 +744,9 @@ Recall that $P(\text{coin})$ is the probability distribution for the result of a
 
 Joint distributions are also mathematical objects that cover a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1 and the sum of all chances must equal 1. The key to a joint distribution is it measures the chance that both events A and B will occur. The notation is $P(A, B)$.
 
-Let's say that you are rolling two six-sided dice simultaneously. Die 1 is weighted so that there is a 50% chance of rolling a 6 and a 10% chance of each of the other values. Die 2 is weighted so there is a 50% chance of rolling a 5 and a 10% chance of rolling each of the other values. Let's roll both dice 1,000 times. In previous examples involving two dice, we cared about the sum of results and not the outcomes of the first versus the second die of each simulation. With a joint distributions, the order matters; so instead of 11 possible outcomes on the x-axis of our distribution plot (ranging from 2 to 12), we have 36. Furthermore, a 2D probability distribution is not sufficient to represent all of the variables involved, so the joint distribution for this example is displayed using a 3D plot.
+Let's say that you are rolling two six-sided dice simultaneously. Die 1 is weighted so that there is a 50% chance of rolling a 6 and a 10% chance of each of the other values. Die 2 is weighted so there is a 50% chance of rolling a 5 and a 10% chance of rolling each of the other values. Let's roll both dice 1,000 times. In previous examples involving two dice, we cared about the sum of results and not the outcomes of the first versus the second die of each simulation. With a joint distributions, the outcomes for individual die matter; so instead of 11 possible outcomes on the x-axis of our distribution plot (ranging from 2 to 12), we have 36 outcomes. Furthermore, a 2D probability distribution is not sufficient to represent all of the variables involved, so the joint distribution for this example is displayed using a 3D plot.
 
 ```{r, echo = FALSE}
-# Yuhan: This stopped working sometime in the last year. Not sure why.
-
 # DK: Revisit and clean up this code.
 
 # Step 1: Create and organize the data.
@@ -766,12 +785,12 @@ plot_gg(mtplot,
          windowsize = c(2048,1536)) # Resolution
  
 # # Step 4: Embed plot in Rmd file.
-# 
+
 rglwidget()
-# 
+
 # # Step 5: Close the "RGL Device" window by running this command. Do
 # # this EVERY time before you try to create a new 3D plot.
-# 
+
 rgl.close()
 ```
 
@@ -786,20 +805,22 @@ The probability of a random person having the disease is 0.6. Since each person 
 knitr::include_graphics("05-probability/images/tree-2.png")
 ```
 
-* *If* the random person has the disease, then we go up the top branch. The probability of an infected person testing positive is 0.8 because the test is 80% sure of correctly returning positive when the person has the disease.
+* If a person has the disease, then we go up the top branch. The probability of an infected person testing positive is 0.8 because the test is 80% sure of correctly returning positive when the person has the disease.
 
-* By the same logic, *if* the random person does not have the disease, we go down the bottom branch. The probability of the person incorrectly testing positive is 0.1.
+* By the same logic, if a person does not have the disease, we go down the bottom branch. The probability of the person incorrectly testing positive is 0.1.
 
-We decide to go down the top branch *if* our random person has the disease. We go down the bottom branch *if* they do not. This is called **conditional probability**. The probability of testing positive is **dependent** on whether the person has the disease.
+We decide to go down the top branch *if* our random person has the disease. We go down the bottom branch *if* they do not. This is **conditional probability**. The probability of testing positive is **dependent** on whether the person has the disease.
 
-How would you express this in statistical notation? $P(A|B)$ is the same thing as the probability of A *given* B. $P(A|B)$ essentially means the probability of A *if* we know for sure the value of B. Note that $P(A|B)$ is not the same thing as $P(B|A)$.
+How would you express this in statistical notation? $P(A|B)$ is the same thing as the probability of A *given* B. $P(A|B)$ means the probability of A *if* we know for sure the value of B. Note that $P(A|B)$ is not the same thing as $P(B|A)$.
 
-In summary, we work with three main categories of probability distributions. First, p(A) is the probability distribution for event A. This is sometimes refered to as a *univariate* probability distribution because there is only one random variable. Second, p(A, B) is the joint probability distribution of A and B. Third, p(A | B) is the conditional probability distribution of A given that B has taken on a specific value. This is often written as p(A | B = b).
+There are three main categories of probability distributions: univariate, joint and condictional. $p(A)$ is the probability distribution for event A. This is a *univariate* probability distribution because there is only one random variable. $p(A, B)$ is the *joint* probability distribution of A and B. $p(A | B)$ is the conditional probability distribution of A given that B has taken on a specific value. This is often written as $p(A | B = b)$.
 
 
-## List-columns and map functions
+## List-columns and map functions {#sec-rlist-columns-and-map-functions}
 
-Before working with probability models, we need to expand our collection of R tricks by understanding list-columns and `map_*` functions. Recall that a list is different from an atomic vector. In atomic vectors, each element of the vector has one value.  Lists, however, can contain vectors, and even more complex objects, as elements.
+<!-- Could we get rid of all of this? How useful is it to learn these tricks if we will just be using rstanarm and friends after Chapter 6? -->
+
+We need to expand our collection of R tricks by learning about list-columns and `map_*` functions. Recall that a list is different from an atomic vector. In atomic vectors, each element of the vector has one value.  Lists, however, can contain vectors, and even more complex objects, as elements.
 
 ```{r}
 x <- list(c(4, 16, 9), c("A", "Z"))
@@ -812,13 +833,17 @@ x
 x[[1]]
 ```
 
-There are a number of built-in R functions that output lists. For example, the ***ggplot*** objects you have been making store all of the plot information in lists. Any function that returns multiple values can be used to create a list output by wrapping that returned object with `list()`.
+There are a number of built-in R functions that output lists. For example, ***ggplot*** objects store all of the plot information in a list. Any function that returns multiple values can be used to create a list output by wrapping that returned object with `list()`.
 
 
 ```{r}
 x <- rnorm(10)
 
 # range() returns the min and max of the argument 
+
+range(x)
+
+# We can create a tibble which includes the results of range(x)
 
 tibble(col_1 = list(range(x))) 
 ```
@@ -830,7 +855,10 @@ Notice this is a 1-by-1 tibble with one observation, which is a list of one elem
 A list column is a column of your data which is a [list](https://adv-r.hadley.nz/vectors-chap.html#lists) rather than an atomic vector.  As with stand-alone list objects, you can pipe to `str()` to examine the column.
 
 ```{r}
-# tibble() is what we use to generate a tibble, it acts sort of like the mutate(), but mutate() needs a data frame to add new column, tibble can survive on itself.
+# tibble() is what we use to generate a tibble, it acts sort of like the
+# mutate(), but mutate() needs a data frame to add new column, tibble can
+# survive on itself.
+
 tibble(col_1 = list(range(x))) |>
   str()
 ```
@@ -840,6 +868,7 @@ We can use `map_*` functions to both create a list-column and then, much more im
 
 ```{r}
 # .x is col_1 from tibble and ~ sum(.) is the formula
+
 tibble(col_1 = list(range(x))) |>
   mutate(col_2 = map_dbl(col_1, ~ sum(.))) |> 
   str()
@@ -847,9 +876,7 @@ tibble(col_1 = list(range(x))) |>
 
 `map_*` functions, like `map_dbl()` in this example, take two key arguments, `.x` (the data which will be acted on) and `.f` (the function which will act on this data). Here, `.x` is the data in `col_1`, which is a list-column. `.f` is the function `sum()`. However, we can not simply write `map_dbl(col_1, sum)`. Instead, each use of `map_*` functions requires the use of a tilde --- a `~` --- to indicate the start of the function and the use of a dot --- a `.` --- to specify where the data goes in the function.
 
-`map_*` functions are a family of functions, with the suffix specifying the type of the object to be returned. `map()` itself returns a list. `map_dbl()` returns a double. `map_int()` returns an integer. `map_chr()` returns a character, and so on.
-
-To summarise `map` function and `map_`* functions could both convert an data (vector or list) with the specific denoted functions or formula you set, and always results in list we called the  "list Column". There are two arguments in the `map()` function as well as `map_*()` function the `.x` and `.f`, the `.x` and `.f` placed in the `map()` functions and `map_*()`functions like this `map(.x,.f)`, where `.x` could either be a list or a vector, and `.f` either be a direct function like `.f=mean`, or an formula like `.f= ~mean(.x)`, remember to put the `~` if you are using `.f` an formula, the difference between `map` and `map_*` function is when you know and want the outcome of the data to be specific data vector like (`double`, `logical`,`character`,`integer`) rather than an general `list` in `map()`, you can use `map_*` instead of `map` to organized your list column.
+`map_*` functions are a family of functions, with the suffix specifying the type of the object to be returned. `map()` itself returns a list. `map_dbl()` returns a double. `map_int()` returns an integer. `map_chr()` returns a character, and so on. Example:
 
 
 ```{r}
@@ -862,7 +889,6 @@ tibble(ID = 1) |>
 ```
 
 Consider a more detailed example:
-
 
 ```{r}
 # This simple example demonstrates the workflow which we will often follow.
@@ -1127,13 +1153,6 @@ ggplot(aes(sum)) +
 
 
 <!-- DK: Insert a use of this posterior? How many positive tests before you have at least 10 sick people? -->
-
-
-This Stat 110 Animations video does a really good job of explaining similar concepts.
-
-```{r, echo = FALSE}
-knitr::include_app("https://www.youtube.com/embed/by3_weGwnMg")
-```
 
 ## Three models
 
