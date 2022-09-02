@@ -50,7 +50,6 @@ book:
     - 09-four-parameters.qmd
     - 10-five-parameters.qmd
     - 11-n-parameters.qmd
-    - style-guide.qmd
     - set-up.qmd
     - references.qmd
 
