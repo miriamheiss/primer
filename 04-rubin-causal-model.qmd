@@ -131,20 +131,20 @@ Again, are these 100 students randomly sampled? Could we estimate the 90th perce
 
 ### Population Table
 
-The Population Table is distinct from the Preceptor Table. The aim of the Population Table is to illustrate the broader population we are interested in, while including the data from our Preceptor Table and dataset. This table has three sources of data: the data for units we want to have (the Preceptor Table), the data for units which we actually have (our actual data), and the data for units we do not care about (the rest of the population, not included in the data or the Preceptor Table).  
+The *Population Table* is distinct from the Preceptor Table. The aim of the Population Table is to illustrate the broader population in which we are interested, while also including the data from our Preceptor Table and from our dataset. This table has three sources of data: the data for units we *want to have* (the Preceptor Table), the data for units which we *actually have* (our actual data), and the data for units we *do not care about* (the rest of the population, not included in the data or the Preceptor Table).  
 
-Our Preceptor Table rows contain the information that we would want to know in order to answer our questions. These rows contain entries for our covariates (year and age) but they do not contain any outcome results (height). We are trying to answer questions about the height of Simmons students in 2022, so our Age column will read somewhere between 15 and 27 and our Year entries for these rows will read "2022."
+The rows in the Preceptor Table contain the information that we would want to know in order to answer our questions. These rows contain entries for our covariates (year and age) but they do not contain any outcome results (height). We are trying to answer questions about the height of Simmons students in 2022, so our Age column will read somewhere between 15 and 27 and our Year entries for these rows will read "2022."
 
 <!-- Sloppy use of both year (to mean the variable) and Year (to mean the column in the table). -->
 
-Our actual data rows contain the information that we do know. These rows contain entries for both our covariates and the outcomes. In this case, the actual data comes from a survey of Simmons students in 2015, so Age column age of those students in 2015 --- none of whom are still at Simmons --- and the Year value for these rows will be "2015."
+Our actual data rows contain the information that we do know. These rows contain entries for both our covariates and the outcomes. In this case, the actual data comes from a survey of Simmons students in 2015, so Age value for those students  --- none of whom are still at Simmons --- will be their ages in 2015, and the Year value for these rows will be "2015."
 
 <!-- Should we be quoting 2015? -->
 
 
 <!-- Do we need to add ID to this table? To any/all Population Tables? -->
 
-Our Population rows contain no data. These are subjects which fall under our desired population, but for which we have no data. As such, all values, other than year, are missing.
+Our Population rows contain no data. These are subjects which fall within our population, but for which we have no data. As such, all values, other than year, are missing.
 
 ```{r, echo = FALSE}
 tibble(source = c("Population", "...",  "Data", "Data", 
@@ -172,11 +172,11 @@ tibble(source = c("Population", "...",  "Data", "Data",
   fmt_markdown(columns = everything())  
 ```
 
-Implicit in the Preceptor Table is a notion of time. Now that we can see our actual data compared with our greater population and our desired data, we must expand our observations. That is to say that, given our data is sourced from 2015 and our desired data is from 2022, we must include a greater time span in our predictions. 
+Implicit in the Preceptor Table is a notion of time. Now that we can see our actual data compared with our greater population and our desired data, we must expand our observations. That is to say that, given our data is sourced from 2015 and our desired data is from 2022, we must include a greater time span in our population. 
 
 <!-- AWK phrasing above and, even more, below. -->
 
-As such, we will see that rows from our larger population may include anywhere between 2010 and 2025. This is a ballpark range. Height is relatively stable, so it is simpler to expand the timeframe. The greater sense of time in future problems will depend on that individual circumstance. 
+As such, we will see that rows from our larger population may include anywhere between 2010 and 2025. This is a ballpark range. Height is relatively stable, so it is reasonable to assume that the population is stable ove a longer time period. 
 
 ## Causal effect
 
