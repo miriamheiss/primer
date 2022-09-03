@@ -227,11 +227,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./style-guide.html" class="sidebar-item-text sidebar-link">Style Guide</a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./set-up.html" class="sidebar-item-text sidebar-link">Set Up for Working on The Primer</a>
   </div>
 </li>
@@ -425,15 +420,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 33 × 4
    group           red_beads prop_red group_ID
    &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
- 1 Katie, Anthony         20     0.4         1
- 2 Ellie, Terrance        17     0.34        2
- 3 Sanjana, Yuko          19     0.38        3
- 4 Maddie, Brent          19     0.38        4
- 5 Mark, Jane             21     0.42        5
- 6 Conrad, Vlad           16     0.32        6
- 7 Yao, Kate              23     0.46        7
- 8 Ian, Iman              18     0.36        8
- 9 Ilyas, Yohan           21     0.42        9
+ 1 Dohyun, Estel          18     0.36        1
+ 2 Aayush, Karen          15     0.3         2
+ 3 Ian, Iman              18     0.36        3
+ 4 Maeve, Josh            18     0.36        4
+ 5 Aaron, Mike            11     0.22        5
+ 6 Ellie, Terrance        17     0.34        6
+ 7 Siobhan, Jane          11     0.22        7
+ 8 Esther, Henry          17     0.34        8
+ 9 Ishan, Cass            15     0.3         9
 10 Ace, Chris             18     0.36       10
 # … with 23 more rows</code></pre>
 </div>
@@ -511,7 +506,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Observe that <code>urn</code> has 1,000 rows, meaning that the urn contains 1,000 beads. The first variable <code>bead_ID</code> is used as an <em>identification variable</em>. None of the beads in the actual urn are marked with numbers. The second variable <code>color</code> indicates whether a particular virtual bead is red or white.</p>
 <p>Note that in this section, we used the variable <code>bead_ID</code> to keep track of each bead in our urn, while in the last section we used <code>group_ID</code> to keep track of the samples drawn by the 33 individual teams. This is a better strategy than naming both variables <code>ID</code>, as it would be much more likely for us to get them confused later on.</p>
-<p>Our virtual urn needs a virtual shovel. We use <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample()</a></code> and list-column mapping wizardry learned in <span class="quarto-unresolved-ref">?sec-rlist-columns-and-map-functions</span> to take a sample of 50 beads from our virtual urn.</p>
+<p>Our virtual urn needs a virtual shovel. We use <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample()</a></code> and some list-column mapping wizardry learned in <a href="05-probability.html#sec-rlist-columns-and-map-functions"><span>Section&nbsp;5.3</span></a> to take a sample of 50 beads from our virtual urn.</p>
 <div class="cell">
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Define trial_ID as one instance of us sampling 50 beads from the urn. When</span></span>
 <span><span class="co"># trial_ID is called within map(), we are performing slice_sample() upon our urn</span></span>
