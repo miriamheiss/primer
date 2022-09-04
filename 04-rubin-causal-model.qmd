@@ -9,6 +9,8 @@ library(gtsummary)
 ```
 
 
+<!-- Assumptions section needs work, especially representativeness. Unconfoundedness is not great either. -->
+
 <!-- Replace 6,700 with number of students at Simmons. -->
 
 <!-- Maybe the whole chapter should begin with simple prediction, with only one possible outcome Y. Then, the step to mutiple potential outcomes is clearer. Might even explain mutiple units at the start. We already sort of do that with the height example. Just make it more explicit. All examples have a predictive version and a causal version. Start with Yao. We might just care about predicting Yao's attitude toward immigration, given that we know he did not receive the treatment. That is a predictive problem, like predicting Andy's height. Only after understanding that, do we try to look at the causal question. We do this a bit at the end of the Multiple Units section. -->
@@ -98,6 +100,8 @@ tibble(ID = c("Robert", "Andy", "Beau", "Ishan", "Nicholas"),
 In this case, we have a row for each brother and a column for their heights. An individual *unit* is a brother. An *outcome* is that brother's height. We will always have an ID column in Preceptor Tables so that we can identify different units. It is always furthest to the left. In addition to an ID column, we will always have an Outcome column displaying the main variable of interest. For simplicity, we often leave out the ID column in this chapter. But it is always there in the background. It must be possible for us to tell apart the different units.
 
 To calculate the average height, we need to know Andy's height -- our missing data. Keep in mind that there is a *truth* out there, a state of the world independent of our knowledge of it. Andy is a specific height. If we had a complete Preceptor Table, with no missing values, we could calculate the average height of the brothers exactly. No fancy statistics would be needed, just arithmetic.
+
+Implicitly in every Preceptor Table is a notion of time. When, exactly, are we making this prediction? Since heights of adults change very, very slowly, we can ignore for this problem whether or not we are making this prediction tomorrow or a year from now. But, if we really want to know the average height of the brothers 40 years from now, we would need to adjust our estimate since people shrink with age.
 
 
 ### Simmons Height
@@ -884,13 +888,11 @@ In this example, there is indeed a constant treatment effect for everyone: $+3$.
 
 ## Assumptions
 
-In this section, we will explore four topics: validity, stability, representativeness and unconfoundedness. Consider new Population Table. 
+In this section, we will explore four topics: validity, stability, representativeness and unconfoundedness. 
 
-### Population Table
+Our earlier Population Table familiarized us with the three sources of data for which we are making inferences: the Preceptor Table, our data, the greater population from which both are drawn. Consider a new Population Table.   
 
-Our earlier Population Table familiarized us with the three sources of data for which we are making inferences: our data, the greater population, and the Preceptor Table. 
-
-The rows from our data have covariates and one potential outcome. The rows from the Preceptor Table include covariates, but not outcomes. The rows from our greater population include no data, as we know nothing about these units. 
+<!-- Seems like we should add ID and time columns, place them toward the left and then put year there. Year is *not* just another covariate. -->
 
 ```{r, echo = FALSE}
 # First, we create a tibble with the values we want for the table
@@ -941,10 +943,14 @@ tibble(source = c("Population", "Population", "...",
     tab_spanner(label = "$$\\text{Covariates}$$", c(sex))
 ```
 
+The rows from our data have covariates and one potential outcome. (By definition, no real data can include more than one potential outcome.) The rows from the Preceptor Table include covariates, but not outcomes. The rows from our greater population include no data, as we know nothing about these units. 
+
 <!-- More detail here? Calling it a Population Table and having only some rows with "Population" as a source seems suspect. -->
 
 
 ### Validity 
+
+<!-- Need a gif of three sources be stacked together, but only if validity is true. -->
 
 To understand *validity* in regards to the Population Table, we must first recognize an inherent flaw in any experiment design: *no two units receive exactly the same treatment*.
 
@@ -957,9 +963,9 @@ Consider different volume levels, measured in decibels (dB), at which Spanish is
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
-       ytreat = c("13", "11", "?", "?", "6"),
-       ytreat1001 = c("?", "?", "?", "?", "?"),
-       ytreat1002 = c("?", "?", "?", "?", "?"),
+       ytreat = c("13", "?", "?", "?", "?"),
+       ytreat1001 = c("?", "11", "?", "?", "?"),
+       ytreat1002 = c("?", "?", "?", "?", "6"),
        yellipsis = c("?", "?", "?", "?", "?"),
        ycontrol = c("?", "?", "10", "12", "?")) %>%
   
@@ -987,11 +993,10 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
 
 Certain units heard the Spanish-speakers at higher volumes than other units. And it is entirely possible that the volume of the speech affects the outcome. There is also the issue of the time spent on the platform. Maybe Yao tends to run late, and only hears the Spanish-speakers for thirty seconds. Emma, on the other hand, arrives early. She hears the Spanish-speakers for fifteen minutes before the train arrives!  Thus, despite the fact that Emma and Yao are in the same treatment --- that is, hearing Spanish on the platform --- they had very different versions of that treatment. 
 
-Indeed, there are an infinite number of possible treatments. This is why it is crucial to define one's estimand precisely: if we are interested in the difference in potential outcomes between Spanish being spoken for 10 minutes at a 60 dB versus control, we can ignore all the other possible columns in the Population Table.
+Indeed, there are an infinite number of possible treatments. Indeed, it is a virtual certainty that *every treated unit received a different treatment.* Hoever, *validity*, if reasonable assumption in this specific example, allows us to pretend/assume that Yao, Emma and Diego all received the same treatment. We place all their treated outcomes in the same column. Only if this is true (or true'ish) can we estimate an average treatment effect. 
 
-More commonly, we simply assume that all treated units received the same treatment. *Validity allows us to ignore variation in treatment.* 
+More commonly, we simply assume that all treated units received the same treatment. *Validity allows us to ignore variation in treatment.* In fact, concerns about validity apply to all the variables (covariates and outcomes), not just the treatments. If the columns in the data are not the same thing as the columns in the Preceptor Table, you have a problem. Validity is the assumption which allows us to create the Population Table.
 
-<!-- Explain what valdity means! -->
 
 ### Stability
 
@@ -1001,39 +1006,34 @@ Stability means that the relationship between the columns is the same for three 
 
 In our height example, it is much easier to assume stability over a greater period of time. Changes in global height occur extremely slowly, so height being stable across a span of 20 years is reasonable to assume. Can we say the same for this example, where we are looking at attitudes on immigration? 
 
-With something like political ideology, it is much harder to assert that data collected in 2010 would be similar to data collected in 2025. Our data, for instance, was collected in 2014. We want to make predictions for 2022. And, frankly, it may be difficult to argue that our results would be stable if we re-conducted the experiment. 
+With something like political ideology, it is much harder to assert that the relationships among the data collected in 2010 would be similar to the relationships among the data collected in 2025. Our data, for instance, was collected in 2014. We want to make predictions for 2022. And, frankly, it may be difficult to argue that our results would be stable if we re-conducted the experiment. 
 
 When we are confronted with this uncertainty, we can consider making our timeframe smaller. However, we would still need to assume stability from 2014 (time of data collection) to today. *Stability allows us to ignore the passage of time.* 
 
-Alternatively, if we believe that it is unlikely that our columns are stable, we have two choices. First, we abandon the experiment. If we believe our data is useless, so is our experiment. Second, we can choose to provide a sort of warning message with our conclusions: *this is based on data from ten years ago, but that was the most recent data available to us.*
-
-
-When creating models, we will ask ourselves:
-
-* Are the units from X years ago likely to have similar outcomes in future year Y?
-* Has the world changed drastically from year Z, when the data was collected? 
-
-When we decide that Yao from today and Yao from a week in the future are *stable*, we can collapse the two units into one unit. This is an assumption we make when forming our Population Table. 
 
 ### Representativeness
 
-The external validity of a study is often directly related to the representativeness of our sample. Representativeness has to do with how well our sample represents the larger population we are interested in generalizing to. 
+<!-- Should we use the word unbiasedness instead? -->
 
-Does the train experiment allow us to calculate a causal effect for people who commute by cars? Can we calculate the causal effect for people in New York City? Before we generalize to broader populations we have to consider if our experimental estimates are applicable beyond our experiment. Maybe we think that commuters in Boston and New York are similar enough to generalize our findings. We could also conclude that people who commute by car are fundamentally different than people who commute by train. If that was true, then we could not say our estimate is true for all commuters because our sample does not accurately represent the broader group we want to generalize to.
+<!-- Subtle issue is that problems can arise because the data is not representative of either the Preceptor Table or the population. Hmmm. Is that really true? -->
+
+Representativeness, or the lack thereof, is the relationship between the rows in the Population Table with our data and the other rows. Ideally, we would like our data to be a random sample from the population. Sadly, this is almost never the case.
+
+Does the train experiment allow us to calculate a causal effect for people who commute by cars? Can we calculate the causal effect for people in New York City? Before we generalize to broader populations we have to consider if our experimental estimates are applicable beyond our experiment. Maybe we think that commuters in Boston and New York are similar enough to generalize our findings. We could also conclude that people who commute by car are fundamentally different than people who commute by train. If that was true, then we could not say our estimate is true for all commuters because our sample does not accurately *represent* the broader group we want to generalize to.
 
 <!-- Generally: *if there was no chance that a certain type of person would have been in this experiment, we cannot make an assumption for that person*. Hmm. Include this? -->
 
 <!-- Below is awkward and poorly done. -->
 
-Additionally, representativeness can also consider whether or not the sample is biased or not. Let's look at it from the lenses of missing data mechanisms. If we have a Preceptor Table with no missing values, we have it easy. We just calculate the answer. Sadly, Preceptor Tables are (almost) always missing values, resulting in "missing data." The process by which some data is missing is known as the "missing data mechanism." The are two main missing data mechanisms which are of interest: the *assignment mechanism* and the *sampling mechanism*. The assignment mechanism is the process by which some units receive (or are "assigned") the treatment and some units receive the control. The sampling mechanism is the process by which some units appear in our data and some do not. The sampling mechanism will be talked about in this section, whereas the assignment mechanism will be discussed in the next section. 
+<!-- Get into missing data mechanism?  -->
 
-You can not just select healthy people for a drug trial, as that might lead to an incorrect conclusion on whether or not the drug is valuable. For example, the study might conclude that they got healthier because the drug was valuable. In reality, maybe they only got better because they were already healthy to begin with. Or, perhaps the drug actually is valuable, but the study might be considered null since they only used healthy people. I suppose we can conclude there isn't a right or wrong in representativeness, we just need to discuss and consider all sides when conducting our experiment. 
+<!-- Additionally, representativeness can also consider whether or not the sample is biased or not. Let's look at it from the lenses of missing data mechanisms. If we have a Preceptor Table with no missing values, we have it easy. We just calculate the answer. Sadly, Preceptor Tables are (almost) always missing values, resulting in "missing data." The process by which some data is missing is known as the "missing data mechanism." The are two main missing data mechanisms which are of interest: the *assignment mechanism* and the *sampling mechanism*. The assignment mechanism is the process by which some units receive (or are "assigned") the treatment and some units receive the control. The sampling mechanism is the process by which some units appear in our data and some do not. The sampling mechanism will be talked about in this section, whereas the assignment mechanism will be discussed in the next section.  -->
 
-A way to improve your representativeness, at least regarding a biased sample, is to use **sampling**, and having a good sampling mechanism. The sampling mechanism is the process by which some units appear in our data and some do not. If we are trying to estimate the average attitude towards immigrants in the US, we usually do so by taking a sample. The process by which people enter our sample is called the sampling mechanism. If the process by which people enter our sample is related to their attitude, even indirectly, then estimates from our sample will not be good estimates for the population. 
+
 
 ### Unconfoundedness
 
-A fourth assumption we use when working with causal models --- but not with predictive models --- is **"unconfoundedness."** If whether or not a unit received treatment or control is a random, we write that treatment assignment is not "confounded." If, however, treatment assignment depends on the value of a potential outcome, then treatment assignment is confounded. Our lives are easiest if we can (reasonably!) assume unconfoundedness. In that case, we can estimate the average treatment effect by subtracting the average outcome of control units from the average outcome of treated units, as we do above. 
+A fourth assumption we use when working with causal models --- but not with predictive models --- is **"unconfoundedness."** If whether or not a unit received treatment or control is random, we write that treatment assignment is not "confounded." If, however, treatment assignment depends on the value of a potential outcome, then treatment assignment is confounded. Our lives are easiest if we can (reasonably!) assume unconfoundedness. In that case, we can estimate the average treatment effect by subtracting the average outcome of control units from the average outcome of treated units, as we do above. 
 
 Consider the "Perfect Doctor" as an example of the problems caused by confounded treatment assignments. Imagine we have this omniscient doctor who knows how any patient will respond to a certain drug. She has perfect knowledge of the entire Preceptor Table. Using this information, she always assign each patient the treatment with the best outcome, whether that is treatment or control. Consider:
 
@@ -1104,7 +1104,7 @@ The best way to ensure unconfoundedness is to randomize the treatment across uni
 
 ## Summary
 
-The fundamental components of every problem in causal inference are units, treatments and outcomes. The units are the rows in the table. The treatments are the columns. The outcomes are the values. Whenever you confront a problem is causal inference, start by identifying the units, treatments and outcomes.
+The fundamental components of every problem in causal inference are units, treatments and outcomes. The units are the rows in the table. The treatments are (some of) the columns. The outcomes are the values under the treatment columns. (There are also covariate columns and the values within them.) Whenever you confront a problem in causal inference, start by identifying the units, treatments and outcomes.
 
 A causal effect is the difference between one potential outcome and another. How different would your life be if you missed the train?
 
@@ -1113,18 +1113,13 @@ knitr::include_app("https://www.youtube.com/embed/BvUbv4iwbDs")
 ```
 
 
-A Preceptor Table includes all rows and columns such that, if no data is missing, it is easy to calculate our quantity of interest. Unfortunately, data is always missing because, at most, we can only observe one *potential outcome* for each unit. The causal effect of a treatment on a single unit at a point in time is the difference between the value of the outcome variable with the treatment and without the treatment. The *Fundamental Problem of Causal Inference* is that it is impossible to observe the causal effect on a single unit. We must make assumptions --- i.e, we must make models ---  in order to estimate causal effects.
+A Preceptor Table includes all rows and columns such that, if no data is missing, it is easy to calculate our quantity of interest. Unfortunately, data is always missing in causal models because, at most, we can only observe one *potential outcome* for each unit. The causal effect of a treatment on a single unit at a point in time is the difference between the value of the outcome variable with the treatment and without the treatment. The *Fundamental Problem of Causal Inference* is that it is impossible to observe the causal effect on a single unit. We must make assumptions --- i.e, we must make models ---  in order to estimate causal effects.
 
 The Population Table has three sources of data: the Preceptor Table, the dataset, and the greater population from which both are drawn. 
 
+The assumption of *validity*, if met, allows us to create the Population Table because it ensures that the columns of data from the different sources can be put into a single table. If the relationships among the data are the same (or at least same'ish), over time, then we can assume *stability.* A model estimated on our data will also apply to our Preceptor Table. *Representativeness* examines the rows we have relative to the rows in the Population Table which we might have had. *Unconfoundedness*, which only matters in causal settings, means that either the treatment was randomly assigned or that we can act *as if* it was.
+
 Random assignment of treatments to units is the best experimental set up for estimating causal effects. Other assignment mechanisms are subject to confounding. If the treatment assigned is correlated with the potential outcomes, it is very hard to estimate the true treatment effect. (As always, we use the terms "causal effects" and "treatment effects" interchangeably.) With random assignment, we can, mostly safely, estimate the average treatment effect (ATE) by looking at the difference between the average outcomes of the treated and control units.
 
-<!-- Discuss Validity et al. -->
-
 Be wary of claims made in situations without random assignment: [Here be dragons](https://en.wikipedia.org/wiki/Here_be_dragons)!
-
-
-```{r echo = FALSE, cache=FALSE, warning = FALSE}
-knitr::write_bib(.packages(), "packages.bib")
-```
 

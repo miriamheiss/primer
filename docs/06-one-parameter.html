@@ -307,12 +307,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header><div class="cell">
 
 </div>
-<!-- RS: There was a random paragraph about the Central Limit therom in the polling section. I moved it to "changing shovel sizes". Guessing Preceptor will delete, but I didn't write it so no harm to me.  -->
-<!-- RS: Technically, standard error should not use sigma in it's formula, as it specifically refers to a point statistic and not a population. Someone may want to change all the sigmas to s.  -->
-<!-- RS: There needs to be more explanation about confidence intervals!  -->
+<!-- In which Cardinal Virtue does we explore validity? Looks like stability and representativeness go in Justice. But what about validity? What about unconfoundedness? -->
+<!-- Deosn't unconfoundedness belong here somewhere? -->
+<!-- Case study of polls needs to be updated to use our language of validity and so on. -->
+<!-- RS: Technically, standard error should not use sigma in it's formula, as it specifically refers to a point statistic and not a population. Someone may want to change all the sigmas to s. Hmm? -->
+<!-- There needs to be more explanation about confidence intervals!  -->
 <!-- In some paragraphs we say that it is impossible to conduct a census because we don't have access to the urn, in others like this we do have access and can complete the census. Which is it? You pick. -->
-<!-- Older comments: -->
-<!-- Old stuff: -->
 <!-- Another paragraph or two of discussion about the final posterior. How do we use it? Within what range would you offer 50/50 odds that the true percentage lies? (use quantile(0.25, 0.75). Area under the curve? Explain clearly how that 26% is calculated. What is post_dist? What does it mean? How can I use it? Maybe show it sorted? Add some code comments. -->
 <!-- You must understand what the standard error of $\hat{\rho}$ means. You do not need to understand why. -->
 <!-- Explain in a comment the reason for  fun = function(.x) 1/(2 * sqrt(.x)) in the plot. I don't know why we need the 2. We would probably use geom_function(). Maybe using geom_function with the function for a standard error will just magically work! -->
@@ -418,18 +418,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 33 × 4
-   group           red_beads prop_red group_ID
-   &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
- 1 Dohyun, Estel          18     0.36        1
- 2 Aayush, Karen          15     0.3         2
- 3 Ian, Iman              18     0.36        3
- 4 Maeve, Josh            18     0.36        4
- 5 Aaron, Mike            11     0.22        5
- 6 Ellie, Terrance        17     0.34        6
- 7 Siobhan, Jane          11     0.22        7
- 8 Esther, Henry          17     0.34        8
- 9 Ishan, Cass            15     0.3         9
-10 Ace, Chris             18     0.36       10
+   group          red_beads prop_red group_ID
+   &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
+ 1 Vignesh, Eliot        16     0.32        1
+ 2 Mal, Francis          17     0.34        2
+ 3 Nam, Joshua           19     0.38        3
+ 4 Conrad, Vlad          16     0.32        4
+ 5 Aayush, Karen         15     0.3         5
+ 6 Ace, Chris            18     0.36        6
+ 7 Caroline, Edna        15     0.3         7
+ 8 Yuki, Harry           21     0.42        8
+ 9 Claire, Cloud         16     0.32        9
+10 Paddy, Matt           16     0.32       10
 # … with 23 more rows</code></pre>
 </div>
 </div>
@@ -787,7 +787,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Observe that as the sample size increases, the histogram becomes taller and narrower. This is because the <em>variation</em> of the proportion red for each sample decreases. Remember: A large variation means there are a wide range of values that can be achieved, while smaller variations are concentrated around a specific value.</p>
-<p>You have also witnessed famous theorem, or mathematically proven truth, called the <em>Central Limit Theorem</em>. It loosely states that when sample means are based on larger and larger sample sizes, the sampling distribution of these sample means becomes both more and more normally shaped and more and more narrow. In other words, the sampling distribution increasingly follows a <em>normal distribution</em> and the variation of these sampling distributions gets smaller, as quantified by their standard errors.</p>
+<p>The <em>Central Limit Theorem</em> states, more or less, that when sample means are based on larger and larger sample sizes, the sampling distribution of these sample means becomes both narrower and more bell-shaped. In other words, the sampling distribution increasingly follows a <em>normal distribution</em> and the variation of this sampling distribution gets smaller, meaning smaller standard errors.</p>
 <p>Why does variation decrease as sample size increases? If we use a large sample size like 100 or 500, our sample is much more representative of the population simply because more of the population is included. As a result, the proportion red in our sample (<span class="math inline">\(\hat{\rho}\)</span>) will be closer to the population proportion (<span class="math inline">\(\rho\)</span>). On the other hand, smaller samples have much more variation because of our old friend chance. We are much more likely to have extreme samples that are not representative of our population.</p>
 <p>Let’s attempt to visualize the concept of <em>variation</em> a different way. For each sample size, let’s plot the proportion red for <em>all</em> 1,000 samples. With 3 different shovel sizes, we will have 3,000 total points, with each point representing an instance of sampling from the urn with a specific shovel size.</p>
 <div class="cell">
@@ -1396,7 +1396,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 </div>
 <p><em>Standard errors (SE) quantify the effect of sampling variation on our estimates.</em> In other words, they quantify how much we can expect the calculated proportions of a shovel’s beads that are red <em>to vary</em> from one sample to another sample to another sample, and so on. As a general rule, as sample size increases, the standard error decreases.</p>
 <p><em>The standard error is the standard deviation of a sample statistic (aka point estimate), such as the proportion.</em> For example, the <em>standard error of the mean</em> refers to the standard deviation of the distribution of sample means taken from a population.</p>
-<p>The relationship between the standard error and the standard deviation is that, for a given sample size, <em>the standard error equals the standard deviation divided by the square root of the sample size</em>. Accordingly, the standard error is inversely proportional to the sample size. The larger the sample size, the smaller the standard error.</p>
+<p>The relationship between the standard error and the standard deviation is that, for a given sample size, <em>the standard error equals the standard deviation divided by the square root of the sample size</em>. Accordingly, the standard error is inversely proportional to the square root of the sample size. The larger the sample size, the smaller the standard error.</p>
 <p>If this sounds confusing, don’t worry! It is. Before we can explain this in more depth, it is important to understand some terminology.</p>
 <section id="sec-terminology-and-notation" class="level3" data-number="6.3.1"><h3 data-number="6.3.1" class="anchored" data-anchor-id="sec-terminology-and-notation">
 <span class="header-section-number">6.3.1</span> Terminology and notation</h3>
@@ -1542,7 +1542,8 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <p><img src="other/images/Wisdom.jpg" class="img-fluid" width="1280"></p>
 </div>
 </div>
-<p>Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination as to whether or not we can (reasonably!) assume that the two come from the same <em>population</em>.</p>
+<!-- Great summary! Use this exact phrasing in every chapter. -->
+<p>Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of “validity,” as to whether or not we can (reasonably!) assume that the two come from the same <em>population</em>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -2478,12 +2479,14 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 </div>
 </div>
 <p>&nbsp;</p>
-<p>Again, there are no ID numbers. But keeping track of which beads were in the sample and which beads were not is helpful.</p>
-<p>The last step of Wisdom is to consider whether or not we can consider the units from the Preceptor Table and the units from the data to have been drawn from the same <em>population</em>. In this case, as with many sampling scenarios, it is trivial that we may make this assumption. If all the rows from the data are also rows in the Preceptor Table, we may assume that they are drawn from the same distribution.</p>
+<p>Again, there are, in truth, no ID numbers. But keeping track of which beads were in the sample and which beads were not is helpful.</p>
+<p>The last step of Wisdom is to decide whether or not we can consider the units from the Preceptor Table and the units from the data to have been drawn from the same <em>population</em>. In this case, as with many sampling scenarios, it is trivial that we may make this assumption. If all the rows from the data are also rows in the Preceptor Table, we may assume that they are drawn from the same distribution.</p>
 <!-- DK: Could expand on this point. -->
-<p>We also consider why some beads do get sampled, while others do not. This is a consequence of the <em>sampling mechanism</em>. We hope that our sampling mechanism has near equal access to all members of the population, or else our samples would be biased. Almost all samples have some bias, but we must make a judgement call to see if the data we have is close enough to the data we want (i.e., the Preceptor Table) that we can consider both as coming from the same population. Our sample of 50 beads is taken from a <em>mixed</em> urn, so hopefully there is a near equal chance of selecting each bead, and our samples are representative of the population.</p>
+<p>We also consider why some beads do get sampled, while others do not. This is a consequence of the <em>sampling mechanism</em>. We hope that all members of the population have the same chance of being sampled, or else our data might be biased. Almost all samples have some bias, but we must make a judgement call to see if the data we have is close enough to the data we want (i.e., the Preceptor Table) that we can consider both as coming from the same population. Our sample of 50 beads is taken from a <em>mixed</em> urn, so hopefully there is a near equal chance of selecting each bead, and our samples are representative of the population.</p>
+<p><em>Validity</em> involves the columns of our data set. Is the meaning of our columns consistent across the different data sources? In our urn scenario, does bead color in our sampled data and bead color in our Preceptor Table mean the same thing? The answer is yes, and validity can be assumed very easily. If some beads in the urn are old and the color has worn off, it may be more difficult to conclude whether the color column always means the same thing.</p>
+<!-- DK: Don't use the word "representative" here! -->
 
-<!-- Could get into more details here, e.g., Sometimes, the Preceptor Table and the Population Table have the same number of rows. This happens when all the data arfe rows from the Preceptor Table. Example would be the simple case of an urn, the beads in which you know do not change color, and from which you have drawn a sample. But, what if beads can change color? Then the data from the sample 10 minutes ago has a less than certain relationship with the Preceptor Table. The same includes the color for bead 96 ten minites ago. The Preceptor Table has one row for bead 96 now, at this moment. So, in this case, the Population Table has a row for every bead at each moment in time that we care about. At the very least, it as 1,000 rows for 10 minutes ago (when we took the sample) and 1,000 rows for now. -->
+<!-- Could get into more details here, e.g., Sometimes, the Preceptor Table and the Population Table have the same number of rows. This happens when all the data are rows from the Preceptor Table. Example would be the simple case of an urn, the beads in which you know do not change color, and from which you have drawn a sample. But, what if beads can change color? Then the data from the sample 10 minutes ago has a less than certain relationship with the Preceptor Table. The same includes the color for bead 96 ten minutes ago. The Preceptor Table has one row for bead 96 now, at this moment. So, in this case, the Population Table has a row for every bead at each moment in time that we care about. At the very least, it as 1,000 rows for 10 minutes ago (when we took the sample) and 1,000 rows for now. -->
 </section><section id="justice" class="level3" data-number="6.4.2"><h3 data-number="6.4.2" class="anchored" data-anchor-id="justice">
 <span class="header-section-number">6.4.2</span> Justice</h3>
 <div class="cell">
@@ -2491,10 +2494,10 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <p><img src="other/images/Justice.jpg" class="img-fluid" width="960"></p>
 </div>
 </div>
-<p>Justice starts with the construction of a Population Table. We use this table to explore the issues of validity, stability and representativeness. We then make an assumption about the <em>form</em> of the data generating mechanism.</p>
+<p>Justice starts with an examination of the stability, representativeness, and unconfoundedness of the Population Table and ends with an assumption about the <em>mathematical form</em> of the data generating mechanism.</p>
 <section id="population-table" class="level4" data-number="6.4.2.1"><h4 data-number="6.4.2.1" class="anchored" data-anchor-id="population-table">
 <span class="header-section-number">6.4.2.1</span> Population Table</h4>
-<p>We use <em>The Population Table</em> to acknowledge the wider source we could have collected data from.</p>
+<p>We use <em>The Population Table</em> to acknowledge the wider source from which we could have collected our data.</p>
 <p>It includes rows from three sources: the data for units we want to have (the Preceptor Table), the data for units which we have (our actual data), and the data for units we do not care about (the rest of the population, not included in the data or the Preceptor Table).</p>
 
 <!-- DK: Make this table correctly. Add a "Time" column. Only four columns: Source, Time, ID and Color. First rows from Population, then Data, than Population, then Preceptor Table, then Population. Time goes in 10 minute increments. Time Preceptor Table is "Now". Time for Population at end is "Now + 10". Time for Data is "Now - 10". Did this a little differently-->
@@ -3251,25 +3254,22 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 </div>
 </div>
 <p>&nbsp;</p>
-<p>Each specific row represents one subject, which are individual beads in our urn scenario. Because there could be thousands or even millions of beads, we provide 3 examples for each category, and use an elipse to denote that there are many more subjects that we have yet to record.</p>
+<p>Each specific row represents one subject, which are individual beads in our urn scenario. Because there could be thousands or even millions of beads, we provide 3 examples for each category, and use ellipses to denote that there are many more subjects that we have yet to record.</p>
 <p>Each Population Table will have a minimum of 3 types of columns: covariates, time, and outcome(s):</p>
-<p>When we construct a Preceptor Table to answer our question, we must select some <em>covariates</em> that we <strong>want</strong> all of our subjects to have. To answer our questions, we in theory should collect data from subjects with our desired covariates. However, life is tough, and the data we get is not always ideal. Our urn scenario only has one covariate: location. Rather intuitively, urns can have drastically different contents, so to easily answer our question it’s important to identify the location of one specific urn for which to find the proportion red.</p>
+<p>When we construct a Preceptor Table to answer our question, we must select some <em>covariates</em> that we <strong>want</strong> all of our subjects to have. Our urn scenario only has no covariates, however, so we will explore this issue in later chapters.</p>
 <ul>
 <li>Because we draw our sample from the exact same urn our question asks us about, the data we collect comes directly from the Preceptor Table, all subjects in our population have the same location (“Known, specific urn”). The Preceptor Table and Population categories are essentially identical. This is the perfect scenario for us, but this rarely occurs in real life.</li>
 </ul>
-<p>Population Tables always have a column for <em>time</em>. When answering a question we must specify the time that it’s being asked, because life changes over time.</p>
+<p>Population Tables always have a column for <em>Time</em>. When answering a question we must specify the time that it’s being asked, because stuff happens and things change.</p>
 <ul>
 <li>We must acknowledge that the sample from the urn could have been taken at any time, so the contents of the urn in the past (our data) <em>could be</em> different from the contents of the urn when we want to answer our question now (the Preceptor Table). As such, there is a wider population we could have collected our data from: any time before collecting the sample, or anytime after collecting it.</li>
 </ul>
-<p>Finally, Population Tables have an <em>outcome</em>. Sometimes there will be multiple outcome columns, like in the case of casual models where we ideally want data on a subject before and after treatment. In our urn problem, we have two outcomes: bead ID and bead color.</p>
-<ul>
-<li>Because we know that the covariates of our data match the covariates of the Preceptor Table, the Data, Preceptor Table, and wider Population all come from the same urn. As such, we can use bead ID as a tool to notate which members of the population we have data on, and which ones are unknown. We always know the color for bead 200 because we sampled it. We also track bead 1 across the Preceptor Table and Population, and never know its value because it was never sampled. Beads 978, 1080, 2025, 2078, and 2300 all change over time simply because different beads could be in the urn at different times. For all we know, someone could be sneakily dumping beads into our urn each week. Either way, because we did not sample those beads, we don’t know their colors.</li>
-</ul></section><section id="validity-stability-and-representativeness" class="level4" data-number="6.4.2.2"><h4 data-number="6.4.2.2" class="anchored" data-anchor-id="validity-stability-and-representativeness">
+<p>Finally, Population Tables have an <em>outcome</em>. Sometimes there will be multiple outcome columns, like in the case of casual models where we want the values for two or more potential outcomes.</p>
+</section><section id="validity-stability-and-representativeness" class="level4" data-number="6.4.2.2"><h4 data-number="6.4.2.2" class="anchored" data-anchor-id="validity-stability-and-representativeness">
 <span class="header-section-number">6.4.2.2</span> Validity, stability, and representativeness</h4>
-<p>Now that we have created our Population Table, we can analyze some key issues: validity, stability, and representativeness.</p>
-<p><em>Validity</em> involves the columns of our data set. Is the meaning of our columns consistent across the different data sources? In our urn scenario, does bead color in our sampled data and bead color in our Preceptor Table mean the same thing? The answer is yes, and validity can be assumed very easily. If some beads in the urn are old and the color has worn off, it may be more difficult to conclude whether the color column always means the same thing.</p>
-<p><em>Stability</em> involves time. Is the model — meaning both the mathematical formula and the value of the parameters — stable over time? Realistically, an urn will always be the same over time. However, what if someone dumps some red beads into the urn after we take our sample? Then we cannot assume stability, because the proportion of red beads in the urn, <span class="math inline">\(\rho\)</span>, the instant before the dump is different than the proportion red in the urn after. We will assume no one is tampering with our urn, and assert stability across time periods.</p>
-<p><em>Representativeness</em> involves the data rows, specifically the rows for which we have data versus the rows which <em>might have been</em>. Are the rows that we do have data for representative of the rows for which we do not have data? For the sample proportion to be similar to the actual population proportion, we ideally want the data we have to be a random, unbiased selection from our population, using a considerable sample size. In the context of our problem, the sampling mechanism of using a shovel of size 50 to sample beads from an urn in which the beads are thoroughly mixed should be enough to consider our sample representative of the population, and we can move on.</p>
+<p>Now that we have created our Population Table, we can analyze the key assumptions of stability, representativeness and unconfoundedness.</p>
+<p><em>Stability</em> involves time. Is the model — meaning both the mathematical formula and the value of the parameters — stable over time? Realistically, an urn will be the same today, tomorrow or next year. However, what if someone dumps some red beads into the urn after we take our sample? Then we cannot assume stability, because the proportion of red beads in the urn, <span class="math inline">\(\rho\)</span>, the instant before the dump is different than the proportion red in the urn after. We will assume no one is tampering with our urn, and assert stability across time periods.</p>
+<p><em>Representativeness</em> involves the data rows, specifically the rows for which we <em>have data</em> versus the rows for which we <em>might have had data</em>. Are the rows that we do have data for representative of the rows for which we do not have data? For the sample proportion to be similar to the actual population proportion, we ideally want the data we have to be a random, unbiased selection from our population, using a considerable sample size. In the context of our problem, the sampling mechanism of using a shovel of size 50 to sample beads from an urn in which the beads are thoroughly mixed should be enough to consider our sample representative of the population, and we can move on.</p>
 </section><section id="the-dgm" class="level4" data-number="6.4.2.3"><h4 data-number="6.4.2.3" class="anchored" data-anchor-id="the-dgm">
 <span class="header-section-number">6.4.2.3</span> The DGM</h4>
 <p>The final aspect of Justice is assuming/creating a mathematical formula — a <em>data generating mechanism</em>, or DGM — which mimics the process by which the data comes to us. The DGM for sampling scenarios with only two possible values is often denoted as follows:</p>
@@ -3282,14 +3282,16 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <p><img src="other/images/Courage.jpg" class="img-fluid" width="1024"></p>
 </div>
 </div>
-<p>We’ve evaluated our data and questions and chosen a mathematical formula. Now it’s time to work on our code to create a model that can simulate the real world.</p>
+<p>Courage takes the mathematical formula from Justice and, using code, creates a fitted model, included posterior probability distributions for all the unknown parameters.</p>
 <section id="bayesian-framework" class="level4" data-number="6.4.3.1"><h4 data-number="6.4.3.1" class="anchored" data-anchor-id="bayesian-framework">
 <span class="header-section-number">6.4.3.1</span> Bayesian framework</h4>
-<p>We are Bayesian data scientists that make Bayesian models. This means that we make specific assumptions and consider different things to be either fixed or variable compared to other data science frameworks. One of the most important distinctions is that in Bayesian data science, <strong>we don’t know the values of our parameters</strong>. Consider the DGM created in Justice:</p>
+<p>We are Bayesian statisticians who make Bayesian models. This means that we make specific assumptions and consider data to be fixed and parameters to be variable. One of the most important distinctions is that in Bayesian data science, <strong>we don’t know the values of our parameters</strong>. Consider the DGM created in Justice:</p>
 <p><span class="math display">\[ T_i  \sim B(\rho, n = 50) \]</span></p>
+<!-- DK: Awkwardy written. Shorten. Cut? -->
 <p>Some non-Bayesian frameworks are concerned with the probability distribution of our observed data, but do not care much about the probability distribution for <span class="math inline">\(\rho\)</span> and assume it to be fixed. If <span class="math inline">\(\rho\)</span> is fixed, the equation above becomes one simple binomial distribution. Think of this as a standard 2 dimensional plot.</p>
-<p>We Bayesians consider our observed data to be fixed. We don’t consider alternate realities where our observed data is different due to sampling variation. Instead, we are concerned with the probability distribution of our parameter. In our urn scenario, <span class="math inline">\(\rho\)</span> is variable, so we have to create a separate binomial distribution for each possible value of <span class="math inline">\(\rho\)</span>. Think of this as a 3 dimensional joint distribution like what we created in <a href="05-probability.html#sec-n-models"><span>Section&nbsp;5.6</span></a>.</p>
+<p>We Bayesians consider our observed data to be fixed. We don’t consider alternate realities where our observed data is different due to sampling variation. Instead, we are concerned with the probability distribution of our parameter. In our urn scenario, <span class="math inline">\(\rho\)</span> is variable, so we have to create a separate binomial distribution for each possible value of <span class="math inline">\(\rho\)</span>. Think of this as a 3 dimensional joint distribution, as we created in <a href="05-probability.html#sec-n-models"><span>Section&nbsp;5.6</span></a>.</p>
 <p>It is essential to understand the joint distribution and the posterior, two concepts Bayesians use to solve problems. We will provide quick a quick review here, including statistical notation that may be helpful to some.</p>
+<!-- Too long? -->
 <p><strong>The joint distribution</strong>, <span class="math inline">\(p(y|\theta)\)</span>, models the outcome <span class="math inline">\(y\)</span> given one or more unknown parameter(s), <span class="math inline">\(\theta\)</span>. The equation illustrates exact same concept we addressed while discussing the distinctions of Bayesian science: because our parameters are variable, we have to create separate distributions for each potential value. Combining all these distributions together creates a joint distribution that is 3 dimensional when plotted.</p>
 <p><strong>The posterior</strong>, <span class="math inline">\(p(\theta|y)\)</span>, is the probability distribution of our parameter(s) <span class="math inline">\(\theta\)</span>, created using data <span class="math inline">\(y\)</span> that updates our beliefs. We have referenced the posterior many times before, and this definition does not change its meaning.</p>
 <p>In our urn scenario, obtaining the posterior involves first creating many binomial distributions for each possible population proportion. This is the joint distribution, and it is a 3 dimensional model. We then select the distribution that corresponds with our data: 17 red beads are sampled. We can represent the posterior with the following:</p>

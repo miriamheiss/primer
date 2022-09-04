@@ -1,5 +1,7 @@
 # Priorities
 
+-1) Could we switch everything from rstanarm to Tidymodels, even Tidymodels which used rstanarm? Learning the Tidymodels framework allows you to do lots of things!
+
 0) Chapters 6 and 7 are OK. 8, 9, 10 and 11? Not so much! Need to make consistent use of the four cardinal virtues.
 
 1) Store all data locally so that we can run everything when not connected to the internet. Maybe also don't require live connections in Chapter 3? See discussion in Data tutorials.
@@ -10,7 +12,11 @@
 
 3) Need to list all packages used in the book. Not sure how.
 
-4) Should we replace knitr::
+4) Should we replace knitr::include_graphics with the new Quarto stuff?
+
+5) Note that the Preceptor Table always has an implicit time column, as does, usually explicitly, the Population Table.
+
+6) We need a one sentence summary of each virtue, a sentence we repeat each time we start to use that virtue. Chapter 6 wisdom is great example.
 
 Difference between Render and Preview book? Maybe Render does the whole book and Preview just does changes?
 
