@@ -22,6 +22,8 @@ Difference between Render and Preview book? Maybe Render does the whole book and
 
 How can you make a change in one chapter, render it and then view it to see if you like the changes? Update this in _quarto.yml.
 
+Could extra detail in the text be hidden in a "More Detail" box which only appears when clicked? 
+
 Figure out what quarto.yml settings are defaults and get rid of those. Explain others.
 
 Shotcut key in tutorials produces %>% instead of |>

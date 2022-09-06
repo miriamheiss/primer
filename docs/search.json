@@ -39,7 +39,7 @@
     "href": "00-getting-started.html#summary",
     "title": "Getting Started",
     "section": "Summary",
-    "text": "Summary\nYou should have done the following:\n\nInstalled the latest versions of R and RStudio.\nInstalled, from Github, the primer.tutorials package:\n\n\nremotes::install_github(\"PPBDS/primer.tutorials\")\n\n\nRun this command to set up RStudio:\n\n\nprimer.tutorials::prep_rstudio_settings()\n\n\nLearned some basic terminology that will help you when you read the rest of the Primer.\n\nLet’s get started.\n\n\n\n\n\n\n\n\n\nIsmay, Chester, and Patrick C. Kennedy. 2016. Getting Used to r, RStudio, and R Markdown. https://rbasics.netlify.com."
+    "text": "Summary\nYou should have done the following:\n\nInstalled the latest versions of R and RStudio.\nInstalled, from Github, the primer.tutorials package:\n\n\nremotes::install_github(\"PPBDS/primer.tutorials\")\n\n\nRun this command to set up RStudio:\n\n\nprimer.tutorials::prep_rstudio_settings()\n\n\nLearned some basic terminology that will help you when you read the rest of the Primer.\n\nLet’s get started."
   },
   {
     "objectID": "01-visualization.html",
