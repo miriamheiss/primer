@@ -22,11 +22,11 @@ Download and install R and RStudio (Desktop version) on your computer.
 
 2.  [Download and install RStudio Desktop](https://rstudio.com/products/rstudio/download/#download) (the free version).
 
-<!-- Chromebook advice: https://levente.littvay.hu/chromebook/ -->
-
 <!-- DK: Sure would be nice if this was not necessary. Maybe R-universe would make it so? -->
 
-3.  If you are using Windows, [download and install R Tools](https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html). Again, this is only for Windows users. The Rtools42 installer is what you want. The link is in the fifth paragraph of [that page](https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html).
+If you are using Windows, [download and install R Tools](https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html). Again, this is only for Windows users. The Rtools42 installer is what you want. The link is in the fifth paragraph of [that page](https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html).
+
+If you are using a Chromebook, follow [this advice](https://levente.littvay.hu/chromebook/).
 
 <!-- DK: Could text like this be in a "More Detail" box which only appears when clicked?  If you want a slower introduction, check out the short (free) book, [*Getting Used to R, RStudio, and R Markdown*](https://rbasics.netlify.com/). @usedtor2016 include screencast recordings that you can follow along and pause as you learn. -->
 
