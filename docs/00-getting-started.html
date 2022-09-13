@@ -278,7 +278,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>More precisely, R is a programming language that runs computations, while RStudio is an <em>integrated development environment (IDE)</em> that provides an interface with many convenient features. Just as having access to a speedometer, rearview mirrors, and a navigation system makes driving much easier, using RStudio’s interface makes using R much easier.</p>
 <p>Download and install R and RStudio (Desktop version) on your computer.</p>
 <ol type="1">
-<li><p><a href="https://cloud.r-project.org/">Download and install R</a>.</p></li>
+<li><p><a href="https://cloud.r-project.org/">Download and install R</a>. If you are using a Mac, make sure the use the correct installation, depending on whether you are using an older “Intel Mac” (first option) or a newer “M1 Mac” (second option). You can look up the chip used in your Mac by checking out “About This Mac” under the Apple menu.</p></li>
 <li><p><a href="https://rstudio.com/products/rstudio/download/#download">Download and install RStudio Desktop</a> (the free version).</p></li>
 </ol>
 <!-- DK: Sure would be nice if this was not necessary. Maybe R-universe would make it so? --><p>If you are using Windows, <a href="https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html">download and install R Tools</a>. Again, this is only for Windows users. The Rtools42 installer is what you want. The link is in the fifth paragraph of <a href="https://cran.r-project.org/bin/windows/Rtools/rtools42/rtools.html">that page</a>.</p>
@@ -360,15 +360,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <ol type="1">
 <li><p><em>Install the package</em>: This is like installing an app on your phone. Most packages are not installed by default when you install R and RStudio. Thus if you want to use a package for the first time, you need to install it. Once you’ve installed a package, you likely won’t install it again unless you want to update it to a newer version.</p></li>
-<li><p><em>“Load” the package</em>: “Loading” a package is like opening an app on your phone. Packages are not “loaded” by default when you start RStudio. You need to “load” each package you want to use every time you restart RStudio.</p></li>
+<li><p><em>Load the package</em>: “Loading” a package is like opening an app on your phone. Packages are not loaded by default when you start RStudio. You need to load each package you want to use every time you restart RStudio.</p></li>
 </ol>
 <p>Before installing packages, issue this command:</p>
 <!-- DK: Is this necessary? Is there a better way to handle it? -->
 <div class="cell">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>pkgType <span class="op">=</span> <span class="st">"binary"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!-- DK: Cut this section since remotes comes installed with a new R installation. (Is that true?) Of course, we need to show install.packages at some point, but it could be in a tutorial, maybe Getting Started. Goal is to make this chapter shorter! -->
-<p>Doing so just makes various errors less likely.</p>
+<p>Doing so just makes various errors less likely. Do NOT do this is if you are installing on a Linux machine, e.g., a Chromebook or on a service like RStudio Cloud.</p>
 <p>Let’s install a useful package. At the Console pane within RStudio, type:</p>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

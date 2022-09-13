@@ -18,7 +18,7 @@ More precisely, R is a programming language that runs computations, while RStudi
 
 Download and install R and RStudio (Desktop version) on your computer.
 
-1.  [Download and install R](https://cloud.r-project.org/).
+1.  [Download and install R](https://cloud.r-project.org/). If you are using a Mac, make sure the use the correct installation, depending on whether you are using an  older "Intel Mac" (first option) or a newer "M1 Mac" (second option). You can look up the chip used in your Mac by checking out "About This Mac" under the Apple menu.
 
 2.  [Download and install RStudio Desktop](https://rstudio.com/products/rstudio/download/#download) (the free version).
 
@@ -103,7 +103,7 @@ knitr::include_graphics("00-getting-started/images/install_vs_load.jpg")
 
 1.  *Install the package*: This is like installing an app on your phone. Most packages are not installed by default when you install R and RStudio. Thus if you want to use a package for the first time, you need to install it. Once you've installed a package, you likely won't install it again unless you want to update it to a newer version.
 
-2.  *"Load" the package*: "Loading" a package is like opening an app on your phone. Packages are not "loaded" by default when you start RStudio. You need to "load" each package you want to use every time you restart RStudio.
+2.  *Load the package*: "Loading" a package is like opening an app on your phone. Packages are not loaded by default when you start RStudio. You need to load each package you want to use every time you restart RStudio.
 
 Before installing packages, issue this command:
 
@@ -113,9 +113,7 @@ Before installing packages, issue this command:
 options(pkgType = "binary")
 ```
 
-<!-- DK: Cut this section since remotes comes installed with a new R installation. (Is that true?) Of course, we need to show install.packages at some point, but it could be in a tutorial, maybe Getting Started. Goal is to make this chapter shorter! -->
-
-Doing so just makes various errors less likely.
+Doing so just makes various errors less likely. Do NOT do this is if you are installing on a Linux machine, e.g., a Chromebook or on a service like RStudio Cloud. 
 
 Let's install a useful package. At the Console pane within RStudio, type:
 
