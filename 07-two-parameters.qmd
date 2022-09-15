@@ -5,19 +5,13 @@ library(gt)
 library(gtsummary)
 ```
 
-
-<!-- Read Gelman on problems with testing. -->
-
-<!-- Read chapter 8 and 11. -->
-
-
 <!-- Add discussion of why Wisdom has nothing to do with representativeness. Use basketball player example. The  best way to be sure that your data is representative of the population is for the process which selected that data to be random. Almost never true! Even if NHANES is a perfect survey --- things are still hard. And no survey is perfect. People in jail? People in hospitals? GP: Done (maybe could elaborate some more later)  -->
 
 <!-- old stuff: -->
 
 <!-- Concerns about representativeness and validity may cause us to make adjustments in our final posteriors in an ad hoc --- but still useful! --- manner, or they may cause us to make changes in our actual models.  -->
 
-<!-- In functional form section, emphasize that we mostly choose our functional form on the basis of the left hand side variable. If it is continuous, we go linear. If it is discrete, we go logistic. (May add one other option later.) -->
+<!-- In functional form section, emphasize that we mostly choose our functional form on the basis of the left hand side variable. If it is continuous, we go linear. If it is 0/1, we go logistic. (May add one other option later.) -->
 
 <!-- Do we still need mutate_all(as.numeric)? This may have been fixed in current version of rstanarm. -->
 
@@ -27,7 +21,7 @@ library(gtsummary)
 
 <!-- Chapter 7 should introduce, gently, the concept of in-sample and out-of-sample. As well as predictive accuracy as being a good way to judge how good your model is. What are some useful measures of predictive accuracy? Discuss our objective functions; minimize what? when would median be better than mean? Find a skewed data set and show how guessing the median works better than guessing the mean, if you care about absolute difference. (Can we estimate the median with stan_glm()?) Bias/Variance == Underfitting/Overfitting -->
 
-In @sec-one-parameter, we learned how to do inference. We created a joint distribution of the models under consideration and the data which might be observed. Once we observed the data, we went from the joint distribution to the conditional distribution of possible models given the data which we did, in fact, observe. That conditional distribution, suitably normalized, was our posterior probability distribution over the space of possible models. With that distribution, we can answer any question we might (reasonably) ask.
+In @sec-probability, we learned how to do inference. We created a joint distribution of the models under consideration and the data which might be observed. Once we observed the data, we went from the joint distribution to the conditional distribution of possible models given the data which we did, in fact, observe. That conditional distribution, suitably normalized, was our posterior probability distribution over the space of possible models. With that distribution, we can answer any question we might (reasonably) ask.
 
 <!-- Need a gif here. Like Hunger Games in Chapter 6. -->
 
@@ -37,9 +31,7 @@ $$\text{Prob}(\text{models} | \text{data} = \text{data we observed})$$
 
 Even then, however, the relative likelihood of different models is not that important. Models are invisible, mental entities with no more physical presence than unicorns or leprechauns. In the world itself, we make and test predictions. *People with better models make better predictions. That is what matters.*
 
-In addition to a change in tools, there are two key differences in this chapter. First, [Chapter -@sec-one-parameter] used models with just one parameter: the number of red beads, which we can also transform into a parameter, $p$, the number of red beads divided by 1,000. The  model in @sec-one-parameter was binomial, and there is only one unknown parameter $p$ in such models. In this chapter, we have two unknown parameters: the mean $\mu$ height in the US and the standard deviation, $\sigma$, of the normally distributed error term.
-
-Second, @sec-one-parameter dealt with a limited set of specific models: 1,001 of them, to be precise. The procedure used was just what we saw in @sec-probability.  In this chapter, on the other hand, we have continuous parameters.
+@sec-one-parameter used models with just one parameter: the number of red beads, which we can also transform into a parameter, $p$, the number of red beads divided by the total number of beads in the bowl. The model in @sec-one-parameter was binomial, and there is only one unknown parameter $p$ in such models. In this chapter, we have two unknown parameters: the mean $\mu$ height in the US and the standard deviation, $\sigma$, of the normally distributed error term.
 
 By this point, we should understand that the reason for making models is not, primarily, that making models is fun (although it is)! The reason is that, when confronted with a question, we face decisions. We must decide between variables X or Y. We must choose from datasets A, B and C. Confronted by a decision, we need to make a model of the world to help us. 
 
@@ -260,14 +252,14 @@ Our **Preceptor Table** rows contain the information that we would *want* to kno
 
 Our **actual data** rows contain the information that we *do* know. These rows contain entries for both our covariates *and* the outcomes. In this case, the actual data comes from a study conducted on males in 2009-2011, so our sex entries for these rows will read "Male" and our year entries of these rows will either read "2009", "2010", or "2011".
 
-Our **population** rows contain no data. These are subjects which fall under our desired population, but for which we have no data. As such, all rows are missing.
+Our **other** rows contain no data. These are subjects which fall under our desired population, but for which we have no data. As such, all outcomes and covariates are missing. (A subtle point is that, even for other data, we "know" the ID and the Year for each subject. Of course, we don't *really* know these things, but, conceptually, we are defining the meaning of those rows on the basis of those variables.)
 
 <!-- GP: I changed everything but the explanation for the **population** rows. I am confused; shouldn't the population rows still contain "Male" in the sex column? Because this entire chapter, we've exclusively been discussing the male population, so at least that much should be known, no? -->
 
 ```{r, echo = FALSE}
 tibble(source = c("Preceptor Table", "Preceptor Table", "...",
                   "Actual Data", "Actual Data", "Actual Data", "...", 
-                  "Population", "Population", "Population"),
+                  "Other", "Other", "Other"),
        gender = c("Male", "Male", "...",
                   "Male", "Male", "Male", "...",
                   "?", "?", "?"),

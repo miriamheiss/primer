@@ -173,13 +173,13 @@ The issue is always: Do the data we have and the data we want to have come from 
 
 Having determined that the Preceptor Table and the data were drawn from the same population, we can produce a Population Table. 
 
-The Population Table includes rows from three sources: the **Preceptor Table**, the **actual data**, and the remainder of the **population**.
+The Population Table includes rows from three sources: the **Preceptor Table**, the **actual data**, and all *other* members of the population.
 
 The rows in the **Preceptor Table** contain the information that we would *want* to know in order to answer our questions. These rows contain entries for our covariates (city and year) but they do not contain any outcome results. We are trying to answer questions about the train commuter population in 2021, so our city entries for these rows will vary and our year entries of these rows will read "2021". 
 
 Our **actual data** rows contain the information that we *do* know. These rows contain entries for both our covariates *and* the outcomes. In this case, the actual data comes from a study conducted on train commuters around Boston, MA in 2012, so our city entries for these rows will read "Boston, MA" and our year entries of these rows will read "2012".
 
-Our **population** rows contain no data. These are subjects which fall under our desired population, but for which we have no data. As such, all rows are missing. However, this may include, for example, data from a range of years before and after 2012, since we considered little change overtime, so we would also consider this data to be representative and drawn from the larger population of train commuters in years near 2012.
+Our **other** rows contain no data. These are subjects which are members of our desired population, but for which we have no data. As such, all outcomes and covariates are missing. The "Other" rows his may include, for example, data from a range of years before and after 2012, since we considered little change overtime, so we would also consider this data to be representative and drawn from the larger population of train commuters in years near 2012.
 
 The population table includes commuters from our Preceptor Table with the information that we would ideally have to answer the questions and those from the data we have that is specific to Boston, MA. Additionally, the population table also includes the groups of people within the population from which both the data we have and the Preceptor table is drawn from that we don't have. 
 
@@ -188,11 +188,11 @@ The population table includes commuters from our Preceptor Table with the inform
 # 2000), Data, more populations rows, Preceptor Table, more populations rows, up
 # through 2025.
 
-tibble(source = c("Population", "Population", "...", 
+tibble(source = c("Other", "Other", "...", 
                   "Data", "Data", "...",
-                  "Population", "Population", "...",
+                  "Other", "Other", "...",
                   "Preceptor Table", "Preceptor Table", "...",
-                  "Population", "Population"),
+                  "Other", "Other"),
        city = c("?", "?", "...",
                  "Boston, MA", "Boston, MA", "...",
                  "?", "?", "...",
@@ -256,7 +256,7 @@ tibble(source = c("Population", "Population", "...",
   fmt_markdown(columns = everything())  
 ```
 
-Our Preceptor Table rows are chronologically ordered. The population shows our greater population for which we are making assumptions --- this is why the year at the start is earlier than our data and the year at the end is later than our Preceptor Table. This shows the more expansive population that we are inferring about. 
+Our Preceptor Table rows are chronologically ordered. The "other" rows our greater population for which we are making assumptions --- this is why the year at the start is earlier than our data and the year at the end is later than our Preceptor Table. This shows the more expansive population that we are inferring about. 
 
 ## age ~ party
 

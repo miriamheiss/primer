@@ -295,23 +295,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header><div class="cell">
 
 </div>
-<!-- Read Gelman on problems with testing. -->
-<!-- Read chapter 8 and 11. -->
 <!-- Add discussion of why Wisdom has nothing to do with representativeness. Use basketball player example. The  best way to be sure that your data is representative of the population is for the process which selected that data to be random. Almost never true! Even if NHANES is a perfect survey --- things are still hard. And no survey is perfect. People in jail? People in hospitals? GP: Done (maybe could elaborate some more later)  -->
 <!-- old stuff: -->
 <!-- Concerns about representativeness and validity may cause us to make adjustments in our final posteriors in an ad hoc --- but still useful! --- manner, or they may cause us to make changes in our actual models.  -->
-<!-- In functional form section, emphasize that we mostly choose our functional form on the basis of the left hand side variable. If it is continuous, we go linear. If it is discrete, we go logistic. (May add one other option later.) -->
+<!-- In functional form section, emphasize that we mostly choose our functional form on the basis of the left hand side variable. If it is continuous, we go linear. If it is 0/1, we go logistic. (May add one other option later.) -->
 <!-- Do we still need mutate_all(as.numeric)? This may have been fixed in current version of rstanarm. -->
 <!-- Take ownership of Temperance section. There is some sloppy writing there! Own it. -->
 <!-- Show posterior_interval() -->
 <!-- Chapter 7 should introduce, gently, the concept of in-sample and out-of-sample. As well as predictive accuracy as being a good way to judge how good your model is. What are some useful measures of predictive accuracy? Discuss our objective functions; minimize what? when would median be better than mean? Find a skewed data set and show how guessing the median works better than guessing the mean, if you care about absolute difference. (Can we estimate the median with stan_glm()?) Bias/Variance == Underfitting/Overfitting -->
-<p>In <a href="06-one-parameter.html"><span>Chapter&nbsp;6</span></a>, we learned how to do inference. We created a joint distribution of the models under consideration and the data which might be observed. Once we observed the data, we went from the joint distribution to the conditional distribution of possible models given the data which we did, in fact, observe. That conditional distribution, suitably normalized, was our posterior probability distribution over the space of possible models. With that distribution, we can answer any question we might (reasonably) ask.</p>
+<p>In <a href="05-probability.html"><span>Chapter&nbsp;5</span></a>, we learned how to do inference. We created a joint distribution of the models under consideration and the data which might be observed. Once we observed the data, we went from the joint distribution to the conditional distribution of possible models given the data which we did, in fact, observe. That conditional distribution, suitably normalized, was our posterior probability distribution over the space of possible models. With that distribution, we can answer any question we might (reasonably) ask.</p>
 <!-- Need a gif here. Like Hunger Games in Chapter 6. -->
 <p><em>But what a pain in the ass that whole process was!</em> Do professionals actually go through all those steps every time they work on a data science problem? No! That would be absurd. Instead, professionals use standard tools which, in an automated fashion, take care of those steps, taking us directly from assumptions and data to the posterior:</p>
 <p><span class="math display">\[\text{Prob}(\text{models} | \text{data} = \text{data we observed})\]</span></p>
 <p>Even then, however, the relative likelihood of different models is not that important. Models are invisible, mental entities with no more physical presence than unicorns or leprechauns. In the world itself, we make and test predictions. <em>People with better models make better predictions. That is what matters.</em></p>
-<p>In addition to a change in tools, there are two key differences in this chapter. First, <a href="06-one-parameter.html">Chapter&nbsp;<span>6</span></a> used models with just one parameter: the number of red beads, which we can also transform into a parameter, <span class="math inline">\(p\)</span>, the number of red beads divided by 1,000. The model in <a href="06-one-parameter.html"><span>Chapter&nbsp;6</span></a> was binomial, and there is only one unknown parameter <span class="math inline">\(p\)</span> in such models. In this chapter, we have two unknown parameters: the mean <span class="math inline">\(\mu\)</span> height in the US and the standard deviation, <span class="math inline">\(\sigma\)</span>, of the normally distributed error term.</p>
-<p>Second, <a href="06-one-parameter.html"><span>Chapter&nbsp;6</span></a> dealt with a limited set of specific models: 1,001 of them, to be precise. The procedure used was just what we saw in <a href="05-probability.html"><span>Chapter&nbsp;5</span></a>. In this chapter, on the other hand, we have continuous parameters.</p>
+<p><a href="06-one-parameter.html"><span>Chapter&nbsp;6</span></a> used models with just one parameter: the number of red beads, which we can also transform into a parameter, <span class="math inline">\(p\)</span>, the number of red beads divided by the total number of beads in the bowl. The model in <a href="06-one-parameter.html"><span>Chapter&nbsp;6</span></a> was binomial, and there is only one unknown parameter <span class="math inline">\(p\)</span> in such models. In this chapter, we have two unknown parameters: the mean <span class="math inline">\(\mu\)</span> height in the US and the standard deviation, <span class="math inline">\(\sigma\)</span>, of the normally distributed error term.</p>
 <p>By this point, we should understand that the reason for making models is not, primarily, that making models is fun (although it is)! The reason is that, when confronted with a question, we face decisions. We must decide between variables X or Y. We must choose from datasets A, B and C. Confronted by a decision, we need to make a model of the world to help us.</p>
 <!-- Add back reference to ch 12 when it shows up again. -->
 <p>The real world is complex. Any substantive decision problem includes a great deal of complexity and requires even more context. We do not have the time to get into that level of detail now. So, we simplify. We are going to create a model of height for adult men. We will then use that model to answer four questions:</p>
@@ -345,12 +342,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-layout-align="left">
 <div class="cell-output-display">
 
-<div id="wrunjbiqtj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ndfvgtozvh" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#wrunjbiqtj .gt_table {
+#ndfvgtozvh .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -375,7 +372,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-left-color: #D3D3D3;
 }
 
-#wrunjbiqtj .gt_heading {
+#ndfvgtozvh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -387,7 +384,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#wrunjbiqtj .gt_title {
+#ndfvgtozvh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -399,7 +396,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-width: 0;
 }
 
-#wrunjbiqtj .gt_subtitle {
+#ndfvgtozvh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -411,13 +408,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-width: 0;
 }
 
-#wrunjbiqtj .gt_bottom_border {
+#ndfvgtozvh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wrunjbiqtj .gt_col_headings {
+#ndfvgtozvh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -432,7 +429,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#wrunjbiqtj .gt_col_heading {
+#ndfvgtozvh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -452,7 +449,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#wrunjbiqtj .gt_column_spanner_outer {
+#ndfvgtozvh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -464,15 +461,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 4px;
 }
 
-#wrunjbiqtj .gt_column_spanner_outer:first-child {
+#ndfvgtozvh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wrunjbiqtj .gt_column_spanner_outer:last-child {
+#ndfvgtozvh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wrunjbiqtj .gt_column_spanner {
+#ndfvgtozvh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -484,7 +481,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   width: 100%;
 }
 
-#wrunjbiqtj .gt_group_heading {
+#ndfvgtozvh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -509,7 +506,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-#wrunjbiqtj .gt_empty_group_heading {
+#ndfvgtozvh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -524,15 +521,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-#wrunjbiqtj .gt_from_md > :first-child {
+#ndfvgtozvh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wrunjbiqtj .gt_from_md > :last-child {
+#ndfvgtozvh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wrunjbiqtj .gt_row {
+#ndfvgtozvh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -551,7 +548,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#wrunjbiqtj .gt_stub {
+#ndfvgtozvh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -564,7 +561,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#wrunjbiqtj .gt_stub_row_group {
+#ndfvgtozvh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -578,11 +575,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: top;
 }
 
-#wrunjbiqtj .gt_row_group_first td {
+#ndfvgtozvh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wrunjbiqtj .gt_summary_row {
+#ndfvgtozvh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -592,16 +589,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#wrunjbiqtj .gt_first_summary_row {
+#ndfvgtozvh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wrunjbiqtj .gt_first_summary_row.thick {
+#ndfvgtozvh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wrunjbiqtj .gt_last_summary_row {
+#ndfvgtozvh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -611,7 +608,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#wrunjbiqtj .gt_grand_summary_row {
+#ndfvgtozvh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -621,7 +618,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#wrunjbiqtj .gt_first_grand_summary_row {
+#ndfvgtozvh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -631,11 +628,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-color: #D3D3D3;
 }
 
-#wrunjbiqtj .gt_striped {
+#ndfvgtozvh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wrunjbiqtj .gt_table_body {
+#ndfvgtozvh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -644,7 +641,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#wrunjbiqtj .gt_footnotes {
+#ndfvgtozvh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -658,7 +655,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#wrunjbiqtj .gt_footnote {
+#ndfvgtozvh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -667,7 +664,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#wrunjbiqtj .gt_sourcenotes {
+#ndfvgtozvh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -681,7 +678,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#wrunjbiqtj .gt_sourcenote {
+#ndfvgtozvh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -689,64 +686,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#wrunjbiqtj .gt_left {
+#ndfvgtozvh .gt_left {
   text-align: left;
 }
 
-#wrunjbiqtj .gt_center {
+#ndfvgtozvh .gt_center {
   text-align: center;
 }
 
-#wrunjbiqtj .gt_right {
+#ndfvgtozvh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wrunjbiqtj .gt_font_normal {
+#ndfvgtozvh .gt_font_normal {
   font-weight: normal;
 }
 
-#wrunjbiqtj .gt_font_bold {
+#ndfvgtozvh .gt_font_bold {
   font-weight: bold;
 }
 
-#wrunjbiqtj .gt_font_italic {
+#ndfvgtozvh .gt_font_italic {
   font-style: italic;
 }
 
-#wrunjbiqtj .gt_super {
+#ndfvgtozvh .gt_super {
   font-size: 65%;
 }
 
-#wrunjbiqtj .gt_footnote_marks {
+#ndfvgtozvh .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#wrunjbiqtj .gt_asterisk {
+#ndfvgtozvh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wrunjbiqtj .gt_indent_1 {
+#ndfvgtozvh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wrunjbiqtj .gt_indent_2 {
+#ndfvgtozvh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wrunjbiqtj .gt_indent_3 {
+#ndfvgtozvh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wrunjbiqtj .gt_indent_4 {
+#ndfvgtozvh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wrunjbiqtj .gt_indent_5 {
+#ndfvgtozvh .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -852,11 +849,11 @@ $ sleep          &lt;int&gt; 4, 4, 4, NA, 8, NA, NA, 8, 8, 8, 7, 5, 4, NA, 5, 7,
 <pre><code># A tibble: 5 × 3
     age gender height
   &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;
-1     7 Male     123.
-2    12 Male     146.
-3    50 Female   151.
-4    49 Male     165 
-5    42 Male     175.</code></pre>
+1    11 Male     148.
+2    51 Male     168.
+3    35 Male     180.
+4    38 Female   161.
+5    11 Female   156.</code></pre>
 </div>
 </div>
 <p>Notice how there is a decimal in the <code>height</code> column of <code>ch7</code>. This is because <code>height</code> is a <code>&lt;dbl&gt;</code> and not an <code>&lt;int&gt;</code>.</p>
@@ -1100,7 +1097,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 <p>The Population Table shows rows from three sources: the <strong>Preceptor Table</strong>, the <strong>actual data</strong>, and the <strong>population</strong> (outside of the data).</p>
 <p>Our <strong>Preceptor Table</strong> rows contain the information that we would <em>want</em> to know in order to answer our questions. These rows contain entries for our covariates (sex and year) but they do not contain any outcome results (height). We are trying to answer questions about the male population in 2021, so our sex entries for these rows will read “Male” and our year entries of these rows will read “2021”.</p>
 <p>Our <strong>actual data</strong> rows contain the information that we <em>do</em> know. These rows contain entries for both our covariates <em>and</em> the outcomes. In this case, the actual data comes from a study conducted on males in 2009-2011, so our sex entries for these rows will read “Male” and our year entries of these rows will either read “2009”, “2010”, or “2011”.</p>
-<p>Our <strong>population</strong> rows contain no data. These are subjects which fall under our desired population, but for which we have no data. As such, all rows are missing.</p>
+<p>Our <strong>other</strong> rows contain no data. These are subjects which fall under our desired population, but for which we have no data. As such, all outcomes and covariates are missing. (A subtle point is that, even for other data, we “know” the ID and the Year for each subject. Of course, we don’t <em>really</em> know these things, but, conceptually, we are defining the meaning of those rows on the basis of those variables.)</p>
 <!-- GP: I changed everything but the explanation for the **population** rows. I am confused; shouldn't the population rows still contain "Male" in the sex column? Because this entire chapter, we've exclusively been discussing the male population, so at least that much should be known, no? -->
 <div class="cell">
 <div class="cell-output-display">
@@ -1618,7 +1615,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 </tr>
 <tr>
 <td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
-<p>Population</p>
+<p>Other</p>
 </div></td>
 <td class="gt_row gt_center"><div class="gt_from_md">
 <p>?</p>
@@ -1632,7 +1629,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 </tr>
 <tr>
 <td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
-<p>Population</p>
+<p>Other</p>
 </div></td>
 <td class="gt_row gt_center"><div class="gt_from_md">
 <p>?</p>
@@ -1646,7 +1643,7 @@ $ height &lt;dbl&gt; 164.7, 164.7, 164.7, 105.4, 168.4, 133.1, 130.6, 166.7, 166
 </tr>
 <tr>
 <td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
-<p>Population</p>
+<p>Other</p>
 </div></td>
 <td class="gt_row gt_center"><div class="gt_from_md">
 <p>?</p>

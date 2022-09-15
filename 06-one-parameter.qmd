@@ -918,11 +918,11 @@ It includes rows from three sources: the data for units we want to have (the Pre
 
 
 ```{r, echo = FALSE}
-tibble(source = c("Population", "Population", "Population","...",  
+tibble(source = c("Other", "Other", "Other","...",  
                   "Data", "Data", "Data", "...",
-                  "Population", "Population", "Population","...", 
+                  "Other", "Other", "Other","...", 
                   "Preceptor Table", "Preceptor Table", "Preceptor Table", "...",
-                  "Population", "Population", "Population"),
+                  "Other", "Other", "Other"),
        location = c("Known, specific urn", "Known, specific urn", "Known, specific urn", "...",
                     "Known, specific urn", "Known, specific urn", "Known, specific urn", "...",
                     "Known, specific urn", "Known, specific urn", "Known, specific urn", "...",
@@ -938,11 +938,11 @@ tibble(source = c("Population", "Population", "Population","...",
               "1", "200", "2025", "...",
               "1", "200", "2078", "...",
               "1", "200", "2300"),
-       color = c("?", "red", "?", "...",
+       color = c("?", "?", "?", "...",
               "white", "red", "white", "...",
+              "?", "?", "?", "...",
               "?", "red", "?", "...",
-              "?", "red", "?", "...",
-              "?", "red", "?")) |>
+              "?", "?", "?")) |>
 
   # Then, we use the gt function to make it pretty
 
@@ -979,7 +979,7 @@ Finally, Population Tables have an *outcome*. Sometimes there will be multiple o
 
 
 
-#### Stabilitycand representativeness
+#### Stability and representativeness
 
 Now that we have created our Population Table, we can analyze the key assumptions of stability, representativeness and unconfoundedness.  
 
@@ -1147,7 +1147,7 @@ With the fitted model object `fit_1`, we can now make predictions into the futur
 
 Recall the second question we started with:
 
->What is the probability, using the same urn, that we will draw more than 8 red beads if we use a shovel of size 20?
+> What is the probability, using the same urn, that we will draw more than 8 red beads if we use a shovel of size 20?
 
 #### Using the posterior
 
@@ -1211,7 +1211,7 @@ post_epred  |>
 ```
 
 
-What happened? `posterior_epred()` shows the distribution of the **entire population**, which is continuous. The expected predictions can be fractional, because `posterior_epred()` returns draws from the posterior (which can be fractional) contingent on some covariate. In our scenario we have no covariates for which to create expected predictions from, so `posterior_epred()` just returns the posterior, but re-scaled to between 0 and 20 beads instead of between 0 and 1 as before. The shape of the distributions are identical: 
+What happened? `posterior_epred()` shows the distribution of the **entire population**, which is continuous. The expected predictions can be fractional, because `posterior_epred()` returns draws from the posterior (which can be fractional) contingent on some covariate. In our scenario we have no covariates from which to create expected predictions, so `posterior_epred()` just returns the posterior, but re-scaled to between 0 and 20 beads instead of between 0 and 1 as before. The shape of the distributions are identical: 
 
 ```{r}
 post_epred |> 
@@ -1236,12 +1236,13 @@ In summary, use `posterior_predict()` when to predict the outcome of individual(
 
 Now let's attempt to actually answer our question: 
 
->What is the probability, using the same urn, that we will draw more than 8 red beads if we use a shovel of size 20?
+> What is the probability, using the same urn, that we will draw more than 8 red beads if we use a shovel of size 20?
 
 Because `posterior_predict()` takes predictive draws for us, we can simply count the number of draws that have more than 8 red beads, and divide by the total number of draws. 
 
 ```{r}
 # Same code as earlier, included as a refresher. 
+
 ppd_reds_in_20 <- posterior_predict(fit_1, 
                   newdata = tibble(.rows = 20)) |> 
   as_tibble() |> 
@@ -1249,6 +1250,7 @@ ppd_reds_in_20 <- posterior_predict(fit_1,
   select(total)
 
 # Calculating the probability
+
 sum(ppd_reds_in_20$total > 8)/length(ppd_reds_in_20$total)
 ```
 
@@ -1328,15 +1330,15 @@ pbinom(q = 8, size = 20, prob = .4, lower.tail = FALSE)
 
 Sadly, the answer to our question could be `r round(pbinom(q = 8, size = 20, prob = .3, lower.tail = FALSE)*100)`%, `r round(pbinom(q = 8, size = 20, prob = .4, lower.tail = FALSE)*100)`%, a value in between, or even a more extreme value. We will never know the correct answer, and must settle with our best estimate of `r round(100 *sum(ppd_reds_in_20$total > 8)/length(ppd_reds_in_20$total))`% that factors in our uncertainty regarding the true value of $\rho$. Long story short, our models are never the truth. 
 
-### Bad practices
+### Traditional practices
 
-Although the process was long, we have successfully gone through the cardinal virtues and answered our questions like real data scientists. In this section we will address some pitfalls to avoid. 
+Although the process was long, we have successfully gone through the cardinal virtues and answered our questions like real data scientists. In this section we will explain more traditional approaches. 
 
 #### Confidence intervals
 
 Let's go back to our first question:
 
->If we get 17 red beads in a random sample of size 50 taken from a mixed urn, what proportion $\rho$ of the beads in the urn are red?
+> If we get 17 red beads in a random sample of size 50 taken from a mixed urn, what proportion $\rho$ of the beads in the urn are red?
 
 If we had decided to, we could have answered this question using confidence intervals and statistics. First calculate the standard error:
 
@@ -1358,7 +1360,7 @@ This is correct, but quite difficult to conceptualize. If our boss needs a quick
 
 #### Hypothesis tests
 
-Statisticians, like how they use confidence intervals, also use hypothesis tests to quickly **try** to answer questions. Recall our view on hypothesis tests: **Amateurs test. Professionals summarize.** Traditionally, most scientific papers are not so much interested in estimating $\rho$. They are interested in testing specific hypotheses. What do we mean by that?
+Statisticians also use hypothesis tests to quickly **try** to answer questions. Recall our view on hypothesis tests: **Amateurs test. Professionals summarize.** Traditionally, most scientific papers are not so much interested in estimating $\rho$. They are interested in testing specific hypotheses. What do we mean by that?
 
 Let's look at a possible hypothesis in our urn paradigm: there are equal number of red and white beads in the urn. The null hypothesis, denoted by $H_0$, is the theory we are testing, while the alternative hypothesis, denoted by $H_a$, represents the opposite of our theory. Therefore, our hypothesis is designed as such:
 
@@ -1368,7 +1370,7 @@ $H_a$: There are *not* an equal number of red and white beads in the urn.
 
 Can we reject that hypothesis? Convention: if the 95% confidence interval excludes the null hypothesis, then we reject it. Here, that would mean if our posterior estimate (plus or minus 2 standard errors) *excluded* the possibility of the red and white beads being equal ($\rho = .5$) we can reject the null hypothesis. In the previous section we determined that the 95% confidence interval is between 21% and 47%. Because 50% is outside of this interval, we could reject the null hypothesis, and conclude that it is unlikely that the proportion of beads in the urn is 50%. 
 
-If we were testing the theory that $\rho = .45$ instead, our null hypothesis would fall within the confidence interval. This does not mean that we accept the null hypothesis, we just don't reject it.  When we can’t reject the null hypothesis our test is essentially useless, as we have no idea whether or not our theory is true. In our scenario we only know that there is some possibility that $\rho = .45$. We're just back where we started! This is why we never test — unless your boss demands a test. **Use your judgment, make your models, summarize your knowledge of the world, and use that summary to make decisions.** 
+If we were testing the theory that $\rho = .45$ instead, our null hypothesis would fall within the confidence interval. **This does not mean that we accept the null hypothesis**.  Instead, we simply don't reject it.  In our scenario we only know that there is some possibility that $\rho = .45$. We're just back where we started! This is why we never test — unless your boss demands a test. **Use your judgment, make your models, summarize your knowledge of the world, and use that summary to make decisions.** 
 
 ## Case study: Polls {#sec-sampling-case-study}
 
