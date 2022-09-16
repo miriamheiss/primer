@@ -9,9 +9,7 @@ library(gtsummary)
 library(patchwork)
 ```
 
-<!-- In which Cardinal Virtue does we explore validity? Looks like stability and representativeness go in Justice. But what about validity? What about unconfoundedness? -->
-
-<!-- Deosn't unconfoundedness belong here somewhere? -->
+<!-- Use twitter comment about transforming R code chunks to new Quarto format. -->
 
 <!-- Case study of polls needs to be updated to use our language of validity and so on. -->
 
@@ -241,11 +239,11 @@ Now let's add a column which indicates the number of red beads in the sample tak
 tibble(trial_ID = 1) |> 
   mutate(shovel = map(trial_ID, ~ slice_sample(urn, n = 50))) |> 
   
-# To count the number of red beads in each shovel, we can use a lesser 
-# known property of the sum() function: By passing in a comparison 
-# expression, sum() will count the number of occurrences within a vector. 
-# In this case, we count the total number occurrences of the word red
-# in the color column of shovel.
+  # To count the number of red beads in each shovel, we can use a lesser 
+  # known property of the sum() function: By passing in a comparison 
+  # expression, sum() will count the number of occurrences within a vector. 
+  # In this case, we count the total number occurrences of the word red
+  # in the color column of shovel.
 
   mutate(numb_red = map_int(shovel, ~ sum(.$color == "red")))
 ```
@@ -338,23 +336,23 @@ facet_compare <- bind_rows(virtual_samples |>
                        levels = c("Virtual sampling", 
                                   "Tactile sampling"))) |> 
   
-# the boundary argument makes sure that at least one bin borders .4, because 
-# we have the unusual insight in knowing that the population proportion in the urn 
-# is .4 (600 white beads and 400 red beads). Setting the color to white changes 
-# the border color, making the distribution easier to visualize. 
+  # the boundary argument makes sure that at least one bin borders .4, because 
+  # we have the unusual insight in knowing that the population proportion in the urn 
+  # is .4 (600 white beads and 400 red beads). Setting the color to white changes 
+  # the border color, making the distribution easier to visualize. 
   
   ggplot(aes(x = prop_red)) +
     geom_histogram(binwidth = 0.05, 
                    boundary = 0.4, 
                    color = "white") +
   
-  # facet_wrapping by type creates two different graphs on our plane. The data
-  # is separated into two graphs based upon the column after the ~.
+    # facet_wrapping by type creates two different graphs on our plane. The data
+    # is separated into two graphs based upon the column after the ~.
   
     facet_wrap(~ type) +
   
-  # Add an x axis with p-hat using expression() with paste() for clarification
-  # on p-hat's meaning. Add an appropriate title and inspect our creation.
+    # Add an x axis with p-hat using expression() with paste() for clarification
+    # on p-hat's meaning. Add an appropriate title and inspect our creation.
   
     labs(x = expression(paste("Proportion of 50 beads that were red", hat(rho))),
          title = "Comparing distributions") 
@@ -516,8 +514,10 @@ virtual_prop |>
        subtitle = "As shovel size increases, variation decreases.",
        y = "Proportion red in sample",
        color = "Shovel size") +
+  
   # We do not need an x axis, because the color of the points denotes the shovel size. 
-   theme(axis.title.x = element_blank(),
+   
+  theme(axis.title.x = element_blank(),
         axis.text.x = element_blank(),
         axis.ticks.x = element_blank())
 ```
@@ -610,13 +610,9 @@ expand_grid(trial_ID = c(1:1000), shovel_size = c(25, 50, 100)) |>
   
 ```
 
-This is, approximately, the same result as we saw above, but with 1 re-factored tibble instead of 3 separate ones. We can also functions like `expand_grid()` in the future to make our code more concise.
+This is, approximately, the same result as we saw above, but with 1 re-factored tibble instead of 3 separate ones. We can also use functions like `expand_grid()` in the future to make our code more concise.
 
 Now that we have this framework, there's no need to limit ourselves to the sizes 25, 50, and 100.  Why not try all integers from 1 to 100? We can use the same code, except we'll now set `shovel_size = 1:100`.
-
-<!-- RS: For me, the tutorial doesn't knit unless this is included. For whoever is reading this, if the tutorial knits for you, then please delete the code chunk below! -->
-
-<!-- RS: If it's still a problem, it has something to do with the code chunk cache = TRUE option being confused with the raysharer/rgl cache = TRUE.  -->
 
 
 ```{r, cache = TRUE}
@@ -762,15 +758,9 @@ p_hat_compare <- virtual_prop |>
   labs(x = expression(paste("Sample proportion ", hat(rho))), 
        title = expression(paste("Sampling distributions of ", hat(rho), " based on n = 25, 50, 100.")) ) +
   facet_wrap(~ n)
-if(knitr::is_latex_output()){
-  p_hat_compare  +
-  theme(
-    strip.text = element_text(color = 'black'),
-    strip.background = element_rect(fill = "grey93")
-  )
-} else {
-  p_hat_compare
-}
+
+p_hat_compare
+
 ```
 
 Furthermore, let's display the graph of standard errors for $n = 1$ to $n = 100$ using our new terminology, notation, and definitions relating to sampling.
@@ -1133,9 +1123,6 @@ sum(ppd_for_p$p > .3 & ppd_for_p$p < .4)/nrow(ppd_for_p)
 
 There is approximately a 54% chance that $\rho$ is between .3 and .4. Give me draws from the posterior and I can show you the world!
 
-```{r, echo = FALSE, fig.cap = "Time for a quick musical interlude. We've earned it."}
-knitr::include_app("https://www.youtube.com/embed/sVxUUotm1P4")
-```
 
 ### Temperance
 
@@ -1463,52 +1450,31 @@ For example, what if Kennedy School's Institute of Politics at Harvard Universit
 
 ## Summary
 
-Key lesson:
+In this chapter, we performed both tactile and virtual sampling exercises to infer about an unknown parameter We also presented a case study of sampling in real life with polls. In each case, we used the sample proportion $\hat{\rho}$ to estimate the population proportion $\rho$. However, we are not just limited to scenarios related to proportions. In other words, we can use sampling to estimate other population parameters using other point estimates as well.
 
-There is a truth! There is a true value for $\rho$ which we do not know! We want to create a posterior probability distribution which summarizes our knowledge. We care about the posterior probability distribution of p. The center of that distribution is around the mean or median of the proportion in your sample. The sd (or mad) of that posterior is the standard deviation divided by the square root of our sample size! Note that this is the same thing as the standard deviation of the repeated samples.
+There is a truth! There is a true value for $\rho$ which we do not know! We want to create a posterior probability distribution which summarizes our knowledge. We care about the posterior probability distribution of $\rho$. The center of that distribution is around the mean or median of the proportion in your sample. The sd (or mad) of that posterior is the standard deviation divided by the square root of our sample size! Note that this is the same thing as the standard deviation of the repeated samples.
 
-Key lesson: 
+We have a journey from reality, to our predictions, to the standard error of our predictions, to the posterior probability distribution for $\rho$. This is our sequence:
 
-We have a journey from reality, to our predictions, to the standard error of our predictions, to the posterior probability distribution for p. This is our sequence:
+**$\rho$ (the truth) $\Rightarrow$ $\hat{\rho}$ (my estimate) $\Rightarrow$ the standard error of $\hat{\rho}$ (black box of math mumbo jumbo and computer simulation magic) $\Rightarrow$ our posterior probability distribution for $\rho$ (our beliefs about the truth).**
 
-**p (the truth) $\Rightarrow$ $\hat{\rho}$ (my estimate) $\Rightarrow$ the standard error of $\hat{\rho}$ (black box of math mumbo jumbo and computer simulation magic) $\Rightarrow$ our posterior probability distribution for p (our beliefs about the truth).**
+This journey shows how our beliefs about the truth develop through our work. We begin with $\rho$; $\rho$ is the truth, the true but unknown value we are estimating. $\hat{\rho}$ is our estimate for $\rho$. There can be millions and millions of $\hat{\rho}$'s. Next, we must take the standard error of our estimates (our $\hat{\rho}$'s) to account for our uncertainty of our predictions. Finally -- the thing we need most -- we create a posterior probability distribution for $\rho$. This distribution is used to answer key questions about $\rho$. 
 
-This journey shows how our beliefs about the truth develop through our work. We begin with p; p is the truth, the true but unknown value we are estimating. $\hat{\rho}$ is our estimate for p. There can be millions and millions of $\hat{\rho}$'s. Next, we must take the standard error of our estimates (our $\hat{\rho}$'s) to account for our uncertainty with our predictions. Finally -- the thing we need most -- we create a posterior probability distribution for p. This distribution is used to answer key questions about p. 
 
-Other highlights:
+### Other highlights
 
-### Tactial sampling
+- Standard error is just a fancy term for your uncertainty about something you don't know. Standard error $\approx$ our (uncertain) beliefs.
 
-- Sampling allows us to make guesses at an unknown, difficult-to-obtain value by looking at a smaller subset of data and generalizing it to the larger population. 
-- Sampling is preferable in the urn example because counting out 1000 beads from an urn is intensive and tedious. 
-- Sampling is preferable in the real-world because it is often impossible to sample "all the beads" (all the people) in a population. With sampling, you see variations in your results. This is known as sampling variation and is expected, especially if you draw samples at random (unbiased).
-
-### Virtual sampling
-
-- By creating a virtual analog of our urn and our shovel, we were able to look at *even more* samples and observe the effects of sampling size on our results. 
-- More samples yield more even distributions which should resemble a bell. 
-- Larger sample sizes decrease standard deviation, meaning that the resulting proportions red are closer to one another than when the sample sizes are smaller. This means that larger samples = lower SD = more precise guesses. 
-- If we want to repeat the same task multiple times, like comparing the distributions of 3 sample sizes, use mapping and functions like `expand_grid()` to cut down on repetative code. 
-
-### Standard error
-
-- Standard error is just a fancy term for your uncertainty about something you don't know. Standard error $\approx$ our (uncertain) beliefs. 
 - The standard error measures the accuracy of a sample distribution as compared to the population by using the standard deviation. 
-- We find that larger sample sizes $\implies$ lower standard errors $\implies$ more accurate estimates.   
-- If we could only know two pieces of information from our data, we would need a measure of the **center** of the distribution (like mean or median) and a measure of the **variability** of the distribution (like sd or MAD). 
-- SE refers to the standard deviation of a sample statistic (aka point estimate), such as the mean or median. Therefore, the "standard error of the mean" refers to the standard deviation of the distribution of sample means taken from a population. 
 
-### Cardinal Virtues
+- We find that larger sample sizes $\implies$ lower standard errors $\implies$ more accurate estimates.   
+
+- If we could only know two pieces of information from our data, we would need a measure of the **center** of the distribution (like mean or median) and a measure of the **variability** of the distribution (like sd or MAD). 
+
+- SE refers to the standard deviation of a sample statistic (aka point estimate), such as the mean or median. Therefore, the "standard error of the mean" refers to the standard deviation of the distribution of sample means taken from a population. 
 
 - `stan_glm()` can create a joint distribution and then estimate the posterior probability distribution, conditional on the data which was passed in to the data argument. This is a much easier way to create the posterior distribution, and will be explored in more detail in @sec-two-parameters. 
 - We use the posterior distribution to answer our questions. 
-
-### Case study: Polls
-
-- Polling is a more complex real life application of the binomial distribution.
-- Real life sampling is *extremely* prone to error. This cannot be emphasized enough. We are often forced to choose between precision and accuracy during real-life sampling. 
-
-In this chapter, we performed both tactile and virtual sampling exercises to infer about an unknown parameter We also presented a case study of sampling in real life with polls. In each case, we used the sample proportion $\hat{\rho}$ to estimate the population proportion $\rho$. However, we are not just limited to scenarios related to proportions. In other words, we can use sampling to estimate other population parameters using other point estimates as well.
 
 As we continue our journey, recall the case of Primrose Everdeen and what she represents: no matter how realistic is our model is, our predictions are **never certain**.  
 
@@ -1516,7 +1482,4 @@ As we continue our journey, recall the case of Primrose Everdeen and what she re
 knitr::include_graphics("06-one-parameter/images/posterior_effie.png")
 ```
 
-```{r echo = FALSE, cache=FALSE, warning = FALSE}
-knitr::write_bib(.packages(), "packages.bib")
-```
 

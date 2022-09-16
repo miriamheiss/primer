@@ -281,11 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li>
 <a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"> <span class="header-section-number">6.6</span> Summary</a>
   <ul class="collapse">
-<li><a href="#tactial-sampling" id="toc-tactial-sampling" class="nav-link" data-scroll-target="#tactial-sampling"> <span class="header-section-number">6.6.1</span> Tactial sampling</a></li>
-  <li><a href="#virtual-sampling" id="toc-virtual-sampling" class="nav-link" data-scroll-target="#virtual-sampling"> <span class="header-section-number">6.6.2</span> Virtual sampling</a></li>
-  <li><a href="#standard-error" id="toc-standard-error" class="nav-link" data-scroll-target="#standard-error"> <span class="header-section-number">6.6.3</span> Standard error</a></li>
-  <li><a href="#cardinal-virtues-1" id="toc-cardinal-virtues-1" class="nav-link" data-scroll-target="#cardinal-virtues-1"> <span class="header-section-number">6.6.4</span> Cardinal Virtues</a></li>
-  <li><a href="#case-study-polls" id="toc-case-study-polls" class="nav-link" data-scroll-target="#case-study-polls"> <span class="header-section-number">6.6.5</span> Case study: Polls</a></li>
+<li><a href="#other-highlights" id="toc-other-highlights" class="nav-link" data-scroll-target="#other-highlights"> <span class="header-section-number">6.6.1</span> Other highlights</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/PPBDS/primer/edit/main/06-one-parameter.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
@@ -307,8 +303,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header><div class="cell">
 
 </div>
-<!-- In which Cardinal Virtue does we explore validity? Looks like stability and representativeness go in Justice. But what about validity? What about unconfoundedness? -->
-<!-- Deosn't unconfoundedness belong here somewhere? -->
+<!-- Use twitter comment about transforming R code chunks to new Quarto format. -->
 <!-- Case study of polls needs to be updated to use our language of validity and so on. -->
 <!-- RS: Technically, standard error should not use sigma in it's formula, as it specifically refers to a point statistic and not a population. Someone may want to change all the sigmas to s. Hmm? -->
 <!-- There needs to be more explanation about confidence intervals!  -->
@@ -420,16 +415,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 33 × 4
    group           red_beads prop_red group_ID
    &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
- 1 Damani, Melissa        15     0.3         1
- 2 Mark, Jane             21     0.42        2
- 3 Mia, James             15     0.3         3
- 4 Ace, Chris             18     0.36        4
- 5 Maddie, Brent          19     0.38        5
- 6 Ellie, Terrance        17     0.34        6
- 7 Sanjana, Yuko          19     0.38        7
- 8 Dohyun, Estel          18     0.36        8
- 9 Ilyas, Yohan           21     0.42        9
-10 Esther, Henry          17     0.34       10
+ 1 Mal, Francis           17     0.34        1
+ 2 Claire, Cloud          16     0.32        2
+ 3 Ace, Chris             18     0.36        3
+ 4 Conrad, Vlad           16     0.32        4
+ 5 Dania, Derek           21     0.42        5
+ 6 Vignesh, Eliot         16     0.32        6
+ 7 Damani, Melissa        15     0.3         7
+ 8 Sophie, Brian          21     0.42        8
+ 9 Yao, Kate              23     0.46        9
+10 Ishan, Cass            15     0.3        10
 # … with 23 more rows</code></pre>
 </div>
 </div>
@@ -543,11 +538,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>trial_ID <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>shovel <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">trial_ID</span>, <span class="op">~</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span><span class="va">urn</span>, n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  </span>
-<span><span class="co"># To count the number of red beads in each shovel, we can use a lesser </span></span>
-<span><span class="co"># known property of the sum() function: By passing in a comparison </span></span>
-<span><span class="co"># expression, sum() will count the number of occurrences within a vector. </span></span>
-<span><span class="co"># In this case, we count the total number occurrences of the word red</span></span>
-<span><span class="co"># in the color column of shovel.</span></span>
+<span>  <span class="co"># To count the number of red beads in each shovel, we can use a lesser </span></span>
+<span>  <span class="co"># known property of the sum() function: By passing in a comparison </span></span>
+<span>  <span class="co"># expression, sum() will count the number of occurrences within a vector. </span></span>
+<span>  <span class="co"># In this case, we count the total number occurrences of the word red</span></span>
+<span>  <span class="co"># in the color column of shovel.</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>numb_red <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">shovel</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">color</span> <span class="op">==</span> <span class="st">"red"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -798,8 +793,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>       subtitle <span class="op">=</span> <span class="st">"As shovel size increases, variation decreases."</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"Proportion red in sample"</span>,</span>
 <span>       color <span class="op">=</span> <span class="st">"Shovel size"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  </span>
 <span>  <span class="co"># We do not need an x axis, because the color of the points denotes the shovel size. </span></span>
-<span>   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>   </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        axis.ticks.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1335,10 +1332,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 3         100       0.0453</code></pre>
 </div>
 </div>
-<p>This is, approximately, the same result as we saw above, but with 1 re-factored tibble instead of 3 separate ones. We can also functions like <code><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid()</a></code> in the future to make our code more concise.</p>
+<p>This is, approximately, the same result as we saw above, but with 1 re-factored tibble instead of 3 separate ones. We can also use functions like <code><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid()</a></code> in the future to make our code more concise.</p>
 <p>Now that we have this framework, there’s no need to limit ourselves to the sizes 25, 50, and 100. Why not try all integers from 1 to 100? We can use the same code, except we’ll now set <code>shovel_size = 1:100</code>.</p>
-<!-- RS: For me, the tutorial doesn't knit unless this is included. For whoever is reading this, if the tutorial knits for you, then please delete the code chunk below! -->
-<!-- RS: If it's still a problem, it has something to do with the code chunk cache = TRUE option being confused with the raysharer/rgl cache = TRUE.  -->
 <div class="cell" data-hash="06-one-parameter_cache/html/unnamed-chunk-34_e84a79498ef77421f35762ce7b13eb88">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">shovels_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid</a></span><span class="op">(</span>trial_ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span>, shovel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>shovel <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">shovel_size</span>, <span class="op">~</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span><span class="va">urn</span>, n <span class="op">=</span> <span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -3399,10 +3394,6 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 </div>
 </div>
 <p>There is approximately a 54% chance that <span class="math inline">\(\rho\)</span> is between .3 and .4. Give me draws from the posterior and I can show you the world!</p>
-<div class="cell">
-<iframe src="https://www.youtube.com/embed/sVxUUotm1P4?showcase=0" width="672" height="400px" data-external="1">
-</iframe>
-</div>
 </section></section><section id="temperance" class="level3" data-number="6.4.4"><h3 data-number="6.4.4" class="anchored" data-anchor-id="temperance">
 <span class="header-section-number">6.4.4</span> Temperance</h3>
 <div class="cell">
@@ -3463,7 +3454,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We have successfully created the posterior probability distribution for the number of red beads drawn in a shovel of size 20. But before we answer our question, some of us may be wondering why we made our predictions using <code><a href="https://mc-stan.org/rstantools/reference/posterior_predict.html">posterior_predict()</a></code> instead of <code><a href="https://mc-stan.org/rstantools/reference/posterior_epred.html">posterior_epred()</a></code>. Let’s examine what happens if we use <code><a href="https://mc-stan.org/rstantools/reference/posterior_epred.html">posterior_epred()</a></code> instead.</p>
@@ -3487,7 +3478,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Using posterior_epred()</figcaption><p></p>
 </figure>
 </div>
@@ -3510,7 +3501,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <span>  <span class="fu">plot_annotation</span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Expected prediction for sample of size 20 on left, posterior on right.'</span>,</span>
 <span>                  subtitle <span class="op">=</span> <span class="st">"The two distributions have an identical shape."</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-63-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>On the other hand, <code><a href="https://mc-stan.org/rstantools/reference/posterior_predict.html">posterior_predict()</a></code> models the posterior distribution for future <strong>individuals</strong>. In our scenario, we model the binomial distribution of a discrete random variable. The bars only appear at real numbers between 1 and 16, because we are predicting the probability of individual samples. We cannot draw fractions of beads in our sample. Using <code><a href="https://mc-stan.org/rstantools/reference/posterior_predict.html">posterior_predict()</a></code> essentially replicates the DGM, taking many virtual draws from our urn and summarizing all the results.</p>
@@ -3588,7 +3579,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-66-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-65-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The red bars illustrate the area under a specific section of the curve, as compared to the <em>entire</em> area under the curve. <em>Each question requires looking at a new area under the curve.</em> When someones asks you a question, they are doing two things. First, they are providing instructions as to the posterior your should create. Here, the results with a shovel of 20 slots. Second, they are asking a question about the area under the curve in a specific region. Here, the region where the number of red beads is greater than 8 is highlighted in red. Therefore, the area below the curve that <strong>is red</strong> is how we get our estimate.</p>
@@ -3731,57 +3722,26 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <p>For example, what if Kennedy School’s Institute of Politics at Harvard University conducted this poll using only mobile phone numbers? People without mobile phones would be left out and therefore not represented in the sample. This flaw is an example of <strong>censoring</strong>, the exclusion of certain datapoints due to an issue with data collection. This results in an incomplete observation and increases the prediction uncertainty of the estimand, Obama’s approval rating among young Americans. Ensuring that our samples were random was easy to do in our sampling urn exercises; however, in a real life situation like the Obama poll, this is much harder to do.</p>
 </section><section id="summary" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="summary">
 <span class="header-section-number">6.6</span> Summary</h2>
-<p>Key lesson:</p>
-<p>There is a truth! There is a true value for <span class="math inline">\(\rho\)</span> which we do not know! We want to create a posterior probability distribution which summarizes our knowledge. We care about the posterior probability distribution of p.&nbsp;The center of that distribution is around the mean or median of the proportion in your sample. The sd (or mad) of that posterior is the standard deviation divided by the square root of our sample size! Note that this is the same thing as the standard deviation of the repeated samples.</p>
-<p>Key lesson:</p>
-<p>We have a journey from reality, to our predictions, to the standard error of our predictions, to the posterior probability distribution for p.&nbsp;This is our sequence:</p>
-<p><strong>p (the truth) <span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(\hat{\rho}\)</span> (my estimate) <span class="math inline">\(\Rightarrow\)</span> the standard error of <span class="math inline">\(\hat{\rho}\)</span> (black box of math mumbo jumbo and computer simulation magic) <span class="math inline">\(\Rightarrow\)</span> our posterior probability distribution for p (our beliefs about the truth).</strong></p>
-<p>This journey shows how our beliefs about the truth develop through our work. We begin with p; p is the truth, the true but unknown value we are estimating. <span class="math inline">\(\hat{\rho}\)</span> is our estimate for p.&nbsp;There can be millions and millions of <span class="math inline">\(\hat{\rho}\)</span>’s. Next, we must take the standard error of our estimates (our <span class="math inline">\(\hat{\rho}\)</span>’s) to account for our uncertainty with our predictions. Finally – the thing we need most – we create a posterior probability distribution for p.&nbsp;This distribution is used to answer key questions about p.&nbsp;</p>
-<p>Other highlights:</p>
-<section id="tactial-sampling" class="level3" data-number="6.6.1"><h3 data-number="6.6.1" class="anchored" data-anchor-id="tactial-sampling">
-<span class="header-section-number">6.6.1</span> Tactial sampling</h3>
-<ul>
-<li>Sampling allows us to make guesses at an unknown, difficult-to-obtain value by looking at a smaller subset of data and generalizing it to the larger population.</li>
-<li>Sampling is preferable in the urn example because counting out 1000 beads from an urn is intensive and tedious.</li>
-<li>Sampling is preferable in the real-world because it is often impossible to sample “all the beads” (all the people) in a population. With sampling, you see variations in your results. This is known as sampling variation and is expected, especially if you draw samples at random (unbiased).</li>
-</ul></section><section id="virtual-sampling" class="level3" data-number="6.6.2"><h3 data-number="6.6.2" class="anchored" data-anchor-id="virtual-sampling">
-<span class="header-section-number">6.6.2</span> Virtual sampling</h3>
-<ul>
-<li>By creating a virtual analog of our urn and our shovel, we were able to look at <em>even more</em> samples and observe the effects of sampling size on our results.</li>
-<li>More samples yield more even distributions which should resemble a bell.</li>
-<li>Larger sample sizes decrease standard deviation, meaning that the resulting proportions red are closer to one another than when the sample sizes are smaller. This means that larger samples = lower SD = more precise guesses.</li>
-<li>If we want to repeat the same task multiple times, like comparing the distributions of 3 sample sizes, use mapping and functions like <code><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid()</a></code> to cut down on repetative code.</li>
-</ul></section><section id="standard-error" class="level3" data-number="6.6.3"><h3 data-number="6.6.3" class="anchored" data-anchor-id="standard-error">
-<span class="header-section-number">6.6.3</span> Standard error</h3>
-<ul>
-<li>Standard error is just a fancy term for your uncertainty about something you don’t know. Standard error <span class="math inline">\(\approx\)</span> our (uncertain) beliefs.</li>
-<li>The standard error measures the accuracy of a sample distribution as compared to the population by using the standard deviation.</li>
-<li>We find that larger sample sizes <span class="math inline">\(\implies\)</span> lower standard errors <span class="math inline">\(\implies\)</span> more accurate estimates.<br>
-</li>
-<li>If we could only know two pieces of information from our data, we would need a measure of the <strong>center</strong> of the distribution (like mean or median) and a measure of the <strong>variability</strong> of the distribution (like sd or MAD).</li>
-<li>SE refers to the standard deviation of a sample statistic (aka point estimate), such as the mean or median. Therefore, the “standard error of the mean” refers to the standard deviation of the distribution of sample means taken from a population.</li>
-</ul></section><section id="cardinal-virtues-1" class="level3" data-number="6.6.4"><h3 data-number="6.6.4" class="anchored" data-anchor-id="cardinal-virtues-1">
-<span class="header-section-number">6.6.4</span> Cardinal Virtues</h3>
-<ul>
-<li>
-<code><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html">stan_glm()</a></code> can create a joint distribution and then estimate the posterior probability distribution, conditional on the data which was passed in to the data argument. This is a much easier way to create the posterior distribution, and will be explored in more detail in <a href="07-two-parameters.html"><span>Chapter&nbsp;7</span></a>.</li>
-<li>We use the posterior distribution to answer our questions.</li>
-</ul></section><section id="case-study-polls" class="level3" data-number="6.6.5"><h3 data-number="6.6.5" class="anchored" data-anchor-id="case-study-polls">
-<span class="header-section-number">6.6.5</span> Case study: Polls</h3>
-<ul>
-<li>Polling is a more complex real life application of the binomial distribution.</li>
-<li>Real life sampling is <em>extremely</em> prone to error. This cannot be emphasized enough. We are often forced to choose between precision and accuracy during real-life sampling.</li>
-</ul>
 <p>In this chapter, we performed both tactile and virtual sampling exercises to infer about an unknown parameter We also presented a case study of sampling in real life with polls. In each case, we used the sample proportion <span class="math inline">\(\hat{\rho}\)</span> to estimate the population proportion <span class="math inline">\(\rho\)</span>. However, we are not just limited to scenarios related to proportions. In other words, we can use sampling to estimate other population parameters using other point estimates as well.</p>
+<p>There is a truth! There is a true value for <span class="math inline">\(\rho\)</span> which we do not know! We want to create a posterior probability distribution which summarizes our knowledge. We care about the posterior probability distribution of <span class="math inline">\(\rho\)</span>. The center of that distribution is around the mean or median of the proportion in your sample. The sd (or mad) of that posterior is the standard deviation divided by the square root of our sample size! Note that this is the same thing as the standard deviation of the repeated samples.</p>
+<p>We have a journey from reality, to our predictions, to the standard error of our predictions, to the posterior probability distribution for <span class="math inline">\(\rho\)</span>. This is our sequence:</p>
+<p><strong><span class="math inline">\(\rho\)</span> (the truth) <span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(\hat{\rho}\)</span> (my estimate) <span class="math inline">\(\Rightarrow\)</span> the standard error of <span class="math inline">\(\hat{\rho}\)</span> (black box of math mumbo jumbo and computer simulation magic) <span class="math inline">\(\Rightarrow\)</span> our posterior probability distribution for <span class="math inline">\(\rho\)</span> (our beliefs about the truth).</strong></p>
+<p>This journey shows how our beliefs about the truth develop through our work. We begin with <span class="math inline">\(\rho\)</span>; <span class="math inline">\(\rho\)</span> is the truth, the true but unknown value we are estimating. <span class="math inline">\(\hat{\rho}\)</span> is our estimate for <span class="math inline">\(\rho\)</span>. There can be millions and millions of <span class="math inline">\(\hat{\rho}\)</span>’s. Next, we must take the standard error of our estimates (our <span class="math inline">\(\hat{\rho}\)</span>’s) to account for our uncertainty of our predictions. Finally – the thing we need most – we create a posterior probability distribution for <span class="math inline">\(\rho\)</span>. This distribution is used to answer key questions about <span class="math inline">\(\rho\)</span>.</p>
+<section id="other-highlights" class="level3" data-number="6.6.1"><h3 data-number="6.6.1" class="anchored" data-anchor-id="other-highlights">
+<span class="header-section-number">6.6.1</span> Other highlights</h3>
+<ul>
+<li><p>Standard error is just a fancy term for your uncertainty about something you don’t know. Standard error <span class="math inline">\(\approx\)</span> our (uncertain) beliefs.</p></li>
+<li><p>The standard error measures the accuracy of a sample distribution as compared to the population by using the standard deviation.</p></li>
+<li><p>We find that larger sample sizes <span class="math inline">\(\implies\)</span> lower standard errors <span class="math inline">\(\implies\)</span> more accurate estimates.</p></li>
+<li><p>If we could only know two pieces of information from our data, we would need a measure of the <strong>center</strong> of the distribution (like mean or median) and a measure of the <strong>variability</strong> of the distribution (like sd or MAD).</p></li>
+<li><p>SE refers to the standard deviation of a sample statistic (aka point estimate), such as the mean or median. Therefore, the “standard error of the mean” refers to the standard deviation of the distribution of sample means taken from a population.</p></li>
+<li><p><code><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html">stan_glm()</a></code> can create a joint distribution and then estimate the posterior probability distribution, conditional on the data which was passed in to the data argument. This is a much easier way to create the posterior distribution, and will be explored in more detail in <a href="07-two-parameters.html"><span>Chapter&nbsp;7</span></a>.</p></li>
+<li><p>We use the posterior distribution to answer our questions.</p></li>
+</ul>
 <p>As we continue our journey, recall the case of Primrose Everdeen and what she represents: no matter how realistic is our model is, our predictions are <strong>never certain</strong>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="06-one-parameter/images/posterior_effie.png" class="img-fluid" width="541"></p>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>tweaking rgl</code></pre>
 </div>
 </div>
 
