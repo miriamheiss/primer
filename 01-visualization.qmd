@@ -724,29 +724,9 @@ trains |>
   select(starts_with("a"))
 ```
 
-### `slice()` and `pull()` and `[]`
-
-`slice()` and `pull()` are additional functions that you can use to pick out specific rows or columns within a data frame.
-
-Using `slice()` gives us specific rows from the `trains` tibble:
-
-```{r}
-trains |> 
-  slice(2:5)
-```
-
-Unlike `filter()`, `slice()` relies on numeric order of the data. 
-
-`pull()` grabs out a variable as a vector, rather than leaving it within a tibble, as `select()` does:
-
-```{r}
-trains |> 
-  slice(2:5) |> 
-  pull(age)
-```
 
 
-### `arrange()`
+### `arrange()` rows
 
 `arrange()` allows us to sort/reorder a tibble's rows according to the values of a specific variable. Unlike `filter()` or `select()`, `arrange()` does not remove any rows or columns from the tibble. Example:
 
@@ -767,7 +747,7 @@ trains |>
 This is the first of many "pipes" which we will create in *The Primer*. First, we have the `trains` tibble. Second, we pipe that to the `select()` function. Third, we pipe the results of `select()` to the `arrange()` function. *Each step in the pipe starts with a tibble and then, once it is done, produces a tibble. It is [tibbles all the way down](https://en.wikipedia.org/wiki/Turtles_all_the_way_down)!*
 
 
-### `mutate()` 
+### `mutate()` variables
 
 ```{r, echo = FALSE, fig.cap = "`mutate() adds a column to a tibble."}
 knitr::include_graphics("01-visualization/images/mutate.png")
@@ -814,7 +794,7 @@ trains |>
 Another function similar to `if_else()`, is `dplyr::case_when()`. `case_when()` is particularly useful inside mutate when you want to create a new variable that relies on a complex combination of existing variables. Note that there is a different version of `if_else()` in base R: `ifelse()`. This works exactly the same as the **dplyr** version but is somewhat less robust. For this reason, we prefer the `if_else()` version.
 
 
-### `summarize()`
+### `summarize()` tibbles
 
 We often need to calculate *summary statistics*, things like the *mean* (also called the average) and the *median* (the middle value). Other examples of summary statistics include the *sum*, the *minimum*, the *maximum*, and the *standard deviation*.
 
@@ -827,6 +807,7 @@ trains |>
 ```
 
 The `mean()` and `sd()` summary functions go inside the `summarize()`  function. The `summarize()` function takes in a tibble and returns a tibble with only one row corresponding to the summary statistics. Remember: Tibbles go in and tibbles come out.
+
 
 
 **`mean()`**
@@ -885,7 +866,7 @@ The interval between these two percentiles includes 95% of all the values in the
 If there is an `NA` value in the variable, any statistical function like `mean()` will return `NA`. You can fix this by using `na.rm = TRUE` within the statistical function.
 
 
-### `group_by()`
+### `group_by()` variables
 
 <!-- Liam: Better explanation of .drop. What is it and why do we need it? -->
 
@@ -929,7 +910,52 @@ The `group_by()` function doesn't change data frames by itself. Rather it change
 
 If you have a tibble which has been grouped, you can remove the grouping variable by using `ungroup()`. 
 
-*When your R code is behaving in a weird way, especially when it is "losing" rows, the problem is often solved by using `ungroup()` in the pipeline.*
+** When your R code is behaving in a weird way, especially when it is "losing" rows, the problem is often solved by using `ungroup()` in the pipeline. **
+
+### `slice()` and `pull()` and `[]`
+
+Use `slice()`, `pull()` and `[]` to pick out specific rows or columns from a tibble.
+
+`slice()` gives us specific rows from the `trains` tibble:
+
+```{r}
+trains |> 
+  slice(2:5)
+```
+
+Unlike `filter()`, `slice()` relies on the order that the rows are currently in. 
+
+`pull()` grabs out a variable as a vector, rather than leaving it within a tibble, as `select()` does:
+
+```{r}
+trains |> 
+  slice(2:5) |> 
+  pull(age)
+```
+
+versus
+
+```{r}
+trains |> 
+  slice(2:5) |> 
+  select(age)
+```
+
+We can use `[]` --- the "single bracket" operator to pull out one or more columns, but the variables names must be quoted.
+
+```{r}
+trains["age"] |> 
+  print(n = 3)
+```
+
+And
+
+```{r}
+trains[c("age", "party")] |> 
+  print(n = 3)
+```
+
+
 
 
 
