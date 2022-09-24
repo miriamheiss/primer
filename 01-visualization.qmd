@@ -137,15 +137,6 @@ Use`summary()` to get a sense of the distribution of the variables in the tibble
 summary(trains)
 ```
 
-
-#### `$` operator
-
-The `$` operator allows us to extract a single variable from a tibble and return it as a vector.
-
-```{r}
-trains$age
-```
-
 ## Basic Plots
 
 There are three essential components to a plot:
@@ -912,18 +903,24 @@ If you have a tibble which has been grouped, you can remove the grouping variabl
 
 ** When your R code is behaving in a weird way, especially when it is "losing" rows, the problem is often solved by using `ungroup()` in the pipeline. **
 
-### `slice()` and `pull()` and `[]`
+### Other useful commands
 
-Use `slice()`, `pull()` and `[]` to pick out specific rows or columns from a tibble.
+<!-- DK: Other things to include here? -->
 
-`slice()` gives us specific rows from the `trains` tibble:
+`slice()` returns specific rows from a tibble:
 
 ```{r}
 trains |> 
   slice(2:5)
 ```
 
-Unlike `filter()`, `slice()` relies on the order that the rows are currently in. 
+Unlike `filter()`, `slice()` relies on the order that the rows are currently in. It is often handy to return a random sample of the rows:
+
+```{r}
+trains |> 
+  slice_sample(n = 4)
+```
+
 
 `pull()` grabs out a variable as a vector, rather than leaving it within a tibble, as `select()` does:
 
@@ -933,7 +930,7 @@ trains |>
   pull(age)
 ```
 
-versus
+Versus
 
 ```{r}
 trains |> 
@@ -941,7 +938,14 @@ trains |>
   select(age)
 ```
 
-We can use `[]` --- the "single bracket" operator to pull out one or more columns, but the variables names must be quoted.
+`pull()` is similar to the `$` operator, which can be used outside of a pipeline and allows us to extract a single variable from a tibble and return it as a vector.
+
+```{r}
+trains$age
+```
+
+
+We can use `[]` --- the "single bracket" operator --- to pull out one or more columns, but the variables names must be quoted.
 
 ```{r}
 trains["age"] |> 
@@ -959,7 +963,10 @@ trains[c("age", "party")] |>
 
 
 
+
 ## Advanced Plots
+
+<!-- This whole section should be rethought. What should we highlight? What can be dropped? -->
 
 <!-- Other stuff needed here? after_stat; plotting two geoms at once; scale_x for changing labels; scales:: for axis formatting. coord_cartesian() and xlim/ylim, which allows for zooming/rescaling graphs. Other? -->
 
@@ -1296,7 +1303,7 @@ There! Within the `theme()` function, we can change the plot title to bold, the 
 
 ## Going further
 
-There are so many more plots you can make with R that we have not shown you yet. For example, you can create cool animations with the *gganimate* package, like this plot below.
+There are so many more plots you can make with R that we have not shown you yet. For example, you can create cool animations with the *gganimate* package:
 
 ```{r, echo = FALSE, cache = TRUE}
 library(gganimate)
@@ -1319,7 +1326,7 @@ gapminder_p <- gapminder |>
 gapminder_p
 ```
 
-You can make your plots interactive, using the **plotly** package. Remember, you need to load packages before you use them, so load `library(plotly)` if you want to make your own interactive plots. Example:
+You can make your plots interactive, using the **plotly** package: 
 
 ```{r, echo = FALSE}
 gapminder_plot <- gapminder |>
@@ -1387,7 +1394,7 @@ dc_income_map_p
 
 *Shield my eyes from your ugly messages and warning.*
 
-*Each step in the pipe starts with a tibble and then, once it is done, produces a tibble. It is tibbles all the way down!*
+*Each step in the pipe starts with a tibble and then, once it is done, usually produces a tibble. It is tibbles all the way down!*
 
 *When your R code is behaving in a weird way, especially when it is "losing" rows, the problem is often solved by using `ungroup()` in the pipeline.*
 
@@ -1406,6 +1413,4 @@ You now know enough to make plots like this by yourself.
 
 A beautiful plot is just a collection of steps, each simple enough on its own. We have taught you (some of) these steps. Time to start walking on your own.
 
-```{r echo = FALSE, cache=FALSE, warning = FALSE}
-knitr::write_bib(.packages(), "packages.bib")
-```
+
