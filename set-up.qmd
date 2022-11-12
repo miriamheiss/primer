@@ -1,6 +1,6 @@
 # Set Up for Working on The Primer {-}
 
-This document provides a guide in setting up R/RStudio to work on *[The Primer](https://ppbds.github.io/primer/)*, both the book itself, [PPDBS/primer](https://github.com/PPBDS/primer), and the associated tutorial and data packages: [PPDBS/primer.tutorials](https://github.com/PPBDS/primer.tutorials) and [PPDBS/primer.data](https://github.com/PPBDS/primer.data). There are three steps:
+This document provides a guide in setting up R/RStudio to work on *[The Primer](https://ppbds.github.io/primer/)*, both the book itself, [PPDBS/primer](https://github.com/PPBDS/primer), and the associated tutorial and data packages: [PPDBS/all.primer.tutorials](https://github.com/PPBDS/all.primer.tutorials) and [PPDBS/primer.data](https://github.com/PPBDS/primer.data). There are three steps:
 
 * The first part ensures that you have the knowledge and computer settings to be successful. With luck, you will only need to do this once. 
 
@@ -87,13 +87,13 @@ create_from_github("PPBDS/primer",
                     protocol = "https")  
 ```
 
-That is the repo for working on the book. If you are working on **PPBDS/primer.data** or **PPBDS/primer.tutorials**, you need to `create_from_github()` using those repos. You must change `destdir` to be a location on your computer. Indeed, professionals will generally have several different RStudio sessions open, each working on a different R project/package, each of which is connected to its own Github repo.                     
+That is the repo for working on the book. If you are working on **PPBDS/primer.data** or **PPBDS/all.primer.tutorials**, you need to `create_from_github()` using those repos. You must change `destdir` to be a location on your computer. Indeed, professionals will generally have several different RStudio sessions open, each working on a different R project/package, each of which is connected to its own Github repo.                     
                     
 For your education, it is worth reading the help page for `create_from_github()`. The `fork`  and `protocal` arguments may not really be necessary and, obviously, you should place the project in the location on your computer in which your other projects live. The command first forks a copy of **PPBDS/primer** to your Github account and then clone/downloads that fork to your computer. 
 
 This may seem like overkill, but, as [*Pro Git*](https://git-scm.com/book/en/v2) explains, it is how (essentially) all large projects are organized. With luck, you only have to issue this command once. After that, you are always connected, both to your fork and to the true repos, which live at github/com/PPBDS. Also, note that, if something ever gets totally messed up on your computer, you can just delete the project folder on your computer and the repo on your Github account and then start again. (If you have made changes that you don't want to lose, just save the files with those changes to one side and then move them back after you have recreated the project.)
 
-Note that this command should automatically put you in a new RStudio session with the primer (or primer.tutorials or primer.data) RStudio project which resides on your computer
+Note that this command should automatically put you in a new RStudio session with the `primer` (or `all.primer.tutorials` or `primer.data`) RStudio project which resides on your computer
 
 2) The next step is to get **renv** setup so that you are running the same package versions as everyone else. Run this once:
 

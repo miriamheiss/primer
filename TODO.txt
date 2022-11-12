@@ -1,5 +1,7 @@
 # Priorities
 
+-2) https://mc-stan.org/rstanarm/reference/stan_polr.html Add some examples with ordinal dependent variables. Of course, what we really want is multinomial regression.
+
 -1) Could we switch everything from rstanarm to Tidymodels, even Tidymodels which used rstanarm? Learning the Tidymodels framework allows you to do lots of things!
 
 0) Chapters 6 and 7 are OK. 8, 9, 10 and 11? Not so much! Need to make consistent use of the four cardinal virtues.
