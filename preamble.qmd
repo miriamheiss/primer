@@ -39,7 +39,7 @@ Also, Kevin Xu, Anmay Gupta, Sophia Zhu, Arghayan Jeiyasarangkan, Yuhan Wu, Ryan
 knitr::include_graphics("other/images/summer_2022_students.png") 
 ```
 
-Also, Tejas Mundhe, Jackson Roe, Varun Dommeti Soham Gunturu and Felix Cai.
+Also, Tejas Mundhe, Jackson Roe, Varun Dommeti, Soham Gunturu and Felix Cai.
 
 I would like to gratefully acknowledge funding from [The Derek Bok Center for Teaching and Learning](https://bokcenter.harvard.edu/) at Harvard University, via its [Digital Teaching Fellows](https://bokcenter.harvard.edu/graduate-fellows-0) and [Learning Lab Undergraduate Fellows](https://bokcenter.harvard.edu/undergraduate-fellows) programs.
 
