@@ -1428,7 +1428,9 @@ This genuinely sucks to read. There's links, random numbers, and elements that h
 
 We will be using the *SelectorGadget* tool in order to find CSS selectors. It's an open source tool that simplifies generating and finding CSS selectors. We recommend that you use the Chrome web browser to use this tool, and install the [selector gadget tool from the Chrome Web Store](https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb). Here is a short video on how to install and use the SelectorGadget tool to get a CSS selector for use in web scraping:
 
-<iframe width="840" height="473" src="https://www.youtube.com/embed/YdIWI6K64zo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+{{< video https://www.youtube.com/embed/YdIWI6K64zo >}}
+
 
 From installing and using the selectorgadget as shown in the video above, we get the two CSS selectors `.housing` and `.result-price` that we can use to scrape information about the square footage and the rental price, respectively. The selector gadget returns them to us as a comma separated list (here `.housing , .result-price`), which is exactly the format we need to provide to R.
 
@@ -1446,7 +1448,8 @@ source: https://www.craigslist.org/about/terms.of.use
 
 So what to do now? Well, we can't scrape Craigslist, so we should find something else that allows you to scrape. Let's use a database from [Open Secrets about foreign-connected PACs within our country](https://www.opensecrets.org/political-action-committees-pacs/foreign-connected-pacs/2020).
 
-<!-- <iframe width="840" height="473" src="https://www.youtube.com/embed/O9HKbdhqYzk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+<!-- Useful? {{< video https://www.youtube.com/embed/O9HKbdhqYzk >}} -->
+
 
 #### Scraping from actual websites
 

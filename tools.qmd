@@ -80,7 +80,7 @@ is valid and allows you to access the `report.csv` data. This is because the `\`
 
 See this video for another explanation: 
 
-<iframe width="840" height="473" src="https://www.youtube.com/embed/ephId3mYu9o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{{< video https://www.youtube.com/embed/ephId3mYu9o >}}
 
 *Source: [Udacity course "Linux Command Line Basics"](https://www.udacity.com/course/linux-command-line-basics--ud595)*
 

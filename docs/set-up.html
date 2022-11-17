@@ -2,16 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.36">
+<meta name="generator" content="quarto-1.2.269">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Preceptor’s Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference - Set Up for Working on The Primer</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -50,7 +55,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -63,7 +68,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -238,7 +243,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
 </div>
 </nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li><a href="#computer-set-up" id="toc-computer-set-up" class="nav-link active" data-scroll-target="#computer-set-up">Computer Set Up</a></li>
@@ -263,6 +268,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -307,9 +313,9 @@ GitHub
 </div>
 <p>If the second part seems messed up, try:</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/github-token.html">create_github_token</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">create_github_token</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>and read about <a href="https://usethis.r-lib.org/articles/articles/git-credentials.html">Github credentials</a>. After you do, restart R and then run <code><a href="https://usethis.r-lib.org/reference/git_sitrep.html">git_sitrep()</a></code> again to make sure that things look like mine, more or less.</p>
+<p>and read about <a href="https://usethis.r-lib.org/articles/articles/git-credentials.html">Github credentials</a>. After you do, restart R and then run <code>git_sitrep()</code> again to make sure that things look like mine, more or less.</p>
 <ol start="3" type="1">
 <li>Install the <strong>renv</strong> package. You can read about the <strong>renv</strong> package <a href="https://rstudio.github.io/renv/articles/renv.html">here</a>.</li>
 </ol>
@@ -328,13 +334,13 @@ GitHub
 </ol>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://usethis.r-lib.org">usethis</a></span><span class="op">)</span>  </span>
-<span><span class="fu"><a href="https://usethis.r-lib.org/reference/create_from_github.html">create_from_github</a></span><span class="op">(</span><span class="st">"PPBDS/primer"</span>,   </span>
+<span><span class="fu">create_from_github</span><span class="op">(</span><span class="st">"PPBDS/primer"</span>,   </span>
 <span>                    fork <span class="op">=</span> <span class="cn">TRUE</span>,   </span>
 <span>                    destdir <span class="op">=</span> <span class="st">"/Users/davidkane/Desktop/projects/"</span>,   </span>
 <span>                    protocol <span class="op">=</span> <span class="st">"https"</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>That is the repo for working on the book. If you are working on <strong>PPBDS/primer.data</strong> or <strong>PPBDS/all.primer.tutorials</strong>, you need to <code><a href="https://usethis.r-lib.org/reference/create_from_github.html">create_from_github()</a></code> using those repos. You must change <code>destdir</code> to be a location on your computer. Indeed, professionals will generally have several different RStudio sessions open, each working on a different R project/package, each of which is connected to its own Github repo.</p>
-<p>For your education, it is worth reading the help page for <code><a href="https://usethis.r-lib.org/reference/create_from_github.html">create_from_github()</a></code>. The <code>fork</code> and <code>protocal</code> arguments may not really be necessary and, obviously, you should place the project in the location on your computer in which your other projects live. The command first forks a copy of <strong>PPBDS/primer</strong> to your Github account and then clone/downloads that fork to your computer.</p>
+<p>That is the repo for working on the book. If you are working on <strong>PPBDS/primer.data</strong> or <strong>PPBDS/all.primer.tutorials</strong>, you need to <code>create_from_github()</code> using those repos. You must change <code>destdir</code> to be a location on your computer. Indeed, professionals will generally have several different RStudio sessions open, each working on a different R project/package, each of which is connected to its own Github repo.</p>
+<p>For your education, it is worth reading the help page for <code>create_from_github()</code>. The <code>fork</code> and <code>protocal</code> arguments may not really be necessary and, obviously, you should place the project in the location on your computer in which your other projects live. The command first forks a copy of <strong>PPBDS/primer</strong> to your Github account and then clone/downloads that fork to your computer.</p>
 <p>This may seem like overkill, but, as <a href="https://git-scm.com/book/en/v2"><em>Pro Git</em></a> explains, it is how (essentially) all large projects are organized. With luck, you only have to issue this command once. After that, you are always connected, both to your fork and to the true repos, which live at github/com/PPBDS. Also, note that, if something ever gets totally messed up on your computer, you can just delete the project folder on your computer and the repo on your Github account and then start again. (If you have made changes that you don’t want to lose, just save the files with those changes to one side and then move them back after you have recreated the project.)</p>
 <p>Note that this command should automatically put you in a new RStudio session with the <code>primer</code> (or <code>all.primer.tutorials</code> or <code>primer.data</code>) RStudio project which resides on your computer</p>
 <ol start="2" type="1">
@@ -354,7 +360,7 @@ GitHub
 <li>Create a branch to work from:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_init</a></span><span class="op">(</span>branch <span class="op">=</span> <span class="st">"chapter-9"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pr_init</span><span class="op">(</span>branch <span class="op">=</span> <span class="st">"chapter-9"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Make sure the branch name is sensible. Again, this is a command that you only need to issue once, at least for our current workflow. You should always be “on” this branch, never on the default (master) branch. You can check this in the upper right corner of the git panel on R Studio.</p>
 <p>In more professional settings, you will often work on several different branches at once. So, if you are comfortable, you should feel free to create more than one branch, use it, delete it and so on. Never work on the default branch, however. And, if you use multiple branches, be careful where you are and what you are doing.</p>
@@ -363,7 +369,7 @@ GitHub
 <li>Pull regularly:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_merge_main</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pr_merge_main</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Issue this command all the time. This is how you make sure that your repo and your computer is updated with the latest changes that have been made in the book. The word “upstream” is associated with the repos at PPBDS. The word “origin” is associated with the fork at your Github account. But, in general, you don’t need to worry about this. Just pull every time you sit down. (Just clicking the pull button is not enough. That only pulls from your repo, to which no changes have been made. It does not pull from <strong>PPBDS/primer</strong>, et al.) You issue this command multiple times a day.</p>
 <ol start="2" type="1">
@@ -374,31 +380,33 @@ GitHub
 <li>Issue pull requests every few days, depending on how much work you have done and/or whether other people are waiting for something you have done.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_push</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pr_push</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This command bundles up a bunch of git commands (which you could do by hand) into one handy step. This command does everything needed to create a “pull request” — a request from you to me that I accept the changes you are proposing into the repo at <strong>PPBDS/primer</strong> — and then opens up the web page to show you. <strong>But your are not done!</strong> You must PRESS the green button on that web page, sometimes twice. Until then, the PR has not actually been created. <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_push()</a></code> just does everything before that. The “pr” in <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_push()</a></code> stands for pull request.</p>
+<p>This command bundles up a bunch of git commands (which you could do by hand) into one handy step. This command does everything needed to create a “pull request” — a request from you to me that I accept the changes you are proposing into the repo at <strong>PPBDS/primer</strong> — and then opens up the web page to show you. <strong>But your are not done!</strong> You must PRESS the green button on that web page, sometimes twice. Until then, the PR has not actually been created. <code>pr_push()</code> just does everything before that. The “pr” in <code>pr_push()</code> stands for pull request.</p>
 <ol start="4" type="1">
-<li><p>I will leave aside for now issues associated with the back-and-forth discussions we might have around your pull request. I will probably just accept it. Your changes will go into the repos at PPBDS and then be distributed to everyone else when they run <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_merge_main()</a></code>.</p></li>
-<li><p>You can now continue on. There is no need to wait for me to deal with your pull request. There is no need to fork/clone/download again. You don’t need to create a new branch, although many people do, with a branch name which describes what they are working on now. You just keep editing your files, knitting, and committing then pushing to your forked repo. When you feel you have completed another chunk of work, just run <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_push()</a></code> again.</p></li>
+<li><p>I will leave aside for now issues associated with the back-and-forth discussions we might have around your pull request. I will probably just accept it. Your changes will go into the repos at PPBDS and then be distributed to everyone else when they run <code>pr_merge_main()</code>.</p></li>
+<li><p>You can now continue on. There is no need to wait for me to deal with your pull request. There is no need to fork/clone/download again. You don’t need to create a new branch, although many people do, with a branch name which describes what they are working on now. You just keep editing your files, knitting, and committing then pushing to your forked repo. When you feel you have completed another chunk of work, just run <code>pr_push()</code> again.</p></li>
 <li><p>Read the <strong>usethis</strong> <a href="https://usethis.r-lib.org/articles/articles/usethis-setup">setup help page</a> at least once, perhaps after a week or two of working within this framework. It has lots of good stuff!</p></li>
 </ol></section><section id="common-problems" class="level2"><h2 class="anchored" data-anchor-id="common-problems">Common Problems</h2>
 <!-- DK: And 1) and 2) still problems? -->
 <!-- TM: Make sure RTools has been downloaded if error with downloading terra after running renv::restore() in setup -->
 <ol type="1">
-<li><p>In the immediate aftermath of this creation process, the blue/green arrows (in the Git panel) for pulling/pushing may be grayed out. This is a sign that the connection between your computer and your forked repo has not “settled in.” (I am not sure of the cause or even if this is the right terminology.) I think that just issuing your first <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_merge_main()</a></code> fixes it. If not, it always goes away. Until it does, however, you can’t pull/push to your repo. That doesn’t really matter, however, since the key commands you need are <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_merge_main()</a></code> and <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_push()</a></code>, both of which always work immediately.</p></li>
-<li><p>After running <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_merge_main()</a></code>, <em>you will often see a bunch of files in your Git tab in the top right corner of Rstudio</em> marked with an M (for Modified), including files which you know you did not edit. These are the files that have been updated on the “truth” — on <strong>PPBDS/primer</strong> — since your last <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_merge_main()</a></code>. Since you pulled them directly from the <strong>PPBDS/primer</strong> repo, your forked repo sees all the changes other people have made and thinks that <em>you made them</em>. This is easily fixed, however — just commit all the changes to your forked repo. (Strangely, this seems to not always happen. If you don’t see this effect, don’t worry.)</p></li>
-<li><p>Always run <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_merge_main()</a></code> before committing a file. Otherwise, you may create lots of merge conflicts. If this happens, save a copy of the file(s) you personally were editing off to the side. Then, <a href="https://knowyourmeme.com/memes/nuke-it-from-orbit">nuke it from orbit</a>, following the instructions above. Repeat the Project Set Up process. Then move in your file(s) by hand into the new repo, and commit/push them as normal.</p></li>
+<li><p>In the immediate aftermath of this creation process, the blue/green arrows (in the Git panel) for pulling/pushing may be grayed out. This is a sign that the connection between your computer and your forked repo has not “settled in.” (I am not sure of the cause or even if this is the right terminology.) I think that just issuing your first <code>pr_merge_main()</code> fixes it. If not, it always goes away. Until it does, however, you can’t pull/push to your repo. That doesn’t really matter, however, since the key commands you need are <code>pr_merge_main()</code> and <code>pr_push()</code>, both of which always work immediately.</p></li>
+<li><p>After running <code>pr_merge_main()</code>, <em>you will often see a bunch of files in your Git tab in the top right corner of Rstudio</em> marked with an M (for Modified), including files which you know you did not edit. These are the files that have been updated on the “truth” — on <strong>PPBDS/primer</strong> — since your last <code>pr_merge_main()</code>. Since you pulled them directly from the <strong>PPBDS/primer</strong> repo, your forked repo sees all the changes other people have made and thinks that <em>you made them</em>. This is easily fixed, however — just commit all the changes to your forked repo. (Strangely, this seems to not always happen. If you don’t see this effect, don’t worry.)</p></li>
+<li><p>Always run <code>pr_merge_main()</code> before committing a file. Otherwise, you may create lots of merge conflicts. If this happens, save a copy of the file(s) you personally were editing off to the side. Then, <a href="https://knowyourmeme.com/memes/nuke-it-from-orbit">nuke it from orbit</a>, following the instructions above. Repeat the Project Set Up process. Then move in your file(s) by hand into the new repo, and commit/push them as normal.</p></li>
 <li><p>When you submit a pull request to merge your work with the PPBDS repo, it won’t always be smiles and sunshine — every once in a while, you’ll run into <em>merge conflicts</em>. When these arise, it is because two parties work on a file separately and submit conflicting changes. This makes it hard for GitHub to “merge” your version with the other version. When this happens, find multiple adjacent “&gt;”, “&lt;”, and “=” signs in your document — these will show you where the conflicts occur. For more background on merge conflicts, read <a href="https://coderefinery.github.io/git-intro/08-conflicts/">this</a>.</p></li>
 </ol>
-<p>If you see the above-mentioned conflicts in your document, <strong>do not submit a pull request</strong>. This will mess things up. Instead, first, go through your document, and make sure all the weird conflict indicators (&lt;, &gt;, and =) are removed. Second, decide what goes in that space. It might be the stuff you wrote. It might be the other stuff. It might be some combination of the two which you decide on. Whatever happens, you are making an affirmative choice about what should appear in the file at that location. Once all the merge conflicts are fixed, run <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_push()</a></code> again.</p>
+<p>If you see the above-mentioned conflicts in your document, <strong>do not submit a pull request</strong>. This will mess things up. Instead, first, go through your document, and make sure all the weird conflict indicators (&lt;, &gt;, and =) are removed. Second, decide what goes in that space. It might be the stuff you wrote. It might be the other stuff. It might be some combination of the two which you decide on. Whatever happens, you are making an affirmative choice about what should appear in the file at that location. Once all the merge conflicts are fixed, run <code>pr_push()</code> again.</p>
 <ol start="5" type="1">
 <li>
-<code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_push()</a></code> can be tricky. First, note that, if I have not accepted a (<strong>p</strong>)ull (<strong>r</strong>)equest which you have submitted, then your PR is still open. You can see it <a href="https://github.com/PPBDS/primer/pulls">on Github</a>. In fact, you can see all the closed/completed pull requests as well. If, while one PR is still open, you submit another <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_push()</a></code>, then this will just be added to your current PR. And that is OK! We don’t need it to be separate.</li>
+<code>pr_push()</code> can be tricky. First, note that, if I have not accepted a (<strong>p</strong>)ull (<strong>r</strong>)equest which you have submitted, then your PR is still open. You can see it <a href="https://github.com/PPBDS/primer/pulls">on Github</a>. In fact, you can see all the closed/completed pull requests as well. If, while one PR is still open, you submit another <code>pr_push()</code>, then this will just be added to your current PR. And that is OK! We don’t need it to be separate.</li>
 </ol>
-<p>But even if there is not an open PR, <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_push()</a></code> can be tricky. The key thing to remember is that <em>you must press a green button on Github</em> for a new PR to be created. Normally, this is easy. Running <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_push()</a></code> automatically (or perhaps after you run <code><a href="https://usethis.r-lib.org/reference/pull-requests.html">pr_view()</a></code>) puts you in a browser and brings you to the correct Github page. Press the button and – presto! – you have created a PR. But, sometimes, the web page is different. It actually sends you back to an old pull request. When this happens, you need to click on the “Pull Request” tab above. This will take you to a new page, with a green button labeled “Compare &amp; Pull Request”. Press that button.</p>
+<p>But even if there is not an open PR, <code>pr_push()</code> can be tricky. The key thing to remember is that <em>you must press a green button on Github</em> for a new PR to be created. Normally, this is easy. Running <code>pr_push()</code> automatically (or perhaps after you run <code>pr_view()</code>) puts you in a browser and brings you to the correct Github page. Press the button and – presto! – you have created a PR. But, sometimes, the web page is different. It actually sends you back to an old pull request. When this happens, you need to click on the “Pull Request” tab above. This will take you to a new page, with a green button labeled “Compare &amp; Pull Request”. Press that button.</p>
 <ol start="6" type="1">
-<li><p>If you end up needing to install a new package — which should be rare — just install it and then type <code><a href="https://rstudio.github.io/renv/reference/status.html">renv::status()</a></code> to confirm than <strong>renv</strong> is aware of the change. Then, type <code><a href="https://rstudio.github.io/renv/reference/snapshot.html">renv::snapshot()</a></code>. This will update the <code>renv.lock</code> file to include the new package. You just commit/push the new version of <code>renv.lock</code>, and that shares the information with everyone else on the project. Never commit/push a modified <code>renv.lock</code> unless you know why it has changed.</p></li>
+<li><p>If you end up needing to install a new package — which should be rare — just install it with <code><a href="https://rstudio.github.io/renv/reference/install.html">renv::install()</a></code>and then type <code><a href="https://rstudio.github.io/renv/reference/status.html">renv::status()</a></code> to confirm than <strong>renv</strong> is aware of the change. Then, type <code><a href="https://rstudio.github.io/renv/reference/snapshot.html">renv::snapshot()</a></code>. This will update the <code>renv.lock</code> file to include the new package. You just commit/push the new version of <code>renv.lock</code>, and that shares the information with everyone else on the project. Never commit/push a modified <code>renv.lock</code> unless you know why it has changed. But, for the most part, leave changes in <code>renv.lock</code> to me.</p></li>
 <li><p>Be careful of committing garbage files like “.DS_Store”, which is a file created sometimes. Only commit changes which you understand. In the vast majority of cases your PRs will only involve one or two files.</p></li>
+<li><p>If using Windows, make sure you have RTools installed.</p></li>
+<li><p>Sometimes, your <strong>renv</strong> library becomes messed up. Note that nuking from orbit may not fix this because <strong>renv</strong> installs your packages in some private common area which is not impacted when you reinstall the PPBDS package you are working with. In this case, running <code><a href="https://rstudio.github.io/renv/reference/rebuild.html">renv::rebuild()</a></code> may help. If not, run <code><a href="https://rstudio.github.io/renv/reference/diagnostics.html">renv::diagnostics()</a></code>, find the path to the <strong>renv</strong> cache directory and delete everything there by hand. Then, run <code>renv::repair()'.</code></p></li>
 </ol></section><section id="style-guide" class="level2"><h2 class="anchored" data-anchor-id="style-guide">Style Guide</h2>
 <ul>
 <li><p>Never use just a single <code>#</code> after using it for the chapter title. The first subpart uses a <code>##</code>. There should be 5 to 8 subparts for each chapter. Within each subpart, you may have sub-subparts, indicated with <code>###</code>. There should be 3 to 10 of those. You may use <code>####</code> if you like.</p></li>
@@ -474,7 +482,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -502,31 +527,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">

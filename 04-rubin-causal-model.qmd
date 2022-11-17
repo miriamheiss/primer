@@ -11,8 +11,6 @@ library(gtsummary)
 
 <!-- Assumptions section needs work, especially representativeness. Unconfoundedness is not great either. -->
 
-<!-- Replace 6,700 with number of students at Simmons. -->
-
 <!-- Maybe the whole chapter should begin with simple prediction, with only one possible outcome Y. Then, the step to mutiple potential outcomes is clearer. Might even explain mutiple units at the start. We already sort of do that with the height example. Just make it more explicit. All examples have a predictive version and a causal version. Start with Yao. We might just care about predicting Yao's attitude toward immigration, given that we know he did not receive the treatment. That is a predictive problem, like predicting Andy's height. Only after understanding that, do we try to look at the causal question. We do this a bit at the end of the Multiple Units section. -->
 
 <!-- Does $\widehat{ATE}$ work? Shows up ugly in my Viewer. -->
@@ -59,9 +57,7 @@ for discussion. I think that something like c("$$13 - \\tau_M$$") could become c
 
 Have you ever wondered what the world would be like without you?
 
-```{r, echo = FALSE}
-knitr::include_app("https://www.youtube.com/embed/cR7p-IB6INM")
-```
+{{< video https://www.youtube.com/embed/cR7p-IB6INM >}}
 
 George Bailey, a character from the movie "It's a Wonderful Life," believes that his life has served no purpose. The movie follows George as he explores a world in which he was never born. It is clear that he had a profound impact on the lives of many people in his community. His actions mattered, more than he ever realized. 
 
@@ -104,9 +100,9 @@ To calculate the average height, we need to know Andy's height -- our missing da
 Implicitly in every Preceptor Table is a notion of time. When, exactly, are we making this prediction? Since heights of adults change very, very slowly, we can ignore for this problem whether or not we are making this prediction tomorrow or a year from now. But, if we really want to know the average height of the brothers 40 years from now, we would need to adjust our estimate since people shrink with age.
 
 
-### Simmons Height
+### Harvard Height
 
-Consider a more complex problem. We have the heights of 100 Simmons students, and from that we want to know the average height of all students in the school. 
+Consider a more complex problem. We have the heights of 100 Harvard students, and from that we want to know the average height of all students in the school. 
 
 
 ```{r echo = FALSE}
@@ -131,17 +127,17 @@ tibble(ID = c("Student 1", "Student 2", "...", "Student 473", "Student 474",
 
 
 
-Again, are these 100 students randomly sampled? Could we estimate the 90th percentile of height in the student population? These questions are more complicated, and we might be less confident in our best guess. Note, also, that we will sometimes not know exactly how many rows there are in the Precptor Table. In that case, we would use "Student N" as the last ID, where N is the total number of students at Simmons.
+Again, are these 100 students randomly sampled? Could we estimate the 90th percentile of height in the student population? These questions are more complicated, and we might be less confident in our best guess. Note, also, that we will sometimes not know exactly how many rows there are in the Precptor Table. In that case, we would use "Student N" as the last ID, where N is the total number of students at Harvard.
 
 ### Population Table
 
 The *Population Table* is distinct from the Preceptor Table. The aim of the Population Table is to illustrate the broader population in which we are interested, while also including the data from our Preceptor Table and from our dataset. This table has three sources of data: the data for units we *want to have* (the Preceptor Table), the data for units which we *actually have* (our actual data), and the data for units we *do not care about* (the rest of the population, not included in the data or the Preceptor Table).  
 
-The rows in the Preceptor Table contain the information that we would want to know in order to answer our questions. These rows contain entries for our covariates (year and age) but they do not contain any outcome results (height). We are trying to answer questions about the height of Simmons students in 2022, so our Age column will read somewhere between 15 and 27 and our Year entries for these rows will read "2022."
+The rows in the Preceptor Table contain the information that we would want to know in order to answer our questions. These rows contain entries for our covariates (year and age) but they do not contain any outcome results (height). We are trying to answer questions about the height of Harvard students in 2022, so our Age column will read somewhere between 15 and 27 and our Year entries for these rows will read "2022."
 
 <!-- Sloppy use of both year (to mean the variable) and Year (to mean the column in the table). -->
 
-Our actual data rows contain the information that we do know. These rows contain entries for both our covariates and the outcomes. In this case, the actual data comes from a survey of Simmons students in 2015, so Age value for those students  --- none of whom are still at Simmons --- will be their ages in 2015, and the Year value for these rows will be "2015."
+Our actual data rows contain the information that we do know. These rows contain entries for both our covariates and the outcomes. In this case, the actual data comes from a survey of Harvard students in 2015, so Age value for those students  --- none of whom are still at Harvard --- will be their ages in 2015, and the Year value for these rows will be "2015."
 
 <!-- Should we be quoting 2015? -->
 
@@ -1108,9 +1104,9 @@ The fundamental components of every problem in causal inference are units, treat
 
 A causal effect is the difference between one potential outcome and another. How different would your life be if you missed the train?
 
-```{r, echo = FALSE}
-knitr::include_app("https://www.youtube.com/embed/BvUbv4iwbDs")
-```
+{{< video https://www.youtube.com/embed/BvUbv4iwbDs >}}
+
+
 
 
 A Preceptor Table includes all rows and columns such that, if no data is missing, it is easy to calculate our quantity of interest. Unfortunately, data is always missing in causal models because, at most, we can only observe one *potential outcome* for each unit. The causal effect of a treatment on a single unit at a point in time is the difference between the value of the outcome variable with the treatment and without the treatment. The *Fundamental Problem of Causal Inference* is that it is impossible to observe the causal effect on a single unit. We must make assumptions --- i.e, we must make models ---  in order to estimate causal effects.

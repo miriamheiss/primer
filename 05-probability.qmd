@@ -619,7 +619,7 @@ knitr::include_graphics("05-probability/images/538_versus_Economist.png")
 There are many questions you could explore with posterior distributions. They can relate to the past, present, or future.
 
 * Past: How many electoral votes would Hilary Clinton have won if she had picked a different VP?
-* Present: What are the total campaign donations from Simmons faculty?
+* Present: What are the total campaign donations from Harvard faculty?
 * Future: How many electoral votes will the Democratic candidate for president win in 2024?
 
 <!-- Add a question and then use a dgm to answer it. -->
@@ -1924,6 +1924,8 @@ Having created (and checked) a model, we now use the model to answer questions. 
 
 Sadly, our models are never as good as we would like them to be. First, the world is intrinsically uncertain. 
 
+
+
 ```{r, echo = FALSE, fig.cap = "Donald Rumsfeld."}
 knitr::include_graphics("05-probability/images/donald_rumsfeld.jpg")
 ```
@@ -1961,10 +1963,7 @@ It is useful to understand the three types of distributions and the concept of c
 
 If you are keen to learn more about probability, here is a video featuring Professor Gary King. This is a great way to review some of the concepts we covered in this chapter, albeit at a higher level of mathematics.
 
-```{r, echo = FALSE}
-knitr::include_app("https://www.youtube.com/embed/6C7yRBfh2ok")
-```
-
+{{< video https://www.youtube.com/embed/6C7yRBfh2ok >}}
 
 
 <!-- ```{r, echo = FALSE, fig.cap = "The truth is out there"} -->

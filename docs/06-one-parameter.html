@@ -2,16 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.36">
+<meta name="generator" content="quarto-1.2.269">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Preceptor’s Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference - 6&nbsp; One Parameter</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -50,7 +55,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -63,7 +68,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -238,50 +243,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
 </div>
 </nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li>
-<a href="#sec-sampling-activity" id="toc-sec-sampling-activity" class="nav-link active" data-scroll-target="#sec-sampling-activity"> <span class="header-section-number">6.1</span> Real sampling activity</a>
+<a href="#sec-sampling-activity" id="toc-sec-sampling-activity" class="nav-link active" data-scroll-target="#sec-sampling-activity"><span class="toc-section-number">6.1</span>  Real sampling activity</a>
   <ul class="collapse">
-<li><a href="#using-the-shovel-method-once" id="toc-using-the-shovel-method-once" class="nav-link" data-scroll-target="#using-the-shovel-method-once"> <span class="header-section-number">6.1.1</span> Using the shovel method once</a></li>
-  <li><a href="#student-shovels" id="toc-student-shovels" class="nav-link" data-scroll-target="#student-shovels"> <span class="header-section-number">6.1.2</span> Using the shovel 33 times</a></li>
-  <li><a href="#what-did-we-just-do" id="toc-what-did-we-just-do" class="nav-link" data-scroll-target="#what-did-we-just-do"> <span class="header-section-number">6.1.3</span> What did we just do?</a></li>
+<li><a href="#using-the-shovel-method-once" id="toc-using-the-shovel-method-once" class="nav-link" data-scroll-target="#using-the-shovel-method-once"><span class="toc-section-number">6.1.1</span>  Using the shovel method once</a></li>
+  <li><a href="#student-shovels" id="toc-student-shovels" class="nav-link" data-scroll-target="#student-shovels"><span class="toc-section-number">6.1.2</span>  Using the shovel 33 times</a></li>
+  <li><a href="#what-did-we-just-do" id="toc-what-did-we-just-do" class="nav-link" data-scroll-target="#what-did-we-just-do"><span class="toc-section-number">6.1.3</span>  What did we just do?</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-virtual-sampling" id="toc-sec-virtual-sampling" class="nav-link" data-scroll-target="#sec-virtual-sampling"> <span class="header-section-number">6.2</span> Virtual sampling</a>
+<a href="#sec-virtual-sampling" id="toc-sec-virtual-sampling" class="nav-link" data-scroll-target="#sec-virtual-sampling"><span class="toc-section-number">6.2</span>  Virtual sampling</a>
   <ul class="collapse">
-<li><a href="#shovel-one-time" id="toc-shovel-one-time" class="nav-link" data-scroll-target="#shovel-one-time"> <span class="header-section-number">6.2.1</span> Using the virtual shovel once</a></li>
-  <li><a href="#shovel-33-times" id="toc-shovel-33-times" class="nav-link" data-scroll-target="#shovel-33-times"> <span class="header-section-number">6.2.2</span> Using the virtual shovel 33 times</a></li>
-  <li><a href="#shovel-1000-times" id="toc-shovel-1000-times" class="nav-link" data-scroll-target="#shovel-1000-times"> <span class="header-section-number">6.2.3</span> Using the virtual shovel 1,000 times</a></li>
-  <li><a href="#different-shovels" id="toc-different-shovels" class="nav-link" data-scroll-target="#different-shovels"> <span class="header-section-number">6.2.4</span> The effect of different shovel sizes</a></li>
+<li><a href="#shovel-one-time" id="toc-shovel-one-time" class="nav-link" data-scroll-target="#shovel-one-time"><span class="toc-section-number">6.2.1</span>  Using the virtual shovel once</a></li>
+  <li><a href="#shovel-33-times" id="toc-shovel-33-times" class="nav-link" data-scroll-target="#shovel-33-times"><span class="toc-section-number">6.2.2</span>  Using the virtual shovel 33 times</a></li>
+  <li><a href="#shovel-1000-times" id="toc-shovel-1000-times" class="nav-link" data-scroll-target="#shovel-1000-times"><span class="toc-section-number">6.2.3</span>  Using the virtual shovel 1,000 times</a></li>
+  <li><a href="#different-shovels" id="toc-different-shovels" class="nav-link" data-scroll-target="#different-shovels"><span class="toc-section-number">6.2.4</span>  The effect of different shovel sizes</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-standard-errors" id="toc-sec-standard-errors" class="nav-link" data-scroll-target="#sec-standard-errors"> <span class="header-section-number">6.3</span> Standard error</a>
+<a href="#sec-standard-errors" id="toc-sec-standard-errors" class="nav-link" data-scroll-target="#sec-standard-errors"><span class="toc-section-number">6.3</span>  Standard error</a>
   <ul class="collapse">
-<li><a href="#sec-terminology-and-notation" id="toc-sec-terminology-and-notation" class="nav-link" data-scroll-target="#sec-terminology-and-notation"> <span class="header-section-number">6.3.1</span> Terminology and notation</a></li>
-  <li><a href="#sec-sampling-definitions" id="toc-sec-sampling-definitions" class="nav-link" data-scroll-target="#sec-sampling-definitions"> <span class="header-section-number">6.3.2</span> Statistical definitions</a></li>
-  <li><a href="#what-is-a-standard-error" id="toc-what-is-a-standard-error" class="nav-link" data-scroll-target="#what-is-a-standard-error"> <span class="header-section-number">6.3.3</span> What is a “standard error”?</a></li>
-  <li><a href="#moral-of-the-story" id="toc-moral-of-the-story" class="nav-link" data-scroll-target="#moral-of-the-story"> <span class="header-section-number">6.3.4</span> The moral of the story</a></li>
+<li><a href="#sec-terminology-and-notation" id="toc-sec-terminology-and-notation" class="nav-link" data-scroll-target="#sec-terminology-and-notation"><span class="toc-section-number">6.3.1</span>  Terminology and notation</a></li>
+  <li><a href="#sec-sampling-definitions" id="toc-sec-sampling-definitions" class="nav-link" data-scroll-target="#sec-sampling-definitions"><span class="toc-section-number">6.3.2</span>  Statistical definitions</a></li>
+  <li><a href="#what-is-a-standard-error" id="toc-what-is-a-standard-error" class="nav-link" data-scroll-target="#what-is-a-standard-error"><span class="toc-section-number">6.3.3</span>  What is a “standard error”?</a></li>
+  <li><a href="#moral-of-the-story" id="toc-moral-of-the-story" class="nav-link" data-scroll-target="#moral-of-the-story"><span class="toc-section-number">6.3.4</span>  The moral of the story</a></li>
   </ul>
 </li>
   <li>
-<a href="#cardinal-virtues" id="toc-cardinal-virtues" class="nav-link" data-scroll-target="#cardinal-virtues"> <span class="header-section-number">6.4</span> Cardinal Virtues</a>
+<a href="#cardinal-virtues" id="toc-cardinal-virtues" class="nav-link" data-scroll-target="#cardinal-virtues"><span class="toc-section-number">6.4</span>  Cardinal Virtues</a>
   <ul class="collapse">
-<li><a href="#wisdom" id="toc-wisdom" class="nav-link" data-scroll-target="#wisdom"> <span class="header-section-number">6.4.1</span> Wisdom</a></li>
-  <li><a href="#justice" id="toc-justice" class="nav-link" data-scroll-target="#justice"> <span class="header-section-number">6.4.2</span> Justice</a></li>
-  <li><a href="#courage" id="toc-courage" class="nav-link" data-scroll-target="#courage"> <span class="header-section-number">6.4.3</span> Courage</a></li>
-  <li><a href="#temperance" id="toc-temperance" class="nav-link" data-scroll-target="#temperance"> <span class="header-section-number">6.4.4</span> Temperance</a></li>
-  <li><a href="#traditional-practices" id="toc-traditional-practices" class="nav-link" data-scroll-target="#traditional-practices"> <span class="header-section-number">6.4.5</span> Traditional practices</a></li>
+<li><a href="#wisdom" id="toc-wisdom" class="nav-link" data-scroll-target="#wisdom"><span class="toc-section-number">6.4.1</span>  Wisdom</a></li>
+  <li><a href="#justice" id="toc-justice" class="nav-link" data-scroll-target="#justice"><span class="toc-section-number">6.4.2</span>  Justice</a></li>
+  <li><a href="#courage" id="toc-courage" class="nav-link" data-scroll-target="#courage"><span class="toc-section-number">6.4.3</span>  Courage</a></li>
+  <li><a href="#temperance" id="toc-temperance" class="nav-link" data-scroll-target="#temperance"><span class="toc-section-number">6.4.4</span>  Temperance</a></li>
+  <li><a href="#traditional-practices" id="toc-traditional-practices" class="nav-link" data-scroll-target="#traditional-practices"><span class="toc-section-number">6.4.5</span>  Traditional practices</a></li>
   </ul>
 </li>
-  <li><a href="#sec-sampling-case-study" id="toc-sec-sampling-case-study" class="nav-link" data-scroll-target="#sec-sampling-case-study"> <span class="header-section-number">6.5</span> Case study: Polls</a></li>
+  <li><a href="#sec-sampling-case-study" id="toc-sec-sampling-case-study" class="nav-link" data-scroll-target="#sec-sampling-case-study"><span class="toc-section-number">6.5</span>  Case study: Polls</a></li>
   <li>
-<a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"> <span class="header-section-number">6.6</span> Summary</a>
+<a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">6.6</span>  Summary</a>
   <ul class="collapse">
-<li><a href="#other-highlights" id="toc-other-highlights" class="nav-link" data-scroll-target="#other-highlights"> <span class="header-section-number">6.6.1</span> Other highlights</a></li>
+<li><a href="#other-highlights" id="toc-other-highlights" class="nav-link" data-scroll-target="#other-highlights"><span class="toc-section-number">6.6.1</span>  Other highlights</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/PPBDS/primer/edit/main/06-one-parameter.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
@@ -296,6 +301,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -312,10 +318,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- You must understand what the standard error of $\hat{\rho}$ means. You do not need to understand why. -->
 <!-- Explain in a comment the reason for  fun = function(.x) 1/(2 * sqrt(.x)) in the plot. I don't know why we need the 2. We would probably use geom_function(). Maybe using geom_function with the function for a standard error will just magically work! -->
 <!-- Make a 15 second video, put it on YouTube. "We don't estimate parameters because we care about parameters. Parameters are imaginary! Like unicorns! [Put finger on forehead and imitate unicorn.] We estimate parameters to build Data Generating Mechanisms. And with a DGM, you can move the world!" -->
-<div class="cell">
-<iframe src="https://www.youtube.com/embed/e3PJ3Du_zDc?showcase=0" width="672" height="400px" data-external="1">
-</iframe>
-</div>
+<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/e3PJ3Du_zDc" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p><em>The Hunger Games</em> is a dystopian novel in which children are chosen via lottery to fight to the death. Primrose Everdeen is selected from the urn. Why does she have the misfortune of being selected? Or, as we data scientists say, <em>sampled</em>?</p>
 <p>In <a href="05-probability.html"><span>Chapter&nbsp;5</span></a>, we learned about probability, the framework for quantifying uncertainty. In this chapter, we will learn about <em>sampling</em>, the beginning of our journey toward inference. When we sample, we take some <em>units</em> from a <em>population</em>, calculate statistics based on those units, and make inferences about unknown <em>parameters</em> associated with the population.</p>
 <p>The urn below has a certain number of red and a certain number of white beads all of equal size, mixed well together. What proportion, <span class="math inline">\(\rho\)</span>, of this urn’s beads are red?</p>
@@ -413,18 +416,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 33 × 4
-   group         red_beads prop_red group_ID
-   &lt;chr&gt;             &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
- 1 Paddy, Matt          16     0.32        1
- 2 Dania, Derek         21     0.42        2
- 3 Sophie, Brian        21     0.42        3
- 4 Mia, James           15     0.3         4
- 5 Aaron, Mike          11     0.22        5
- 6 Mal, Francis         17     0.34        6
- 7 Aayush, Karen        15     0.3         7
- 8 Griffin, Mary        18     0.36        8
- 9 Claire, Cloud        16     0.32        9
-10 Siobhan, Jane        11     0.22       10
+   group           red_beads prop_red group_ID
+   &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
+ 1 Mark, Ramses           21     0.42        1
+ 2 Damani, Melissa        15     0.3         2
+ 3 Dohyun, Estel          18     0.36        3
+ 4 Ilyas, Yohan           21     0.42        4
+ 5 Sophie, Brian          21     0.42        5
+ 6 Aayush, Karen          15     0.3         6
+ 7 Siobhan, Jane          11     0.22        7
+ 8 Paddy, Matt            16     0.32        8
+ 9 Vignesh, Eliot         16     0.32        9
+10 Yao, Kate              23     0.46       10
 # … with 23 more rows</code></pre>
 </div>
 </div>
@@ -451,7 +454,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>       y <span class="op">=</span> <span class="st">"Count"</span>,</span>
 <span>       title <span class="op">=</span> <span class="st">"Proportions Red in 33 Samples"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="what-did-we-just-do" class="level3" data-number="6.1.3"><h3 data-number="6.1.3" class="anchored" data-anchor-id="what-did-we-just-do">
@@ -619,7 +622,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Since <code>binwidth = 0.05</code>, this will create bins with boundaries at 0.30, 0.35, 0.45, and so on. Recall that <span class="math inline">\(\hat{\rho}\)</span> is equal to the proportion of beads which are red in each sample.</p>
@@ -628,7 +631,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Comparing 33 virtual and 33 tactile proportions red. Note that, though the figures differ slightly, both are centered around .35 to .45. This shows that, in both sampling distributions, the most frequently occuring proportion red is between 35% and 45%.</figcaption><p></p>
 </figure>
 </div>
@@ -668,7 +671,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>       y <span class="op">=</span> <span class="st">"Count"</span>,</span>
 <span>       title <span class="op">=</span> <span class="st">"Distribution of 1,000 proportions red"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Why the empty spaces among the bars? Recall that, with only 50 beads, there are only 51 possible values for <span class="math inline">\(\hat{\rho}\)</span>: 0, 0.02, 0.04, …, 0.98, 1. A value of 0.31 or 0.47 is impossible, hence the gaps.</p>
@@ -703,7 +706,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Proportion of 25 beads that were red"</span>, </span>
 <span>       title <span class="op">=</span> <span class="st">"25"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We will repeat this process with a shovel size of <strong>50</strong>.</p>
@@ -722,7 +725,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Proportion of 50 beads that were red"</span>, </span>
 <span>       title <span class="op">=</span> <span class="st">"50"</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We choose a bin width of .04 for all histograms to more easily compare different shovel sizes. Using a smaller bin size would result in gaps between the bars, as a shovel of size 50 has more possible <span class="math inline">\(\hat{\rho}\)</span> values than a shovel of size 25.</p>
@@ -742,7 +745,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Proportion of 100 beads that were red"</span>, </span>
 <span>       title <span class="op">=</span> <span class="st">"100"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>For easy comparison, we present the three resulting histograms in a single row with matching x and y axes:</p>
@@ -775,7 +778,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span><span class="va">comparing_sampling_distributions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Comparing the distributions of proportion red for different sample sizes (25, 50, 100). The important takeaway is that our center becomes more concentrated as our sample size increases, indicating a smaller standard deviation between our guesses.</figcaption><p></p>
 </figure>
 </div>
@@ -800,7 +803,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>        axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        axis.ticks.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>This graph illustrates the exact same concept as the histogram. With the smallest shovel size there is significant variance from sample to sample, as samples take on a wide variety of sample proportions! However, as we increase the sample size, the points become more concentrated, or less variance.</p>
@@ -813,7 +816,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#kqavcuevlu .gt_table {
+:where(#kqavcuevlu) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -838,7 +841,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-left-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_heading {
+:where(#kqavcuevlu) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -850,7 +853,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_title {
+:where(#kqavcuevlu) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -862,7 +865,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-width: 0;
 }
 
-#kqavcuevlu .gt_subtitle {
+:where(#kqavcuevlu) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -874,13 +877,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-width: 0;
 }
 
-#kqavcuevlu .gt_bottom_border {
+:where(#kqavcuevlu) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_col_headings {
+:where(#kqavcuevlu) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -895,7 +898,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_col_heading {
+:where(#kqavcuevlu) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -915,7 +918,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#kqavcuevlu .gt_column_spanner_outer {
+:where(#kqavcuevlu) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -927,15 +930,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 4px;
 }
 
-#kqavcuevlu .gt_column_spanner_outer:first-child {
+:where(#kqavcuevlu) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kqavcuevlu .gt_column_spanner_outer:last-child {
+:where(#kqavcuevlu) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kqavcuevlu .gt_column_spanner {
+:where(#kqavcuevlu) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -947,7 +950,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   width: 100%;
 }
 
-#kqavcuevlu .gt_group_heading {
+:where(#kqavcuevlu) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -972,7 +975,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-#kqavcuevlu .gt_empty_group_heading {
+:where(#kqavcuevlu) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -987,15 +990,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: middle;
 }
 
-#kqavcuevlu .gt_from_md > :first-child {
+:where(#kqavcuevlu) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kqavcuevlu .gt_from_md > :last-child {
+:where(#kqavcuevlu) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kqavcuevlu .gt_row {
+:where(#kqavcuevlu) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1014,7 +1017,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   overflow-x: hidden;
 }
 
-#kqavcuevlu .gt_stub {
+:where(#kqavcuevlu) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1027,7 +1030,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#kqavcuevlu .gt_stub_row_group {
+:where(#kqavcuevlu) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1041,11 +1044,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   vertical-align: top;
 }
 
-#kqavcuevlu .gt_row_group_first td {
+:where(#kqavcuevlu) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kqavcuevlu .gt_summary_row {
+:where(#kqavcuevlu) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1055,16 +1058,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#kqavcuevlu .gt_first_summary_row {
+:where(#kqavcuevlu) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_first_summary_row.thick {
+:where(#kqavcuevlu) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kqavcuevlu .gt_last_summary_row {
+:where(#kqavcuevlu) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1074,7 +1077,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_grand_summary_row {
+:where(#kqavcuevlu) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1084,7 +1087,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#kqavcuevlu .gt_first_grand_summary_row {
+:where(#kqavcuevlu) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1094,11 +1097,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-top-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_striped {
+:where(#kqavcuevlu) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kqavcuevlu .gt_table_body {
+:where(#kqavcuevlu) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1107,7 +1110,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-bottom-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_footnotes {
+:where(#kqavcuevlu) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1121,7 +1124,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_footnote {
+:where(#kqavcuevlu) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1130,7 +1133,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#kqavcuevlu .gt_sourcenotes {
+:where(#kqavcuevlu) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1144,7 +1147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-color: #D3D3D3;
 }
 
-#kqavcuevlu .gt_sourcenote {
+:where(#kqavcuevlu) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1152,64 +1155,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   padding-right: 5px;
 }
 
-#kqavcuevlu .gt_left {
+:where(#kqavcuevlu) .gt_left {
   text-align: left;
 }
 
-#kqavcuevlu .gt_center {
+:where(#kqavcuevlu) .gt_center {
   text-align: center;
 }
 
-#kqavcuevlu .gt_right {
+:where(#kqavcuevlu) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kqavcuevlu .gt_font_normal {
+:where(#kqavcuevlu) .gt_font_normal {
   font-weight: normal;
 }
 
-#kqavcuevlu .gt_font_bold {
+:where(#kqavcuevlu) .gt_font_bold {
   font-weight: bold;
 }
 
-#kqavcuevlu .gt_font_italic {
+:where(#kqavcuevlu) .gt_font_italic {
   font-style: italic;
 }
 
-#kqavcuevlu .gt_super {
+:where(#kqavcuevlu) .gt_super {
   font-size: 65%;
 }
 
-#kqavcuevlu .gt_footnote_marks {
+:where(#kqavcuevlu) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#kqavcuevlu .gt_asterisk {
+:where(#kqavcuevlu) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kqavcuevlu .gt_indent_1 {
+:where(#kqavcuevlu) .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kqavcuevlu .gt_indent_2 {
+:where(#kqavcuevlu) .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kqavcuevlu .gt_indent_3 {
+:where(#kqavcuevlu) .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kqavcuevlu .gt_indent_4 {
+:where(#kqavcuevlu) .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kqavcuevlu .gt_indent_5 {
+:where(#kqavcuevlu) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1334,7 +1337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>This is, approximately, the same result as we saw above, but with 1 re-factored tibble instead of 3 separate ones. We can also use functions like <code><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid()</a></code> in the future to make our code more concise.</p>
 <p>Now that we have this framework, there’s no need to limit ourselves to the sizes 25, 50, and 100. Why not try all integers from 1 to 100? We can use the same code, except we’ll now set <code>shovel_size = 1:100</code>.</p>
-<div class="cell" data-hash="06-one-parameter_cache/html/unnamed-chunk-34_e84a79498ef77421f35762ce7b13eb88">
+<div class="cell" data-hash="06-one-parameter_cache/html/unnamed-chunk-33_f50726ab7baa87bdaffca791e712c88c">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">shovels_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid</a></span><span class="op">(</span>trial_ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span>, shovel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>shovel <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">shovel_size</span>, <span class="op">~</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span><span class="va">urn</span>, n <span class="op">=</span> <span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>numb_red <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">shovel</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">color</span> <span class="op">==</span> <span class="st">"red"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1351,10 +1354,10 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 </div>
 </div>
 <p>Now, we have the standard deviation of <code>prop_red</code> for all shovel sizes from 1 to 100. Let’s plot that value to see how it changes as the shovel gets larger:</p>
-<div class="cell" data-hash="06-one-parameter_cache/html/unnamed-chunk-35_ddb6f49ff3f4cbddb97e9ebd88ec4cf4">
+<div class="cell" data-hash="06-one-parameter_cache/html/unnamed-chunk-34_be5491f2eff6ec9696333192064265e7">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Comparing standard deviations of proportions red for 100 different shovels. The standard deviation decreases at the same rate as the square root of shovel size. The red line shows the standard error.</figcaption><p></p>
 </figure>
 </div>
@@ -1438,7 +1441,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Previously seen three distributions of the sample proportion <span class="math inline">\(\hat{ ho}\)</span>.</figcaption><p></p>
 </figure>
 </div>
@@ -1449,7 +1452,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Previously seen comparing standard deviations of proportions red for 100 different shovels</figcaption><p></p>
 </figure>
 </div>
@@ -1469,7 +1472,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Three sampling distributions of the sample proportion <span class="math inline">\(\hat{ ho}\)</span>. Note the increased concentration on the bins around .4 as our sample size increases.</figcaption><p></p>
 </figure>
 </div>
@@ -1479,7 +1482,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Standard errors of the sample proportion based on sample sizes of 1 to 100</figcaption><p></p>
 </figure>
 </div>
@@ -1550,7 +1553,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#khbizfzmxo .gt_table {
+:where(#khbizfzmxo) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1575,7 +1578,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-left-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_heading {
+:where(#khbizfzmxo) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1587,7 +1590,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_title {
+:where(#khbizfzmxo) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1599,7 +1602,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-bottom-width: 0;
 }
 
-#khbizfzmxo .gt_subtitle {
+:where(#khbizfzmxo) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1611,13 +1614,13 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-top-width: 0;
 }
 
-#khbizfzmxo .gt_bottom_border {
+:where(#khbizfzmxo) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_col_headings {
+:where(#khbizfzmxo) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1632,7 +1635,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_col_heading {
+:where(#khbizfzmxo) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1652,7 +1655,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   overflow-x: hidden;
 }
 
-#khbizfzmxo .gt_column_spanner_outer {
+:where(#khbizfzmxo) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1664,15 +1667,15 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 4px;
 }
 
-#khbizfzmxo .gt_column_spanner_outer:first-child {
+:where(#khbizfzmxo) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#khbizfzmxo .gt_column_spanner_outer:last-child {
+:where(#khbizfzmxo) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#khbizfzmxo .gt_column_spanner {
+:where(#khbizfzmxo) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1684,7 +1687,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   width: 100%;
 }
 
-#khbizfzmxo .gt_group_heading {
+:where(#khbizfzmxo) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1709,7 +1712,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   vertical-align: middle;
 }
 
-#khbizfzmxo .gt_empty_group_heading {
+:where(#khbizfzmxo) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1724,15 +1727,15 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   vertical-align: middle;
 }
 
-#khbizfzmxo .gt_from_md > :first-child {
+:where(#khbizfzmxo) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#khbizfzmxo .gt_from_md > :last-child {
+:where(#khbizfzmxo) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#khbizfzmxo .gt_row {
+:where(#khbizfzmxo) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1751,7 +1754,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   overflow-x: hidden;
 }
 
-#khbizfzmxo .gt_stub {
+:where(#khbizfzmxo) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1764,7 +1767,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 5px;
 }
 
-#khbizfzmxo .gt_stub_row_group {
+:where(#khbizfzmxo) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1778,11 +1781,11 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   vertical-align: top;
 }
 
-#khbizfzmxo .gt_row_group_first td {
+:where(#khbizfzmxo) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#khbizfzmxo .gt_summary_row {
+:where(#khbizfzmxo) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1792,16 +1795,16 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 5px;
 }
 
-#khbizfzmxo .gt_first_summary_row {
+:where(#khbizfzmxo) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_first_summary_row.thick {
+:where(#khbizfzmxo) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#khbizfzmxo .gt_last_summary_row {
+:where(#khbizfzmxo) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1811,7 +1814,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-bottom-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_grand_summary_row {
+:where(#khbizfzmxo) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1821,7 +1824,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 5px;
 }
 
-#khbizfzmxo .gt_first_grand_summary_row {
+:where(#khbizfzmxo) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1831,11 +1834,11 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-top-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_striped {
+:where(#khbizfzmxo) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#khbizfzmxo .gt_table_body {
+:where(#khbizfzmxo) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1844,7 +1847,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-bottom-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_footnotes {
+:where(#khbizfzmxo) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1858,7 +1861,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_footnote {
+:where(#khbizfzmxo) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1867,7 +1870,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 5px;
 }
 
-#khbizfzmxo .gt_sourcenotes {
+:where(#khbizfzmxo) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1881,7 +1884,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-color: #D3D3D3;
 }
 
-#khbizfzmxo .gt_sourcenote {
+:where(#khbizfzmxo) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1889,64 +1892,64 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 5px;
 }
 
-#khbizfzmxo .gt_left {
+:where(#khbizfzmxo) .gt_left {
   text-align: left;
 }
 
-#khbizfzmxo .gt_center {
+:where(#khbizfzmxo) .gt_center {
   text-align: center;
 }
 
-#khbizfzmxo .gt_right {
+:where(#khbizfzmxo) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#khbizfzmxo .gt_font_normal {
+:where(#khbizfzmxo) .gt_font_normal {
   font-weight: normal;
 }
 
-#khbizfzmxo .gt_font_bold {
+:where(#khbizfzmxo) .gt_font_bold {
   font-weight: bold;
 }
 
-#khbizfzmxo .gt_font_italic {
+:where(#khbizfzmxo) .gt_font_italic {
   font-style: italic;
 }
 
-#khbizfzmxo .gt_super {
+:where(#khbizfzmxo) .gt_super {
   font-size: 65%;
 }
 
-#khbizfzmxo .gt_footnote_marks {
+:where(#khbizfzmxo) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#khbizfzmxo .gt_asterisk {
+:where(#khbizfzmxo) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#khbizfzmxo .gt_indent_1 {
+:where(#khbizfzmxo) .gt_indent_1 {
   text-indent: 5px;
 }
 
-#khbizfzmxo .gt_indent_2 {
+:where(#khbizfzmxo) .gt_indent_2 {
   text-indent: 10px;
 }
 
-#khbizfzmxo .gt_indent_3 {
+:where(#khbizfzmxo) .gt_indent_3 {
   text-indent: 15px;
 }
 
-#khbizfzmxo .gt_indent_4 {
+:where(#khbizfzmxo) .gt_indent_4 {
   text-indent: 20px;
 }
 
-#khbizfzmxo .gt_indent_5 {
+:where(#khbizfzmxo) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2014,7 +2017,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#mculmoacfi .gt_table {
+:where(#mculmoacfi) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2039,7 +2042,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-left-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_heading {
+:where(#mculmoacfi) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2051,7 +2054,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_title {
+:where(#mculmoacfi) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2063,7 +2066,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-bottom-width: 0;
 }
 
-#mculmoacfi .gt_subtitle {
+:where(#mculmoacfi) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2075,13 +2078,13 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-top-width: 0;
 }
 
-#mculmoacfi .gt_bottom_border {
+:where(#mculmoacfi) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_col_headings {
+:where(#mculmoacfi) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2096,7 +2099,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_col_heading {
+:where(#mculmoacfi) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2116,7 +2119,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   overflow-x: hidden;
 }
 
-#mculmoacfi .gt_column_spanner_outer {
+:where(#mculmoacfi) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2128,15 +2131,15 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 4px;
 }
 
-#mculmoacfi .gt_column_spanner_outer:first-child {
+:where(#mculmoacfi) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mculmoacfi .gt_column_spanner_outer:last-child {
+:where(#mculmoacfi) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mculmoacfi .gt_column_spanner {
+:where(#mculmoacfi) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2148,7 +2151,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   width: 100%;
 }
 
-#mculmoacfi .gt_group_heading {
+:where(#mculmoacfi) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2173,7 +2176,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   vertical-align: middle;
 }
 
-#mculmoacfi .gt_empty_group_heading {
+:where(#mculmoacfi) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2188,15 +2191,15 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   vertical-align: middle;
 }
 
-#mculmoacfi .gt_from_md > :first-child {
+:where(#mculmoacfi) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mculmoacfi .gt_from_md > :last-child {
+:where(#mculmoacfi) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mculmoacfi .gt_row {
+:where(#mculmoacfi) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2215,7 +2218,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   overflow-x: hidden;
 }
 
-#mculmoacfi .gt_stub {
+:where(#mculmoacfi) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2228,7 +2231,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 5px;
 }
 
-#mculmoacfi .gt_stub_row_group {
+:where(#mculmoacfi) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2242,11 +2245,11 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   vertical-align: top;
 }
 
-#mculmoacfi .gt_row_group_first td {
+:where(#mculmoacfi) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mculmoacfi .gt_summary_row {
+:where(#mculmoacfi) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2256,16 +2259,16 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 5px;
 }
 
-#mculmoacfi .gt_first_summary_row {
+:where(#mculmoacfi) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_first_summary_row.thick {
+:where(#mculmoacfi) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mculmoacfi .gt_last_summary_row {
+:where(#mculmoacfi) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2275,7 +2278,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-bottom-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_grand_summary_row {
+:where(#mculmoacfi) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2285,7 +2288,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 5px;
 }
 
-#mculmoacfi .gt_first_grand_summary_row {
+:where(#mculmoacfi) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2295,11 +2298,11 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-top-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_striped {
+:where(#mculmoacfi) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mculmoacfi .gt_table_body {
+:where(#mculmoacfi) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2308,7 +2311,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-bottom-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_footnotes {
+:where(#mculmoacfi) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2322,7 +2325,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_footnote {
+:where(#mculmoacfi) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2331,7 +2334,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 5px;
 }
 
-#mculmoacfi .gt_sourcenotes {
+:where(#mculmoacfi) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2345,7 +2348,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-color: #D3D3D3;
 }
 
-#mculmoacfi .gt_sourcenote {
+:where(#mculmoacfi) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2353,64 +2356,64 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 5px;
 }
 
-#mculmoacfi .gt_left {
+:where(#mculmoacfi) .gt_left {
   text-align: left;
 }
 
-#mculmoacfi .gt_center {
+:where(#mculmoacfi) .gt_center {
   text-align: center;
 }
 
-#mculmoacfi .gt_right {
+:where(#mculmoacfi) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mculmoacfi .gt_font_normal {
+:where(#mculmoacfi) .gt_font_normal {
   font-weight: normal;
 }
 
-#mculmoacfi .gt_font_bold {
+:where(#mculmoacfi) .gt_font_bold {
   font-weight: bold;
 }
 
-#mculmoacfi .gt_font_italic {
+:where(#mculmoacfi) .gt_font_italic {
   font-style: italic;
 }
 
-#mculmoacfi .gt_super {
+:where(#mculmoacfi) .gt_super {
   font-size: 65%;
 }
 
-#mculmoacfi .gt_footnote_marks {
+:where(#mculmoacfi) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#mculmoacfi .gt_asterisk {
+:where(#mculmoacfi) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mculmoacfi .gt_indent_1 {
+:where(#mculmoacfi) .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mculmoacfi .gt_indent_2 {
+:where(#mculmoacfi) .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mculmoacfi .gt_indent_3 {
+:where(#mculmoacfi) .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mculmoacfi .gt_indent_4 {
+:where(#mculmoacfi) .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mculmoacfi .gt_indent_5 {
+:where(#mculmoacfi) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2483,7 +2486,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#kiywfzfbzi .gt_table {
+:where(#kiywfzfbzi) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2508,7 +2511,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-left-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_heading {
+:where(#kiywfzfbzi) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2520,7 +2523,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_title {
+:where(#kiywfzfbzi) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2532,7 +2535,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-bottom-width: 0;
 }
 
-#kiywfzfbzi .gt_subtitle {
+:where(#kiywfzfbzi) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2544,13 +2547,13 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-top-width: 0;
 }
 
-#kiywfzfbzi .gt_bottom_border {
+:where(#kiywfzfbzi) .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_col_headings {
+:where(#kiywfzfbzi) .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2565,7 +2568,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_col_heading {
+:where(#kiywfzfbzi) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2585,7 +2588,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   overflow-x: hidden;
 }
 
-#kiywfzfbzi .gt_column_spanner_outer {
+:where(#kiywfzfbzi) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2597,15 +2600,15 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 4px;
 }
 
-#kiywfzfbzi .gt_column_spanner_outer:first-child {
+:where(#kiywfzfbzi) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kiywfzfbzi .gt_column_spanner_outer:last-child {
+:where(#kiywfzfbzi) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kiywfzfbzi .gt_column_spanner {
+:where(#kiywfzfbzi) .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2617,7 +2620,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   width: 100%;
 }
 
-#kiywfzfbzi .gt_group_heading {
+:where(#kiywfzfbzi) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2642,7 +2645,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   vertical-align: middle;
 }
 
-#kiywfzfbzi .gt_empty_group_heading {
+:where(#kiywfzfbzi) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2657,15 +2660,15 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   vertical-align: middle;
 }
 
-#kiywfzfbzi .gt_from_md > :first-child {
+:where(#kiywfzfbzi) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kiywfzfbzi .gt_from_md > :last-child {
+:where(#kiywfzfbzi) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kiywfzfbzi .gt_row {
+:where(#kiywfzfbzi) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2684,7 +2687,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   overflow-x: hidden;
 }
 
-#kiywfzfbzi .gt_stub {
+:where(#kiywfzfbzi) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2697,7 +2700,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 5px;
 }
 
-#kiywfzfbzi .gt_stub_row_group {
+:where(#kiywfzfbzi) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2711,11 +2714,11 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   vertical-align: top;
 }
 
-#kiywfzfbzi .gt_row_group_first td {
+:where(#kiywfzfbzi) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kiywfzfbzi .gt_summary_row {
+:where(#kiywfzfbzi) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2725,16 +2728,16 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 5px;
 }
 
-#kiywfzfbzi .gt_first_summary_row {
+:where(#kiywfzfbzi) .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_first_summary_row.thick {
+:where(#kiywfzfbzi) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kiywfzfbzi .gt_last_summary_row {
+:where(#kiywfzfbzi) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2744,7 +2747,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-bottom-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_grand_summary_row {
+:where(#kiywfzfbzi) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2754,7 +2757,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 5px;
 }
 
-#kiywfzfbzi .gt_first_grand_summary_row {
+:where(#kiywfzfbzi) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2764,11 +2767,11 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-top-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_striped {
+:where(#kiywfzfbzi) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kiywfzfbzi .gt_table_body {
+:where(#kiywfzfbzi) .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2777,7 +2780,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-bottom-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_footnotes {
+:where(#kiywfzfbzi) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2791,7 +2794,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_footnote {
+:where(#kiywfzfbzi) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2800,7 +2803,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 5px;
 }
 
-#kiywfzfbzi .gt_sourcenotes {
+:where(#kiywfzfbzi) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2814,7 +2817,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-color: #D3D3D3;
 }
 
-#kiywfzfbzi .gt_sourcenote {
+:where(#kiywfzfbzi) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2822,64 +2825,64 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   padding-right: 5px;
 }
 
-#kiywfzfbzi .gt_left {
+:where(#kiywfzfbzi) .gt_left {
   text-align: left;
 }
 
-#kiywfzfbzi .gt_center {
+:where(#kiywfzfbzi) .gt_center {
   text-align: center;
 }
 
-#kiywfzfbzi .gt_right {
+:where(#kiywfzfbzi) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kiywfzfbzi .gt_font_normal {
+:where(#kiywfzfbzi) .gt_font_normal {
   font-weight: normal;
 }
 
-#kiywfzfbzi .gt_font_bold {
+:where(#kiywfzfbzi) .gt_font_bold {
   font-weight: bold;
 }
 
-#kiywfzfbzi .gt_font_italic {
+:where(#kiywfzfbzi) .gt_font_italic {
   font-style: italic;
 }
 
-#kiywfzfbzi .gt_super {
+:where(#kiywfzfbzi) .gt_super {
   font-size: 65%;
 }
 
-#kiywfzfbzi .gt_footnote_marks {
+:where(#kiywfzfbzi) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#kiywfzfbzi .gt_asterisk {
+:where(#kiywfzfbzi) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kiywfzfbzi .gt_indent_1 {
+:where(#kiywfzfbzi) .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kiywfzfbzi .gt_indent_2 {
+:where(#kiywfzfbzi) .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kiywfzfbzi .gt_indent_3 {
+:where(#kiywfzfbzi) .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kiywfzfbzi .gt_indent_4 {
+:where(#kiywfzfbzi) .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kiywfzfbzi .gt_indent_5 {
+:where(#kiywfzfbzi) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3345,7 +3348,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We have successfully created the posterior distribution and can finally answer the question we started the chapter with:</p>
@@ -3454,7 +3457,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We have successfully created the posterior probability distribution for the number of red beads drawn in a shovel of size 20. But before we answer our question, some of us may be wondering why we made our predictions using <code><a href="https://mc-stan.org/rstantools/reference/posterior_predict.html">posterior_predict()</a></code> instead of <code><a href="https://mc-stan.org/rstantools/reference/posterior_epred.html">posterior_epred()</a></code>. Let’s examine what happens if we use <code><a href="https://mc-stan.org/rstantools/reference/posterior_epred.html">posterior_epred()</a></code> instead.</p>
@@ -3478,7 +3481,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Using posterior_epred()</figcaption><p></p>
 </figure>
 </div>
@@ -3501,7 +3504,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <span>  <span class="fu">plot_annotation</span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Expected prediction for sample of size 20 on left, posterior on right.'</span>,</span>
 <span>                  subtitle <span class="op">=</span> <span class="st">"The two distributions have an identical shape."</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>On the other hand, <code><a href="https://mc-stan.org/rstantools/reference/posterior_predict.html">posterior_predict()</a></code> models the posterior distribution for future <strong>individuals</strong>. In our scenario, we model the binomial distribution of a discrete random variable. The bars only appear at real numbers between 1 and 16, because we are predicting the probability of individual samples. We cannot draw fractions of beads in our sample. Using <code><a href="https://mc-stan.org/rstantools/reference/posterior_predict.html">posterior_predict()</a></code> essentially replicates the DGM, taking many virtual draws from our urn and summarizing all the results.</p>
@@ -3579,7 +3582,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-65-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The red bars illustrate the area under a specific section of the curve, as compared to the <em>entire</em> area under the curve. <em>Each question requires looking at a new area under the curve.</em> When someones asks you a question, they are doing two things. First, they are providing instructions as to the posterior your should create. Here, the results with a shovel of 20 slots. Second, they are asking a question about the area under the curve in a specific region. Here, the region where the number of red beads is greater than 8 is highlighted in red. Therefore, the area below the curve that <strong>is red</strong> is how we get our estimate.</p>
@@ -3787,7 +3790,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -3815,31 +3835,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">

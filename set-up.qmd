@@ -176,9 +176,13 @@ If you see the above-mentioned conflicts in your document, **do not submit a pul
 
 But even if there is not an open PR, `pr_push()` can be tricky. The key thing to remember is that *you must press a green button on Github* for a new PR to be created. Normally, this is easy. Running `pr_push()` automatically (or perhaps after you run `pr_view()`) puts you in a browser and brings you to the correct Github page. Press the button and -- presto! -- you have created a PR. But, sometimes, the web page is different. It actually sends you back to an old pull request. When this happens, you need to click on the "Pull Request" tab above. This will take you to a new page, with a green button labeled "Compare & Pull Request". Press that button.
 
-6) If you end up needing to install a new package --- which should be rare --- just install it and then type `renv::status()` to confirm than **renv** is aware of the change. Then, type `renv::snapshot()`. This will update the `renv.lock` file to include the new package. You just commit/push the new version of `renv.lock`, and that shares the information with everyone else on the project. Never commit/push a modified `renv.lock` unless you know why it has changed.
+6) If you end up needing to install a new package --- which should be rare --- just install it with `renv::install()`and then type `renv::status()` to confirm than **renv** is aware of the change. Then, type `renv::snapshot()`. This will update the `renv.lock` file to include the new package. You just commit/push the new version of `renv.lock`, and that shares the information with everyone else on the project. Never commit/push a modified `renv.lock` unless you know why it has changed. But, for the most part, leave changes in `renv.lock` to me.
 
 7) Be careful of committing garbage files like ".DS_Store", which is a file created sometimes. Only commit changes which you understand. In the vast majority of cases your PRs will only involve one or two files.
+
+8) If using Windows, make sure you have RTools installed.
+
+9) Sometimes, your **renv** library becomes messed up. Note that nuking from orbit may not fix this because **renv** installs your packages in some private common area which is not impacted when you reinstall the PPBDS package you are working with. In this case, running `renv::rebuild()` may help. If not, run `renv::diagnostics()`, find the path to the **renv** cache directory and delete everything there by hand. Then, run `renv::repair()'.`
 
 ## Style Guide
 

@@ -30,9 +30,9 @@ library(patchwork)
 <!-- Make a 15 second video, put it on YouTube. "We don't estimate parameters because we care about parameters. Parameters are imaginary! Like unicorns! [Put finger on forehead and imitate unicorn.] We estimate parameters to build Data Generating Mechanisms. And with a DGM, you can move the world!" -->
 
 
-```{r, echo = FALSE}
-knitr::include_app("https://www.youtube.com/embed/e3PJ3Du_zDc")
-```
+{{< video https://www.youtube.com/embed/e3PJ3Du_zDc >}}
+
+
 
 *The Hunger Games* is a dystopian novel in which children are chosen via lottery to fight to the death. Primrose Everdeen is selected from the urn. Why does she have the misfortune of being selected? Or, as we data scientists say, *sampled*?
 

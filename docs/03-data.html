@@ -2,16 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.36">
+<meta name="generator" content="quarto-1.2.269">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Preceptor’s Primer for Bayesian Data Science: Using the Cardinal Virtues for Inference - 3&nbsp; Data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -50,7 +55,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -63,7 +68,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -238,41 +243,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
 </div>
 </nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"> <span class="header-section-number">3.1</span> Introduction</a></li>
+<li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="toc-section-number">3.1</span>  Introduction</a></li>
   <li>
-<a href="#reading-and-writing-files" id="toc-reading-and-writing-files" class="nav-link" data-scroll-target="#reading-and-writing-files"> <span class="header-section-number">3.2</span> Reading and writing files</a>
+<a href="#reading-and-writing-files" id="toc-reading-and-writing-files" class="nav-link" data-scroll-target="#reading-and-writing-files"><span class="toc-section-number">3.2</span>  Reading and writing files</a>
   <ul class="collapse">
-<li><a href="#text-files" id="toc-text-files" class="nav-link" data-scroll-target="#text-files"> <span class="header-section-number">3.2.1</span> Text files</a></li>
-  <li><a href="#excel-files" id="toc-excel-files" class="nav-link" data-scroll-target="#excel-files"> <span class="header-section-number">3.2.2</span> Excel files</a></li>
-  <li><a href="#rds-files" id="toc-rds-files" class="nav-link" data-scroll-target="#rds-files"> <span class="header-section-number">3.2.3</span> RDS files</a></li>
-  <li><a href="#json" id="toc-json" class="nav-link" data-scroll-target="#json"> <span class="header-section-number">3.2.4</span> JSON</a></li>
+<li><a href="#text-files" id="toc-text-files" class="nav-link" data-scroll-target="#text-files"><span class="toc-section-number">3.2.1</span>  Text files</a></li>
+  <li><a href="#excel-files" id="toc-excel-files" class="nav-link" data-scroll-target="#excel-files"><span class="toc-section-number">3.2.2</span>  Excel files</a></li>
+  <li><a href="#rds-files" id="toc-rds-files" class="nav-link" data-scroll-target="#rds-files"><span class="toc-section-number">3.2.3</span>  RDS files</a></li>
+  <li><a href="#json" id="toc-json" class="nav-link" data-scroll-target="#json"><span class="toc-section-number">3.2.4</span>  JSON</a></li>
   </ul>
 </li>
   <li>
-<a href="#databases" id="toc-databases" class="nav-link" data-scroll-target="#databases"> <span class="header-section-number">3.3</span> Databases</a>
+<a href="#databases" id="toc-databases" class="nav-link" data-scroll-target="#databases"><span class="toc-section-number">3.3</span>  Databases</a>
   <ul class="collapse">
-<li><a href="#reading-data-from-a-sqlite-database" id="toc-reading-data-from-a-sqlite-database" class="nav-link" data-scroll-target="#reading-data-from-a-sqlite-database"> <span class="header-section-number">3.3.1</span> Reading data from a SQLite database</a></li>
-  <li><a href="#interacting-with-sqlite-databases" id="toc-interacting-with-sqlite-databases" class="nav-link" data-scroll-target="#interacting-with-sqlite-databases"> <span class="header-section-number">3.3.2</span> Interacting with SQLite databases</a></li>
+<li><a href="#reading-data-from-a-sqlite-database" id="toc-reading-data-from-a-sqlite-database" class="nav-link" data-scroll-target="#reading-data-from-a-sqlite-database"><span class="toc-section-number">3.3.1</span>  Reading data from a SQLite database</a></li>
+  <li><a href="#interacting-with-sqlite-databases" id="toc-interacting-with-sqlite-databases" class="nav-link" data-scroll-target="#interacting-with-sqlite-databases"><span class="toc-section-number">3.3.2</span>  Interacting with SQLite databases</a></li>
   </ul>
 </li>
   <li>
-<a href="#webscraping" id="toc-webscraping" class="nav-link" data-scroll-target="#webscraping"> <span class="header-section-number">3.4</span> Webscraping</a>
+<a href="#webscraping" id="toc-webscraping" class="nav-link" data-scroll-target="#webscraping"><span class="toc-section-number">3.4</span>  Webscraping</a>
   <ul class="collapse">
-<li><a href="#html-and-css-selectors" id="toc-html-and-css-selectors" class="nav-link" data-scroll-target="#html-and-css-selectors"> <span class="header-section-number">3.4.1</span> HTML and CSS selectors</a></li>
-  <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application"> <span class="header-section-number">3.4.2</span> Application</a></li>
+<li><a href="#html-and-css-selectors" id="toc-html-and-css-selectors" class="nav-link" data-scroll-target="#html-and-css-selectors"><span class="toc-section-number">3.4.1</span>  HTML and CSS selectors</a></li>
+  <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application"><span class="toc-section-number">3.4.2</span>  Application</a></li>
   </ul>
 </li>
-  <li><a href="#working-with-apis" id="toc-working-with-apis" class="nav-link" data-scroll-target="#working-with-apis"> <span class="header-section-number">3.5</span> Working with APIs</a></li>
+  <li><a href="#working-with-apis" id="toc-working-with-apis" class="nav-link" data-scroll-target="#working-with-apis"><span class="toc-section-number">3.5</span>  Working with APIs</a></li>
   <li>
-<a href="#distill" id="toc-distill" class="nav-link" data-scroll-target="#distill"> <span class="header-section-number">3.6</span> Distill</a>
+<a href="#distill" id="toc-distill" class="nav-link" data-scroll-target="#distill"><span class="toc-section-number">3.6</span>  Distill</a>
   <ul class="collapse">
-<li><a href="#common-errors-and-functions" id="toc-common-errors-and-functions" class="nav-link" data-scroll-target="#common-errors-and-functions"> <span class="header-section-number">3.6.1</span> Common Errors and Functions</a></li>
+<li><a href="#common-errors-and-functions" id="toc-common-errors-and-functions" class="nav-link" data-scroll-target="#common-errors-and-functions"><span class="toc-section-number">3.6.1</span>  Common Errors and Functions</a></li>
   </ul>
 </li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"> <span class="header-section-number">3.7</span> Summary</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="toc-section-number">3.7</span>  Summary</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/PPBDS/primer/edit/main/03-data.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -285,6 +290,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -421,7 +427,10 @@ dbl (3): a, b, c
 <span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">file_2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: One or more parsing issues, see `problems()` for details</code></pre>
+<pre><code>Warning: One or more parsing issues, call `problems()` on your data frame for details,
+e.g.:
+  dat &lt;- vroom(...)
+  problems(dat)</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 4 Columns: 1
@@ -1933,8 +1942,7 @@ This is not red.
 </code></pre>
 <p>This genuinely sucks to read. There’s links, random numbers, and elements that have 4 classes on them at the same time, all while being stupidly long to the point where your eyes fall out. While we can pick out the CSS selectors that we need, (“result-price” and “housing”), this is a hassle and a pain and there’s a better solution.</p>
 <p>We will be using the <em>SelectorGadget</em> tool in order to find CSS selectors. It’s an open source tool that simplifies generating and finding CSS selectors. We recommend that you use the Chrome web browser to use this tool, and install the <a href="https://chrome.google.com/webstore/detail/selectorgadget/mhjhnkcfbdhnjickkkdbjoemdmbfginb">selector gadget tool from the Chrome Web Store</a>. Here is a short video on how to install and use the SelectorGadget tool to get a CSS selector for use in web scraping:</p>
-<iframe width="840" height="473" src="https://www.youtube.com/embed/YdIWI6K64zo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
-</iframe>
+<div class="quarto-video ratio ratio-16x9"><iframe src="https://www.youtube.com/embed/YdIWI6K64zo" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 <p>From installing and using the selectorgadget as shown in the video above, we get the two CSS selectors <code>.housing</code> and <code>.result-price</code> that we can use to scrape information about the square footage and the rental price, respectively. The selector gadget returns them to us as a comma separated list (here <code>.housing , .result-price</code>), which is exactly the format we need to provide to R.</p>
 <p>However, when we’re scraping from actual websites we need to take more than just the size of the code into consideration. We also need to take the legal aspects into account,</p>
 <section id="legal-to-scrape" class="level4" data-number="3.4.2.1"><h4 data-number="3.4.2.1" class="anchored" data-anchor-id="legal-to-scrape">
@@ -1946,7 +1954,7 @@ This is not red.
 <p>Want to learn more about the legalities of web scraping and crawling? Read this interesting blog post titled <a href="https://benbernardblog.com/web-scraping-and-crawling-are-perfectly-legal-right/">“Web Scraping and Crawling Are Perfectly Legal, Right?” by Benoit Bernard</a> (this is optional, not required reading).</p>
 </blockquote>
 <p>So what to do now? Well, we can’t scrape Craigslist, so we should find something else that allows you to scrape. Let’s use a database from <a href="https://www.opensecrets.org/political-action-committees-pacs/foreign-connected-pacs/2020">Open Secrets about foreign-connected PACs within our country</a>.</p>
-<!-- <iframe width="840" height="473" src="https://www.youtube.com/embed/O9HKbdhqYzk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+<!-- Useful?  -->
 </section><section id="scraping-from-actual-websites" class="level4" data-number="3.4.2.2"><h4 data-number="3.4.2.2" class="anchored" data-anchor-id="scraping-from-actual-websites">
 <span class="header-section-number">3.4.2.2</span> Scraping from actual websites</h4>
 <p>Now, earlier we only scraped from pre-written HTML code, but you can do this from websites as well. We can do this just by plugging in the URL to the website and using <code><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html()</a></code> instead of <code><a href="https://rvest.tidyverse.org/reference/minimal_html.html">minimal_html()</a></code>.</p>
@@ -1957,7 +1965,7 @@ This is not red.
 <span>  <span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{html_document}
-&lt;html&gt;
+&lt;html class="no-js" lang="en" dir="ltr"&gt;
 [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
 [2] &lt;body&gt;\n\n    &lt;!-- Google Adsense Script --&gt;\n&lt;!--    &lt;script async src=" ...</code></pre>
 </div>
@@ -2175,18 +2183,18 @@ dttm (1): valid
 <section id="create_website" class="level4" data-number="3.6.1.1"><h4 data-number="3.6.1.1" class="anchored" data-anchor-id="create_website">
 <span class="header-section-number">3.6.1.1</span> <code>create_website()</code>
 </h4>
-<p>The first step to creating a website is by using the <code><a href="https://pkgs.rstudio.com/distill/reference/create_website.html">create_website()</a></code> function. This creates the entire distill website and should be the first function that you run whenever you want to make one. Just use the following syntax:</p>
+<p>The first step to creating a website is by using the <code>create_website()</code> function. This creates the entire distill website and should be the first function that you run whenever you want to make one. Just use the following syntax:</p>
 <div class="cell">
 <div class="sourceCode" id="cb156"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/distill">distill</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://pkgs.rstudio.com/distill/reference/create_website.html">create_website</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="st">"."</span>, title <span class="op">=</span> <span class="st">"title-of-your-website"</span>, gh_pages <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu">create_website</span><span class="op">(</span>dir <span class="op">=</span> <span class="st">"."</span>, title <span class="op">=</span> <span class="st">"title-of-your-website"</span>, gh_pages <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This essentially creates a distill website in your current R project, titles it “title-of-your-website” and formats it so that we can publish it on <a href="https://pages.github.com/">Github Pages</a> (Github’s website publishing service). After you run this, you should see an <code>index.Rmd</code> and an <code>about.Rmd</code> file in your project, as well as some other miscellaneous files. These are the “Home” and “About” pages that you can use on your website.</p>
 </section><section id="create_article" class="level4" data-number="3.6.1.2"><h4 data-number="3.6.1.2" class="anchored" data-anchor-id="create_article">
 <span class="header-section-number">3.6.1.2</span> <code>create_article()</code>
 </h4>
-<p>But what if I want more pages than that? Only being restricted to a Home and About page is pretty bad, especially when you want to have a bibliography. This is when we use <code><a href="https://pkgs.rstudio.com/distill/reference/create_article.html">create_article()</a></code> to create a new page within our website. Just run the function with the title of the file and it’ll automatically create the .Rmd file for you to code in.</p>
+<p>But what if I want more pages than that? Only being restricted to a Home and About page is pretty bad, especially when you want to have a bibliography. This is when we use <code>create_article()</code> to create a new page within our website. Just run the function with the title of the file and it’ll automatically create the .Rmd file for you to code in.</p>
 <div class="cell">
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pkgs.rstudio.com/distill/reference/create_article.html">create_article</a></span><span class="op">(</span><span class="st">"sources.Rmd"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">create_article</span><span class="op">(</span><span class="st">"sources.Rmd"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then, you need to put it into your website. Just go to the <code>_site.yml</code> file and add the page in using <code>text: "Sources"</code> and <code>"href: sources.html"</code>. This is what the <code>_site.yml</code> file should look like after you add the page.</p>
 <pre><code>name: "."
@@ -2205,14 +2213,14 @@ navbar:
     - text: "Sources"
       href: sources.html
 output: distill::distill_article</code></pre>
-<p>The <code>_site.yml</code> is the file that keeps everything in line and organizes your distill website. <em>However, it’s very specific as to the syntax, so you should take care to only add in specific things.</em> Additionally, keep in mind that you should always use the <code><a href="https://pkgs.rstudio.com/distill/reference/create_article.html">create_article()</a></code> function whenever you need to create a new page or a .Rmd file. <em>Do not add in a .Rmd file manually.</em> These both lead to errors that can break your project.</p>
+<p>The <code>_site.yml</code> is the file that keeps everything in line and organizes your distill website. <em>However, it’s very specific as to the syntax, so you should take care to only add in specific things.</em> Additionally, keep in mind that you should always use the <code>create_article()</code> function whenever you need to create a new page or a .Rmd file. <em>Do not add in a .Rmd file manually.</em> These both lead to errors that can break your project.</p>
 </section><section id="formatting-the-article" class="level4" data-number="3.6.1.3"><h4 data-number="3.6.1.3" class="anchored" data-anchor-id="formatting-the-article">
 <span class="header-section-number">3.6.1.3</span> Formatting the article</h4>
 <p>You can format the article just like you did before because it’s still an RMarkdown file. However, you can also put more advanced features like block quotes <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">here</a>. Just make sure not to edit the headers at the top of the file without knowing exactly what you’re doing in order to prevent any errors.</p>
 </section><section id="error-operator-is-invalid-for-atomic-vectors" class="level4" data-number="3.6.1.4"><h4 data-number="3.6.1.4" class="anchored" data-anchor-id="error-operator-is-invalid-for-atomic-vectors">
 <span class="header-section-number">3.6.1.4</span> <code>Error: $ operator is invalid for atomic vectors</code>
 </h4>
-<p>This is the error caused by creating a .Rmd file without using it in your <code>_site.yml</code> or using <code><a href="https://pkgs.rstudio.com/distill/reference/create_article.html">create_article()</a></code> to make it. Essentially, distill doesn’t know how to deal with the extra .Rmd file and crashes because of it. This can normally be solved just by deleting the extra .Rmd, but it may be necessary to just nuke the project from orbit and restart.</p>
+<p>This is the error caused by creating a .Rmd file without using it in your <code>_site.yml</code> or using <code>create_article()</code> to make it. Essentially, distill doesn’t know how to deal with the extra .Rmd file and crashes because of it. This can normally be solved just by deleting the extra .Rmd, but it may be necessary to just nuke the project from orbit and restart.</p>
 <p>As such, make sure that you never create an extra .Rmd, as it’s just going to be more work on your end when you start encountering this error. If you want to write R code for a graph so that you can put it into your website, just use a normal R script file by going to File -&gt; New File -&gt; R Script in RStudio.</p>
 </section><section id="yaml-errors" class="level4" data-number="3.6.1.5"><h4 data-number="3.6.1.5" class="anchored" data-anchor-id="yaml-errors">
 <span class="header-section-number">3.6.1.5</span> YAML Errors</h4>
@@ -2293,7 +2301,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -2321,31 +2346,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
