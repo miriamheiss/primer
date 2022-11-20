@@ -535,13 +535,10 @@ Use `posterior_predict()` to create draws from the posterior for this scenario. 
 
 ```{r}
 pp <- posterior_predict(fit_1, newdata = new_obs) |>
-    as_tibble() |>
-    mutate_all(as.numeric)
+    as_tibble() 
 
 head(pp, 10)
 ```
-
-We might expect that we can use `as_tibble()` directly after the object returned `posterior_predict()`. Sadly, for obscure technical reasons, that won't quite work. So, we need the incantation `mutate_all(as.numeric)` to make sure that the resulting tibble is well-behaved. This command ensures that every column in the tibble is a simple numeric vector, which is what we want.
 
 The result are draws from the posterior distribution of the age of a Democrat. It is important to understand that this is not a concrete person from the `trains` dataset - the algorithm in `posterior_predict()` simply uses the existing data from  `trains` to estimate this posterior distribution. 
 
@@ -579,8 +576,7 @@ newobs <- tibble(party = c("Democrat", "Democrat", "Democrat",
                         "Republican", "Republican","Republican"))
 
 posterior_predict(fit_1, newdata = newobs) |>
-    as_tibble() |>
-    mutate_all(as.numeric)
+    as_tibble() 
 ```
 
 <!-- These pp objects are fundamentally flawed because some of the predicted values are absurdly low, even negative! This is not the fault of the model or the code. It is simply that, if sigma is large enough, then the model thinks a negative age is plausible. We should at least mention this, ideally as part of a posterior predictive check. -->
@@ -595,8 +591,7 @@ We have 6 columns: one for each person. `posterior_predict()` does not name the 
 ```{r}
 pp <- posterior_predict(fit_1, newdata = newobs) |>
     as_tibble() |>
-    mutate_all(as.numeric) |> 
-  
+
     # We don't need to rename the columns, but doing so makes the subsequest
     # code much easier to understand. We could just have worked with columns 1,
     # 2, 3 and so on. Either way, the key is to ensure that you correctly map
@@ -882,7 +877,6 @@ Consider the result of `posterior_predict()` for two people, one treated and one
 pp <- posterior_predict(fit_2, 
                         newdata = newobs) |>
     as_tibble() |>
-    mutate_all(as.numeric) |> 
     mutate(te = `1` - `2`)
   
 pp
@@ -1178,7 +1172,6 @@ newobs <- tibble(income = c(rep(100000, 2),
 pp <- posterior_predict(fit_4, 
                         newdata = newobs) |> 
   as_tibble() |> 
-  mutate_all(as.numeric) |> 
   rowwise() |> 
   mutate(total = sum(c_across()))
 

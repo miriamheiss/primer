@@ -73,11 +73,11 @@ tibble(ID = c("Candidate 1", "Candidate 2"),
        before = c("56", "72"),
        ytreat = c("12", "7"),
        ycontrol = c("9", "5"),
-       yeffect = c("+3", "+2")) %>%
+       yeffect = c("+3", "+2")) |>
   
   # Then, we use the gt function to make it pretty
   
-  gt() %>%
+  gt() |>
   cols_label(ID = md("ID"),
              sex = md("Sex"),
              before = md("Age at Election"),
@@ -107,9 +107,9 @@ There are `r ncol(governors)` variables and `r scales::comma(nrow(governors))` o
 
 
 ```{r}
-ch10 <- governors %>% 
-  mutate(won = if_else(win_margin > 0, TRUE, FALSE)) %>% 
-  mutate(close_race = if_else(abs(win_margin) < 5, TRUE, FALSE)) %>% 
+ch10 <- governors |> 
+  mutate(won = if_else(win_margin > 0, TRUE, FALSE)) |> 
+  mutate(close_race = if_else(abs(win_margin) < 5, TRUE, FALSE)) |> 
   select(last_name, year, state, sex, lived_after, election_age, won, close_race)
 ```
 
@@ -118,7 +118,7 @@ ch10 <- governors %>%
 One subtle issue: Should the same candidate be included multiple times? For example:
 
 ```{r}
-ch10 %>% 
+ch10 |> 
   filter(last_name == "Cuomo")
 ```
 
@@ -134,7 +134,7 @@ set.seed(14)
 ```
 
 ```{r}
-ch10 %>% 
+ch10 |> 
   slice_sample(n = 5)
 ```
 
@@ -152,7 +152,7 @@ In using this data set, our left-side variable will be `lived_after`. We are try
 
 
 ```{r}
-ch10 %>%
+ch10 |>
   ggplot(aes(x = year, y = lived_after)) +
   geom_point() +
   labs(title = "US Gubernatorial Candidate Years Lived Post-Election",
@@ -172,7 +172,7 @@ The reason the data is slanted downward is because the maximum value for this sc
 To begin visualizing our `lived_after` data, we will inspect the difference in years lived post election between male and female candidates. 
 
 ```{r}
-ch10 %>%
+ch10 |>
   ggplot(aes(x = sex, y = lived_after)) +
   geom_boxplot() +
   labs(title = "US Gubernatorial Candidate Years Lived Post-Election",
@@ -263,11 +263,11 @@ tibble(source = c("Population", "Population", "...",
                  "20", "19", "...",
                  "?", "?", "...",
                  "?", "?", "...",
-                 "?", "?")) %>%
+                 "?", "?")) |>
   
   # Then, we use the gt function to make it pretty
   
-  gt() %>%
+  gt() |>
   cols_label(source = md("Source"),
              year_elected = md("Year"),
              election_age = md("Election Age"),
@@ -351,9 +351,9 @@ The posterior distribution for $\beta_0 + \beta_1$ can be constructed via simple
 
 
 ```{r}
-fit_2 %>% 
-  as_tibble() %>% 
-  mutate(male_intercept = `(Intercept)` + sexMale) %>% 
+fit_2 |> 
+  as_tibble() |> 
+  mutate(male_intercept = `(Intercept)` + sexMale) |> 
   ggplot(aes(male_intercept)) + 
     geom_histogram(aes(y = after_stat(count/sum(count))),
                    bins = 100) +
@@ -369,8 +369,8 @@ But is that actually so "simple?" Not really! Manipulating parameters directly i
 
 ```{r}
 posterior_epred(fit_2,
-                tibble(sex = "Male")) %>% 
-  as_tibble() %>% 
+                tibble(sex = "Male")) |> 
+  as_tibble() |> 
   ggplot(aes(`1`)) + 
     geom_histogram(aes(y = after_stat(count/sum(count))),
                    bins = 100) +
@@ -386,8 +386,8 @@ The interpretation of this parameter is the same as we have seen before. There i
 
 ```{r}
 posterior_epred(fit_2,
-                tibble(sex = "Female")) %>% 
-  as_tibble() %>% 
+                tibble(sex = "Female")) |> 
+  as_tibble() |> 
   ggplot(aes(`1`)) + 
     geom_histogram(aes(y = after_stat(count/sum(count))),
                    bins = 100) +
@@ -406,7 +406,7 @@ To begin, let's model candidate lifespan after the election as a function of can
 
 
 ```{r}
-ch10 %>% 
+ch10 |> 
   ggplot(aes(x = election_age, y = lived_after)) +
     geom_point() +
     labs(title = "Longevity of Gubernatorial Candidates",
@@ -461,7 +461,7 @@ fit_1 <- stan_glm(data = ch10,
                       refresh = 0,
                       seed = 9)
 
-ch10 %>% 
+ch10 |> 
   ggplot(aes(x = election_age, y = lived_after)) +
     geom_point() +
     geom_line(aes(y = fitted(fit_1)), color = "blue") +
@@ -496,8 +496,8 @@ Let's look at the posterior of $\beta_1$, the coefficient of $election\_age_i$:
 <!-- DK: We should standardize what these plots look like, both in this chapter and throughout the book. -->
 
 ```{r}
-fit_1 %>% 
-  as_tibble() %>% 
+fit_1 |> 
+  as_tibble() |> 
   ggplot(aes(election_age)) + 
     geom_histogram(aes(y = after_stat(count/sum(count))),
                    bins = 100) +
@@ -566,8 +566,8 @@ We will now show you the parallel slopes model, which was created using the same
 # First, we will tidy the data from our model and select the term and estimate.
 # This allows us to create our regression lines more easily.
 
-tidy <- fit_3 %>% 
-  tidy() %>% 
+tidy <- fit_3 |> 
+  tidy() |> 
   select(term, estimate)
 
 tidy
@@ -686,14 +686,14 @@ The posterior:
 
 
 ```{r}
-fit_4 %>% 
-  as_tibble() %>% 
-  mutate(male_years = `(Intercept)` + sexMale) %>% 
-  rename(female_years = `(Intercept)`) %>% 
-  select(female_years, male_years) %>% 
+fit_4 |> 
+  as_tibble() |> 
+  mutate(male_years = `(Intercept)` + sexMale) |> 
+  rename(female_years = `(Intercept)`) |> 
+  select(female_years, male_years) |> 
   pivot_longer(cols = female_years:male_years, 
                names_to = "parameters",
-               values_to = "years") %>% 
+               values_to = "years") |> 
   ggplot(aes(years, fill = parameters)) +
     geom_histogram(aes(y = after_stat(count/sum(count))),
                    alpha = 0.5, 
@@ -720,14 +720,14 @@ Male candidates live longer on average than female candidates. Note, also, that 
 *Slope* posteriors:
 
 ```{r}
-fit_4 %>% 
-  as_tibble() %>% 
-  mutate(slope_men = election_age + `sexMale:election_age`) %>% 
-  rename(slope_women = election_age) %>% 
-  select(slope_women, slope_men) %>% 
+fit_4 |> 
+  as_tibble() |> 
+  mutate(slope_men = election_age + `sexMale:election_age`) |> 
+  rename(slope_women = election_age) |> 
+  select(slope_women, slope_men) |> 
   pivot_longer(cols = slope_women:slope_men, 
                names_to = "parameters",
-               values_to = "slope") %>% 
+               values_to = "slope") |> 
   ggplot(aes(slope, fill = parameters)) +
     geom_histogram(aes(y = after_stat(count/sum(count))),
                    alpha = 0.5, 
@@ -753,8 +753,8 @@ The process for creating the interaction model is similar to creating the parall
 # First, we will tidy the data from our model and select the term and estimate.
 # This allows us to create our regression lines more easily.
 
-tidy <- fit_4 %>% 
-  tidy() %>% 
+tidy <- fit_4 |> 
+  tidy() |> 
   select(term, estimate)
 
 tidy
@@ -874,16 +874,16 @@ newobs = tibble(sex = c("Male", "Female"),
                  election_age = 10)
 
 pe <- posterior_epred(object = fit_4, 
-                      newdata = newobs) %>% 
-  as_tibble() %>% 
+                      newdata = newobs) |> 
+  as_tibble() |> 
   rename("Male" = `1`,
          "Female" = `2`)
 
 
-pe %>% 
+pe |> 
  pivot_longer(cols = Male:Female, 
                names_to = "Gender",
-               values_to = "years") %>% 
+               values_to = "years") |> 
   ggplot(aes(years, fill = Gender)) +
     geom_histogram(aes(y = after_stat(count/sum(count))),
                    alpha = 0.5, 
@@ -908,12 +908,12 @@ Looking at our posterior probability distributions above, we can see that male c
 
 ```{r}
 pe <- posterior_epred(object = fit_4, 
-                      newdata = newobs) %>% 
-  as_tibble() %>% 
+                      newdata = newobs) |> 
+  as_tibble() |> 
   mutate(diff = `1` - `2`)
 
 
-pe %>% 
+pe |> 
   ggplot(aes(diff)) +
     geom_histogram(aes(y = after_stat(count/sum(count))),
                    alpha = 0.5, 
@@ -942,9 +942,8 @@ Use `posterior_predict()` to create draws from the posterior probability distrib
 
 ```{r}
 pp <- posterior_predict(object = fit_4, 
-                        newdata = newobs) %>%
-  as_tibble() %>% 
-  mutate_all(as.numeric) %>% 
+                        newdata = newobs) |>
+  as_tibble() |> 
   rename("Male" = `1`,
          "Female" = `2`)
 
@@ -953,18 +952,15 @@ pp
 
 The resulting tibble has 2 columns, the first for a male candidate and the second for female candidate. Both columns are draws from the posterior predictive distributions. In both cases, the forecasts depend on the values of all the covariates. That is, we would provide a different forecast if the candidates were younger or older. 
 
-<!-- DK: Already explained mutate_all(as.numeric) in previous chapters. -->
-
-Why do we need the weird `mutate_all(as.numeric)` incantation? The reason is that `posterior_epred()` returns a simple matrix, which is easy to transform into a tibble. `posterior_predict()`, on the other hand, returns a special sort of matrix which is much harder to work with. So, we need a little hackery to make the next steps easier.
 
 Let's look at the posterior predictive distribution for each candidate.
 
 
 ```{r}
-pp %>% 
+pp |> 
   pivot_longer(cols = Male:Female, 
                names_to = "Gender",
-               values_to = "years") %>% 
+               values_to = "years") |> 
   ggplot(aes(years, fill = Gender)) +
     geom_histogram(aes(y = after_stat(count/sum(count))),
                    alpha = 0.5, 
@@ -985,8 +981,8 @@ There is a big overlap in the predictions for individuals while, at the same tim
 <!-- DK: Example "Posterior Predictive Distribution" -->
 
 ```{r}
-pp %>% 
-  mutate(diff = Male - Female) %>% 
+pp |> 
+  mutate(diff = Male - Female) |> 
   ggplot(aes(diff)) +
     geom_histogram(aes(y = after_stat(count/sum(count))),
                    alpha = 0.5, 
@@ -1004,12 +1000,12 @@ pp %>%
 
 <!-- DK: Fix. Could not figure out how to calculate the 13 years on the fly. Code like this --- r round(mean(pp[,2] - pp[,1]), 0) --- did not work. Problem is that the pp tibble has variable names 1 and 2, but we can't grab those with pp$`1` because that expression is within the backticks of an inline R code chunk. -->
 
-In words, we would predict that the male candidate would live longer than the female candidate. By how much? Well, that number is an unknown parameter. By looking at our posterior above, our best estimate is about `r round(pp %>% mutate(diff = Male - Female) %>% pull(diff) %>% mean(), 1)` years. However, it is quite possible that, for any given male/female candidates, the female will live longer.
+In words, we would predict that the male candidate would live longer than the female candidate. By how much? Well, that number is an unknown parameter. By looking at our posterior above, our best estimate is about `r round(pp |> mutate(diff = Male - Female) |> pull(diff) |> mean(), 1)` years. However, it is quite possible that, for any given male/female candidates, the female will live longer.
 
 
 ```{r}
-pp %>% 
-  mutate(diff = Male - Female) %>% 
+pp |> 
+  mutate(diff = Male - Female) |> 
   summarize(f_live_longer = sum(diff < 0),
             total = n(),
             f_live_longer / total)
@@ -1028,21 +1024,20 @@ newobs <- tibble(sex = c("Male", "Female"),
                   election_age = 10)
 
 pe <- posterior_epred(fit_4, 
-                      newdata = newobs) %>%
-  as_tibble() %>% 
+                      newdata = newobs) |>
+  as_tibble() |> 
   mutate(diff = `1` - `2`)
 
 pp <- posterior_predict(fit_4, 
-                        newdata = newobs) %>% 
-  as_tibble() %>% 
-  mutate_all(as.numeric) %>% 
+                        newdata = newobs) |> 
+  as_tibble() |> 
   mutate(diff = `1` - `2`)
 
 tibble(Expectation = pe$diff,
-       Prediction = pp$diff) %>% 
+       Prediction = pp$diff) |> 
   pivot_longer(cols = Expectation:Prediction, 
                names_to = "Type",
-               values_to = "years") %>% 
+               values_to = "years") |> 
   ggplot(aes(years, fill = Type)) +
     geom_histogram(aes(y = after_stat(count/sum(count))),
                    alpha = 0.5, 
