@@ -5,15 +5,12 @@ library(gt)
 library(gtsummary)
 ```
 
-<!-- Add discussion of why Wisdom has nothing to do with representativeness. Use basketball player example. The  best way to be sure that your data is representative of the population is for the process which selected that data to be random. Almost never true! Even if NHANES is a perfect survey --- things are still hard. And no survey is perfect. People in jail? People in hospitals? GP: Done (maybe could elaborate some more later)  -->
 
 <!-- old stuff: -->
 
 <!-- Concerns about representativeness and validity may cause us to make adjustments in our final posteriors in an ad hoc --- but still useful! --- manner, or they may cause us to make changes in our actual models.  -->
 
 <!-- In functional form section, emphasize that we mostly choose our functional form on the basis of the left hand side variable. If it is continuous, we go linear. If it is 0/1, we go logistic. (May add one other option later.) -->
-
-<!-- Do we still need mutate_all(as.numeric)? This may have been fixed in current version of rstanarm. -->
 
 <!-- Take ownership of Temperance section. There is some sloppy writing there! Own it. -->
 
@@ -670,8 +667,7 @@ If you need to predict X individuals, then you need a tibble with X rows, regard
 ```{r}
 pp <- posterior_predict(object = fit_obj,
                         newdata = newobs) |> 
-        as_tibble() |> 
-        mutate_all(as.numeric)
+        as_tibble() 
 ```
 
 Note we need to add `mutate_all(as.numeric)` to the end of the pipe. This is caused by a bug --- or at least an awkwardness --- whereby the variable type provided by `posterior_predict()` is `ppd` rather than `dbl`. Using `mutate_all(as.numeric)` makes each column of type double. Avoid working with columns of type `ppd`. Doing so will only lead to heartache.
@@ -688,7 +684,6 @@ The next step is to calculate the number of interest. We can not, directly, draw
 pp <- posterior_predict(object = fit_obj,
                         newdata = newobs) |> 
         as_tibble() |> 
-        mutate_all(as.numeric) |> 
   
         # Second part of the code requires some trickery.
   
@@ -743,7 +738,6 @@ newobs <- tibble(.rows =  100)
 pp <- posterior_predict(object = fit_obj,
                         newdata = newobs) |> 
   as_tibble() |> 
-  mutate_all(as.numeric) |> 
   rowwise() |> 
   mutate(third_tallest = sort(c_across(), 
                               decreasing = TRUE)[3])
@@ -938,8 +932,7 @@ Another major difference with logistic models is that `posterior_epred()` and `p
 newobs <- tibble(height = rep(180, 100))
 
 pp <- posterior_predict(fit_2, newdata = newobs) |> 
-  as_tibble() |> 
-  mutate_all(as.numeric) 
+  as_tibble() 
 
 pp[, 1:4]
 ```
@@ -954,7 +947,6 @@ We can manipulate this object on a row-by-row basis.
 ```{r}
 pp <- posterior_predict(fit_2, newdata = newobs) |> 
   as_tibble() |> 
-  mutate_all(as.numeric) |> 
   rowwise() |> 
   mutate(total = sum(c_across()))
 
