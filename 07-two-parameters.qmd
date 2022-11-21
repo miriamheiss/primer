@@ -5,9 +5,6 @@ library(gt)
 library(gtsummary)
 ```
 
-
-<!-- old stuff: -->
-
 <!-- Concerns about representativeness and validity may cause us to make adjustments in our final posteriors in an ad hoc --- but still useful! --- manner, or they may cause us to make changes in our actual models.  -->
 
 <!-- In functional form section, emphasize that we mostly choose our functional form on the basis of the left hand side variable. If it is continuous, we go linear. If it is 0/1, we go logistic. (May add one other option later.) -->
@@ -30,7 +27,7 @@ Even then, however, the relative likelihood of different models is not that impo
 
 @sec-one-parameter used models with just one parameter: the number of red beads, which we can also transform into a parameter, $p$, the number of red beads divided by the total number of beads in the bowl. The model in @sec-one-parameter was binomial, and there is only one unknown parameter $p$ in such models. In this chapter, we have two unknown parameters: the mean $\mu$ height in the US and the standard deviation, $\sigma$, of the normally distributed error term.
 
-By this point, we should understand that the reason for making models is not, primarily, that making models is fun (although it is)! The reason is that, when confronted with a question, we face decisions. We must decide between variables X or Y. We must choose from datasets A, B and C. Confronted by a decision, we need to make a model of the world to help us. 
+The reason for making models is not, primarily, that making models is fun -- although it is! The reason is that, when confronted with a question, we face decisions. We must decide between options X or Y. We must choose from actions A, B and C. Confronted by a decision, we need to make a model of the world to help us. 
 
 <!-- Add back reference to ch 12 when it shows up again. -->
 
@@ -60,15 +57,15 @@ Data science is ultimately a moral act, so we will use the four [Cardinal Virtue
 knitr::include_graphics("other/images/Wisdom.jpg")
 ```
 
-What rows and columns of data do you need such that, if you had them all, the calculation of the number of interest would be trivial? If you want to know the average height of an adult in India, then the Preceptor Table would include a row for each adult in India and a column for their height. In this scenario, we want to know the average height for men, where "men" includes all males on Earth that are over the age of 18. 
+What rows and columns of data do you need such that, if you had them all, the calculation of the number of interest would be trivial? If you want to know the average height of an adult in India, then the Preceptor Table would include a row for each adult in India and a column for their height. In this scenario, we want to know the average height for men, where "men" includes all males on Earth that are at least 18 years old. 
 
 One key aspect of this Preceptor Table is whether or not we need more than one potential outcome in order to calculate our estimand. Mainly: are we are modeling (just) for prediction or are we (also) modeling for causation? Do we need a causal model, one which estimates that attitude under both treatment and control? In a causal model, the Preceptor Table would require two columns for the outcome. In this case, we are not modeling for causation; thus, we do not need two outcome columns. 
 
 Predictive models care nothing about causation. Causal models are often also concerned with prediction, if only as a means of measuring the quality of the model. Here, we are looking at *prediction*. 
 
-So, what would our ideal table look like? Assuming we are predicting height for every male on planet Earth at this moment in time, we would have height data for every male person above 18 years of age. This means that we would have almost 4 billion rows, one for each male person, which includes a column for height.
+So, what does our Preceptor Table look like? Assuming we are predicting height for every adult male on planet Earth at this moment in time, we would have height data for every male person at least 18 years of age. This means that we would have about 4 billion rows, one for each male person, along with a column for each individual's height.
 
-Here is a sample from our Preceptor Table: 
+Here are some rows from our Preceptor Table: 
 
 
 ```{r, include=FALSE}
@@ -92,7 +89,7 @@ tibble(ID = c("Person 1", "Person 2", "...", "Person 45000", "Person 45001", "..
                 height = "Height (cm)") 
 ```
 
-This table would extend all the way until person 4 billion-and-something. If we had this table, all of our questions could be answered with basic math. No inference necessary. Now that we've seen our ideal dataset, what does our actual data look like? 
+This table would extend all the way until person 4 billion-and-something. If we had this table, all of our questions could be answered with simple math and/or simulations. No inference necessary. Now that we've seen our ideal dataset, what does our actual data look like? 
 
 ### EDA for `nhanes`
 
@@ -120,9 +117,7 @@ nhanes |>
   slice_sample(n = 5)
 ```
 
-Notice how there is a decimal in the `height` column of `ch7`. This is because `height` is a `<dbl>` and not an `<int>`.
-
-Let's also run `glimpse()` on our new data.
+Notice how there is a decimal in the `height` column. This is because `height` is a `<dbl>` and not an `<int>`.
 
 ```{r}
 nhanes |> 
@@ -130,7 +125,7 @@ nhanes |>
   glimpse()
 ```
 
-Be on the lookout for anything suspicious. Are there any NA's in your data set? What types of data are the columns, i.e. why is `age` characterized as integer instead of double? Are there more females than males? 
+Be on the lookout for anything suspicious. Are there any NA's in your data? What types of data are the columns, i.e. why is `age` characterized as integer instead of double? Are there more females than males? 
 
 **You can never look at your data too closely.**
 
@@ -151,24 +146,31 @@ ch7 <- nhanes |>
   drop_na()
 ```
 
-Let's plot this data using `geom_density()` and `geom_histogram()`. 
+Let's plot this data using `geom_histogram()`. 
 
 <!-- DK: Add discussion about 95% interval. Connect to posterior_predict later. More or less: posterior_predict makes the same histogram as the raw data. Teach that! -->
+
+<!-- This plot used to have this layer also: -->
+
+<!--   geom_density(color = "black", -->
+<!--                fill = "red", -->
+<!--                alpha = .2) + -->
+
+<!--   # You can have multiple geom layers in a plot by simply adding them one after -->
+<!--   # the other. -->
+
+<!--   # Be careful though! Often times you'll need to give each additional layer its -->
+<!--   # own mapping argument in order for it to show up properly.              -->
+
+<!-- but once I updated ..density.. to after_stat(count), only the histogram showed up.  -->
+<!-- So, I deleted the above. Add it back? -->
+
+<!-- Need to explain after_stat(count) -->
 
 ```{r}
 ch7 |>
   ggplot(aes(x = height)) + 
-  geom_density(color = "black",
-               fill = "red",
-               alpha = .2) +
-  
-  # You can have multiple geom layers in a plot by simply adding them one after
-  # the other.
-  
-  # Be careful though! Often times you'll need to give each additional layer its
-  # own mapping argument in order for it to show up properly.
-  
-  geom_histogram(mapping = aes(y = ..density..),
+  geom_histogram(mapping = aes(y = after_stat(count)),
                  bins = 15,
                  color = "black",
                  fill = "blue",
@@ -202,21 +204,23 @@ ch7 <- ch7_all |>
   slice_sample(n = 50)
 ```
 
-Will the data we have --- which is only for a sample of adult American men more than a decade ago --- allow us to answer our questions, however roughly? This is where the notion of **population** comes into play. 
+How will the data we have --- which is only for a sample of adult American men more than a decade ago --- allow us to answer our questions, however roughly? This is where the notion of **population** comes into play. 
 
 ### Population
 
+<!-- Spend more time here? -->
+
 One of the most important components of Wisdom is the concept of the “population.” 
 
-The population is not the set of people for which we have data --- the participants in the CDC's Health and Nutrition Examination Survey conducted from 2009 to 2011. This is the dataset. Nor is it the set of voters about whom we would like to have data. Those are the rows in the Preceptor Table. The population is the larger — potentially much larger — set of individuals which include both the data we have and the data we want. Generally, the population will be much larger than either the data we have and the data we want.
+The population is not the set of people for which we have data --- the participants in the CDC's Health and Nutrition Examination Survey conducted from 2009 to 2011. This is the dataset. Nor is it the set of all the individuals about whom we would like to have data. Those are the rows in the Preceptor Table. The population is the larger — potentially much larger — set of individuals which include both the data we have and the data we want. Generally, **the population will be much larger than either the data we have or the data we want.** In fact, there is almost always a time dimension to consider. We also always want to make inferences about right now or the future. By definition, the data we have is always from the past.
 
-In this case, we want to predict average height for males *today*, not for people in 2009-2011! We also want to predict height for males outside the United States, a group that is excluded from our dataset. Is it reasonable to generate conclusions for the world from this group? Most likely, no. However, we have limited data to work with and we have to determine how far we are willing to generalize to other groups.
+In this case, we want to predict average height for males *today*, not for people in 2009 -- 2011. We also want to predict height for males outside the United States, a group that is excluded from our dataset. Is it reasonable to generate conclusions for the world from this group? Maybe? We have limited data to work with and we have to determine how far we are willing to generalize to other groups.
 
 It is a judgment call, a matter of Wisdom, as to whether or not we may assume that the data we have and the data we want to have (i.e., the Preceptor Table) are drawn from the same population.
 
-Note that this judgement call differs from the discussion of representativeness in Justice. In Wisdom, we ask questions about how the data was collected, and what this says about our data. In Justice, we ask questions (already knowing how the data was collected) about whether or not inferences made using this data can apply to a broader scope of the population. Suppose, for instance, that the men sampled in NHANES were all NBA players. Wisdom would tell us that these heights are likely to be much greater than those of the average person. Justice asks whether or not this data is representative of the average person, and what modifications could imposed to fix a potential bias.
+Note that this judgement call differs from the discussion of representativeness in Justice. In Wisdom, we ask questions about how the data was collected, and what this says about our data. In Justice, we ask questions (already knowing how the data was collected) about whether or not inferences made using this data can apply to a broader scope of the population. Suppose, for instance, that the men sampled in NHANES were all NBA players. Wisdom would tell us that these heights are likely to be much greater than those of the average person. Justice asks whether or not this data is representative of the population which we are trying to understand, and what modifications could imposed to fix any potential bias.
 
-In the social sciences, *there is never a perfect relationship between the data you have and the question you are trying to answer.* Data for American males in the past is not the same thing as data for American males today. Nor is it the same as the data for men in France or Mexico.Yet, this data is relevant. Right? It is certainly better than nothing. 
+In the social sciences, *there is never a perfect relationship between the data you have and the question you are trying to answer.* Data for American males in the past is not the same thing as data for American males today. Nor is it the same as the data for men in France or Mexico. Yet, this data is relevant. Right? It is certainly better than nothing. 
 
 *Using not-perfect data is generally better than using no data at all.*
 
