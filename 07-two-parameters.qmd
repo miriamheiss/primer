@@ -93,7 +93,7 @@ This table would extend all the way until person 4 billion-and-something. If we 
 
 ### EDA for `nhanes`
 
-In our quest to find suitable data, we find the `nhanes` dataset from the National Health and Nutrition Examination Survey conducted from 2009 to 2011 by the Centers for Disease Control and Prevention, which examines health and other pieces of data for children and adults in the United States. 
+In our quest to find suitable data, consider the `nhanes` dataset from the National Health and Nutrition Examination Survey conducted from 2009 to 2011 by the Centers for Disease Control and Prevention. 
 
 ```{r, warning = FALSE}
 library(tidyverse)
@@ -102,14 +102,14 @@ library(skimr)
 glimpse(nhanes)
 ```
 
-`nhanes` includes `r ncol(nhanes)` variables, including physical attributes like weight and height. Let's restrict our attention to a subset, focusing on age, gender and height. 
+`nhanes` includes `r ncol(nhanes)` variables, including physical attributes like weight and height. Let's restrict our attention to three varaibles: age, gender and height. 
 
 ```{r}
 nhanes |> 
   select(age, gender, height)
 ```
 
-Now, let's examine a random sample of our data:
+Examine a random sample:
 
 ```{r}
 nhanes |> 
@@ -117,7 +117,8 @@ nhanes |>
   slice_sample(n = 5)
 ```
 
-Notice how there is a decimal in the `height` column. This is because `height` is a `<dbl>` and not an `<int>`.
+We think of both `age` and `height` as numbers. And they are numbers! But R distinguishes between "integers" and "doubles," only the second of which allow for decimal values. In the `nhanes` data, `age` is an integer and `height` is a double.
+
 
 ```{r}
 nhanes |> 
@@ -129,7 +130,7 @@ Be on the lookout for anything suspicious. Are there any NA's in your data? What
 
 **You can never look at your data too closely.**
 
-In addition to `glimpse()`, we can run `skim()`, from the **skimr** package, to calculate some summary statistics. 
+In addition to `glimpse()`, we can run `skim()`, from the **skimr** package, to calculate summary statistics. 
 
 ```{r}
 nhanes |> 
@@ -148,57 +149,39 @@ ch7 <- nhanes |>
 
 Let's plot this data using `geom_histogram()`. 
 
-<!-- DK: Add discussion about 95% interval. Connect to posterior_predict later. More or less: posterior_predict makes the same histogram as the raw data. Teach that! -->
 
-<!-- This plot used to have this layer also: -->
+<!-- The original version of this plot used to have a geom_density() overlay, but that stopped working for some reason. We could leave this plot as simple. After all, this is a section about EDA and we usually use simple plots on EDA. Or, we could make this plot more complex, by including a density plot. That might serve two purposes. First, we should make plots in these chapters more complex so that we have occasion to teach more plotting tricks. Second, we could use a density to teach/discuss things like 95% confidence intervals and posterior predictions. For now, I keep it simple. -->
 
-<!--   geom_density(color = "black", -->
-<!--                fill = "red", -->
-<!--                alpha = .2) + -->
-
-<!--   # You can have multiple geom layers in a plot by simply adding them one after -->
-<!--   # the other. -->
-
-<!--   # Be careful though! Often times you'll need to give each additional layer its -->
-<!--   # own mapping argument in order for it to show up properly.              -->
-
-<!-- but once I updated ..density.. to after_stat(count), only the histogram showed up.  -->
-<!-- So, I deleted the above. Add it back? -->
-
-<!-- Need to explain after_stat(count) -->
 
 ```{r}
 ch7 |>
   ggplot(aes(x = height)) + 
-  geom_histogram(mapping = aes(y = after_stat(count)),
-                 bins = 15,
-                 color = "black",
-                 fill = "blue",
-                 alpha = .2) +
-  
-  # In order to use Greek letters and other mathematical expressions in plot
-  # labels and titles, you'll need to use the expression() function, with
-  # appropriate arguments.
-  
-  labs(x = expression(mu),
-       y = "Density",
-       title = "Height (cm) in NHANES Dataset",
-       color = "Sex") +
-  theme_classic()
+    geom_histogram(bins = 50) +
+    labs(x = "Height (cm)",
+         y = "Count",
+         title = "Male Adult Height in the US") +
+    theme_classic()
 ```
 
-We'll be focusing on a subset of the `nhanes` data, designed to answer our questions. And, instead of using all the data, we'll just use 50 randomly selected observations. (The `set.seed()` function ensures that the same 50 observations are selected every time this code is run.) 
+For pedagogical purposes, we won't use all the NHANES data. Instead, we will randonly sample 50 observations and then *pretend* that this is all the data we have access to when trying to answer our questions. 
 
-<!-- Add more comments to below code chunk. Put set.seed discussion there. There should be as many lines of comments as lines of code. -->
 
 ```{r}
+# We start by keeping all the adult males, just as we did above.
 
 ch7_all <- nhanes |>
   filter(gender == "Male", age >= 18) |>
   select(height) |>
   drop_na() 
 
+# The `set.seed()` function ensures that the same 50 observations are selected
+# every time this code is run.
+
 set.seed(9)
+
+# Up till now, we have just been using pipes and then "spitting" out the result.
+# Now, we want to create a new object, `ch7`, which we will use for the rest of
+# the chapter.
 
 ch7 <- ch7_all |> 
   slice_sample(n = 50)
