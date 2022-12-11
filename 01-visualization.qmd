@@ -6,6 +6,7 @@
 #| message: false
 #| echo: false
 #| warning: false
+
 library(tidyverse)
 library(ggthemes)
 library(gapminder)
@@ -24,6 +25,7 @@ Everyone loves visualizations.
 #| message: false
 #| echo: false
 #| warning: false
+
 president_data <- read_csv("01-visualization/data/president_approval.csv",
                            show_col_types = FALSE) |> 
   pivot_longer(names_to = "approval_type",
@@ -33,7 +35,10 @@ president_data <- read_csv("01-visualization/data/president_approval.csv",
          enddate = lubridate::yday(enddate),
          enddate = as.integer(enddate - 20))
 
-# Data is from 538, this is the data for the first 100 days of both Biden's and Trump's presidency. Changed the columns to date formates, but also bc the term starts on January 20th instead of January 1st I needed to subtract 20 days to make sure January 20 was counted as "Day 1"
+# Data is from 538, this is the data for the first 100 days of both Biden's and
+# Trump's presidency. Changed the columns to date format, but also bc the term
+# starts on January 20th instead of January 1st I needed to subtract 20 days to
+# make sure January 20 was counted as "Day 1"
 
 hundred_days_p <- president_data |>
   ggplot(mapping = aes(x = enddate,
@@ -61,7 +66,9 @@ Once you have read this chapter, and completed the associated tutorials, you wil
 
 ## Looking at data
 
-This chapter focuses on **ggplot2**, one of the core packages in the **tidyverse**. The **tidyverse** is a package that contains 8 individual packages, most importantly **ggplot2**, but also other packages that help us view data within R. To access the datasets, help pages, and functions that we will use in this chapter, load the tidyverse:
+This chapter focuses on **ggplot2**, one of the core packages in the *[Tidyverse](https://www.tidyverse.org/)*, a collection of 25 or so packages which have a similar design philosophy. The **[tidyverse](https://tidyverse.tidyverse.org/)** (note the small "t") is an R package that contains the 9 key packages, most importantly **ggplot2**. In other words, there are two separate things called "tidyverse": a capital "T" *Tidyverse* which refers to many packages which work well-together and a small "t" **tidyverse** which is an R package which loads the key *Tidyverse* packages. 
+
+To access the datasets, help pages, and functions that we will use in this chapter, load the **tidyverse**:
 
 ```{r} 
 library(tidyverse)
@@ -80,6 +87,7 @@ If that happens, you need to install the package:
 
 ```{r}
 #| eval: false
+
 install.packages("tidyverse")
 ```
 
@@ -112,6 +120,7 @@ The `n` argument to `print()` tells R the number of rows you want to see. `width
 
 ```{r}
 #| eval: false
+
 print(trains, n = Inf, width = Inf)
 ```
 
@@ -354,6 +363,7 @@ Linegraphs show the relationship between two numerical variables when the variab
 
 ```{r}
 #| echo: false
+
 knitr::include_graphics("https://imgs.xkcd.com/comics/decline.png")
 ```
 
@@ -624,6 +634,7 @@ The pipe operator (`|>`) allows us to combine multiple operations in R into a si
 ```{r}
 #| echo: false
 #| fig.cap: filter() reduces the rows in a tibble.
+
 knitr::include_graphics("01-visualization/images/filter.png")
 ```
 
@@ -683,6 +694,7 @@ trains |>
 ```{r}
 #| echo: false
 #| fig.cap: select() reduces the number of columns in a tibble.
+
 knitr::include_graphics("01-visualization/images/select.png")
 ```
 
@@ -760,6 +772,7 @@ This is the first of many "pipes" which we will create in *The Primer*. First, w
 ```{r}
 #| echo: false
 #| fig.cap: '`mutate() adds a column to a tibble.'
+
 knitr::include_graphics("01-visualization/images/mutate.png")
 ```
 
@@ -979,10 +992,6 @@ trains[c("age", "party")] |>
 ```
 
 
-
-
-
-
 ## Advanced Plots
 
 <!-- This whole section should be rethought. What should we highlight? What can be dropped? -->
@@ -1021,6 +1030,7 @@ But, sometimes, we want a permanent copy of the plot, saved to our computer. Tha
 
 ```{r}
 #| eval: false
+
 ggsave(filename = "enos_trains.jpg", 
        plot = train_plot)
 ```
@@ -1029,6 +1039,7 @@ ggsave(filename = "enos_trains.jpg",
 
 ```{r}
 #| eval: false
+
 knitr::include_graphics("enos_trains.jpg")
 ```
 
@@ -1162,6 +1173,7 @@ ggplot(gapminder_filt,
   scale_x_continuous(labels = scales::dollar_format(),
                      breaks = c(0, 20000, 40000))
 ```
+
 Let's break this down. We used the `breaks` argument to create the breaks on the scale. We used the `c()` function to specify what breaks we wanted. Then, we used `labels` to modify the labels on the x-axis. The `::` allows us to extract a function from a specific package, if the function exists in multiple packages. So, we specifically extract the `dollar_format` function from the `scales` package to change the labels of the x-axis. 
 
 There is another function called `scale_x_discrete/scale_y_discrete`. This function is similar enough to `scale_y/x_continuous` that we will not give it its own section. The only difference in the usage of the discrete vs. continuous function is that the discrete function is applied to **discrete variables**. Discrete variables are those that are countable (i.e. the number of tables in a room) with nothing in between, whereas continuous variables have infinite possibilities (i.e. height has an infinite number of possible values). 
@@ -1309,7 +1321,7 @@ ggplot(data = economics,
         panel.grid.minor.x = element_blank())
 ```
 
-There! Within the `theme()` function, we can change the plot title to bold, the background to blue, and get rid of the "minor" grid lines. `theme()` is a very versatile function. See the full list of elements [here](https://ggplot2-book.org/polishing.html#polishing).
+There! Within the `theme()` function, we can change the plot title to bold, the background to blue, and get rid of the "minor" grid lines. `theme()` is a very [versatile function](https://ggplot2-book.org/polishing.html#polishing). S
 
 <!-- https://dsy5.github.io/World-Happiness-Data-Analysis-and-Visualizations/ -->
 <!-- y = NULL to get rid of axis labels all together. -->
@@ -1329,6 +1341,7 @@ There are so many more plots you can make with R that we have not shown you yet.
 ```{r}
 #| echo: false
 #| cache: true
+
 library(gganimate)
 
 gapminder_p <- gapminder |>
@@ -1353,6 +1366,7 @@ You can make your plots interactive, using the **plotly** package:
 
 ```{r}
 #| echo: false
+
 gapminder_plot <- gapminder |>
   filter(continent != "Oceania") |>
   ggplot(aes(gdpPercap, lifeExp, color = continent)) +
@@ -1380,6 +1394,7 @@ You can also create maps from census data, like this plot below.
 ```{r}
 #| echo: false
 #| message: false
+
 library(tidycensus)
 library(tigris)
 options(tigris_use_cache = TRUE)
@@ -1433,6 +1448,7 @@ Recall the plot we began the chapter with:
 
 ```{r}
 #| echo: false
+
 hundred_days_p
 ```
 
