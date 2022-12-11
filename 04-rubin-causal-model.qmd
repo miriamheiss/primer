@@ -1,6 +1,10 @@
 # Rubin Causal Model {#sec-rubin-causal-model}
 
-```{r hidden-libraries, message=FALSE, echo = FALSE, warning = FALSE}
+```{r}
+#| label: hidden-libraries
+#| message: false
+#| echo: false
+#| warning: false
 library(tidyverse)
 library(knitr)
 library(xtable)
@@ -71,7 +75,8 @@ A **Preceptor Table** is a table with rows and columns such that, if none of the
 
 Assume that there are five adult brothers and you are given four of their heights. What is the average height of all five brothers? Consider a Preceptor Table for this problem:
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 tibble(ID = c("Robert", "Andy", "Beau", "Ishan", "Nicholas"),
        Heights = c("178", "?", "172", "173", "165")) |>
   
@@ -105,7 +110,8 @@ Implicitly in every Preceptor Table is a notion of time. When, exactly, are we m
 Consider a more complex problem. We have the heights of 100 Harvard students, and from that we want to know the average height of all students in the school. 
 
 
-```{r echo = FALSE}
+```{r}
+#| echo: false
 tibble(ID = c("Student 1", "Student 2", "...", "Student 473", "Student 474",
               "...", "Student 3,258", "Student 3,259", "...", "Student 6,700"),
        Heights = c("?", "?", "...", "172", "?", "...", "?", "162", "...", "?")) |>
@@ -146,7 +152,8 @@ Our actual data rows contain the information that we do know. These rows contain
 
 Our Population rows contain no data. These are subjects which fall within our population, but for which we have no data. As such, all values, other than year, are missing.
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 tibble(source = c("Population", "...",  "Data", "Data", 
                   "...", "Population", "...", 
                   "Preceptor Table", "...", "Population"),
@@ -181,7 +188,10 @@ As such, we will see that rows from our larger population may include anywhere b
 ## Causal effect
 
 
-```{r echo = FALSE, fig.cap = "This study, which shows the impact of exposure to Spanish-speaking individuals on attitudes towards immigration, was conducted by Ryan Enos."}
+```{r}
+#| echo: false
+#| fig.cap: This study, which shows the impact of exposure to Spanish-speaking individuals
+#|   on attitudes towards immigration, was conducted by Ryan Enos.
 knitr::include_graphics("04-rubin-causal-model/images/enos_seal.png")
 ```
 
@@ -200,7 +210,9 @@ We will use the symbol $Y$ to represent potential outcomes, the variable we are 
 
 Suppose that Yao is one of the commuters surveyed in this experiment. If we were omniscient, we would know the outcomes for Yao under both treatment (with Spanish-speakers) and control (no Spanish-speakers), and we'd be able to ignore the Fundamental Problem of Causal Inference. We can show this using a Preceptor Table. Calculating the number we are interested in is trivial because none of the data is missing.
 
-```{r, echo = FALSE, fig.align = 'left'}
+```{r}
+#| echo: false
+#| fig.align: left
 # First, we create a tibble with the values we want for the table
 
 tibble(ID = "Yao",
@@ -230,7 +242,8 @@ Regardless of what the causal effect is for other subjects, the causal effect fo
 
 Using the response variable --- the actual symbol rather than a written description --- makes for a more concise Preceptor Table.
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = "Yao",
@@ -261,7 +274,8 @@ tibble(subject = "Yao",
 
 The "causal effect" is the difference between Yao's potential outcome under treatment and his potential outcome under control. 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = "Yao",
@@ -295,7 +309,9 @@ tibble(subject = "Yao",
 
 Remember that, in the real world, we will have a bunch of missing data! We can not use simple arithmetic to calculate the causal effect on Yao's attitude toward immigration. Instead, we will be required to estimate it. An **estimand** is some unknown variable in the real world that we are trying to measure. In this case, it is  $Y_{t}-Y_{c}$, not $+4$. An estimand is not the *value* you calculated, but is rather the *unknown variable* you want to estimate. 
 
-```{r echo = FALSE, fig.cap = "Don Rubin was a Professor of Statistics at Harvard."}
+```{r}
+#| echo: false
+#| fig.cap: Don Rubin was a Professor of Statistics at Harvard.
 knitr::include_graphics("04-rubin-causal-model/images/don_rubin.jpg")
 ```
 
@@ -344,7 +360,8 @@ Let's look at a Preceptor Table with more subjects using our new notation:
 <!-- DK: Do the two table trick. A descriptive table only has one outcome table, labeled Y. -->
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
@@ -391,7 +408,8 @@ From this Preceptor Table, there are many possible estimands we might be interes
 
 Similar concepts can also be applied to the Population Table: 
 
-``` {r, echo = FALSE}
+``` {r}
+#| echo: false
 tibble(source = c("Population", "...",  "Data", "Data", 
                   "...", "Population", "...", 
                   "Preceptor Table", "...", "Population"),
@@ -432,7 +450,8 @@ All of the variables calculated in the Preceptor and Population Tables are examp
 
 What does our real-world Preceptor Table look like?
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 causal_table <- tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
        ytreat = c("13", "14", "?", "?", "3"),
        ycontrol = c("?", "?", "6", "12", "?"),
@@ -471,7 +490,8 @@ gt() |>
 <!-- SZ: Can't seem to make GT tables appear side by side, can only find working versions for Kable tables. Thoughts?  
 See: https://stackoverflow.com/questions/65835639/arrange-gt-tables-side-by-side-or-in-a-grid-or-table-of-tables -->
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 causal_table <- tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
@@ -533,7 +553,8 @@ One model might be that the causal effect is the same for everyone. There is a s
 
 Remember what our Preceptor Table looks like with all of the missing data: 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
@@ -567,7 +588,8 @@ If we assume $\tau$ is the treatment effect for everyone, how do we fill in the 
 
 Assuming there is a constant treatment effect, $\tau$, for everyone, filling in the missing values would look like this: 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
@@ -608,7 +630,8 @@ $\Sigma$ represents the sum of the treated/control values, and $n_t$/$n_c$ repre
 
 Continuing with the example, calculating the ATE or the causal effect, gives us an estimate of $+1$ for $\tau$. Let's fill in our missing values by adding $\tau$ to the observed values under control and by subtracting $\tau$ from the observed value under treatment like so:
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
@@ -640,7 +663,8 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
 
 Which gives us:
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
@@ -683,7 +707,8 @@ Consider a model in which causal effects differ based on sex. When we are lookin
 <!-- Not sure that I like this table. Also, maybe introduce the notion of covariates in a predictive context first. Knowing gender helps to predict Yao's attitude toward immigration, regardless of causal effects. -->
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
@@ -722,7 +747,8 @@ $\tau_F$ would be $$(14-6 = +8)$$
 
 Using those values, we would fill out our new table like this: 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
@@ -754,7 +780,8 @@ tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
 
 Which gives us:
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
@@ -794,7 +821,8 @@ Is the assumption of a constant treatment effect, $\tau$, usually true? No! It i
 
 Reality looks like this: 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
@@ -852,7 +880,8 @@ Consider point #3. For example, let's say the treatment effect does vary depende
 
 Estimating the average treatment effect, by calculating $\widehat{ATE}$, is easy.  But is our $\widehat{ATE}$ a good estimate of the actual ATE?  After all, if we knew all the missing values in the Preceptor Table, we could calculate the ATE perfectly.  But those missing values may be wildly different from the observed values.  Consider this Preceptor Table:
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
@@ -890,7 +919,8 @@ Our earlier Population Table familiarized us with the three sources of data for 
 
 <!-- Seems like we should add ID and time columns, place them toward the left and then put year there. Year is *not* just another covariate. -->
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(source = c("Population", "Population", "...",
@@ -955,7 +985,8 @@ If this doesn't ring true, consider our Spanish-speakers train experiment. The u
 Consider different volume levels, measured in decibels (dB), at which Spanish is being spoken. 
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
@@ -1033,7 +1064,8 @@ A fourth assumption we use when working with causal models --- but not with pred
 
 Consider the "Perfect Doctor" as an example of the problems caused by confounded treatment assignments. Imagine we have this omniscient doctor who knows how any patient will respond to a certain drug. She has perfect knowledge of the entire Preceptor Table. Using this information, she always assign each patient the treatment with the best outcome, whether that is treatment or control. Consider:
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego", "MEAN"),
        ytreat = c("130", "120", "100", "115", "135", "120"),
        ycontrol = c("105", "140", "170", "125", "100", "128"),
@@ -1065,7 +1097,8 @@ We, the non-Perfect Doctors, do not have access to the entire Precetor Table. We
 
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego", "MEAN"),
        ytreat = c("?", "120", "100", "115", "?", "111.66"),
        ycontrol = c("105", "?", "?", "?", "100", "102.5"),

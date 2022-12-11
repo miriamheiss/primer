@@ -23,7 +23,9 @@ Packages:
 <!-- 1.3.4 and Current Matrix version is 1.3.3. Not sure what to do, besides turn -->
 <!-- it off for now. -->
 
-```{r, message = FALSE, warning = FALSE}
+```{r}
+#| message: false
+#| warning: false
 library(primer.data)
 library(gt)
 library(gtsummary)
@@ -47,7 +49,9 @@ Note how far we have come in the *Primer*. These are difficult questions, involv
 
 ## Wisdom
 
-```{r echo = FALSE, fig.cap = "Wisdom"}
+```{r}
+#| echo: false
+#| fig.cap: Wisdom
 knitr::include_graphics("other/images/Wisdom.jpg")
 ```
 
@@ -65,7 +69,9 @@ Also, because this is an idealized table, we would know age at time of death ass
 
 Here is a sample:
 
-```{r, echo = FALSE, fig.align = 'left'}
+```{r}
+#| echo: false
+#| fig.align: left
 # First, we create a tibble with the values we want for the table
 
 tibble(ID = c("Candidate 1", "Candidate 2"),
@@ -127,7 +133,8 @@ For now, we leave in multiple observations for a single person.
 First, let's sample from our dataset. 
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # Bit of a cheat to ensure that one of the sampled candidates is female.
 
 set.seed(14)
@@ -210,7 +217,11 @@ Of course, this is not always true. If we wanted to predict lifespans of guberna
 
 ## Justice 
 
-```{r echo = FALSE, out.width="60%", fig.align='center', fig.cap = "Justice"}
+```{r}
+#| echo: false
+#| out.width: 60%
+#| fig.align: center
+#| fig.cap: Justice
 knitr::include_graphics("other/images/Justice.jpg")
 ```
 
@@ -320,7 +331,11 @@ Generally: *if there was no chance that a certain type of person would have been
 
 ## Courage
 
-```{r echo = FALSE, out.width="60%", fig.align='center', fig.cap = "Courage"}
+```{r}
+#| echo: false
+#| out.width: 60%
+#| fig.align: center
+#| fig.cap: Courage
 knitr::include_graphics("other/images/Courage.jpg")
 ```
 
@@ -455,7 +470,8 @@ You may recall from middle school algebra that the equation of a line is $y = m 
 Rather repeat the process in Chapter 8, we will look at the resulting plot using a model that predicts years lived after as a factor of age at election. 
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 fit_1 <- stan_glm(data = ch10,
                       formula = lived_after ~ election_age,
                       refresh = 0,
@@ -540,7 +556,8 @@ The answer is that `male` is an *indicator* variable, meaning a 0/1 variable. `m
 
 Let's translate the model into code. 
 
-```{r, cache = TRUE}
+```{r}
+#| cache: true
 fit_3 <- stan_glm(data = ch10,
                       formula = lived_after ~ sex + election_age,
                       refresh = 0,
@@ -562,7 +579,8 @@ Now take a look at the coefficient for $c\_election\_age_i$, $\beta_2$. The medi
 We will now show you the parallel slopes model, which was created using the same process explained in the prior chapter. All we've done here is extracted the values for our intercepts and slopes, and separated them into two groups. This allows us to create a `geom_abline` object that takes a unique slope and intercept value, so we can separate the male and female observations. 
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we will tidy the data from our model and select the term and estimate.
 # This allows us to create our regression lines more easily.
 
@@ -581,7 +599,8 @@ sex_male <- tidy$estimate[2]
 election_age <- tidy$estimate[3]
 
 ```
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # Recall that the (Intercept) shows us the estimate for the case where liberal =
 # FALSE. We want to extract the female_intercept to indicate where the
 # intercept in our visualization should be. The slope for this case, and for the
@@ -599,7 +618,8 @@ sex_male_att_slope <- election_age
 ```
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 
 ggplot(ch10, aes(x = lived_after, y = election_age, color = sex)) +
   
@@ -660,7 +680,8 @@ $$ lived\_after_i =  \beta_0 + \beta_1 male_i + \beta_2 c\_election\_age_i + \\ 
 
 Code:
 
-```{r, cache = TRUE}
+```{r}
+#| cache: true
 fit_4 <- stan_glm(data = ch10,
                       formula = lived_after ~ sex*election_age,
                       refresh = 0,
@@ -849,7 +870,9 @@ The male line seems more sensible, as we might expect with far more datapoints. 
 
 ## Temperance
 
-```{r echo = FALSE, fig.cap = "Temperance"}
+```{r}
+#| echo: false
+#| fig.cap: Temperance
 knitr::include_graphics("other/images/Temperance.jpg")
 ```
 

@@ -1,6 +1,10 @@
 # Three Parameters {#sec-three-parameters}
 
-```{r hidden-libraries, message=FALSE, echo = FALSE, warning=FALSE}
+```{r}
+#| label: hidden-libraries
+#| message: false
+#| echo: false
+#| warning: false
 library(gt)
 library(gtsummary)
 library(patchwork)
@@ -54,12 +58,15 @@ Models have parameters. In @sec-one-parameter we created models with a single pa
 Wisdom begins with considering the questions we desire to answer and the data set we are given. In this chapter, we are going to ask a series of questions involving train commuters' ages, party affiliations, incomes, and political ideology, as well as the causal effect of exposure to Spanish-speakers on their attitude toward immigration. These questions will pertain to all train commuters in the US today. Given these types of questions, the Preceptor Table would be:
 
 
-```{r, echo = FALSE, message = FALSE}
+```{r}
+#| echo: false
+#| message: false
 library(tidyverse)
 ```
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 tibble(ID = c("Commuter 1", "Commuter 2", "...", "Commuter 1000", "Commuter 1001", "..."),
        age = c("23", "18", "...", "49", "38", "..."),
        party = c("Democrat", "Republican", "...", "Republican", "Democrat", "..."),
@@ -99,7 +106,9 @@ Having created the Preceptor Table, we now look at the data we have:  the `train
 
 *Always explore your data.* Recall the discussion from @sec-rubin-causal-model. @enos2014 randomly placed Spanish-speaking confederates on nine train platforms around Boston, Massachusetts. Exposure to Spanish-speakers -- the `treatment` -- influenced attitudes toward immigration. These reactions were measured through changes in answers to three survey questions. Load the necessary libraries and look at the data.
 
-```{r, message=FALSE, warning = FALSE}
+```{r}
+#| message: false
+#| warning: false
 library(primer.data)
 library(rstanarm)
 library(skimr)
@@ -183,7 +192,8 @@ Our **other** rows contain no data. These are subjects which are members of our 
 
 The population table includes commuters from our Preceptor Table with the information that we would ideally have to answer the questions and those from the data we have that is specific to Boston, MA. Additionally, the population table also includes the groups of people within the population from which both the data we have and the Preceptor table is drawn from that we don't have. 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # Order should be by year and then by source. population rows (starting in
 # 2000), Data, more populations rows, Preceptor Table, more populations rows, up
 # through 2025.
@@ -281,7 +291,9 @@ We can answer these and similar questions by creating a model that uses party af
 
 ### Justice
 
-```{r echo = FALSE, fig.cap = "Justice"}
+```{r}
+#| echo: false
+#| fig.cap: Justice
 knitr::include_graphics("other/images/Justice.jpg")
 ```
 
@@ -303,7 +315,8 @@ We can also consider the type of DGM. Any DGM with age as its dependent variable
 
 A good way at looking at this is with a Preceptor Table, as seen below. Unlike the previous table in @sec-two-parameters, we now have two columns in addition to ID.  Since our data does not include all Republicans and Democrats in the world, not every row is filled in. 
 
-```{r echo = FALSE}
+```{r}
+#| echo: false
 tibble(ID = c("1", "2", "...", "473", "474",
               "...", "3,258", "3,259", "...", "N"),
        Party = c("D", "?", "...", "D", "?", "...", "?", "R", "...", "?"),
@@ -369,7 +382,9 @@ Some things to note about our model:
 
 ### Courage
 
-```{r echo = FALSE, fig.cap = "Courage"}
+```{r}
+#| echo: false
+#| fig.cap: Courage
 knitr::include_graphics("other/images/Courage.jpg")
 ```
 
@@ -442,7 +457,8 @@ The unknown parameters $\beta_1$ (partyDemocrat) and $\beta_2$ (partyRepublican)
 
 Consider a table which shows a sample of 8 individuals.
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 trains |> 
   select(age, party) |> 
   mutate(fitted = fitted(fit_1)) |> 
@@ -510,7 +526,9 @@ The three plots are structured like our equation and table above. A value in the
 
 ### Temperance
 
-```{r echo = FALSE, fig.cap = "Temperance"}
+```{r}
+#| echo: false
+#| fig.cap: Temperance
 knitr::include_graphics("other/images/Temperance.jpg")
 ```
 
@@ -669,7 +687,9 @@ Models help us answer questions better than we could without those models, but o
 
 ### Justice
 
-```{r echo = FALSE, fig.cap = "Justice"}
+```{r}
+#| echo: false
+#| fig.cap: Justice
 knitr::include_graphics("other/images/Justice.jpg")
 ```
 
@@ -715,7 +735,9 @@ The last part, $\epsilon_i$ (“epsilon”), represents the part that is not exp
 
 ### Courage
 
-```{r echo = FALSE, fig.cap = "Courage"}
+```{r}
+#| echo: false
+#| fig.cap: Courage
 knitr::include_graphics("other/images/Courage.jpg")
 ```
 
@@ -769,7 +791,8 @@ It appears that the affect of the treatment is to change people's attitudes to b
 We can decompose the the dependent variable, `att_end` into two parts: the fitted values and the residuals. There are only two possible fitted values, one for the Treated and one for the Control. The residuals, as always, are simply the difference between the outcomes and the fitted values. 
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 outcome <- trains |> 
   ggplot(aes(att_end)) +
     geom_histogram(bins = 50) +
@@ -801,7 +824,9 @@ The smaller the spread of the residuals, the better a job the model is doing of 
 
 ### Temperance
 
-```{r echo = FALSE, fig.cap = "Temperance"}
+```{r}
+#| echo: false
+#| fig.cap: Temperance
 knitr::include_graphics("other/images/Temperance.jpg")
 ```
 
@@ -926,7 +951,9 @@ Next, let's consider another issue that we may have with representativeness. Wha
 
 If we had reason to believe this is true, one way that we could fix this issue of representativeness is to alter our population to be train commuters in the US who would respond to the survey. In doing so, our population would then accommodate for the skewed age distribution under the assumption that younger individuals tend to respond to surveys at higher rates than older people.
 
-```{r echo = FALSE, fig.cap = "Justice"}
+```{r}
+#| echo: false
+#| fig.cap: Justice
 knitr::include_graphics("other/images/Justice.jpg")
 ```
 
@@ -960,7 +987,9 @@ Note how careful we are not to imply that increasing age by one year "causes" an
 
 ### Courage
 
-```{r echo = FALSE, fig.cap = "Courage"}
+```{r}
+#| echo: false
+#| fig.cap: Courage
 knitr::include_graphics("other/images/Courage.jpg")
 ``` 
 
@@ -989,7 +1018,8 @@ The above is a good summary of the models.
 
 Consider our usual decomposition of the outcome into two parts: the model and the error term.
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 outcome <- trains |> 
   ggplot(aes(income)) +
     geom_histogram(bins = 50) +
@@ -1025,7 +1055,9 @@ There are scores of different fitted values. Indeed, there are a greater number 
 
 ### Temperance
 
-```{r echo = FALSE, fig.cap = "Temperance"}
+```{r}
+#| echo: false
+#| fig.cap: Temperance
 knitr::include_graphics("other/images/Temperance.jpg")
 ```
 
@@ -1242,6 +1274,9 @@ Once we have draws from a posterior distribution for our outcome variable --- wh
 
 * *Don't confuse the estimated posterior (which is what you have) with the true posterior (which is what you want). Be humble and cautious in your use of the posterior.*
 
-```{r echo = FALSE, cache=FALSE, warning = FALSE}
+```{r}
+#| echo: false
+#| cache: false
+#| warning: false
 knitr::write_bib(.packages(), "packages.bib")
 ```

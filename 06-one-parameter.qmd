@@ -1,6 +1,10 @@
 # One Parameter {#sec-one-parameter}
 
-```{r hidden-libraries, message = FALSE, echo = FALSE, warning = FALSE}
+```{r}
+#| label: hidden-libraries
+#| message: false
+#| echo: false
+#| warning: false
 options(rgl.useNULL = TRUE)
 library(rgl)
 library(rayshader)
@@ -40,7 +44,9 @@ In @sec-probability, we learned about probability, the framework for quantifying
 
 The urn below has a certain number of red and a certain number of white beads all of equal size, mixed well together. What proportion, $\rho$, of this urn's beads are red? 
 
-```{r, echo = FALSE, fig.cap = "An urn with red and white beads."}
+```{r}
+#| echo: false
+#| fig.cap: An urn with red and white beads.
 knitr::include_graphics("06-one-parameter/images/sampling_bowl_1.jpg")
 ```
 
@@ -54,13 +60,16 @@ To begin this chapter, we will look at a real sampling activity: the urn.  Then,
 
 Use the **tidyverse** package.
 
-```{r, message = FALSE}
+```{r}
+#| message: false
 library(tidyverse)
 ```
 
 ## Real sampling activity {#sec-sampling-activity}
 
-```{r, echo = FALSE, fig.cap = "An urn with red and white beads."}
+```{r}
+#| echo: false
+#| fig.cap: An urn with red and white beads.
 knitr::include_graphics("06-one-parameter/images/sampling_bowl_1.jpg")
 ```
 
@@ -68,12 +77,16 @@ knitr::include_graphics("06-one-parameter/images/sampling_bowl_1.jpg")
 
 Instead of performing an exhaustive count, let's insert a shovel into the urn and remove $5 \cdot 10 = 50$ beads. We are taking a *sample* of the total population of beads. 
 
-```{r, echo = FALSE, fig.cap = "Inserting a shovel into the urn."}
+```{r}
+#| echo: false
+#| fig.cap: Inserting a shovel into the urn.
 knitr::include_graphics("06-one-parameter/images/sampling_bowl_2.jpg")
 ```
 
 
-```{r, echo = FALSE, fig.cap = "Removing 50 beads from the urn."}
+```{r}
+#| echo: false
+#| fig.cap: Removing 50 beads from the urn.
 knitr::include_graphics("06-one-parameter/images/sampling_bowl_3_cropped.jpg")
 ```
 
@@ -98,13 +111,17 @@ Each of our 33 groups of friends will do the following:
 
 Each of our 33 groups of friends make note of their proportion of red beads from their sample collected. Each group then marks their proportion of their 50 beads that were red in the appropriate bin in a hand-drawn histogram as seen below.
 
-```{r, echo = FALSE, fig.cap = "Constructing a histogram of proportions."}
+```{r}
+#| echo: false
+#| fig.cap: Constructing a histogram of proportions.
 knitr::include_graphics("06-one-parameter/images/tactile_3_a.jpg")
 ```
 
 Histograms allow us to visualize the *distribution* of a numerical variable. In particular, where the center of the values falls and how the values vary. A partially completed histogram of the first 10 out of 33 groups of friends' results can be seen in the figure below.
 
-```{r, echo = FALSE, fig.cap = "Hand-drawn histogram of first 10 out of 33 proportions."}
+```{r}
+#| echo: false
+#| fig.cap: Hand-drawn histogram of first 10 out of 33 proportions.
 knitr::include_graphics("06-one-parameter/images/tactile_3_c.jpg")
 ```
 
@@ -118,7 +135,8 @@ Observe the following details in the histogram:
 `tactile_sample_urn` saves the results from our 33 groups of friends. 
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 tactile_sample_urn <- tibble(group = c("Ilyas, Yohan", "Ellie, Terrance", "Mark, Ramses", 
                                       "Sophie, Brian", "Maeve, Josh", "Sanjana, Yuko", 
                                       "Nam, Joshua", "Siobhan, Jane", "Caroline, Edna",
@@ -310,7 +328,12 @@ Observe that we occasionally obtained proportions red that are less than 30%. On
 Now we will compare our virtual results with our tactile results from the previous section. Observe that both histograms are somewhat similar in their center and variation, although not identical. These slight differences are again due to random sampling variation. Furthermore, observe that both distributions are somewhat bell-shaped.
 
 
-```{r, echo = FALSE, fig.cap = "Comparing 33 virtual and 33 tactile proportions red. Note that, though the figures differ slightly, both are centered around .35 to .45. This shows that, in both sampling distributions, the most frequently occuring proportion red is between 35% and 45%."}
+```{r}
+#| echo: false
+#| fig.cap: Comparing 33 virtual and 33 tactile proportions red. Note that, though the
+#|   figures differ slightly, both are centered around .35 to .45. This shows that, in
+#|   both sampling distributions, the most frequently occuring proportion red is between
+#|   35% and 45%.
 
 # bind_rows() takes our data from virtual_samples and "binds" it with our data
 # from tactile_sample_urn, resulting in one set of data for us to work with.
@@ -364,7 +387,9 @@ This visualization allows us to see how our results differed between our tactile
 
 ### Using the virtual shovel 1,000 times {#shovel-1000-times}
 
-```{r, echo = FALSE, fig.cap = "So much sampling, so little time."}
+```{r}
+#| echo: false
+#| fig.cap: So much sampling, so little time.
 knitr::include_graphics("06-one-parameter/images/sample_bernie.png")
 ```
 
@@ -403,7 +428,9 @@ Now that we have a good understanding of virtual sampling, we can apply our know
 
 ### The effect of different shovel sizes {#different-shovels}
 
-```{r, echo = FALSE, fig.cap = "What happens if we use different sized shovels to sample?"}
+```{r}
+#| echo: false
+#| fig.cap: What happens if we use different sized shovels to sample?
 knitr::include_graphics("06-one-parameter/images/three_shovels.png")
 ```
 
@@ -468,7 +495,11 @@ virtual_samples_100 |>
 
 For easy comparison, we present the three resulting histograms in a single row with matching x and y axes:
 
-```{r, fig.cap = "Comparing the distributions of proportion red for different sample sizes (25, 50, 100). The important takeaway is that our center becomes more concentrated as our sample size increases, indicating a smaller standard deviation between our guesses."}
+```{r}
+#| fig.cap: Comparing the distributions of proportion red for different sample sizes
+#|   (25, 50, 100). The important takeaway is that our center becomes more concentrated
+#|   as our sample size increases, indicating a smaller standard deviation between our
+#|   guesses.
 
 # Use bind_rows to combine the data from our three saved virtual sampling
 # objects. Use mutate() in each to clarify the n as the necessary number
@@ -527,7 +558,11 @@ This graph illustrates the exact same concept as the histogram. With the smalles
 There is also a third way to understand variation! We can be numerically explicit about the amount of variation in our three sets of 1,000 values of `prop_red` by using the *standard deviation*. A standard deviation is a summary statistic that measures the amount of variation within a numerical variable. For all three sample sizes, let's compute the standard deviation of the 1,000 proportions red.
 
 
-```{r, echo = FALSE, fig.cap = "Comparing the number of slots in the shovel with the standard deviation of proportions red. Here, we see that standard deviation decreases with higher sample sizes. Larger sample sizes yield more precise estimates."}
+```{r}
+#| echo: false
+#| fig.cap: Comparing the number of slots in the shovel with the standard deviation of
+#|   proportions red. Here, we see that standard deviation decreases with higher sample
+#|   sizes. Larger sample sizes yield more precise estimates.
 
 # Start by performing group_by(n) to get data separated
 # by our different shovel sizes. 
@@ -567,7 +602,9 @@ comparing_n_table  |>
 
 As the sample size increases, the sample to sample variation decreases, and our guesses at the true proportion of the urn's beads that are red get more precise. The larger the shovel, the more precise the result. 
 
-```{r, echo = FALSE, fig.cap = "Variance appears everywhere in data science."}
+```{r}
+#| echo: false
+#| fig.cap: Variance appears everywhere in data science.
 knitr::include_graphics("06-one-parameter/images/variance_everywhere_meme.jpeg")
 ```
 
@@ -615,7 +652,8 @@ This is, approximately, the same result as we saw above, but with 1 re-factored 
 Now that we have this framework, there's no need to limit ourselves to the sizes 25, 50, and 100.  Why not try all integers from 1 to 100? We can use the same code, except we'll now set `shovel_size = 1:100`.
 
 
-```{r, cache = TRUE}
+```{r}
+#| cache: true
 shovels_100 <- expand_grid(trial_ID = c(1:1000), shovel_size = c(1:100)) |> 
   mutate(shovel = map(shovel_size, ~ slice_sample(urn, n = .))) |> 
   mutate(numb_red = map_int(shovel, ~ sum(.$color == "red"))) |> 
@@ -628,7 +666,12 @@ glimpse(shovels_100)
 
 Now, we have the standard deviation of `prop_red` for all shovel sizes from 1 to 100.  Let's plot that value to see how it changes as the shovel gets larger:
 
-```{r, echo = FALSE, cache = TRUE, fig.cap = "Comparing standard deviations of proportions red for 100 different shovels. The standard deviation decreases at the same rate as the square root of shovel size. The red line shows the standard error."}
+```{r}
+#| echo: false
+#| cache: true
+#| fig.cap: Comparing standard deviations of proportions red for 100 different shovels.
+#|   The standard deviation decreases at the same rate as the square root of shovel size.
+#|   The red line shows the standard error.
 shovels_100 |>
  ggplot(aes(x = shovel_size, y = st_dev_p_hat)) +
  geom_point() +
@@ -641,7 +684,10 @@ shovels_100 |>
 
 The red line here represents an important statistical concept: standard error (SE). As the shovel size increases, and thus our sample size increases, we find that the standard error decreases.  If this is confusing right now, fear not! We will delve into the explanation of standard error in our next section. 
 
-```{r, echo = FALSE, fig.cap = "To any poets and philosophers confused about this: don't worry! It won't be on a problem set."}
+```{r}
+#| echo: false
+#| fig.cap: 'To any poets and philosophers confused about this: don''t worry! It won''t
+#|   be on a problem set.'
 knitr::include_graphics("06-one-parameter/images/meme_math.png")
 ```
 
@@ -649,7 +695,10 @@ This is the power of running many analyses at once using map functions and list 
 
 ## Standard error {#sec-standard-errors}
 
-```{r, echo = FALSE, fig.cap= "Standard errors are just the way old people talk about confidence intervals.", fig.align= 'center'}
+```{r}
+#| echo: false
+#| fig.cap: Standard errors are just the way old people talk about confidence intervals.
+#| fig.align: center
 knitr::include_graphics("06-one-parameter/images/old_man_SE.png")
 ```
 
@@ -663,7 +712,9 @@ If this sounds confusing, don't worry! It is. Before we can explain this in more
 
 ### Terminology and notation {#sec-terminology-and-notation}
 
-```{r, echo = FALSE, fig.cap = "Let Yoda's wisdom dull the pain of this terminology section."}
+```{r}
+#| echo: false
+#| fig.cap: Let Yoda's wisdom dull the pain of this terminology section.
 knitr::include_graphics("06-one-parameter/images/yoda.png")
 ```
 
@@ -689,7 +740,11 @@ Eighth, **biased sampling** occurs if certain individuals or observations in a p
 
 Ninth, a sampling procedure is *random* if we sample randomly from the population in an unbiased fashion. In our sampling activities, this would correspond to sufficiently mixing the urn before each use of the shovel. 
 
-```{r, echo = FALSE, fig.align='center', fig.cap = "Fear not if you look like Spongebob after reading this section. We will re-cap right now!"}
+```{r}
+#| echo: false
+#| fig.align: center
+#| fig.cap: Fear not if you look like Spongebob after reading this section. We will re-cap
+#|   right now!
 knitr::include_graphics("06-one-parameter/images/cant_breathe_sponge.png")
 ```
 
@@ -715,7 +770,9 @@ knitr::include_graphics("06-one-parameter/images/cant_breathe_sponge.png")
 
 Now, for some important statistical definitions related to sampling. As a refresher of our 1,000 repeated/replicated virtual samples of size $n$ = 25, $n$ = 50, and $n$ = 100 in @sec-virtual-sampling, let's display our figure showing the difference in proportions red according to different shovel sizes.  
 
-```{r, echo = FALSE, fig.cap = "Previously seen three distributions of the sample proportion $\\hat{\rho}$."}
+```{r}
+#| echo: false
+#| fig.cap: "Previously seen three distributions of the sample proportion $\\hat{\rho}$."
 comparing_sampling_distributions
 ```
 
@@ -723,7 +780,10 @@ These types of distributions have a special name: **sampling distributions**; th
 
 For example, observe the centers of all three sampling distributions: they are all roughly centered around $0.4 = 40\%$. Furthermore, observe that while we are somewhat likely to observe sample proportions of red beads of $0.2 = 20\%$ when using the shovel with 25 slots, we will almost never observe a proportion of 20% when using the shovel with 100 slots. Observe also the effect of sample size on the sampling variation. As the sample size $n$ increases from 25 to 50 to 100, the variation of the sampling distribution decreases and thus the values cluster more and more tightly around the same center of around 40%. We quantified this variation using the standard deviation of our sample proportions, seeing that the standard deviation decreases with the square root of the sample size:
 
-```{r, echo = FALSE, fig.cap = "Previously seen comparing standard deviations of proportions red for 100 different shovels"}
+```{r}
+#| echo: false
+#| fig.cap: Previously seen comparing standard deviations of proportions red for 100
+#|   different shovels
 shovels_100 |>
   ggplot(aes(x = shovel_size, y = st_dev_p_hat)) +
   geom_point() +
@@ -747,7 +807,10 @@ The more data points involved in the calculations of the mean, the smaller the s
 
 To help reinforce these concepts, let's re-display our previous figure but using our new sampling terminology, notation, and definitions:
 
-```{r, echo = FALSE, fig.cap = "Three sampling distributions of the sample proportion $\\hat{\rho}$. Note the increased concentration on the bins around .4 as our sample size increases."}
+```{r}
+#| echo: false
+#| fig.cap: "Three sampling distributions of the sample proportion $\\hat{\rho}$. Note
+#|   the increased concentration on the bins around .4 as our sample size increases."
 p_hat_compare <- virtual_prop |> 
   mutate(
     n = str_c("n = ", n),
@@ -765,7 +828,9 @@ p_hat_compare
 
 Furthermore, let's display the graph of standard errors for $n = 1$ to $n = 100$ using our new terminology, notation, and definitions relating to sampling.
 
-```{r, echo = FALSE, fig.cap = "Standard errors of the sample proportion based on sample sizes of 1 to 100"}
+```{r}
+#| echo: false
+#| fig.cap: Standard errors of the sample proportion based on sample sizes of 1 to 100
 shovels_100 |>
   ggplot(aes(x = shovel_size, y = st_dev_p_hat)) +
   geom_point() +
@@ -785,7 +850,11 @@ The standard error measures the accuracy of a sample distribution as compared to
 
 To really drive home our point: standard error is just a fancy term for your uncertainty about something you don't know. Standard error == our (uncertain) beliefs. 
 
-```{r, echo = FALSE, fig.cap= "If you are wondering how much you need to know, follow this helpful guide of the information we have learned this chapter!", fig.align= 'center'}
+```{r}
+#| echo: false
+#| fig.cap: If you are wondering how much you need to know, follow this helpful guide
+#|   of the information we have learned this chapter!
+#| fig.align: center
 knitr::include_graphics("06-one-parameter/images/final_preceptor.png")
 ```
 
@@ -818,7 +887,8 @@ Use the Cardinal Virtues to guide your thinking.
 
 ### Wisdom
 
-```{r echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("other/images/Wisdom.jpg")
 ```
 
@@ -826,13 +896,16 @@ knitr::include_graphics("other/images/Wisdom.jpg")
 
 Wisdom requires the creation of a Preceptor Table, an examination of our data, and a determination, using the concept of "validity," as to whether or not we can (reasonably!) assume that the two come from the same *population*.
 
-```{r, echo = FALSE, fig.cap = "When you see another Precetor Table section."}
+```{r}
+#| echo: false
+#| fig.cap: When you see another Precetor Table section.
 knitr::include_graphics("06-one-parameter/images/here_we_go.png")
 ```
 
 A Preceptor Table is a table with rows and columns, such that, if no data is missing, we can easily answer our questions. 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 tibble(bead_ID = c("1", "2", 
                    "...", "200", "201", "...", "2078", "2079", "..."),
        color = c("white", "white", 
@@ -858,7 +931,8 @@ If we know the color of every bead, then calculating the proportion of beads whi
 
 The data we have, unfortunately, only provides the color for 50 beads. 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # Actual Preceptor Table to be created by the very helpful Cass!
 
 tibble(bead_ID = c("2", "...", 
@@ -892,7 +966,8 @@ We also consider why some beads do get sampled, while others do not. This is a c
 
 ### Justice
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("other/images/Justice.jpg")
 ```
 
@@ -907,7 +982,8 @@ It includes rows from three sources: the data for units we want to have (the Pre
 <!-- DK: Make this table correctly. Add a "Time" column. Only four columns: Source, Time, ID and Color. First rows from Population, then Data, than Population, then Preceptor Table, then Population. Time goes in 10 minute increments. Time Preceptor Table is "Now". Time for Population at end is "Now + 10". Time for Data is "Now - 10". Did this a little differently-->
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 tibble(source = c("Other", "Other", "Other","...",  
                   "Data", "Data", "Data", "...",
                   "Other", "Other", "Other","...", 
@@ -989,7 +1065,8 @@ The total number of red beads selected in a sample of 50 beads, $T_i$, is equal 
 
 ### Courage
 
-```{r echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("other/images/Courage.jpg")
 ```
 
@@ -1028,7 +1105,8 @@ Given a data set to use and a mathematical formula to work with, the next step i
 **rstanarm** and Stan are appealing because they are powerful. Functions such as `stan_glm()` can do everything we did by hand in Chapter 5 in a few lines of code. Because we will use a professional statistical library, the objects we make will become more complex. In this Chapter, we provide the steps for answering our questions. @sec-two-parameters will provide a more detailed explanation of the objects we will make. *To be clear, you do not need to fully understand this section or how this code works. This is an introduction, not a formal lesson.*
 
 
-```{r, message = FALSE}
+```{r}
+#| message: false
 library(rstanarm)
 
 fit_1 <- stan_glm(formula = red ~ 1, 
@@ -1126,7 +1204,8 @@ There is approximately a 54% chance that $\rho$ is between .3 and .4. Give me dr
 
 ### Temperance
 
-```{r echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("other/images/Temperance.jpg")
 ```
 
@@ -1176,7 +1255,8 @@ ppd_reds_in_20   |>
 
 We have successfully created the posterior probability distribution for the number of red beads drawn in a shovel of size 20. But before we answer our question, some of us may be wondering why we made our predictions using `posterior_predict()` instead of `posterior_epred()`. Let's examine what happens if we use `posterior_epred()` instead.
 
-```{r, fig.cap = "Using posterior_epred()"}
+```{r}
+#| fig.cap: Using posterior_epred()
 
 post_epred <- posterior_epred(fit_1, 
                   newdata = tibble(.rows = 20)) |> 
@@ -1478,7 +1558,8 @@ This journey shows how our beliefs about the truth develop through our work. We 
 
 As we continue our journey, recall the case of Primrose Everdeen and what she represents: no matter how realistic is our model is, our predictions are **never certain**.  
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("06-one-parameter/images/posterior_effie.png")
 ```
 

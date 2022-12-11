@@ -1,6 +1,10 @@
 # Two Parameters {#sec-two-parameters}
 
-```{r hidden-libraries, message = FALSE, echo = FALSE, warning = FALSE}
+```{r}
+#| label: hidden-libraries
+#| message: false
+#| echo: false
+#| warning: false
 library(gt)
 library(gtsummary)
 ```
@@ -43,7 +47,8 @@ The real world is complex. Any substantive decision problem includes a great dea
 
 The hope for this chapter is that, by answering these four questions, we'll gain a better and more thorough understanding of how professionals do data science.
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("07-two-parameters/images/learn_the ways.gif")
 ```
 
@@ -53,7 +58,8 @@ Data science is ultimately a moral act, so we will use the four [Cardinal Virtue
 
 ### Preceptor Table
 
-```{r echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("other/images/Wisdom.jpg")
 ```
 
@@ -68,12 +74,15 @@ So, what does our Preceptor Table look like? Assuming we are predicting height f
 Here are some rows from our Preceptor Table: 
 
 
-```{r, include=FALSE}
+```{r}
+#| include: false
 library(tidyverse)
 ```
 
 
-```{r, echo = FALSE, fig.align = 'left'}
+```{r}
+#| echo: false
+#| fig.align: left
 # First, we create a tibble with the values we want for the table
 
 
@@ -95,7 +104,8 @@ This table would extend all the way until person 4 billion-and-something. If we 
 
 In our quest to find suitable data, consider the `nhanes` dataset from the National Health and Nutrition Examination Survey conducted from 2009 to 2011 by the Centers for Disease Control and Prevention. 
 
-```{r, warning = FALSE}
+```{r}
+#| warning: false
 library(tidyverse)
 library(primer.data)
 library(skimr)
@@ -213,7 +223,8 @@ For now, we will accept that our data works.
 
 ## Justice
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("other/images/Justice.jpg")
 ```
 
@@ -240,7 +251,8 @@ Our **other** rows contain no data. These are subjects which fall under our desi
 
 <!-- GP: I changed everything but the explanation for the **population** rows. I am confused; shouldn't the population rows still contain "Male" in the sex column? Because this entire chapter, we've exclusively been discussing the male population, so at least that much should be known, no? -->
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 tibble(source = c("Preceptor Table", "Preceptor Table", "...",
                   "Actual Data", "Actual Data", "Actual Data", "...", 
                   "Other", "Other", "Other"),
@@ -336,7 +348,8 @@ What is the difference between the *outcome* and the *model*? By definition, it 
 <!--  7.3 is by FAR the most confusing section. Code here needs to be better introduced (such as in the earlier chapters) and unfamiliar terms such as "predictors" need to be more clearly defined. I believe the majority of my work on the chapter will be in fixing this section. -->
 
 
-```{r echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("other/images/Courage.jpg")
 ```
 
@@ -346,14 +359,16 @@ In data science, we deal with words, math, and code, but the most important of t
 
 Bayesian models are not hard to create in R. The **rstanarm** package provides the tools we need, most importantly the function `stan_glm()`.
 
-```{r, message = FALSE}
+```{r}
+#| message: false
 library(rstanarm)
 ```
 
 The first argument in `stan_glm()` is `data`, which in our case is the filtered `ch7` tibble which contains 50 observations. The only other mandatory argument is the `formula` that we want to use to build the model. In this case, since we have no predictor variables, our formula is `height ~ 1`. 
 
 
-```{r, cache = TRUE}
+```{r}
+#| cache: true
 fit_obj <- stan_glm(data = ch7, 
                     formula = height ~ 1, 
                     family = gaussian, 
@@ -421,7 +436,8 @@ print(fit_obj, detail = FALSE, digits = 1)
 Now that we understand the meaning of Median and MAD_SD in the above display, we can interpret the actual numbers. The median of the intercept, `r round(coef(fit_obj), 1)`, is the median of our posterior distribution for $\mu$, the average height of all men in the population. The median of sigma, `r round(sigma(fit_obj), 1)`, is the median of our posterior distribution for the true $\sigma$, which can be roughly understood as the variability in the height of men, once we account for our estimate of $\mu$.
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 ## DK: Seems like there ought to be a better way of doing this. Aren't there
 ## ways for pulling at the median and mad_sd directly, rather than calculating
 ## them ourselves? Please investigate.
@@ -523,7 +539,8 @@ Again, $\sigma$ is usually a nuisance parameter. We don't really care what its v
 ## Temperance
 
 
-```{r echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("other/images/Temperance.jpg")
 ```
 
@@ -985,7 +1002,10 @@ Let's practice this process another dozen or so times.
 
 <!-- Although a bootstrap can create a posterior distribution, as above, there are much simpler ways to do so. The most common involves the function `stan_glm()` from the **rstanarm** library. Halfway through the book, we are now ready for our first full scale data science project. Let us be guided by the cardinal virtues. -->
 
-```{r echo = FALSE, cache=FALSE, warning = FALSE}
+```{r}
+#| echo: false
+#| cache: false
+#| warning: false
 knitr::write_bib(.packages(), "packages.bib")
 ```
 

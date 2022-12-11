@@ -1,6 +1,10 @@
 # N Parameters {#sec-n-parameters}
 
-```{r hidden-libraries, echo = FALSE, message = FALSE, warning = FALSE}
+```{r}
+#| label: hidden-libraries
+#| echo: false
+#| message: false
+#| warning: false
 library(tidyverse)
 library(gt)
 library(gtsummary)
@@ -30,7 +34,9 @@ Imagine you are running for Governor in Texas and want to do a better job of get
 
 ## Wisdom
 
-```{r echo = FALSE, fig.cap = "Wisdom"}
+```{r}
+#| echo: false
+#| fig.cap: Wisdom
 knitr::include_graphics("other/images/Wisdom.jpg")
 ```
 
@@ -57,7 +63,9 @@ So, what would our ideal table look like? Assuming we are running for governor i
 Because there is no missing data in an ideal Preceptor Table, we would also know the outcomes under both treatment (receiving a reminder) and control (not receiving a reminder). Here is a sample row from our table:
 
 
-```{r, echo = FALSE, fig.align = 'left'}
+```{r}
+#| echo: false
+#| fig.align: left
 # First, we create a tibble with the values we want for the table
 
 tibble(ID = c("Citizen 1", "Citizen 2"),
@@ -91,7 +99,9 @@ However, the main point of this exercise is to see *what we want to know* compar
 
 After loading the packages we need, let's perform an EDA, starting off by running `glimpse()` on the `shaming` tibble from the **primer.data** package. 
 
-```{r, message = FALSE, warning = FALSE}
+```{r}
+#| message: false
+#| warning: false
 library(tidyverse)
 library(primer.data)
 library(rstanarm)
@@ -153,7 +163,11 @@ Even though the original question is about “voters” in general, and does not
 
 ## Justice 
 
-```{r echo = FALSE, out.width="60%", fig.align='center', fig.cap = "Justice"}
+```{r}
+#| echo: false
+#| out.width: 60%
+#| fig.align: center
+#| fig.cap: Justice
 knitr::include_graphics("other/images/Justice.jpg")
 ```
 
@@ -171,7 +185,8 @@ Recall that in an actual Preceptor Table, we will have a bunch of missing data! 
 
 Let's build a basic visualization for the actual Preceptor Table for this scenario:
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(subject = c("Citizen 1", "Citizen 23", "Citizen 40", "Citizen 53", "Citizen 80"),
@@ -215,7 +230,8 @@ The rows from our data have everything: the covariates and the outcomes. The cov
 
 The rows from the population have no data. These are subjects which fall under our desired population, but for which we have no data. As such, all rows are missing. 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # First, we create a tibble with the values we want for the table
 
 tibble(source = c("Population", "Population", "...",
@@ -317,7 +333,11 @@ The purpose of this section is to make us think critically about the assumptions
 <!-- DK: Discuss functional form. --> 
 
 ## Courage
-```{r echo = FALSE, out.width="60%", fig.align='center', fig.cap = "Courage"}
+```{r}
+#| echo: false
+#| out.width: 60%
+#| fig.align: center
+#| fig.cap: Courage
 knitr::include_graphics("other/images/Courage.jpg")
 ```
 
@@ -403,7 +423,8 @@ The second type of formal notation, more associated with the virtue Courage, inc
 
 Let's translate the model into code. 
 
-```{r, cache=TRUE}
+```{r}
+#| cache: true
 fit_1 <- stan_glm(data = object_1,
                   formula = primary_06 ~ treatment + sex,
                   refresh = 0,
@@ -445,7 +466,8 @@ The math:
 $$y_{i} = \beta_{0} + \beta_{1}z\_age + \beta_{2}male_i + \beta_{3}civic\_duty_i + \\ \beta_{4}hawthorne_i + \beta_{5}self_i + \beta_{6}neighbors_i + \\ \beta_{7}Sometimes\ vote_i + \beta_{8}Always\ vote_i + \\ \beta_{9}civic\_duty_i Sometimes\ vote_i + \beta_{10}hawthorne_i Sometimes\ vote_i + \\ \beta_{11}self_i Sometimes\ vote_i + \beta_{11}neighbors_i Sometimes\ vote_i + \\ \beta_{12}civic\_duty_i Always\ vote_i + \beta_{13}hawthorne_i Always\ vote_i + \\ \beta_{14}self_i Always\ vote_i + \beta_{15}neighbors_i Always\ vote_i + \epsilon_{i}$$
 Translate into code: 
 
-```{r, cache = TRUE}
+```{r}
+#| cache: true
 
 fit_2 <- stan_glm(data = object_1,
                   formula = primary_06 ~ z_age + sex + treatment + voter_class + 
@@ -483,7 +505,9 @@ of the average treatment effect.
 
 ## Temperance
 
-```{r echo = FALSE, fig.cap = "Temperance"}
+```{r}
+#| echo: false
+#| fig.cap: Temperance
 knitr::include_graphics("other/images/Temperance.jpg")
 ```
 
@@ -705,7 +729,10 @@ We know, from experience, that our posteriors are often too narrow. They assume 
 
 * When dealing with models with many parameters, double check that you know how to find the true slope and intercepts --- often, this requires adding numerous values to the coefficient you are studying. 
 
-```{r echo = FALSE, cache=FALSE, warning = FALSE}
+```{r}
+#| echo: false
+#| cache: false
+#| warning: false
 knitr::write_bib(.packages(), "packages.bib")
 ```
 

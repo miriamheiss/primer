@@ -14,7 +14,9 @@
 
 Start by loading the packages which we will need in this chapter.
 
-```{r, message = FALSE, warning = FALSE}
+```{r}
+#| message: false
+#| warning: false
 library(tidyverse)
 library(primer.data)
 library(lubridate)
@@ -67,7 +69,9 @@ tibble(`54abc` = 1, `my var` = 2, c = 3)
 
 If we did not include the backticks, R would give us an error.
 
-```{r, error = TRUE, renv.ignore = TRUE}
+```{r}
+#| error: true
+#| renv.ignore: true
 tibble(54abc = 1, my var = 2, c = 3)
 ```
 
@@ -91,7 +95,9 @@ The tildes --- as in `~ var1` --- specify which row has the column names. The fo
 
 <!-- AM: Shouldn't the figure come AFTER the first demonstration of `list()` on lines 113-116? -->
 
-```{r, echo = FALSE, fig.cap = "Subsetting a list, visually."}
+```{r}
+#| echo: false
+#| fig.cap: Subsetting a list, visually.
 knitr::include_graphics("02-wrangling/images/lists-subsetting.png")
 ```
 
@@ -136,7 +142,8 @@ x3 <- list(1, list(2, list(3)))
 
 They are structured as follows:
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("02-wrangling/images/lists-structure.png")
 ```
 
@@ -184,7 +191,9 @@ The distinction between `[ ]` and `[[ ]]` is really important for lists, because
 
 ## Characters 
 
-```{r, echo = FALSE, fig.cap = "Real data is nasty."}
+```{r}
+#| echo: false
+#| fig.cap: Real data is nasty.
 knitr::include_graphics("02-wrangling/images/nasty.gif")
 ```
 
@@ -389,7 +398,8 @@ gapminder$continent |>
 
 These two bar charts of frequency by continent differ only in the order of the continents. Which do you prefer? We show the code for just the second one.
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 gapminder |> 
   ggplot(aes(x = continent)) +
     geom_bar() +
@@ -508,7 +518,8 @@ i_gap$country |>
 We will manipulate date-times using the **lubridate** package because lubridate makes it easier to work with dates and times in R. **lubridate** is not part of the core tidyverse because you only need it when you're working with dates/times.
 
 
-```{r echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("https://imgs.xkcd.com/comics/iso_8601.png")
 ```
 
@@ -661,7 +672,9 @@ In R, the time zone is an attribute of the date-time that only controls printing
 
 There are many ways to bring data together. 
 
-```{r, echo = FALSE, fig.cap = "Combining data is often tricky."}
+```{r}
+#| echo: false
+#| fig.cap: Combining data is often tricky.
 knitr::include_graphics("02-wrangling/images/wrangling.gif")
 ```
 
@@ -712,7 +725,9 @@ Note how easy it is to use `tribble()` from the **tibble** package to create a t
 
 `inner_join(x, y)`: Returns all rows from `x` where there are matching values in `y`, and all columns from `x` and `y`. If there are multiple matches between `x` and `y`, all combination of the matches are returned. 
 
-```{r, echo= FALSE, fig.cap = "Inner join."}
+```{r}
+#| echo: false
+#| fig.cap: Inner join.
 knitr::include_graphics("02-wrangling/images/join-inner.png")
 ```
 
@@ -725,7 +740,8 @@ We lose Hellboy in the join because, although he appears in `x = superheroes`, h
 Note the message that we are 'Joining, by = "publisher"'. Whenever joining, R checks to see if there are variables in common between the two tibbles and, if there are, uses them to join. However, it is concerned that you may not be aware that this is what it is doing, so R tells you. Such messages are both annoying and a signal that we have not made our code as robust as we should. Fortunately, we can specify precisely which variables we want to join by. Always do this.
 
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 inner_join(superheroes, publishers, by = "publisher")
 ```
 
@@ -813,7 +829,9 @@ We keep only publisher Image now (and the variables found in `x = publishers`).
 Consider the relationships among the tibbles in the **nycflights13** package:
 
 
-```{r, echo = FALSE, fig.cap = "Relationships among nycflights tables"}
+```{r}
+#| echo: false
+#| fig.cap: Relationships among nycflights tables
 knitr::include_graphics("02-wrangling/images/relational-nycflights.png")
 ```
 
@@ -830,7 +848,8 @@ This is our first example of using a join function with a "pipe." `flights` is f
 
 The above code is equivalent to:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 inner_join(flights, airlines, by = "carrier")
 ```
 
@@ -870,7 +889,8 @@ flights |>
 
 Consider the first five rows from the `drinks` data frame from the **fivethirtyeight** package:
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 drinks |>  
   head(5)
 ```
@@ -905,7 +925,8 @@ What does it mean for your data to be "tidy"? While "tidy" has a clear English m
 3. Each type of observational unit forms a table.
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("02-wrangling/images/tidy-1.png")
 ```
 
@@ -940,7 +961,8 @@ Let's dissect the arguments to `pivot_longer()`.
 
 The third argument here of `cols` is a little nuanced, so let's consider code that was written slightly differently but that produces the same output: 
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 drinks_smaller |> 
   pivot_longer(names_to = "type", 
                values_to = "servings", 
@@ -949,7 +971,8 @@ drinks_smaller |>
 
 Note that the third argument now specifies which columns we want to "tidy" with `c(beer, spirit, wine)`, instead of the columns we don't want to "tidy" using `-country`. We use the `c()` function to create a vector of the columns in `drinks_smaller` that we'd like to "tidy." Note that since these three columns appear one after another in the `drinks_smaller` data frame, we can also do the following for the `cols` argument:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 drinks_smaller |> 
   pivot_longer(names_to = "type", 
                values_to = "servings", 
@@ -993,7 +1016,8 @@ The most common distributions you will work with are *empirical* or *frequency* 
 
 Consider the distribution of the possible values from rolling a fair die. We can use the `sample()` function to create draws from this distribution, meaning it will change (or sometimes stay the same) for every subsequent draw.
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 set.seed(9)
 ```
 
@@ -1144,7 +1168,9 @@ This bell-shaped distribution is defined by two parameters: (1) the *mean* $\mu$
 1. The dotted normal curve has mean $\mu = 5$ \& standard deviation $\sigma = 5$.
 1. The dashed normal curve has mean $\mu = 15$ \& standard deviation $\sigma = 2$.
 
-```{r, echo = FALSE, fig.cap = "Three normal distributions."}
+```{r}
+#| echo: false
+#| fig.cap: Three normal distributions.
 library(ggrepel)
 
 all_points <- tibble(
@@ -1200,7 +1226,9 @@ Let's illustrate this on a standard normal curve. The dashed lines are at -3, -1
 1. The middle four segments represent the interval -1.96 to 1.96. The shaded area above this interval represents 13.5% + 34% + 34% + 13.5% = 95% of the area under the curve. In other words, 95% of values. 
 1. The middle six segments represent the interval -3 to 3. The shaded area above this interval represents 2.35% + 13.5% + 34% + 34% + 13.5% + 2.35% = 99.7% of the area under the curve. In other words, 99.7% of values. 
 
-```{r, echo = FALSE, fig.cap = "Rules of thumb about areas under normal curves."}
+```{r}
+#| echo: false
+#| fig.cap: Rules of thumb about areas under normal curves.
 shade_3_sd <- function(x) {
   y <- dnorm(x, mean = 0, sd = 1)
   y[x <= -3 | x >= 3] <- NA
@@ -1389,6 +1417,9 @@ The second way that the word distribution is used is to refer to a vector of val
 
 Whether "distribution" means the imaginary object or a vector of numbers drawn from that imaginary object depends on context.
 
-```{r echo = FALSE, cache=FALSE, warning = FALSE}
+```{r}
+#| echo: false
+#| cache: false
+#| warning: false
 knitr::write_bib(.packages(), "packages.bib")
 ```

@@ -26,7 +26,9 @@ Getting data into and out of R is a major part of any real world data science pr
 
 Start by loading the packages which we will need in this chapter.
 
-```{r, message = FALSE, warning = FALSE}
+```{r}
+#| message: false
+#| warning: false
 library(tidyverse)
 library(primer.data)
 library(dbplyr)
@@ -41,7 +43,11 @@ github_url <- "https://raw.githubusercontent.com/PPBDS/primer.tutorials/master/i
 
 ## Reading and writing files
 
-```{r, echo = FALSE, out.width="50%", fig.cap="Choose your file formats wisely.", fig.align='center'}
+```{r}
+#| echo: false
+#| out.width: 50%
+#| fig.cap: Choose your file formats wisely.
+#| fig.align: center
 knitr::include_graphics("03-data/images/file_extensions.png")
 ```
 
@@ -103,7 +109,8 @@ Sometimes, CSV files will not be what you want. Maybe they have the wrong column
 
 Consider the following csv file: `test_2.csv`. Here's what it looks like as a text file:
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 # I made it so that it doesn't show this line of code This is so it doesn't
 # confuse the readers And it lines up with the introduction that I used without
 # looking weird We set `file_1` to be the full path to `test_2.csv`'s location
@@ -245,7 +252,8 @@ read_csv(file_5,
 
 You can also tell the code to ignore comment lines, which may be common in a csv file that was written by a human and as such has comments in it. `test_6.csv` is a perfect example of this. Here's what it looks like:
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 file_6 <- paste0(github_url, "test_6.csv")
 readLines(file_6)
 ```
@@ -267,7 +275,8 @@ When our tabular data comes in a different format, we can use the `read_delim()`
 
 Here's another file named `delim_1`, which uses the `|` to separate the lines instead of a comma like a normal CSV file.
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 delim_1 <- paste0(github_url, "delim_1.txt")
 
 readLines(delim_1)
@@ -320,7 +329,8 @@ download.file(url = paste0(github_url, "excel_1.xlsx"),
 read_excel(path = "example_excel.xlsx")
 ```
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 # Just doing this to clean up the downloaded file so that Git does not ask me
 # about it each time I build the book. Maybe we should be transparent and
 # include this code above, like we did with download.file(). (Or maybe we should
@@ -485,7 +495,8 @@ rds_p +
 
 By saving the `iris_p` plot in a RDS file, we eliminate the time needed to calculate and generate that plot again because we can use the saved information. We can then use the object by reading the file back into r and using it like any normal plot, adding new layers and doing new operations.
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 file.remove("iris_p.rds")
 ```
 
@@ -499,7 +510,8 @@ JSON files are a minimal readable format that structures data, and they're commo
 
 The functions `fromJSON()` and `toJSON()` allow you to convert between R objects and JSON. Both functions come from the **jsonlite** package. 
 
-```{r, message = FALSE}
+```{r}
+#| message: false
 library(jsonlite)
 ```
 
@@ -537,7 +549,9 @@ Make sure to follow the JSON format exactly when you're writing JSON files, as t
 
 ## Databases
 
-```{r, echo = FALSE, fig.cap="DROP TABLE is a particularly infamous SQL command"}
+```{r}
+#| echo: false
+#| fig.cap: DROP TABLE is a particularly infamous SQL command
 knitr::include_graphics("03-data/images/exploits_of_a_mom.png")
 ```
 
@@ -569,7 +583,8 @@ con_lang_data <- dbConnect(RSQLite::SQLite(), "example_db.db")
 
 Often relational databases have many tables, and their power comes from the useful ways they can be joined. Thus anytime you want to access data from a relational database, you need to know the table names. You can get the names of all the tables in the database using `dbListTables()`.
 
-```{r, con_lang_data}
+```{r}
+#| label: con_lang_data
 tables <- dbListTables(con_lang_data)
 tables
 ```
@@ -622,7 +637,8 @@ tail(aboriginal_lang_data)
 
 In order to delete and stop using an SQLite server, you need to first disconnect the file from the connection be using `dbDisconnect()` and passing in the connection object as an argument. You can then safely delete the database file from your computer by using `file.remove()`.
 
-```{r, results = "hide"}
+```{r}
+#| results: hide
 dbDisconnect(con_lang_data)
 file.remove("example_db.db")
 ```
@@ -923,7 +939,8 @@ invisible(file.remove("chinook.db"))
 
 ## Webscraping
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("03-data/images/tags.png")
 ```
 
@@ -937,13 +954,17 @@ Before we jump into scraping, let's learn a little bit about what the "source co
 
 #### Website structure {#website-structure}
 
-```{r, echo = FALSE, fig.cap = "A little bit of HTML editing can bring you a long way."}
+```{r}
+#| echo: false
+#| fig.cap: A little bit of HTML editing can bring you a long way.
 knitr::include_graphics("03-data/images/nobel.png")
 ```
 
 Websites are coded in a language called *HTML*, or *H*yper*T*ext *M*arkup *L*anguage. This is the code that puts all of the information on the website, such as the numbers and text. These are the files created when we "knit" our .Rmd files and it's what makes them put information on the screen. When we're webscraping, we can look at the information on the website by looking at the HTML code. You can try this out by yourself! Just go to any website and right-click, then press "Inspect". You'll be able to see the HTML code behind the website and even edit it to your liking!
 
-```{r, fig.cap="You can see the HTML code of a website and even edit it temporarily by inspecting the HTML code of the in"}
+```{r}
+#| fig.cap: You can see the HTML code of a website and even edit it temporarily by inspecting
+#|   the HTML code of the in
 knitr::include_graphics("03-data/images/html_inspect.gif")
 ```
 
@@ -963,7 +984,8 @@ looks like this in the result:
 
 <!-- These are CSS rules that allow you to draw a box around HTML elements. This helps to make them stand out from the rest of the primer and actually look like an output from a program rather than just plain text. -->
 
-```{css, echo = FALSE}
+```{css}
+/*| echo: false*/
 .artificial-html-div {
   border-style: solid;
   border-width: thin;
@@ -995,7 +1017,8 @@ Now, we're doing data science. And let's say you find some really cool website o
 
 We can do this by using the **rvest** package like I talked about earlier. This is essentially a package that allows you to scrape information from HTML code, allowing you to scrape the information off of the complete website.
 
-```{r, message = FALSE}
+```{r}
+#| message: false
 library(rvest)
 ```
 
@@ -1372,7 +1395,8 @@ These chains are known as *CSS Selectors* and they're an important part of data 
 
 Now let's look at this in a real-world context. Say we are interested in knowing the average rental price (per square footage) of the most recently available one-bedroom apartments in Vancouver according to [this](https://vancouver.craigslist.org). When we visit the Vancouver Craigslist website and search for one-bedroom apartments, this is what we are shown:
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("03-data/images/craigslist_human.png")
 ```
 
@@ -1529,7 +1553,10 @@ Webscraping is a powerful tool to gain data directly from the internet, but make
 
 ## Working with APIs
 
-```{r, echo = FALSE, out.width="50%", fig.align='center'}
+```{r}
+#| echo: false
+#| out.width: 50%
+#| fig.align: center
 knitr::include_graphics("03-data/images/api.png")
 ```
 
@@ -1562,7 +1589,8 @@ To get a certain set of weather data from the Iowa Environmental Mesonet, you ca
 
 When you are making an HTTP request using the `GET()` or `POST()` functions from the **httr** package, you can include the key-value pairs for any query parameters as a list object in the `query` argument of the function. For example, suppose you want to get wind speed in miles per hour (data = "sped") for Denver, CO, (station = "DEN") for the month of June 2016 (year1 = "2016", month1 = "6", etc.) in Denver’s local time zone (tz = "America/Denver") and in a comma-separated file (format = "comma"). To get this weather dataset, you can run:
 
-```{r, message = FALSE}
+```{r}
+#| message: false
 library(httr)
 ```
 
@@ -1652,7 +1680,8 @@ As you forge onwards into the world of distill, you will likely encounter a vari
 
 The first step to creating a website is by using the `create_website()` function. This creates the entire distill website and should be the first function that you run whenever you want to make one. Just use the following syntax:
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 library(distill)
 create_website(dir = ".", title = "title-of-your-website", gh_pages = TRUE)
 ```
@@ -1663,7 +1692,8 @@ This essentially creates a distill website in your current R project, titles it 
 
 But what if I want more pages than that? Only being restricted to a Home and About page is pretty bad, especially when you want to have a bibliography. This is when we use `create_article()` to create a new page within our website. Just run the function with the title of the file and it'll automatically create the .Rmd file for you to code in.
 
-```{r, eval=FALSE}
+```{r}
+#| eval: false
 create_article("sources.Rmd")
 ```
 
@@ -1741,10 +1771,15 @@ And finally, we looked at how we can pull data from websites both through webscr
 
 In the end, this chapter is about getting data from other people and using it inside your own projects.
 
-```{r, echo = FALSE, fig.cap="Make sure to use up to date data."}
+```{r}
+#| echo: false
+#| fig.cap: Make sure to use up to date data.
 knitr::include_graphics("03-data/images/suckville.png")
 ```
 
-```{r echo = FALSE, cache=FALSE, warning = FALSE}
+```{r}
+#| echo: false
+#| cache: false
+#| warning: false
 knitr::write_bib(.packages(), "packages.bib")
 ```

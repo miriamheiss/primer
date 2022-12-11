@@ -416,18 +416,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 33 × 4
-   group          red_beads prop_red group_ID
-   &lt;chr&gt;              &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
- 1 Conrad, Vlad          16     0.32        1
- 2 Sanjana, Yuko         19     0.38        2
- 3 Ishan, Cass           15     0.3         3
- 4 Mak, Sophie           17     0.34        4
- 5 Dohyun, Estel         18     0.36        5
- 6 Vignesh, Eliot        16     0.32        6
- 7 Ace, Chris            18     0.36        7
- 8 Katie, Anthony        20     0.4         8
- 9 Paddy, Matt           16     0.32        9
-10 Mal, Francis          17     0.34       10
+   group           red_beads prop_red group_ID
+   &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
+ 1 Yuki, Harry            21     0.42        1
+ 2 Siobhan, Jane          11     0.22        2
+ 3 Caroline, Edna         15     0.3         3
+ 4 Ellie, Terrance        17     0.34        4
+ 5 Maddie, Brent          19     0.38        5
+ 6 Mark, Jane             21     0.42        6
+ 7 Nam, Joshua            19     0.38        7
+ 8 Katie, Anthony         20     0.4         8
+ 9 Aaron, Mike            11     0.22        9
+10 Yao, Kate              23     0.46       10
 # … with 23 more rows</code></pre>
 </div>
 </div>
@@ -454,7 +454,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>       y <span class="op">=</span> <span class="st">"Count"</span>,</span>
 <span>       title <span class="op">=</span> <span class="st">"Proportions Red in 33 Samples"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="what-did-we-just-do" class="level3" data-number="6.1.3"><h3 data-number="6.1.3" class="anchored" data-anchor-id="what-did-we-just-do">
@@ -622,7 +622,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Since <code>binwidth = 0.05</code>, this will create bins with boundaries at 0.30, 0.35, 0.45, and so on. Recall that <span class="math inline">\(\hat{\rho}\)</span> is equal to the proportion of beads which are red in each sample.</p>
@@ -631,7 +631,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Comparing 33 virtual and 33 tactile proportions red. Note that, though the figures differ slightly, both are centered around .35 to .45. This shows that, in both sampling distributions, the most frequently occuring proportion red is between 35% and 45%.</figcaption><p></p>
 </figure>
 </div>
@@ -671,7 +671,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>       y <span class="op">=</span> <span class="st">"Count"</span>,</span>
 <span>       title <span class="op">=</span> <span class="st">"Distribution of 1,000 proportions red"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Why the empty spaces among the bars? Recall that, with only 50 beads, there are only 51 possible values for <span class="math inline">\(\hat{\rho}\)</span>: 0, 0.02, 0.04, …, 0.98, 1. A value of 0.31 or 0.47 is impossible, hence the gaps.</p>
@@ -706,7 +706,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Proportion of 25 beads that were red"</span>, </span>
 <span>       title <span class="op">=</span> <span class="st">"25"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We will repeat this process with a shovel size of <strong>50</strong>.</p>
@@ -725,7 +725,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Proportion of 50 beads that were red"</span>, </span>
 <span>       title <span class="op">=</span> <span class="st">"50"</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We choose a bin width of .04 for all histograms to more easily compare different shovel sizes. Using a smaller bin size would result in gaps between the bars, as a shovel of size 50 has more possible <span class="math inline">\(\hat{\rho}\)</span> values than a shovel of size 25.</p>
@@ -745,7 +745,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Proportion of 100 beads that were red"</span>, </span>
 <span>       title <span class="op">=</span> <span class="st">"100"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>For easy comparison, we present the three resulting histograms in a single row with matching x and y axes:</p>
@@ -778,7 +778,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span><span class="va">comparing_sampling_distributions</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Comparing the distributions of proportion red for different sample sizes (25, 50, 100). The important takeaway is that our center becomes more concentrated as our sample size increases, indicating a smaller standard deviation between our guesses.</figcaption><p></p>
 </figure>
 </div>
@@ -803,7 +803,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>        axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        axis.ticks.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>This graph illustrates the exact same concept as the histogram. With the smallest shovel size there is significant variance from sample to sample, as samples take on a wide variety of sample proportions! However, as we increase the sample size, the points become more concentrated, or less variance.</p>
@@ -1337,7 +1337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>This is, approximately, the same result as we saw above, but with 1 re-factored tibble instead of 3 separate ones. We can also use functions like <code><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid()</a></code> in the future to make our code more concise.</p>
 <p>Now that we have this framework, there’s no need to limit ourselves to the sizes 25, 50, and 100. Why not try all integers from 1 to 100? We can use the same code, except we’ll now set <code>shovel_size = 1:100</code>.</p>
-<div class="cell" data-hash="06-one-parameter_cache/html/unnamed-chunk-33_f50726ab7baa87bdaffca791e712c88c">
+<div class="cell" data-hash="06-one-parameter_cache/html/unnamed-chunk-34_9e7b1526bb8ce24b44d23d9f32b3be6e">
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">shovels_100</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid</a></span><span class="op">(</span>trial_ID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span>, shovel_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>shovel <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">shovel_size</span>, <span class="op">~</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span><span class="va">urn</span>, n <span class="op">=</span> <span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>numb_red <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">shovel</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">color</span> <span class="op">==</span> <span class="st">"red"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1354,10 +1354,10 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 </div>
 </div>
 <p>Now, we have the standard deviation of <code>prop_red</code> for all shovel sizes from 1 to 100. Let’s plot that value to see how it changes as the shovel gets larger:</p>
-<div class="cell" data-hash="06-one-parameter_cache/html/unnamed-chunk-34_be5491f2eff6ec9696333192064265e7">
+<div class="cell" data-hash="06-one-parameter_cache/html/unnamed-chunk-35_14f42aed473aa3c358b0c61f2fc1e99a">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Comparing standard deviations of proportions red for 100 different shovels. The standard deviation decreases at the same rate as the square root of shovel size. The red line shows the standard error.</figcaption><p></p>
 </figure>
 </div>
@@ -1441,7 +1441,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Previously seen three distributions of the sample proportion <span class="math inline">\(\hat{ ho}\)</span>.</figcaption><p></p>
 </figure>
 </div>
@@ -1452,7 +1452,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Previously seen comparing standard deviations of proportions red for 100 different shovels</figcaption><p></p>
 </figure>
 </div>
@@ -1472,7 +1472,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Three sampling distributions of the sample proportion <span class="math inline">\(\hat{ ho}\)</span>. Note the increased concentration on the bins around .4 as our sample size increases.</figcaption><p></p>
 </figure>
 </div>
@@ -1482,7 +1482,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-42-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Standard errors of the sample proportion based on sample sizes of 1 to 100</figcaption><p></p>
 </figure>
 </div>
@@ -3348,7 +3348,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We have successfully created the posterior distribution and can finally answer the question we started the chapter with:</p>
@@ -3457,7 +3457,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-59-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We have successfully created the posterior probability distribution for the number of red beads drawn in a shovel of size 20. But before we answer our question, some of us may be wondering why we made our predictions using <code><a href="https://mc-stan.org/rstantools/reference/posterior_predict.html">posterior_predict()</a></code> instead of <code><a href="https://mc-stan.org/rstantools/reference/posterior_epred.html">posterior_epred()</a></code>. Let’s examine what happens if we use <code><a href="https://mc-stan.org/rstantools/reference/posterior_epred.html">posterior_epred()</a></code> instead.</p>
@@ -3481,7 +3481,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-60-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid figure-img" width="672"></p>
 <p></p><figcaption class="figure-caption">Using posterior_epred()</figcaption><p></p>
 </figure>
 </div>
@@ -3504,7 +3504,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <span>  <span class="fu">plot_annotation</span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Expected prediction for sample of size 20 on left, posterior on right.'</span>,</span>
 <span>                  subtitle <span class="op">=</span> <span class="st">"The two distributions have an identical shape."</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-61-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-62-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>On the other hand, <code><a href="https://mc-stan.org/rstantools/reference/posterior_predict.html">posterior_predict()</a></code> models the posterior distribution for future <strong>individuals</strong>. In our scenario, we model the binomial distribution of a discrete random variable. The bars only appear at real numbers between 1 and 16, because we are predicting the probability of individual samples. We cannot draw fractions of beads in our sample. Using <code><a href="https://mc-stan.org/rstantools/reference/posterior_predict.html">posterior_predict()</a></code> essentially replicates the DGM, taking many virtual draws from our urn and summarizing all the results.</p>
@@ -3582,7 +3582,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent_format</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-64-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-one-parameter_files/figure-html/unnamed-chunk-65-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The red bars illustrate the area under a specific section of the curve, as compared to the <em>entire</em> area under the curve. <em>Each question requires looking at a new area under the curve.</em> When someones asks you a question, they are doing two things. First, they are providing instructions as to the posterior your should create. Here, the results with a shovel of 20 slots. Second, they are asking a question about the area under the curve in a specific region. Here, the region where the number of red beads is greater than 8 is highlighted in red. Therefore, the area below the curve that <strong>is red</strong> is how we get our estimate.</p>

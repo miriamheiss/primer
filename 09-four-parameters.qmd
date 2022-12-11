@@ -1,6 +1,10 @@
 # Four Parameters {#sec-four-parameters}
 
-```{r hidden-libraries, message = FALSE, echo = FALSE, warning = FALSE}
+```{r}
+#| label: hidden-libraries
+#| message: false
+#| echo: false
+#| warning: false
 library(patchwork)
 ```
 
@@ -41,7 +45,9 @@ We fit this using the `trains` data from **primer.data**. We will also be using 
 <!-- it off for now. -->
 
 
-```{r, message = FALSE, warning =  FALSE}
+```{r}
+#| message: false
+#| warning: false
 library(tidyverse)
 library(primer.data)
 library(rstanarm)
@@ -310,7 +316,8 @@ To look at our recommendations in practice, let's focus on the `trains` dataset.
 
 First, let's look at a model with a left hand variable, `att_end`, and two right side variables, `treatment` and `att_start`.
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 set.seed(78)
 ```
 
@@ -525,7 +532,8 @@ Sadly, it is not wise to simply select the model which fits the data best becaus
 
 One of the biggest dangers in data science is *overfitting*, using a model with too many parameters which fits the data we have too well and, therefore, works poorly on data we have yet to see. Consider a simple example with 10 data points.
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 ovrftng <- tibble(x = 1:10,
                   y = c(1.9, 1.9, 4.9, 2.7, 2.6, 
                         5.2, 6.8, 8.9, 9.0, 9.9))
@@ -540,7 +548,8 @@ ovrftng |>
 
 What happens when we fit a model with one predictor?
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 one_pred <- lm(y ~ x,
                data = ovrftng)
   
@@ -564,7 +573,8 @@ That is a reasonable model. It does not fit the data particularly well, but we c
 
 But we can also use some of the lessons from above and try a quadratic fit by adding $x^2$ as a predictor.
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 two_pred <- lm(y ~ poly(x, 2),
                data = ovrftng)
 
@@ -739,7 +749,9 @@ To conclude this chapter, we will look at a four parameter model. The model we w
 
 ### Wisdom
 
-```{r echo = FALSE, fig.cap = "Wisdom"}
+```{r}
+#| echo: false
+#| fig.cap: Wisdom
 knitr::include_graphics("other/images/Wisdom.jpg")
 ```
 
@@ -772,7 +784,9 @@ All of these populations are different, so each has a different $\mu$. Which $\m
 
 ### Justice 
 
-```{r echo = FALSE, fig.cap = "Justice"}
+```{r}
+#| echo: false
+#| fig.cap: Justice
 knitr::include_graphics("other/images/Justice.jpg")
 ```
 
@@ -807,7 +821,9 @@ $$y_i = (intercept + liberal\_true) + \beta_1 att\_start_i$$
 
 ### Courage
 
-```{r echo = FALSE, fig.cap = "Courage"}
+```{r}
+#| echo: false
+#| fig.cap: Courage
 knitr::include_graphics("other/images/Courage.jpg")
 ``` 
 
@@ -995,7 +1011,10 @@ In this chapter, we covered a number of topics important to effectively creating
 - When we compare *across unit*, meaning comparing Joe and George, we are not looking at a causal relationship. *Within unit* discussions, where we are comparing Joe under treatment versus Joe under control, are causal. This means that within unit interpretation is only possible in causal models, where we are studying **one unit** under **two conditions**. 
 - When we talk about two potential outcomes, we are discussing the same person or unit under two conditions. 
 
-```{r echo = FALSE, cache=FALSE, warning = FALSE}
+```{r}
+#| echo: false
+#| cache: false
+#| warning: false
 knitr::write_bib(.packages(), "packages.bib")
 ```
 
