@@ -1,6 +1,11 @@
 # Visualization {#sec-visualization}
 
-```{r hidden-libraries, include = FALSE, message = FALSE, echo = FALSE, warning = FALSE}
+```{r}
+#| label: hidden-libraries
+#| include: false
+#| message: false
+#| echo: false
+#| warning: false
 library(tidyverse)
 library(ggthemes)
 library(gapminder)
@@ -15,7 +20,10 @@ Everyone loves visualizations.
 
 <!-- Consider swapping out animation to use this instead: https://github.com/jschoeley/de0anim -->
 
-```{r, message = FALSE, echo = FALSE, warning = FALSE}
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
 president_data <- read_csv("01-visualization/data/president_approval.csv",
                            show_col_types = FALSE) |> 
   pivot_longer(names_to = "approval_type",
@@ -70,7 +78,8 @@ Error in library(tidyverse) : there is no package called ‘tidyverse’
 If that happens, you need to install the package: 
 
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 install.packages("tidyverse")
 ```
 
@@ -101,7 +110,8 @@ print(trains, n = 15, width = 100)
 
 The `n` argument to `print()` tells R the number of rows you want to see. `width` refers to the number of characters to print across the screen. Want to see every row and every column? Try:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 print(trains, n = Inf, width = Inf)
 ```
 
@@ -342,7 +352,8 @@ When deciding whether to jitter a scatterplot or use the `alpha` argument to `ge
 Linegraphs show the relationship between two numerical variables when the variable on the x-axis, also called the *explanatory*, *predictive*, or *independent* variable, is of a sequential nature. In other words, there is an inherent ordering to the variable. 
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("https://imgs.xkcd.com/comics/decline.png")
 ```
 
@@ -610,7 +621,9 @@ The pipe operator (`|>`) allows us to combine multiple operations in R into a si
 
 ### `filter()` rows
 
-```{r, echo = FALSE, fig.cap = "filter() reduces the rows in a tibble."}
+```{r}
+#| echo: false
+#| fig.cap: filter() reduces the rows in a tibble.
 knitr::include_graphics("01-visualization/images/filter.png")
 ```
 
@@ -667,7 +680,9 @@ trains |>
 
 ### `select` variables
 
-```{r, echo = FALSE, fig.cap = "select() reduces the number of columns in a tibble."}
+```{r}
+#| echo: false
+#| fig.cap: select() reduces the number of columns in a tibble.
 knitr::include_graphics("01-visualization/images/select.png")
 ```
 
@@ -742,7 +757,9 @@ This is the first of many "pipes" which we will create in *The Primer*. First, w
 
 ### `mutate()` variables
 
-```{r, echo = FALSE, fig.cap = "`mutate() adds a column to a tibble."}
+```{r}
+#| echo: false
+#| fig.cap: '`mutate() adds a column to a tibble.'
 knitr::include_graphics("01-visualization/images/mutate.png")
 ```
 
@@ -1002,14 +1019,16 @@ Recall that typing the name of an object is the same thing as using `print()`. N
 
 But, sometimes, we want a permanent copy of the plot, saved to our computer. That is the purpose of `ggsave()`:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 ggsave(filename = "enos_trains.jpg", 
        plot = train_plot)
 ```
 
 `ggsave()` uses the suffix of the provided `filename` to determine the type of image to save. Because we use "enos_trains.jpg", the file is saved in JPEG format. If we had used "enos_trains.png", the file would have been saved as a PNG. We can display a saved file by using `knitr::include_graphics()`. For example:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 knitr::include_graphics("enos_trains.jpg")
 ```
 
@@ -1307,7 +1326,9 @@ There! Within the `theme()` function, we can change the plot title to bold, the 
 
 There are so many more plots you can make with R that we have not shown you yet. For example, you can create cool animations with the *gganimate* package:
 
-```{r, echo = FALSE, cache = TRUE}
+```{r}
+#| echo: false
+#| cache: true
 library(gganimate)
 
 gapminder_p <- gapminder |>
@@ -1330,7 +1351,8 @@ gapminder_p
 
 You can make your plots interactive, using the **plotly** package: 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 gapminder_plot <- gapminder |>
   filter(continent != "Oceania") |>
   ggplot(aes(gdpPercap, lifeExp, color = continent)) +
@@ -1355,7 +1377,9 @@ gapminder_plotly
 
 You can also create maps from census data, like this plot below.
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
+#| message: false
 library(tidycensus)
 library(tigris)
 options(tigris_use_cache = TRUE)
@@ -1407,7 +1431,8 @@ In this chapter, we first looked at basic coding terminology and concepts that w
 Recall the plot we began the chapter with:
 
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 hundred_days_p
 ```
 
