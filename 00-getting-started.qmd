@@ -1,5 +1,8 @@
 # Getting Started {.unnumbered}
 
+<!-- We do not run prep_rstudio_settings() because this function only works with an associated RStudio instance. There is no such instance when you render a qmd file, even if you render that file from within RStudio. (I think!) -->
+
+
 The world confronts us. Make decisions we must.
 
 ### Installing R and RStudio {.unnumbered}
@@ -8,7 +11,8 @@ The world confronts us. Make decisions we must.
 
 <!-- Change the graphic so that the words are the top are: "R is like a car's engine." and "RStudio is like a car's dashboard." -->
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("00-getting-started/images/R_vs_RStudio_1.png")
 ```
 
@@ -32,7 +36,9 @@ If you are using a Chromebook, follow [this advice](https://levente.littvay.hu/c
 
 ### Using R via RStudio {.unnumbered}
 
-```{r echo = FALSE, fig.cap = "Icons of R versus RStudio on your computer."}
+```{r}
+#| echo: false
+#| fig.cap: Icons of R versus RStudio on your computer.
 knitr::include_graphics("00-getting-started/images/R_vs_RStudio.png")
 ```
 
@@ -40,13 +46,15 @@ Much as we don't drive a car by interacting directly with the engine but rather 
 
 Open up RStudio. You should see three *panes* dividing the screen: the *Console pane*, the *Environment pane*, and the *Files pane*.
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("00-getting-started/images/rstudio_box.png")
 ```
 
 This is your workspace. Start with the big pane on the left:
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("00-getting-started/images/left_window.png")
 ```
 
@@ -58,13 +66,14 @@ We often use the phrase "run the following code." This means that you should typ
 
 Look at the top right:
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("00-getting-started/images/top_right_window.png")
 ```
 
 The main two tabs we will be using are Environment and Git (which is not yet visible). The Environment tab shows you the datasets and variables you currently have loaded into R. In this case, we loaded in a dataset with 3407 rows and 5 columns and a variable `x` equal to 5. For you, the Environment should be empty. Let's change that. Go to your Console and type:
 
-```{r, eval = FALSE}
+```{r}
 x <- 5
 ```
 
@@ -72,7 +81,9 @@ This assigned the value 5 to an object, `x`. `<-` is the operator used to assign
 
 Look at the bottom right pane:
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
+
 knitr::include_graphics("00-getting-started/images/bottom_right_window.png")
 ```
 
@@ -84,7 +95,10 @@ The Files tab displays your computer's file system. When you create a project la
 
 R *packages*, also known as *libraries*, extend the power of R by providing additional functions and data.
 
-```{r echo = FALSE, fig.cap = "R is to R packages as a new phone is to apps for that phone."}
+```{r}
+#| echo: false
+#| fig.cap: R is to R packages as a new phone is to apps for that phone.
+
 knitr::include_graphics("00-getting-started/images/R_vs_R_packages.png")
 ```
 
@@ -97,7 +111,10 @@ Consider an analogy to Instagram. If you have a new phone and want to share a ph
 
 The process is very similar for an R package. You need to:
 
-```{r, echo = FALSE, fig.cap = "Installing versus loading an R package"}
+```{r}
+#| echo: false
+#| fig.cap: Installing versus loading an R package
+
 knitr::include_graphics("00-getting-started/images/install_vs_load.jpg")
 ```
 
@@ -109,7 +126,7 @@ Before installing packages, issue this command:
 
 <!-- DK: Is this necessary? Is there a better way to handle it? -->
 
-```{r, eval = FALSE}
+```{r}
 options(pkgType = "binary")
 ```
 
@@ -117,7 +134,9 @@ Doing so just makes various errors less likely. Do NOT do this is if you are ins
 
 Let's install a useful package. At the Console pane within RStudio, type:
 
-```{r, eval = FALSE}
+```{r}
+#| output: false
+
 install.packages("remotes")
 ```
 
@@ -125,7 +144,8 @@ And press return/enter on your keyboard. You must include the quotation marks ar
 
 One tricky aspect of this process is that R will occasionally ask you:
 
-```{bash, eval=FALSE}
+```{bash}
+#| eval: false
 Do you want to install from sources the packages which 
 need compilation? (Yes/no/cancel)
 ```
@@ -142,11 +162,14 @@ R packages generally live in one of two places:
 
 After you install a package, you need to "load" it by using the `library()` command. To load the **remotes** package, run the following code in the Console. 
 
-```{r, eval = FALSE}
+```{r}
+#| output: false
 library(remotes)
 ```
 
 After running this code, a blinking cursor should appear next to the `>` symbol. (The `>` is the "prompt.") This means you were successful and the **remotes** package is now loaded and ready to use. However, you might get a red "error message" which reads:
+
+<!-- DK: Make this text, and other error messages, red. -->
 
     Error in library(remotes) : there is no package called ‘remotes’
 
@@ -166,7 +189,9 @@ This is a different error message than the one you just saw about a package not 
 
 Let's install a package that is not available from CRAN: **all.primer.tutorials**. Copy and paste the following to the R Console:
 
-```{r, eval = FALSE}
+```{r}
+#| output: false
+
 library(remotes)
 install_github("PPBDS/all.primer.tutorials")
 ```
@@ -177,7 +202,9 @@ Many other new packages will be installed, including **primer.data**, which prov
 
 Once you have **primer.tutorials** installed, run these commands.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
+
 library(all.primer.tutorials)
 prep_rstudio_settings()
 ```
@@ -191,13 +218,15 @@ The `prep_rstudio_settings()` function sets various R/RStudio options to conveni
 
 For each chapter of the textbook, there are one or more tutorials available in the **all.primer.tutorials** package. In order to access these tutorials, you should run `library(all.primer.tutorials)` in the R Console.
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("00-getting-started/images/run_ppbds.PNG")
 ```
 
 Access the tutorials via the Tutorial tab in the Environment pane in RStudio. If you don't see any tutorials, try clicking the "Home" icon -- the little house symbol with the thin red roof. You may need to restart your R session. Click on the "Session" menu and select "Restart R".
 
-```{r, echo = FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("00-getting-started/images/tutorial_new.gif")
 ```
 
@@ -242,13 +271,15 @@ You should have done the following:
 
   - Installed, from Github, the **all.primer.tutorials** package:
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 remotes::install_github("PPBDS/all.primer.tutorials")
 ```
 
   - Run this command to set up RStudio:
   
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 all.primer.tutorials::prep_rstudio_settings()
 ``` 
 
@@ -256,6 +287,7 @@ all.primer.tutorials::prep_rstudio_settings()
 
 Let's get started.
 
-```{r, echo=FALSE}
+```{r}
+#| echo: false
 knitr::include_graphics("00-getting-started/images/ending.gif")
 ```

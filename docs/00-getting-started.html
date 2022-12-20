@@ -271,7 +271,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><p>The world confronts us. Make decisions we must.</p>
+</header><!-- We do not run prep_rstudio_settings() because this function only works with an associated RStudio instance. There is no such instance when you render a qmd file, even if you render that file from within RStudio. (I think!) --><p>The world confronts us. Make decisions we must.</p>
 <section id="installing-r-and-rstudio" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="installing-r-and-rstudio">Installing R and RStudio</h3>
 <!-- Update all the images. -->
 <!-- Change the graphic so that the words are the top are: "R is like a car's engine." and "RStudio is like a car's dashboard." -->
@@ -388,13 +388,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>R packages generally live in one of two places:</p>
 <ul>
 <li><p>CRAN (rhymes with “clan”) for more mature, popular packages. Use <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>, as you did above.</p></li>
-<li><p>Github for more experimental, less stable packages. Use <code>remotes::install_github()</code>.</p></li>
+<li><p>Github for more experimental, less stable packages. Use <code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github()</a></code>.</p></li>
 </ul></section><section id="package-loading" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="package-loading">Package loading</h3>
 <p>After you install a package, you need to “load” it by using the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> command. To load the <strong>remotes</strong> package, run the following code in the Console.</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org">remotes</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After running this code, a blinking cursor should appear next to the <code>&gt;</code> symbol. (The <code>&gt;</code> is the “prompt.”) This means you were successful and the <strong>remotes</strong> package is now loaded and ready to use. However, you might get a red “error message” which reads:</p>
+<!-- DK: Make this text, and other error messages, red. -->
 <pre><code>Error in library(remotes) : there is no package called ‘remotes’</code></pre>
 <p>This error message means that you haven’t successfully installed the package. If you get this error message, make sure to install the <strong>remotes</strong> package before proceeding.</p>
 <p>For historical reasons, <em>packages</em> are also known as <em>libraries</em>, which is why the relevant command for loading them is <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>.</p>
@@ -406,16 +407,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Let’s install a package that is not available from CRAN: <strong>all.primer.tutorials</strong>. Copy and paste the following to the R Console:</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org">remotes</a></span><span class="op">)</span></span>
-<span><span class="fu">install_github</span><span class="op">(</span><span class="st">"PPBDS/all.primer.tutorials"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"PPBDS/all.primer.tutorials"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This might fail, especially if the quotation marks you paste over turn “curly.” In that case, type the commands yourself from scratch.</p>
 <p>Many other new packages will be installed, including <strong>primer.data</strong>, which provides the data sets we use in the <em>Primer</em>. It may take a few minutes. If something gets messed up, it is often useful to read the error messages and see if a specific package is at fault. If so, use the <code><a href="https://rdrr.io/r/utils/remove.packages.html">remove.packages()</a></code> function to remove the problematic package and then install it again.</p>
 <p>Once you have <strong>primer.tutorials</strong> installed, run these commands.</p>
 <div class="cell">
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">all.primer.tutorials</span><span class="op">)</span></span>
-<span><span class="fu">prep_rstudio_settings</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/all.primer.tutorials/man/prep_rstudio_settings.html">prep_rstudio_settings</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The <code>prep_rstudio_settings()</code> function sets various R/RStudio options to convenient values.</p>
+<p>The <code><a href="https://rdrr.io/pkg/all.primer.tutorials/man/prep_rstudio_settings.html">prep_rstudio_settings()</a></code> function sets various R/RStudio options to convenient values.</p>
 </section><section id="tutorials" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="tutorials">Tutorials</h3>
 <!-- DK: Is this really necessary? I think that you get all the tutorials for free? That is, you don't need to load them explicitly. They are just found by the Tutorial pane. -->
 <p>For each chapter of the textbook, there are one or more tutorials available in the <strong>all.primer.tutorials</strong> package. In order to access these tutorials, you should run <code><a href="https://rdrr.io/r/base/library.html">library(all.primer.tutorials)</a></code> in the R Console.</p>
@@ -465,13 +466,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Installed, from Github, the <strong>all.primer.tutorials</strong> package:</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"PPBDS/all.primer.tutorials"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"PPBDS/all.primer.tutorials"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Run this command to set up RStudio:</li>
 </ul>
 <div class="cell">
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">all.primer.tutorials</span><span class="fu">::</span><span class="fu">prep_rstudio_settings</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">all.primer.tutorials</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/all.primer.tutorials/man/prep_rstudio_settings.html">prep_rstudio_settings</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Learned some basic terminology that will help you when you read the rest of the <em>Primer</em>.</li>
