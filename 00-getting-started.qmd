@@ -1,6 +1,6 @@
 # Getting Started {.unnumbered}
 
-<!-- We do not run prep_rstudio_settings() because this function only works with an associated RStudio instance. There is no such instance when you render a qmd file, even if you render that file from within RStudio. (I think!) -->
+<!-- We do not run prep_rstudio_settings() because this function only works with an associated RStudio instance. There is no such instance when you render a qmd file, even if you render that file from within RStudio. (I think!) We do, however, run the install code for the packages. We do this in order to ensure that the code works when students try to run it, even though this is somewhat aggresive from the point of view of our co-authors. -->
 
 
 The world confronts us. Make decisions we must.
