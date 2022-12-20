@@ -415,11 +415,16 @@ The message is telling us that the histogram was constructed using `bins = 30` f
 Let's specify `bins` and also add some labels.
 
 ```{r}
+# Note that we can use either single or double quotes when creating items like
+# titles and axis labels. In this case, we use single quotes for the subtitle
+# because we want to put the word middle to print within double quotes in the
+# actual plot.
+
 ggplot(trains, 
        aes(x = income)) +
   geom_histogram(bins = 50) +
   labs(title = "Income Among Boston Commuter",
-       subtitle = "Why are there so few people with `middle' incomes?",
+       subtitle = 'Why are there so few people with "middle" incomes?',
        x = "Income",
        y = "Count",
        caption = "Data source: Enos (2014)")
@@ -437,7 +442,7 @@ ggplot(trains,
   geom_histogram(bins = 50,
                  fill = "steelblue") +
   labs(title = "Income Among Boston Commuter",
-       subtitle = "Why are there so few people with `middle' incomes?",
+       subtitle = 'Why are there so few people with "middle" incomes?',
        x = "Income",
        y = "Count",
        caption = "Data source: Enos (2014)")
@@ -571,7 +576,7 @@ ggplot(trains,
        aes(x = income)) +
   geom_histogram(bins = 50) +
   labs(title = "Income Among Boston Commuter",
-       subtitle = "Why are there so few people with `middle' incomes?",
+       subtitle = 'Why are there so few people with "middle" incomes?',
        x = "Income",
        y = "Count",
        caption = "Data source: Enos (2014)")
@@ -584,7 +589,7 @@ ggplot(trains,
        aes(x = income)) +
   geom_density() +
   labs(title = "Income Among Boston Commuter",
-       subtitle = "Why are there so few people with `middle' incomes?",
+       subtitle = 'Why are there so few people with "middle" incomes?',
        x = "Income",
        y = NULL,
        caption = "Data source: Enos (2014)")
