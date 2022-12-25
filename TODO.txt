@@ -1,5 +1,7 @@
 # Priorities
 
+-3) Update Trump/Biden data in chapter 1.
+
 -2) https://mc-stan.org/rstanarm/reference/stan_polr.html Add some examples with ordinal dependent variables. Of course, what we really want is multinomial regression.
 
 -1) Could we switch everything from rstanarm to Tidymodels, even Tidymodels which used rstanarm? Learning the Tidymodels framework allows you to do lots of things!

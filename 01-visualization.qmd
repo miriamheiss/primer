@@ -15,11 +15,37 @@ library(plotly)
 
 Everyone loves visualizations.
 
-<!-- Rationalize other command section, coordinate with tutorial overview. Do we really need pull() and []. When do we introduce $? -->
+<!-- Switch out unemployment data anymore. Use two or three of the temperature series from primer.data::temperature.  I have similar concerns about the `group` aesthetic, especially for line plots. But maybe group is too difficult? But can you possibly do geom_line without showing groups? -->
 
-<!-- DO NOT DO THIS. Hold off on this for now. Don't use the unemployment data anymore. Use two or three of the temperature series from primer.data::temperature.  I have similar concerns about the `group` aesthetic, especially for line plots. But maybe group is too difficult? But can you possibly do geom_line without showing groups? -->
+<!-- Consider swapping out current animation to use this instead: https://github.com/jschoeley/de0anim -->
 
-<!-- Consider swapping out animation to use this instead: https://github.com/jschoeley/de0anim -->
+
+<!-- The data as provided by 538 has changed over time. Recently, I have had to download the Trump and Biden data separately, and then combine them by hand as when located in the 01-visualization/data directory like so: 
+
+$ cat app* > presidential_approval.csv 
+
+The original files are always named approval_pollist.csv. You have to navigate to a president's page in order to get his data. Theoretically, the next time we download this, we only need to get Biden's updated data. But I bet that they recreate the historical data each time they fix the model, so we ought to grab both sets. Might be nice to actually download the data each time we re-render the chapter, but not today.
+
+Then we need to clean the data in order to make plotting easier. Note that this requires a bunch of changes from the previous version since we are plotting almost two years of data, rather than merely the first 100 days. -->
+
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+
+# president_data <- read_csv("01-visualization/data/presidential_approval.csv",
+#                            show_col_types = FALSE) |> 
+#   select(president, enddate, approve) |> 
+#   drop_na() |> 
+  
+  # This dating manipulation needs to be redone
+  
+  # mutate(enddate = lubridate::mdy(enddate),
+  #        enddate = lubridate::yday(enddate))
+
+```
+
 
 ```{r}
 #| message: false
@@ -27,7 +53,7 @@ Everyone loves visualizations.
 #| warning: false
 
 president_data <- read_csv("01-visualization/data/president_approval.csv",
-                           show_col_types = FALSE) |> 
+                           show_col_types = FALSE) |>
   pivot_longer(names_to = "approval_type",
                values_to = "rate",
                cols = c(-president, -enddate)) |> 
@@ -66,7 +92,7 @@ Once you have read this chapter, and completed the associated tutorials, you wil
 
 ## Looking at data
 
-This chapter focuses on **ggplot2**, one of the core packages in the *[Tidyverse](https://www.tidyverse.org/)*, a collection of 25 or so packages which have a similar design philosophy. The **[tidyverse](https://tidyverse.tidyverse.org/)** (note the small "t") is an R package that contains the 9 key packages, most importantly **ggplot2**. In other words, there are two separate things called "tidyverse": a capital "T" *Tidyverse* which refers to many packages which work well-together and a small "t" **tidyverse** which is an R package which loads the key *Tidyverse* packages. 
+This chapter focuses on **ggplot2**, one of the core packages in the *[Tidyverse](https://www.tidyverse.org/)*, a collection of 25 or so packages which have a similar design philosophy. The **[tidyverse](https://tidyverse.tidyverse.org/)** (note the small "t") is an R package that contains the 9 key packages, most importantly **ggplot2**. In other words, there are two separate things called "tidyverse": a capital "T" *Tidyverse* which refers to many packages which work well together and a small "t" **tidyverse** which is an R package which loads the key *Tidyverse* packages. 
 
 To access the datasets, help pages, and functions that we will use in this chapter, load the **tidyverse**:
 
@@ -76,11 +102,17 @@ library(tidyverse)
 
 That one line of code loads all the packages associated with the **tidyverse**, packages which you will use in almost every data analysis. The first time you load the tidyverse, R will report which functions from the tidyverse conflict with functions in base R or with other packages you may have loaded. (We hide these and other messages in this book because they are ugly.)
 
+
+<!-- DK: Would be nice to make this error message print out in red. Can't find way to do this directly, but something from here might work: https://quarto.org/docs/computations/execution-options.html#raw-output. See below for my attempt. Also: -->
+
 You might get this error message:
 
-````
-Error in library(tidyverse) : there is no package called ‘tidyverse’
-````
+```{r}
+#| echo: false
+
+message("Error in library(tidyverse) : there is no package called ‘tidyverse’")
+```
+
 
 If that happens, you need to install the package: 
 
@@ -958,30 +990,6 @@ trains |>
   slice_sample(n = 4)
 ```
 
-
-`pull()` grabs out a variable as a vector, rather than leaving it within a tibble, as `select()` does:
-
-```{r}
-trains |> 
-  slice(2:5) |> 
-  pull(age)
-```
-
-Versus
-
-```{r}
-trains |> 
-  slice(2:5) |> 
-  select(age)
-```
-
-`pull()` is similar to the `$` operator, which can be used outside of a pipeline and allows us to extract a single variable from a tibble and return it as a vector.
-
-```{r}
-trains$age
-```
-
-
 We can use `[]` --- the "single bracket" operator --- to pull out one or more columns, but the variables names must be quoted.
 
 ```{r}
@@ -995,6 +1003,16 @@ And
 trains[c("age", "party")] |> 
   print(n = 3)
 ```
+
+This behavior is, more or less, the same as with `select()`. However, `[]` is part of "base R," those parts of the R language which do not require extra packages like the Tidyverse. For the most part, you should use `select()`.
+
+The `$` operator allows us to extract a single variable from a tibble and return it as a vector. If you need to do something like this within a pipe, use `pull()`.
+
+```{r}
+trains$age
+```
+
+
 
 
 ## Advanced Plots

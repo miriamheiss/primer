@@ -1965,7 +1965,7 @@ This is not red.
 <span>  <span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{html_document}
-&lt;html class="no-js" lang="en" dir="ltr"&gt;
+&lt;html&gt;
 [1] &lt;head&gt;\n&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8 ...
 [2] &lt;body&gt;\n\n    &lt;!-- Google Adsense Script --&gt;\n&lt;!--    &lt;script async src=" ...</code></pre>
 </div>
@@ -2183,18 +2183,18 @@ dttm (1): valid
 <section id="create_website" class="level4" data-number="3.6.1.1"><h4 data-number="3.6.1.1" class="anchored" data-anchor-id="create_website">
 <span class="header-section-number">3.6.1.1</span> <code>create_website()</code>
 </h4>
-<p>The first step to creating a website is by using the <code>create_website()</code> function. This creates the entire distill website and should be the first function that you run whenever you want to make one. Just use the following syntax:</p>
+<p>The first step to creating a website is by using the <code><a href="https://pkgs.rstudio.com/distill/reference/create_website.html">create_website()</a></code> function. This creates the entire distill website and should be the first function that you run whenever you want to make one. Just use the following syntax:</p>
 <div class="cell">
 <div class="sourceCode" id="cb156"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/distill">distill</a></span><span class="op">)</span></span>
-<span><span class="fu">create_website</span><span class="op">(</span>dir <span class="op">=</span> <span class="st">"."</span>, title <span class="op">=</span> <span class="st">"title-of-your-website"</span>, gh_pages <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://pkgs.rstudio.com/distill/reference/create_website.html">create_website</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="st">"."</span>, title <span class="op">=</span> <span class="st">"title-of-your-website"</span>, gh_pages <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This essentially creates a distill website in your current R project, titles it “title-of-your-website” and formats it so that we can publish it on <a href="https://pages.github.com/">Github Pages</a> (Github’s website publishing service). After you run this, you should see an <code>index.Rmd</code> and an <code>about.Rmd</code> file in your project, as well as some other miscellaneous files. These are the “Home” and “About” pages that you can use on your website.</p>
 </section><section id="create_article" class="level4" data-number="3.6.1.2"><h4 data-number="3.6.1.2" class="anchored" data-anchor-id="create_article">
 <span class="header-section-number">3.6.1.2</span> <code>create_article()</code>
 </h4>
-<p>But what if I want more pages than that? Only being restricted to a Home and About page is pretty bad, especially when you want to have a bibliography. This is when we use <code>create_article()</code> to create a new page within our website. Just run the function with the title of the file and it’ll automatically create the .Rmd file for you to code in.</p>
+<p>But what if I want more pages than that? Only being restricted to a Home and About page is pretty bad, especially when you want to have a bibliography. This is when we use <code><a href="https://pkgs.rstudio.com/distill/reference/create_article.html">create_article()</a></code> to create a new page within our website. Just run the function with the title of the file and it’ll automatically create the .Rmd file for you to code in.</p>
 <div class="cell">
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">create_article</span><span class="op">(</span><span class="st">"sources.Rmd"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pkgs.rstudio.com/distill/reference/create_article.html">create_article</a></span><span class="op">(</span><span class="st">"sources.Rmd"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then, you need to put it into your website. Just go to the <code>_site.yml</code> file and add the page in using <code>text: "Sources"</code> and <code>"href: sources.html"</code>. This is what the <code>_site.yml</code> file should look like after you add the page.</p>
 <pre><code>name: "."
@@ -2213,14 +2213,14 @@ navbar:
     - text: "Sources"
       href: sources.html
 output: distill::distill_article</code></pre>
-<p>The <code>_site.yml</code> is the file that keeps everything in line and organizes your distill website. <em>However, it’s very specific as to the syntax, so you should take care to only add in specific things.</em> Additionally, keep in mind that you should always use the <code>create_article()</code> function whenever you need to create a new page or a .Rmd file. <em>Do not add in a .Rmd file manually.</em> These both lead to errors that can break your project.</p>
+<p>The <code>_site.yml</code> is the file that keeps everything in line and organizes your distill website. <em>However, it’s very specific as to the syntax, so you should take care to only add in specific things.</em> Additionally, keep in mind that you should always use the <code><a href="https://pkgs.rstudio.com/distill/reference/create_article.html">create_article()</a></code> function whenever you need to create a new page or a .Rmd file. <em>Do not add in a .Rmd file manually.</em> These both lead to errors that can break your project.</p>
 </section><section id="formatting-the-article" class="level4" data-number="3.6.1.3"><h4 data-number="3.6.1.3" class="anchored" data-anchor-id="formatting-the-article">
 <span class="header-section-number">3.6.1.3</span> Formatting the article</h4>
 <p>You can format the article just like you did before because it’s still an RMarkdown file. However, you can also put more advanced features like block quotes <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">here</a>. Just make sure not to edit the headers at the top of the file without knowing exactly what you’re doing in order to prevent any errors.</p>
 </section><section id="error-operator-is-invalid-for-atomic-vectors" class="level4" data-number="3.6.1.4"><h4 data-number="3.6.1.4" class="anchored" data-anchor-id="error-operator-is-invalid-for-atomic-vectors">
 <span class="header-section-number">3.6.1.4</span> <code>Error: $ operator is invalid for atomic vectors</code>
 </h4>
-<p>This is the error caused by creating a .Rmd file without using it in your <code>_site.yml</code> or using <code>create_article()</code> to make it. Essentially, distill doesn’t know how to deal with the extra .Rmd file and crashes because of it. This can normally be solved just by deleting the extra .Rmd, but it may be necessary to just nuke the project from orbit and restart.</p>
+<p>This is the error caused by creating a .Rmd file without using it in your <code>_site.yml</code> or using <code><a href="https://pkgs.rstudio.com/distill/reference/create_article.html">create_article()</a></code> to make it. Essentially, distill doesn’t know how to deal with the extra .Rmd file and crashes because of it. This can normally be solved just by deleting the extra .Rmd, but it may be necessary to just nuke the project from orbit and restart.</p>
 <p>As such, make sure that you never create an extra .Rmd, as it’s just going to be more work on your end when you start encountering this error. If you want to write R code for a graph so that you can put it into your website, just use a normal R script file by going to File -&gt; New File -&gt; R Script in RStudio.</p>
 </section><section id="yaml-errors" class="level4" data-number="3.6.1.5"><h4 data-number="3.6.1.5" class="anchored" data-anchor-id="yaml-errors">
 <span class="header-section-number">3.6.1.5</span> YAML Errors</h4>

@@ -416,18 +416,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 33 × 4
-   group           red_beads prop_red group_ID
-   &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
- 1 Yuki, Harry            21     0.42        1
- 2 Siobhan, Jane          11     0.22        2
- 3 Caroline, Edna         15     0.3         3
- 4 Ellie, Terrance        17     0.34        4
- 5 Maddie, Brent          19     0.38        5
- 6 Mark, Jane             21     0.42        6
- 7 Nam, Joshua            19     0.38        7
- 8 Katie, Anthony         20     0.4         8
- 9 Aaron, Mike            11     0.22        9
-10 Yao, Kate              23     0.46       10
+   group         red_beads prop_red group_ID
+   &lt;chr&gt;             &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
+ 1 Frank, Clara         21     0.42        1
+ 2 Maeve, Josh          18     0.36        2
+ 3 Morgan, Emily        21     0.42        3
+ 4 Yuki, Harry          21     0.42        4
+ 5 Mark, Jane           21     0.42        5
+ 6 Siobhan, Jane        11     0.22        6
+ 7 Ilyas, Yohan         21     0.42        7
+ 8 Aaron, Mike          11     0.22        8
+ 9 Sanjana, Yuko        19     0.38        9
+10 Ian, Iman            18     0.36       10
 # … with 23 more rows</code></pre>
 </div>
 </div>
@@ -811,7 +811,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="kqavcuevlu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="kqavcuevlu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
@@ -851,6 +851,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-style: none;
   border-right-width: 1px;
   border-right-color: #D3D3D3;
+}
+
+:where(#kqavcuevlu) .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 :where(#kqavcuevlu) .gt_title {
@@ -973,6 +978,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
 :where(#kqavcuevlu) .gt_empty_group_heading {
@@ -1221,21 +1227,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="">Comparing standard deviations of proportions red for three different shovels</td>
     </tr></thead>
 <thead class="gt_col_headings"><tr>
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Number of slots in shovel</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Standard deviation of proportions red</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Number of slots in shovel">Number of slots in shovel</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Standard deviation of proportions red">Standard deviation of proportions red</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td class="gt_row gt_right">25</td>
-<td class="gt_row gt_right">0.099</td>
+<td headers="Number of slots in shovel" class="gt_row gt_right">25</td>
+<td headers="Standard deviation of proportions red" class="gt_row gt_right">0.099</td>
 </tr>
 <tr>
-<td class="gt_row gt_right">50</td>
-<td class="gt_row gt_right">0.067</td>
+<td headers="Number of slots in shovel" class="gt_row gt_right">50</td>
+<td headers="Standard deviation of proportions red" class="gt_row gt_right">0.067</td>
 </tr>
 <tr>
-<td class="gt_row gt_right">100</td>
-<td class="gt_row gt_right">0.045</td>
+<td headers="Number of slots in shovel" class="gt_row gt_right">100</td>
+<td headers="Standard deviation of proportions red" class="gt_row gt_right">0.045</td>
 </tr>
 </tbody>
 </table>
@@ -1548,7 +1554,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="khbizfzmxo" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="khbizfzmxo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
@@ -1588,6 +1594,11 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-style: none;
   border-right-width: 1px;
   border-right-color: #D3D3D3;
+}
+
+:where(#khbizfzmxo) .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 :where(#khbizfzmxo) .gt_title {
@@ -1710,6 +1721,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
 :where(#khbizfzmxo) .gt_empty_group_heading {
@@ -1958,45 +1970,45 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <td colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="">Preceptor Table</td>
     </tr></thead>
 <thead class="gt_col_headings"><tr>
-<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">ID</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Color</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="ID">ID</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Color">Color</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">1</td>
-<td class="gt_row gt_center">white</td>
+<td headers="bead_ID" class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">1</td>
+<td headers="color" class="gt_row gt_center">white</td>
 </tr>
 <tr>
-<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">2</td>
-<td class="gt_row gt_center">white</td>
+<td headers="bead_ID" class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">2</td>
+<td headers="color" class="gt_row gt_center">white</td>
 </tr>
 <tr>
-<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">...</td>
-<td class="gt_row gt_center">...</td>
+<td headers="bead_ID" class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">...</td>
+<td headers="color" class="gt_row gt_center">...</td>
 </tr>
 <tr>
-<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">200</td>
-<td class="gt_row gt_center">red</td>
+<td headers="bead_ID" class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">200</td>
+<td headers="color" class="gt_row gt_center">red</td>
 </tr>
 <tr>
-<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">201</td>
-<td class="gt_row gt_center">white</td>
+<td headers="bead_ID" class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">201</td>
+<td headers="color" class="gt_row gt_center">white</td>
 </tr>
 <tr>
-<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">...</td>
-<td class="gt_row gt_center">...</td>
+<td headers="bead_ID" class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">...</td>
+<td headers="color" class="gt_row gt_center">...</td>
 </tr>
 <tr>
-<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">2078</td>
-<td class="gt_row gt_center">red</td>
+<td headers="bead_ID" class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">2078</td>
+<td headers="color" class="gt_row gt_center">red</td>
 </tr>
 <tr>
-<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">2079</td>
-<td class="gt_row gt_center">white</td>
+<td headers="bead_ID" class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">2079</td>
+<td headers="color" class="gt_row gt_center">white</td>
 </tr>
 <tr>
-<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">...</td>
-<td class="gt_row gt_center">...</td>
+<td headers="bead_ID" class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">...</td>
+<td headers="color" class="gt_row gt_center">...</td>
 </tr>
 </tbody>
 </table>
@@ -2012,7 +2024,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="mculmoacfi" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mculmoacfi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
@@ -2052,6 +2064,11 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-style: none;
   border-right-width: 1px;
   border-right-color: #D3D3D3;
+}
+
+:where(#mculmoacfi) .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 :where(#mculmoacfi) .gt_title {
@@ -2174,6 +2191,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
 :where(#mculmoacfi) .gt_empty_group_heading {
@@ -2422,33 +2440,33 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <td colspan="2" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="">Data from Shovel</td>
     </tr></thead>
 <thead class="gt_col_headings"><tr>
-<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">ID</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Color</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="ID">ID</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Color">Color</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">2</td>
-<td class="gt_row gt_center">white</td>
+<td headers="bead_ID" class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">2</td>
+<td headers="color" class="gt_row gt_center">white</td>
 </tr>
 <tr>
-<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">...</td>
-<td class="gt_row gt_center">...</td>
+<td headers="bead_ID" class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">...</td>
+<td headers="color" class="gt_row gt_center">...</td>
 </tr>
 <tr>
-<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">200</td>
-<td class="gt_row gt_center">red</td>
+<td headers="bead_ID" class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">200</td>
+<td headers="color" class="gt_row gt_center">red</td>
 </tr>
 <tr>
-<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">...</td>
-<td class="gt_row gt_center">...</td>
+<td headers="bead_ID" class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">...</td>
+<td headers="color" class="gt_row gt_center">...</td>
 </tr>
 <tr>
-<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">2079</td>
-<td class="gt_row gt_center">white</td>
+<td headers="bead_ID" class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">2079</td>
+<td headers="color" class="gt_row gt_center">white</td>
 </tr>
 <tr>
-<td class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">...</td>
-<td class="gt_row gt_center">...</td>
+<td headers="bead_ID" class="gt_row gt_center" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;">...</td>
+<td headers="color" class="gt_row gt_center">...</td>
 </tr>
 </tbody>
 </table>
@@ -2481,7 +2499,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="kiywfzfbzi" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="kiywfzfbzi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
@@ -2521,6 +2539,11 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-style: none;
   border-right-width: 1px;
   border-right-color: #D3D3D3;
+}
+
+:where(#kiywfzfbzi) .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
 :where(#kiywfzfbzi) .gt_title {
@@ -2643,6 +2666,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
 :where(#kiywfzfbzi) .gt_empty_group_heading {
@@ -2888,333 +2912,333 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 </style>
 <table class="gt_table">
 <thead class="gt_col_headings"><tr>
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="font-size: large; text-align: left; vertical-align: middle;" scope="col">Source</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Location</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Time</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">ID</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col">Color</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="font-size: large; text-align: left; vertical-align: middle;" scope="col" id="Source">Source</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Location">Location</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Time">Time</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="ID">ID</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Color">Color</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>Other</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>Known, specific urn</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>Time of sample - 2 years</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>1</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>?</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>Other</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>Known, specific urn</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>Time of sample - 3 weeks</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>200</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>?</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>Other</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>Known, specific urn</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>Time of sample - 10 days</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>976</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>?</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>Data</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>Known, specific urn</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>Time of sample</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>2</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>white</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>Data</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>Known, specific urn</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>Time of sample</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>200</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>red</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>Data</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>Known, specific urn</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>Time of sample</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>1080</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>white</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>Other</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>Known, specific urn</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>Time of sample + 10 days</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>1</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>?</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>Other</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>Known, specific urn</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>Time of sample + 3 weeks</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>200</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>?</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>Other</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>Known, specific urn</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>Time of sample + 2 years</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>2025</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>?</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>Preceptor Table</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>Known, specific urn</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>Now</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>1</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>?</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>Preceptor Table</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>Known, specific urn</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>Now</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>200</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>red</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>Preceptor Table</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>Known, specific urn</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>Now</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>2078</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>?</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>...</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>Other</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>Known, specific urn</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>Now + 10 days</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>1</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>?</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>Other</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>Known, specific urn</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>Now + 3 weeks</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>200</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>?</p>
 </div></td>
 </tr>
 <tr>
-<td class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
+<td headers="source" class="gt_row gt_left" style="border-right-width: 1px; border-right-style: solid; border-right-color: #000000;"><div class="gt_from_md">
 <p>Other</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="location" class="gt_row gt_center"><div class="gt_from_md">
 <p>Known, specific urn</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="time" class="gt_row gt_center"><div class="gt_from_md">
 <p>Now + 2 years</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="id" class="gt_row gt_center"><div class="gt_from_md">
 <p>2300</p>
 </div></td>
-<td class="gt_row gt_center"><div class="gt_from_md">
+<td headers="color" class="gt_row gt_center"><div class="gt_from_md">
 <p>?</p>
 </div></td>
 </tr>

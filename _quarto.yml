@@ -61,6 +61,8 @@ format:
   html:
     theme: cosmo
     code-link: true
+    code-overflow: wrap
+
   # pdf:
   #   documentclass: krantz
   #   keep-tex: true

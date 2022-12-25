@@ -1776,12 +1776,12 @@ z <- read_csv("./05-probability/data/election-forecasts-2020/prez_1.csv",
        mutate(obs = round(prob * 1000000))  |>
        select(-prob) |>
        uncount(weights = obs) |>
-       pull(electoral_votes)
+       select(electoral_votes)
 
 
 
 draws <- tibble(ID = 1:1000000,
-                electoral_votes = as.integer(sample(z)))
+                electoral_votes = as.integer(sample(z$electoral_votes)))
 
 ```
 
