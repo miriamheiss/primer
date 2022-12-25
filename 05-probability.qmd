@@ -166,14 +166,14 @@ more_rolls <- rep(ten_rolls, 100)
 #| echo: false
 rolls_p <- tibble(value = ten_rolls) |> 
   ggplot(aes(value)) +
-    geom_bar(aes(y = after_stat(count))) +
+    geom_bar() +
     labs(title = "Distribution of 10 Rolls",
          y = "Count") 
 
 
 more_rolls_p <- tibble(value = more_rolls) |> 
   ggplot(aes(value)) +
-    geom_bar(aes(y = after_stat(count))) +
+    geom_bar() +
     labs(title = "Distribution of 1,000 Rolls",
          y = NULL)
 

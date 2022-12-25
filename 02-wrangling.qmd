@@ -46,19 +46,13 @@ library(fivethirtyeight)
 
 Tibbles are a kind of data frame, useful for storing data in which we have the same number of observations for each variable. We can use the `tibble()` function to create tibbles. Tibbles are composed of columns, each of which is a variable, and rows, each of which is a "unit" or an "observation." Furthermore, each column (i.e., each variable) can be of a different type: character, integer, factor, double, date and so on.
 
-<!-- AM: Probably mention how we've already used tibbles, such as the trains dataset from Chapter 1. -->
-
 ### `tibble()`
 
 ```{r}
 tibble(a = 2.1, b = "Hello", c = TRUE, d = 9L)
 ```
 
-<!-- AM: Also unnecessarily wordy. -->
-
 In our code, we specify the column names as , `a`, `b`, and `c`. Under each variable, we give a different value. Under each variable name, the data type is specified for the data within that column. A tibble can consist of one or more atomic vectors, the most important types of which are double, character, logical, and integer. The tibble above includes a variable of each type. The "L" in "9L" tells R that we want `d` to be an integer rather than the default, which would be a double. When you print out a tibble, the variable type is shown below the variable name, as indicated by `<dbl>`, `<chr>`, and so on.
-
-<!-- Add note about data in the wild. -->
 
 Variables should not begin with a number (like `54abc`) or include spaces (like `my var`). If you insist on using variable names such, you must include backticks around each name when you reference it.
 
@@ -87,9 +81,9 @@ tribble(
 )
 ```
 
-<!-- AM: The last part of this sentence is confusing. -->
-
 The tildes --- as in `~ var1` --- specify which row has the column names. The formatting makes it easier, relative to specifying raw vectors, to see which values are from the same observation.
+
+`as_tibble()` is a handy function for transforming other R objects, especially matrices, into tibbles.
 
 ## Lists
 
@@ -1080,7 +1074,7 @@ runif(n = 10, min = 4, max = 6)
 
 Mathematically, we would notate:
 
-$$y_i \sim U(4, 6)$$, 
+$$y_i \sim U(4, 6)$$
 
 This means that the each value for $y$ is drawn from a uniform distribution between four and six.
 
@@ -1133,7 +1127,7 @@ tibble(heads = rbinom(n = 100, size = 1, prob = 0.75)) |>
 
 The distribution --- the imaginary urn --- from which we draw the results of a coin flip for a fair coin is a different distribution --- a different imaginary urn --- from the distribution for a biased coin. In fact, there are an infinite number of distributions. *Yet as long as we can draw values from a distribution, we can work with it.* Mathematics:
 
-$$y_i \sim B(n, p)$$. 
+$$y_i \sim B(n, p)$$
 
 Each value for $y$ is drawn from a binomial distribution with parameters $n$ for the number of trials and $p$ for the probability of success. 
 
@@ -1157,7 +1151,7 @@ tibble(heads = rbinom(n = 10000, size = 10, prob = 0.5)) |>
 
 The most important distribution is the *normal distribution*. Mathematics:
 
-$$y_i \sim N(\mu, \sigma^2)$$. 
+$$y_i \sim N(\mu, \sigma^2)$$
 
 Each value $y_i$ is drawn from a normal distribution with parameters $\mu$ for the mean and $\sigma$ for the standard deviation. 
 
@@ -1171,6 +1165,7 @@ This bell-shaped distribution is defined by two parameters: (1) the *mean* $\mu$
 ```{r}
 #| echo: false
 #| fig.cap: Three normal distributions.
+
 library(ggrepel)
 
 all_points <- tibble(
@@ -1305,14 +1300,6 @@ m[, 2]
 
 Tibbles, on the other hand, always maintain their rectangular shapes, even with only one column or row. 
 
-We can turn matrices into tibbles with `as_tibble()`.
-
-```{r}
-m |> 
-  as_tibble()
-```
-
-Because `m` does not have column names, `as_tibble()` creates its won variables names, using "V" for variable.
 
 ### Missing Values 
 

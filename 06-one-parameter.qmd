@@ -1169,8 +1169,6 @@ We have successfully created the posterior distribution and can finally answer t
 
 Look to the posterior probability distribution we have created. We can see that the bulk of the area under the posterior occurs approximately when $\rho$ is between .28 and .42, so the answer to our question is that it is likely that 28% to 42% of the beads in the urn are red. Is that specific range the truth? No! We are just eye-balling the distribution, giving a rough sense of the likely value of $\rho$. Any range that is large enough to acknowledge the uncertainty we have regarding the exact value of $\rho$ is acceptable. 
 
-<!-- DK: here -->
-
 Although the most likely probability (the highest bar on the histogram) occurs when $\rho$ is around .34, The answer is not a single number. Our posterior distribution is just that: a distribution. Using our data, we have many different results for the proportion of red beads in the entire urn. Certain proportions, like the extremes close to 0% or 100%, are essentially impossible due to our sample value being 34%. On the other hand, we could have just as easily sampled 16 or 18 beads from the urn, and sample proportions such as 32% and 36% are very plausible.
 
 This means that, while we can provide a range of possibilities (and we can estimate which of those possibilities occur most frequently), we can never say that we know the total number of red beads with certainty.  We know that there is the most chance that $\rho$ is between .28 and about .42, some chance that $\rho$ is between .15 and .24 or between .42 and .56, and almost no chance that $\rho$ is below .15 or above .56. With the posterior we can visualize all of these probabilities at once. 
