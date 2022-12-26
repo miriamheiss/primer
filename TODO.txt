@@ -1,5 +1,7 @@
 # Priorities
 
+-4) Introduce c_across() in Other Commands in Wrangling.
+
 -3) Update Trump/Biden data in chapter 1.
 
 -2) https://mc-stan.org/rstanarm/reference/stan_polr.html Add some examples with ordinal dependent variables. Of course, what we really want is multinomial regression.
@@ -63,7 +65,7 @@ https://tmb.njtierney.com/
 
 * Should validity be moved to Wisdom? You need to establish valdity before you can presume to consider the Preceptor Table and the data to have come from the same population. Yes!
 
-* Add rowSums() explanation to Chapter 2.
+* Add rowwise() and c_across() explanation to Chapter 2.
 
 * Check out Frank Herrell book: http://hbiostat.org/rflow/
 
@@ -200,13 +202,8 @@ https://github.com/jonspring/discontinuity/blob/master/fileb23c55435f90.gif
 ## To Discuss Later
 
 
-* I like the hack of making your Rmd an index.Rmd and then the html will appear as a Github pages for free.
-
 
 * Should use summary(fit_1) and discuss at some point. But when? Maybe Chapter 10?
-
-* Do we need a cool graphics appendix, with  brief descriptions, pretty pictures from cool packages like: ggrepel, gghighlights, plotly. Others?
-
 
 
 * More discussion of what it means to "control for" something in a regression. Right now, we don't mention this until chapter 11. Needs to be covered earlier, especially in chapter 9. That sets the stage for later.

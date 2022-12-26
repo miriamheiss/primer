@@ -5,10 +5,11 @@
 #| echo: false
 #| message: false
 #| warning: false
- # We also load the **rayshader** and **rgl** packages. We use them to create
- # the 3-D plots below. You can read more about **rayshader**
- # [here](https://www.rayshader.com/) but we will not be explaining how to use
- # it in this *Primer*.
+ 
+# We also load the **rayshader** and **rgl** packages. We use them to create the
+# 3-D plots below. You can read more about **rayshader**
+# [here](https://www.rayshader.com/) but we will not be explaining how to use it
+# in this *Primer*.
 
 options(rgl.useNULL = TRUE)
 library(rayshader)
@@ -23,6 +24,8 @@ library(patchwork)
 
 
 <!-- Major change is that each example needs to have a simple question. Then it needs a DGM. Then we use the DGM to answer the question.  -->
+
+<!-- In the list column section, is use a dot the best approach to working with map* functions and list-columns? -->
 
 <!-- Topics we don't currently address in the chapter but which we might add: population, Preceptor Table, Population Table. -->
 
@@ -1167,7 +1170,7 @@ By looking at the posterior graph we just create, we can answer this question ea
 *With a positive test, you can be almost 70% sure that you have Probophobia, however there is a good chance about 30% that you receive a false positive, so don't worry too much there is still about a third of hope that you get the wrong result*
 
 Now let's consider the manipulation of this posterior, here is another question.
-Question : *10 people walks up to testing center, 5 of them tested negative, 5 of them tested positive, what is the probability of at least 6 people is actually healthy? *
+Question : *10 people walks up to testing center, 5 of them tested negative, 5 of them tested positive, what is the probability of at least 6 people are actually healthy? *
 
 ```{r}
 tibble(test = 1:100000) |>
@@ -1183,17 +1186,22 @@ tibble(test = 1:100000) |>
   mutate(person10 = map_int(test, ~ rbinom(n = 1, size = 1, p = 0.7))) |>
   select(!test) |> 
   
-mutate(sum = rowSums(across(person1:person10))) |>
+  # The tricky part of this code is that we want to sum the outcomes across the
+  # rows of the tibble. This is different from our usual approach of summing
+  # down the columns, as with summarize(). The way to do this is to, first, use
+  # rowwise() to tell R that we want to work with rows in the tibble and then,
+  # second, use c_across() to indicate which variables we want to work with.
   
-ggplot(aes(sum)) +
-  geom_histogram(aes(y = after_stat(count/sum(count))),
-                 binwidth = 1,
+  rowwise() |> 
+  mutate(total = sum(c_across(person1:person10))) |>
+  
+  ggplot(aes(total)) +
+    geom_histogram(aes(y = after_stat(count/sum(count))),
+                   binwidth = 1,
                    color = "white") +
-  scale_x_continuous(breaks = c(0:10)) +
-    scale_y_continuous(labels = 
-                         scales::percent_format(accuracy = 1)) +
+    scale_x_continuous(breaks = c(0:10)) +
+    scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
     theme_classic()  
-
 ```
 
 
@@ -1210,12 +1218,12 @@ ggplot(aes(sum)) +
 knitr::include_graphics("05-probability/images/marble.jpg")
 ```
 
-Imagine that your friend gives you a bag with two marbles. There could either be two white marbles, two black marbles, or one of each color. Thus, the bag could contain 0% white marbles, 50% white marbles, or 100% white marbles. Respectively, the proportion, $p$, of white marbles could be 0, 0.5, or 1.
+Imagine that your friend gives you a bag with two marbles. There could either be two white marbles, two black marbles, or one of each color. Thus, the bag could contain 0% white marbles, 50% white marbles, or 100% white marbles. The proportion, $p$, of white marbles could be, respectively, 0, 0.5, or 1.
 
-Question: *What is the chance of the bag contains exactly two white marbles, given that when we selected the marbles three times, everytime we select a white marble?*
+Question: *What is the chance of the bag contains exactly two white marbles, given that when we selected the marbles three times, every time we select a white marble?*
 
 $$ P(\text{2 White Marbles in bag | White Marbles Sampled = 3} ) $$
-Just as during the *Probophobia* models, in order to answer this question, we need to start up with the simulated data and then graphing out the joint distribution of this sinerio because we need to considered all possible outcomes of this model, and then based on the joint distribution we can slice out the the part we want (Conditional distribution) in the end making an posterior graph as well as normalizing it to see the probability.
+Just as during the *Probophobia* models, in order to answer this question, we need to start up with the simulated data and then graphing out the joint distribution of this scenerio because we need to considered all possible outcomes of this model, and then based on the joint distribution we can slice out the the part we want (the conditional distribution) in the end making a posterior graph as well as normalizing it to see the probability.
 
 Step 1: Simulate the data into an tibble
 
