@@ -22,7 +22,7 @@ More precisely, R is a programming language that runs computations, while RStudi
 
 Download and install R and RStudio (Desktop version) on your computer.
 
-1.  [Download and install R](https://cloud.r-project.org/). If you are using a Mac, make sure the use the correct installation, depending on whether you are using an  older "Intel Mac" (first option) or a newer "M1 Mac" (second option). You can look up the chip used in your Mac by checking out "About This Mac" under the Apple menu.
+1.  [Download and install R](https://cloud.r-project.org/). If you are using a Mac, make sure the use the correct installation, depending on whether you are using newer "M1 and higher Macs" (first option) or older "Intel Macs" (second option). You can look up the chip used in your Mac by checking out "About This Mac" under the Apple menu.
 
 2.  [Download and install RStudio Desktop](https://rstudio.com/products/rstudio/download/#download) (the free version).
 
@@ -171,7 +171,7 @@ After running this code, a blinking cursor should appear next to the `>` symbol.
 
 <!-- DK: Make this text, and other error messages, red. -->
 
-    Error in library(remotes) : there is no package called ‘remotes’
+<span style="color: red;">Error in library(remotes) : there is no package called 'remotes'</span>
 
 This error message means that you haven't successfully installed the package. If you get this error message, make sure to install the **remotes** package before proceeding.
 
@@ -183,7 +183,7 @@ R will occasionally ask you if you want to install some packages. You almost alw
 
 *You have to load each package you want to use every time you start RStudio.* If you don't load a package before attempting to use one of its features, you will see an error message like:
 
-    Error: could not find function
+<span style="color: red;">Error: could not find function</span>
 
 This is a different error message than the one you just saw about a package not having been installed yet. R is telling you that you are trying to use a function in a package that has not yet been loaded. R doesn't know where to "find" the function you want to use.
 
@@ -195,8 +195,6 @@ Let's install a package that is not available from CRAN: **all.primer.tutorials*
 library(remotes)
 install_github("PPBDS/all.primer.tutorials")
 ```
-
-This might fail, especially if the quotation marks you paste over turn "curly." In that case, type the commands yourself from scratch.
 
 Many other new packages will be installed, including **primer.data**, which provides the data sets we use in the *Primer*. It may take a few minutes. If something gets messed up, it is often useful to read the error messages and see if a specific package is at fault. If so, use the `remove.packages()` function to remove the problematic package and then install it again.
 
@@ -258,16 +256,23 @@ sqrt(64)
 
 -   *Errors, warnings, and messages*: these are important communications from R to you. When there is an error, the code will not run. Read (and/or Google) the message and try to fix it. Warnings don't prevent code from completing. For example, if you create a scatterplot based on data with two missing values, you will see this warning:
 
-    Warning message:
-    Removed 2 rows containing missing values (geom_point).  
+    <span style="color: red;">Warning message:
+    Removed 2 rows containing missing values (geom_point).</span>  
 
-Messages are similar. In both cases, you should fix the underlying issue until the warning/message goes away.
+Messages are similar. In both cases, you should fix the underlying issue until the error/warning/message goes away.
 
 ## Summary {.unnumbered}
 
 You should have done the following:
 
   - Installed the *latest* versions of R and RStudio.
+  
+  - Run, from the Console:
+  
+```{r}
+#| eval: false
+options(pkgType = "binary")
+```
 
   - Installed, from Github, the **all.primer.tutorials** package:
 
@@ -276,7 +281,7 @@ You should have done the following:
 remotes::install_github("PPBDS/all.primer.tutorials")
 ```
 
-  - Run this command to set up RStudio:
+  - Run this command to set some RStudio options:
   
 ```{r}
 #| eval: false
