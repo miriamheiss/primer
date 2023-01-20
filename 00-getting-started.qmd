@@ -22,7 +22,7 @@ More precisely, R is a programming language that runs computations, while RStudi
 
 Download and install R and RStudio (Desktop version) on your computer.
 
-1.  [Download and install R](https://cloud.r-project.org/). If you are using a Mac, make sure the use the correct installation, depending on whether you are using newer "M1 and higher Macs" (first option) or older "Intel Macs" (second option). You can look up the chip used in your Mac by checking out "About This Mac" under the Apple menu.
+1.  [Download and install R](https://cloud.r-project.org/). If you are using a Mac, make sure to use the correct installation, depending on whether you are using newer "M1 and higher Macs" (first option) or older "Intel Macs" (second option). You can look up the chip used in your Mac by checking out "About This Mac" under the Apple menu.
 
 2.  [Download and install RStudio Desktop](https://rstudio.com/products/rstudio/download/#download) (the free version).
 
