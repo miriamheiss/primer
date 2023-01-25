@@ -130,7 +130,7 @@ Before installing packages, issue this command:
 options(pkgType = "binary")
 ```
 
-Doing so just makes various errors less likely. Do NOT do this is if you are installing on a Linux machine, e.g., a Chromebook or on a service like RStudio Cloud. 
+Doing so just makes various errors less likely. Do NOT do this is if you are installing on a Linux machine, e.g., a Chromebook or on a service like [Posit Cloud](https://posit.cloud). 
 
 Let's install a useful package. At the Console pane within RStudio, type:
 
