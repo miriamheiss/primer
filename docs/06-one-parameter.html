@@ -309,9 +309,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header><div class="cell">
 
 </div>
-<!-- Use twitter comment about transforming R code chunks to new Quarto format. -->
 <!-- Case study of polls needs to be updated to use our language of validity and so on. -->
-<!-- RS: Technically, standard error should not use sigma in it's formula, as it specifically refers to a point statistic and not a population. Someone may want to change all the sigmas to s. Hmm? -->
 <!-- There needs to be more explanation about confidence intervals!  -->
 <!-- In some paragraphs we say that it is impossible to conduct a census because we don't have access to the urn, in others like this we do have access and can complete the census. Which is it? You pick. -->
 <!-- Another paragraph or two of discussion about the final posterior. How do we use it? Within what range would you offer 50/50 odds that the true percentage lies? (use quantile(0.25, 0.75). Area under the curve? Explain clearly how that 26% is calculated. What is post_dist? What does it mean? How can I use it? Maybe show it sorted? Add some code comments. -->
@@ -418,16 +416,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 33 × 4
    group           red_beads prop_red group_ID
    &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
- 1 Yuki, Harry            21     0.42        1
- 2 Katie, Anthony         20     0.4         2
- 3 Damani, Melissa        15     0.3         3
- 4 Caroline, Edna         15     0.3         4
- 5 Ilyas, Yohan           21     0.42        5
- 6 Griffin, Mary          18     0.36        6
- 7 Aayush, Karen          15     0.3         7
- 8 Mark, Jane             21     0.42        8
- 9 Maddie, Brent          19     0.38        9
-10 Aaron, Mike            11     0.22       10
+ 1 Sophie, Brian          21     0.42        1
+ 2 Ellie, Terrance        17     0.34        2
+ 3 Paddy, Matt            16     0.32        3
+ 4 Claire, Cloud          16     0.32        4
+ 5 Mak, Sophie            17     0.34        5
+ 6 Vignesh, Eliot         16     0.32        6
+ 7 Ishan, Cass            15     0.3         7
+ 8 Ace, Chris             18     0.36        8
+ 9 Aayush, Karen          15     0.3         9
+10 Mark, Jane             21     0.42       10
 # … with 23 more rows</code></pre>
 </div>
 </div>
@@ -450,7 +448,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  <span class="co"># p-hat. The paste after expression allows us to paste text prior to said</span></span>
 <span>  <span class="co"># expression.</span></span>
 <span>  </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Proportion of 50 beads that were red "</span>, <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">rho</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Proportion, "</span>, <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">rho</span><span class="op">)</span>, <span class="st">", of 50 beads that were red"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"Count"</span>,</span>
 <span>       title <span class="op">=</span> <span class="st">"Proportions Red in 33 Samples"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -535,8 +533,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>There are two levels. There is one row in the tibble for each sample. So far, we have only drawn one sample. Within each row, there is a second level, the tibble which is the sample. That tibble has two variables: <code>trial_ID</code> and <code>color</code>. This is the advantage to using <code><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample()</a></code>, because it selects all columns of our urn, whereas <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> can only sample from a single column. While identifying each individual bead may be irrelevant in our urn scenario, with other problems it could be very useful to have additional data about each individual.</p>
 <p>Now let’s add a column which indicates the number of red beads in the sample taken from the shovel.</p>
-<!-- DK: Is code like .$color understandable? -->
-<!-- RS: I think the dollar sign operator should be understood at this point, but was thinking about asking Yuhan to include a way better explanation about the "this" operator in Chapter 5.  -->
+<!-- Explain .$color in a code comment. -->
 <div class="cell">
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>trial_ID <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>shovel <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">trial_ID</span>, <span class="op">~</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span><span class="va">urn</span>, n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -612,7 +609,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  <span class="co"># To use mathematical symbols in titles and labels, use the expression()</span></span>
 <span>  <span class="co"># function, as here.</span></span>
 <span>  </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">rho</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Proportion, "</span>, <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">rho</span><span class="op">)</span>, <span class="st">", of 50 beads that were red"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>       y <span class="op">=</span> <span class="st">"Count"</span>,</span>
 <span>       title <span class="op">=</span> <span class="st">"Distribution of 33 proportions red"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  </span>
@@ -703,7 +700,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.04</span>, </span>
 <span>                 boundary <span class="op">=</span> <span class="fl">0.4</span>, </span>
 <span>                 color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Proportion of 25 beads that were red"</span>, </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Proportion, "</span>, <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">rho</span><span class="op">)</span>, <span class="st">", of 25 beads that were red"</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>       title <span class="op">=</span> <span class="st">"25"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="06-one-parameter_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
@@ -722,7 +719,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.04</span>, </span>
 <span>                 boundary <span class="op">=</span> <span class="fl">0.4</span>, </span>
 <span>                 color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Proportion of 50 beads that were red"</span>, </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Proportion, "</span>, <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">rho</span><span class="op">)</span>, <span class="st">", of 50 beads that were red"</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>       title <span class="op">=</span> <span class="st">"50"</span><span class="op">)</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="06-one-parameter_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
@@ -742,7 +739,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.04</span>, </span>
 <span>                 boundary <span class="op">=</span> <span class="fl">0.4</span>, </span>
 <span>                 color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Proportion of 100 beads that were red"</span>, </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Proportion, "</span>, <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">rho</span><span class="op">)</span>, <span class="st">", of 100 beads that were red"</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>       title <span class="op">=</span> <span class="st">"100"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="06-one-parameter_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
@@ -769,7 +766,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span></span>
 <span><span class="va">comparing_sampling_distributions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">virtual_prop</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">prop_red</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">0.04</span>, boundary <span class="op">=</span> <span class="fl">0.4</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Proportion of shovel's beads that are red"</span>, </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Proportion, "</span>, <span class="fu"><a href="https://rdrr.io/r/stats/influence.measures.html">hat</a></span><span class="op">(</span><span class="va">rho</span><span class="op">)</span>, <span class="st">", of the beads that were red"</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>       title <span class="op">=</span> <span class="st">"Comparing distributions of proportions red for three different shovel sizes."</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">n</span><span class="op">)</span> </span>
 <span></span>
@@ -1264,7 +1261,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>trial_ID <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>shovel_ID <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">trial_ID</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">50</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span><span class="op">(</span><span class="va">shovel_ID</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">shovel_ID</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">shovel_ID</span>, <span class="op">~</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span><span class="va">urn</span>, n <span class="op">=</span> <span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>num_red <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">samples</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">.</span><span class="op">$</span><span class="va">color</span> <span class="op">==</span> <span class="st">"red"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>prop_red <span class="op">=</span> <span class="va">num_red</span><span class="op">/</span><span class="va">shovel_ID</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1360,7 +1357,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 </div>
 </div>
 <p>Now, we have the standard deviation of <code>prop_red</code> for all shovel sizes from 1 to 100. Let’s plot that value to see how it changes as the shovel gets larger:</p>
-<div class="cell" data-hash="06-one-parameter_cache/html/unnamed-chunk-35_14f42aed473aa3c358b0c61f2fc1e99a">
+<div class="cell" data-hash="06-one-parameter_cache/html/unnamed-chunk-35_0b4bc25394dd2eba24a9ca2f5f7ec37f">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="06-one-parameter_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
@@ -1512,7 +1509,6 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 </div>
 </div>
 </div>
-<!-- RS: Pyramid is not super helpful and I support removing it and all references to it.  -->
 <p>This hierarchy represents the knowledge we need to understand standard error (SE). At the bottom, we have math. It’s the foundation for our understanding, but it doesn’t need to be what we take away from this lesson. As we go up, we simplify the topic. The top of the pyramid are the basic levels of understanding that will help you to remember in the future.</p>
 <p>If I know your estimate plus or minus <em>two</em> standard errors, I know your 95% confidence interval. This is valuable information. Standard error is really just a measure for how uncertain we are about something we do not know, the thing we are estimating. When we recall SE, we should remember that, all in all, it’s a complicated concept that can be distilled into: the way old people talk about confidence intervals.</p>
 <!-- RS: Explain what confidence interval is.  -->
@@ -3419,7 +3415,7 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <pre><code>[1] 0.5445</code></pre>
 </div>
 </div>
-<p>There is approximately a 54% chance that <span class="math inline">\(\rho\)</span> is between .3 and .4. Give me draws from the posterior and I can show you the world!</p>
+<p>There is approximately a 54% chance that <span class="math inline">\(\rho\)</span> is between .3 and .4. Give me enough draws from the posterior and I can show you the world!</p>
 </section></section><section id="temperance" class="level3" data-number="6.4.4"><h3 data-number="6.4.4" class="anchored" data-anchor-id="temperance">
 <span class="header-section-number">6.4.4</span> Temperance</h3>
 <div class="cell">
@@ -3753,23 +3749,22 @@ $ st_dev_p_hat &lt;dbl&gt; 0.48436516, 0.34093399, 0.27629253, 0.24069833, 0.214
 <p>For example, what if Kennedy School’s Institute of Politics at Harvard University conducted this poll using only mobile phone numbers? People without mobile phones would be left out and therefore not represented in the sample. This flaw is an example of <strong>censoring</strong>, the exclusion of certain datapoints due to an issue with data collection. This results in an incomplete observation and increases the prediction uncertainty of the estimand, Obama’s approval rating among young Americans. Ensuring that our samples were random was easy to do in our sampling urn exercises; however, in a real life situation like the Obama poll, this is much harder to do.</p>
 </section><section id="summary" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="summary">
 <span class="header-section-number">6.6</span> Summary</h2>
-<p>In this chapter, we performed both tactile and virtual sampling exercises to infer about an unknown parameter We also presented a case study of sampling in real life with polls. In each case, we used the sample proportion <span class="math inline">\(\hat{\rho}\)</span> to estimate the population proportion <span class="math inline">\(\rho\)</span>. However, we are not just limited to scenarios related to proportions. In other words, we can use sampling to estimate other population parameters using other point estimates as well.</p>
-<p>There is a truth! There is a true value for <span class="math inline">\(\rho\)</span> which we do not know! We want to create a posterior probability distribution which summarizes our knowledge. We care about the posterior probability distribution of <span class="math inline">\(\rho\)</span>. The center of that distribution is around the mean or median of the proportion in your sample. The sd (or mad) of that posterior is the standard deviation divided by the square root of our sample size! Note that this is the same thing as the standard deviation of the repeated samples.</p>
-<p>We have a journey from reality, to our predictions, to the standard error of our predictions, to the posterior probability distribution for <span class="math inline">\(\rho\)</span>. This is our sequence:</p>
+<p>In this chapter, we performed both tactile and virtual sampling exercises to make inferences about an unknown parameter: the proportion of red beads. We also presented a case study of sampling in real life with polls. In each case, we used the sample proportion <span class="math inline">\(\hat{\rho}\)</span> to estimate the true proportion <span class="math inline">\(\rho\)</span>. However, we are not just limited to scenarios related to proportions. We can use sampling to estimate other unknown quantities.</p>
+<p>There is a truth! There is a true value for <span class="math inline">\(\rho\)</span> which we do not know. We want to create a posterior probability distribution which summarizes our knowledge. We care about the posterior probability distribution of <span class="math inline">\(\rho\)</span>. The center of that distribution is around the mean or median of the proportion in your sample. The sd (or mad) of that posterior is the standard deviation divided by the square root of our sample size. Note that this is the same thing as the standard deviation of the repeated samples.</p>
+<p>We journey from reality, to our predictions, to the standard error of our predictions, to the posterior probability distribution for <span class="math inline">\(\rho\)</span>. This is our sequence:</p>
 <p><strong><span class="math inline">\(\rho\)</span> (the truth) <span class="math inline">\(\Rightarrow\)</span> <span class="math inline">\(\hat{\rho}\)</span> (my estimate) <span class="math inline">\(\Rightarrow\)</span> the standard error of <span class="math inline">\(\hat{\rho}\)</span> (black box of math mumbo jumbo and computer simulation magic) <span class="math inline">\(\Rightarrow\)</span> our posterior probability distribution for <span class="math inline">\(\rho\)</span> (our beliefs about the truth).</strong></p>
-<p>This journey shows how our beliefs about the truth develop through our work. We begin with <span class="math inline">\(\rho\)</span>; <span class="math inline">\(\rho\)</span> is the truth, the true but unknown value we are estimating. <span class="math inline">\(\hat{\rho}\)</span> is our estimate for <span class="math inline">\(\rho\)</span>. There can be millions and millions of <span class="math inline">\(\hat{\rho}\)</span>’s. Next, we must take the standard error of our estimates (our <span class="math inline">\(\hat{\rho}\)</span>’s) to account for our uncertainty of our predictions. Finally – the thing we need most – we create a posterior probability distribution for <span class="math inline">\(\rho\)</span>. This distribution is used to answer key questions about <span class="math inline">\(\rho\)</span>.</p>
+<p>This journey shows how our beliefs about the truth develop through our work. We begin with <span class="math inline">\(\rho\)</span>; <span class="math inline">\(\rho\)</span> is the truth, the true but unknown value we are estimating. <span class="math inline">\(\hat{\rho}\)</span> is our estimate for <span class="math inline">\(\rho\)</span>. There can be millions and millions of <span class="math inline">\(\hat{\rho}\)</span>’s. Next, we must estimate the standard error of our estimates (our <span class="math inline">\(\hat{\rho}\)</span>’s) to account for the uncertainty of our predictions. Finally, we create a posterior probability distribution for <span class="math inline">\(\rho\)</span>. This distribution is used to answer any questions about <span class="math inline">\(\rho\)</span>.</p>
 <section id="other-highlights" class="level3" data-number="6.6.1"><h3 data-number="6.6.1" class="anchored" data-anchor-id="other-highlights">
 <span class="header-section-number">6.6.1</span> Other highlights</h3>
 <ul>
 <li><p>Standard error is just a fancy term for your uncertainty about something you don’t know. Standard error <span class="math inline">\(\approx\)</span> our (uncertain) beliefs.</p></li>
-<li><p>The standard error measures the accuracy of a sample distribution as compared to the population by using the standard deviation.</p></li>
-<li><p>We find that larger sample sizes <span class="math inline">\(\implies\)</span> lower standard errors <span class="math inline">\(\implies\)</span> more accurate estimates.</p></li>
+<li><p>Larger sample sizes <span class="math inline">\(\implies\)</span> lower standard errors <span class="math inline">\(\implies\)</span> more accurate estimates.</p></li>
 <li><p>If we could only know two pieces of information from our data, we would need a measure of the <strong>center</strong> of the distribution (like mean or median) and a measure of the <strong>variability</strong> of the distribution (like sd or MAD).</p></li>
-<li><p>SE refers to the standard deviation of a sample statistic (aka point estimate), such as the mean or median. Therefore, the “standard error of the mean” refers to the standard deviation of the distribution of sample means taken from a population.</p></li>
+<li><p>The standard error refers to the standard deviation of a sample statistic (also known as a “point estimate”), such as the mean or median. Therefore, the “standard error of the mean” refers to the standard deviation of the distribution of sample means taken from a population.</p></li>
 <li><p><code><a href="https://mc-stan.org/rstanarm/reference/stan_glm.html">stan_glm()</a></code> can create a joint distribution and then estimate the posterior probability distribution, conditional on the data which was passed in to the data argument. This is a much easier way to create the posterior distribution, and will be explored in more detail in <a href="07-two-parameters.html"><span>Chapter&nbsp;7</span></a>.</p></li>
 <li><p>We use the posterior distribution to answer our questions.</p></li>
 </ul>
-<p>As we continue our journey, recall the case of Primrose Everdeen and what she represents: no matter how realistic is our model is, our predictions are <strong>never certain</strong>.</p>
+<p>As we continue our journey, recall the case of Primrose Everdeen and what she represents: no matter how realistic our model is, our predictions are <strong>never certain</strong>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="06-one-parameter/images/posterior_effie.png" class="img-fluid" width="541"></p>

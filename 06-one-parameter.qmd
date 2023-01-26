@@ -13,12 +13,8 @@ library(gtsummary)
 library(patchwork)
 ```
 
-<!-- Use twitter comment about transforming R code chunks to new Quarto format. -->
 
 <!-- Case study of polls needs to be updated to use our language of validity and so on. -->
-
-
-<!-- RS: Technically, standard error should not use sigma in it's formula, as it specifically refers to a point statistic and not a population. Someone may want to change all the sigmas to s. Hmm? -->
 
 <!-- There needs to be more explanation about confidence intervals!  -->
 
@@ -182,7 +178,7 @@ tactile_sample_urn |>
   # p-hat. The paste after expression allows us to paste text prior to said
   # expression.
   
-  labs(x = expression(paste("Proportion of 50 beads that were red ", hat(rho))),
+  labs(x = expression(paste("Proportion, ", hat(rho), ", of 50 beads that were red")),
        y = "Count",
        title = "Proportions Red in 33 Samples") 
 ```
@@ -250,8 +246,8 @@ There are two levels. There is one row in the tibble for each sample. So far, we
 
 Now let's add a column which indicates the number of red beads in the sample taken from the shovel.
 
-<!-- DK: Is code like .$color understandable? -->
-<!-- RS: I think the dollar sign operator should be understood at this point, but was thinking about asking Yuhan to include a way better explanation about the "this" operator in Chapter 5.  -->
+<!-- Explain .$color in a code comment. -->
+
 
 ```{r}
 tibble(trial_ID = 1) |> 
@@ -310,7 +306,7 @@ ggplot(aes(x = prop_red)) +
   # To use mathematical symbols in titles and labels, use the expression()
   # function, as here.
   
-  labs(x = expression(hat(rho)),
+  labs(x = expression(paste("Proportion, ", hat(rho), ", of 50 beads that were red")),
        y = "Count",
        title = "Distribution of 33 proportions red") +
   
@@ -377,7 +373,7 @@ facet_compare <- bind_rows(virtual_samples |>
     # Add an x axis with p-hat using expression() with paste() for clarification
     # on p-hat's meaning. Add an appropriate title and inspect our creation.
   
-    labs(x = expression(paste("Proportion of 50 beads that were red", hat(rho))),
+    labs(x = expression(paste("Proportion, ", hat(rho), ", of 50 beads that were red")),
          title = "Comparing distributions") 
 
 facet_compare
@@ -450,7 +446,7 @@ virtual_samples_25 |>
   geom_histogram(binwidth = 0.04, 
                  boundary = 0.4, 
                  color = "white") +
-  labs(x = "Proportion of 25 beads that were red", 
+  labs(x = expression(paste("Proportion, ", hat(rho), ", of 25 beads that were red")), 
        title = "25") 
 ```
 
@@ -468,7 +464,7 @@ virtual_samples_50  |>
   geom_histogram(binwidth = 0.04, 
                  boundary = 0.4, 
                  color = "white") +
-  labs(x = "Proportion of 50 beads that were red", 
+  labs(x = expression(paste("Proportion, ", hat(rho), ", of 50 beads that were red")), 
        title = "50")  
 ```
 
@@ -489,7 +485,7 @@ virtual_samples_100 |>
   geom_histogram(binwidth = 0.04, 
                  boundary = 0.4, 
                  color = "white") +
-  labs(x = "Proportion of 100 beads that were red", 
+  labs(x = expression(paste("Proportion, ", hat(rho), ", of 100 beads that were red")), 
        title = "100") 
 ```
 
@@ -520,7 +516,7 @@ virtual_prop <- bind_rows(virtual_samples_25 |>
 
 comparing_sampling_distributions <- ggplot(virtual_prop, aes(x = prop_red)) +
   geom_histogram(binwidth = 0.04, boundary = 0.4, color = "white") +
-  labs(x = "Proportion of shovel's beads that are red", 
+  labs(x = expression(paste("Proportion, ", hat(rho), ", of the beads that were red")), 
        title = "Comparing distributions of proportions red for three different shovel sizes.") +
   facet_wrap(~ n) 
 
@@ -672,6 +668,7 @@ Now, we have the standard deviation of `prop_red` for all shovel sizes from 1 to
 #| fig.cap: Comparing standard deviations of proportions red for 100 different shovels.
 #|   The standard deviation decreases at the same rate as the square root of shovel size.
 #|   The red line shows the standard error.
+
 shovels_100 |>
  ggplot(aes(x = shovel_size, y = st_dev_p_hat)) +
  geom_point() +
@@ -784,6 +781,7 @@ For example, observe the centers of all three sampling distributions: they are a
 #| echo: false
 #| fig.cap: Previously seen comparing standard deviations of proportions red for 100
 #|   different shovels
+
 shovels_100 |>
   ggplot(aes(x = shovel_size, y = st_dev_p_hat)) +
   geom_point() +
@@ -811,6 +809,7 @@ To help reinforce these concepts, let's re-display our previous figure but using
 #| echo: false
 #| fig.cap: "Three sampling distributions of the sample proportion $\\hat{\rho}$. Note
 #|   the increased concentration on the bins around .4 as our sample size increases."
+
 p_hat_compare <- virtual_prop |> 
   mutate(
     n = str_c("n = ", n),
@@ -831,6 +830,7 @@ Furthermore, let's display the graph of standard errors for $n = 1$ to $n = 100$
 ```{r}
 #| echo: false
 #| fig.cap: Standard errors of the sample proportion based on sample sizes of 1 to 100
+
 shovels_100 |>
   ggplot(aes(x = shovel_size, y = st_dev_p_hat)) +
   geom_point() +
@@ -857,8 +857,6 @@ To really drive home our point: standard error is just a fancy term for your unc
 #| fig.align: center
 knitr::include_graphics("06-one-parameter/images/final_preceptor.png")
 ```
-
-<!-- RS: Pyramid is not super helpful and I support removing it and all references to it.  -->
 
 This hierarchy represents the knowledge we need to understand standard error (SE). At the bottom, we have math. It's the foundation for our understanding, but it doesn't need to be what we take away from this lesson. As we go up, we simplify the topic. The top of the pyramid are the basic levels of understanding that will help you to remember in the future. 
 
@@ -1197,7 +1195,7 @@ We can also accomplish a similar effect by passing `aes(y = after_stat(count/sum
 sum(ppd_for_p$p > .3 & ppd_for_p$p < .4)/nrow(ppd_for_p)
 ```
 
-There is approximately a 54% chance that $\rho$ is between .3 and .4. Give me draws from the posterior and I can show you the world!
+There is approximately a 54% chance that $\rho$ is between .3 and .4. Give me enough draws from the posterior and I can show you the world!
 
 
 ### Temperance
@@ -1222,7 +1220,6 @@ The posterior probability distribution for a probability is a tricky thing. It i
 To predict these future unknown samples, we use `posterior_predict()`. We pass the posterior created using `stan_glm()` as the first argument, and because we want to estimate the number of red draws with a shovel size of 20, we use pass a tibble with 20 rows into `newdata`.  
 
 ```{r}
-
 posterior_predict(fit_1, 
                   newdata = tibble(.rows = 20)) |> 
   as_tibble()
@@ -1327,7 +1324,6 @@ sum(ppd_reds_in_20$total > 8)/length(ppd_reds_in_20$total)
 To visualize this probability graphically, we will reuse our posterior, and add a new column called `above_eight` that is `TRUE` if `total > 8`. 
 
 ```{r}
-
 ppd_reds_in_20 <- posterior_predict(fit_1, 
                     newdata = tibble(.rows = 20)) |> 
   as_tibble() |> 
@@ -1532,33 +1528,32 @@ For example, what if Kennedy School's Institute of Politics at Harvard Universit
 
 ## Summary
 
-In this chapter, we performed both tactile and virtual sampling exercises to infer about an unknown parameter We also presented a case study of sampling in real life with polls. In each case, we used the sample proportion $\hat{\rho}$ to estimate the population proportion $\rho$. However, we are not just limited to scenarios related to proportions. In other words, we can use sampling to estimate other population parameters using other point estimates as well.
+In this chapter, we performed both tactile and virtual sampling exercises to make inferences about an unknown parameter: the proportion of red beads. We also presented a case study of sampling in real life with polls. In each case, we used the sample proportion $\hat{\rho}$ to estimate the true proportion $\rho$. However, we are not just limited to scenarios related to proportions. We can use sampling to estimate other unknown quantities.
 
-There is a truth! There is a true value for $\rho$ which we do not know! We want to create a posterior probability distribution which summarizes our knowledge. We care about the posterior probability distribution of $\rho$. The center of that distribution is around the mean or median of the proportion in your sample. The sd (or mad) of that posterior is the standard deviation divided by the square root of our sample size! Note that this is the same thing as the standard deviation of the repeated samples.
+There is a truth! There is a true value for $\rho$ which we do not know. We want to create a posterior probability distribution which summarizes our knowledge. We care about the posterior probability distribution of $\rho$. The center of that distribution is around the mean or median of the proportion in your sample. The sd (or mad) of that posterior is the standard deviation divided by the square root of our sample size. Note that this is the same thing as the standard deviation of the repeated samples.
 
-We have a journey from reality, to our predictions, to the standard error of our predictions, to the posterior probability distribution for $\rho$. This is our sequence:
+We journey from reality, to our predictions, to the standard error of our predictions, to the posterior probability distribution for $\rho$. This is our sequence:
 
 **$\rho$ (the truth) $\Rightarrow$ $\hat{\rho}$ (my estimate) $\Rightarrow$ the standard error of $\hat{\rho}$ (black box of math mumbo jumbo and computer simulation magic) $\Rightarrow$ our posterior probability distribution for $\rho$ (our beliefs about the truth).**
 
-This journey shows how our beliefs about the truth develop through our work. We begin with $\rho$; $\rho$ is the truth, the true but unknown value we are estimating. $\hat{\rho}$ is our estimate for $\rho$. There can be millions and millions of $\hat{\rho}$'s. Next, we must take the standard error of our estimates (our $\hat{\rho}$'s) to account for our uncertainty of our predictions. Finally -- the thing we need most -- we create a posterior probability distribution for $\rho$. This distribution is used to answer key questions about $\rho$. 
+This journey shows how our beliefs about the truth develop through our work. We begin with $\rho$; $\rho$ is the truth, the true but unknown value we are estimating. $\hat{\rho}$ is our estimate for $\rho$. There can be millions and millions of $\hat{\rho}$'s. Next, we must estimate the standard error of our estimates (our $\hat{\rho}$'s) to account for the uncertainty of our predictions. Finally, we create a posterior probability distribution for $\rho$. This distribution is used to answer any questions about $\rho$. 
 
 
 ### Other highlights
 
 - Standard error is just a fancy term for your uncertainty about something you don't know. Standard error $\approx$ our (uncertain) beliefs.
 
-- The standard error measures the accuracy of a sample distribution as compared to the population by using the standard deviation. 
-
-- We find that larger sample sizes $\implies$ lower standard errors $\implies$ more accurate estimates.   
+- Larger sample sizes $\implies$ lower standard errors $\implies$ more accurate estimates.   
 
 - If we could only know two pieces of information from our data, we would need a measure of the **center** of the distribution (like mean or median) and a measure of the **variability** of the distribution (like sd or MAD). 
 
-- SE refers to the standard deviation of a sample statistic (aka point estimate), such as the mean or median. Therefore, the "standard error of the mean" refers to the standard deviation of the distribution of sample means taken from a population. 
+- The standard error refers to the standard deviation of a sample statistic (also known as a "point estimate"), such as the mean or median. Therefore, the "standard error of the mean" refers to the standard deviation of the distribution of sample means taken from a population. 
 
 - `stan_glm()` can create a joint distribution and then estimate the posterior probability distribution, conditional on the data which was passed in to the data argument. This is a much easier way to create the posterior distribution, and will be explored in more detail in @sec-two-parameters. 
+
 - We use the posterior distribution to answer our questions. 
 
-As we continue our journey, recall the case of Primrose Everdeen and what she represents: no matter how realistic is our model is, our predictions are **never certain**.  
+As we continue our journey, recall the case of Primrose Everdeen and what she represents: no matter how realistic our model is, our predictions are **never certain**.  
 
 ```{r}
 #| echo: false
