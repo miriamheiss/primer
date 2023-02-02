@@ -704,8 +704,9 @@ Here's an example of using the **dbpylr** package to get the number of albums ea
 band_albums <- tbl(con, "albums") |>
                  inner_join(tbl(con, "artists"), by = "ArtistId") |>
                  select("AlbumId", "ArtistId", "Title", "Name") |>
-                 group_by(ArtistId) |>
-                 summarize(Name = Name, num_albums = n()) |>
+                 summarize(Name = Name, 
+                           num_albums = n(),
+                           .by = ArtistId) |>
                  mutate(artist_name = Name) |>
                  mutate(artist_id = ArtistId) |>
                  filter(num_albums > 3) |>
@@ -1521,6 +1522,8 @@ raw_data_wiki <- wiki_url |>
 raw_data_wiki
 ```
 
+<!-- DK: Awkwardly written. Not an interesting plot. -->
+
 Past this point, you can work with the data just like you would normal data. Here's an example graph of how states that have a denser population experience more consistent gun deaths than states with a less dense population.
 
 ```{r}
@@ -1531,8 +1534,9 @@ clean_data <- raw_data_wiki |>
                         select(population, death_rate) |>
                         mutate(population = parse_number(population)) |>
                         mutate(pop_tile = ntile(population, 20)) |>
-                        group_by(pop_tile) |>
-                        summarize(num_states = n(), sum_rate = sum(death_rate)) |>
+                        summarize(num_states = n(), 
+                                  sum_rate = sum(death_rate),
+                                  .by = pop_tile) |>
                         mutate(avg_rate = sum_rate/num_states) |>
                         mutate(percent_rate = avg_rate / sum(avg_rate))
 
@@ -1543,7 +1547,7 @@ ggplot(clean_data, aes(x = pop_tile, y = percent_rate)) +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   theme_classic() +
   labs(title = "Distribution of US Death Rate by Guns in Quantile of Population in 2015",
-       subtitle = "Death rate of less populated states fluctuate more than states with a denser population",
+       subtitle = "Death rate of less populated states fluctuate more than states with a denser population",      
        x = "Quantile by Population (least to most)",
        y = "Percent of Average Death Rate",
        caption = "Wikipedia: Gun Violence in the United States (2017)")

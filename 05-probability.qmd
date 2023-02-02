@@ -22,6 +22,7 @@ library(gtsummary)
 library(patchwork)
 ```
 
+<!-- Remove last couple of sloppy uses of group_by(). -->
 
 <!-- Major change is that each example needs to have a simple question. Then it needs a DGM. Then we use the DGM to answer the question.  -->
 
@@ -797,9 +798,8 @@ mydata <- tibble(die.1 = sample(1:6, size = 1000, prob =
                                   c(0.1, 0.1, 0.1, 0.1, 0.1, 0.5), replace = TRUE),
                  die.2 = sample(1:6, size = 1000, prob =
                                   c(0.1, 0.1, 0.1, 0.1, 0.5, 0.1), replace = TRUE)) |>
-          group_by(die.1, die.2) |>
           summarize(total = n(),
-                    .groups = "drop")
+                    .by = c(die.1, die.2))
 
 die1_factor <- as.factor(mydata$die.1)
 die2_factor <- as.factor(mydata$die.2)
@@ -1056,13 +1056,12 @@ Below is a joint distribution displayed in 3D. Instead of using the "jitter" fea
 ```{r}
 #| echo: false
 
-# group_by and summarize use for count, and pile up the dots in one point.
+# Pile up the dots in one point.
 # Later use for rayshader
 
 jd_disease_plot <- jd_disease |>
-  group_by(have_disease, positive_test) |>
   summarize(total = n(),
-            .groups = "drop") |> 
+            .by = c(have_disease, positive_test)) |> 
   ggplot(aes(x = as.factor(positive_test),
              y = as.factor(have_disease),
              color = total)) +
@@ -1082,8 +1081,6 @@ jd_disease_plot <- jd_disease |>
           title = element_text(size = 7),
           axis.text.x = element_text(size = 7),
           axis.text.y = element_text(size = 7))
-
-# Yuhan: This stopped working sometime in the last year. Not sure why.
 
  plot_gg(jd_disease_plot,
          width = 3.5,
@@ -1209,8 +1206,6 @@ tibble(test = 1:100000) |>
 
 ## Three models
 
-<!-- Handy? jd_marbles |> filter(in_bag == 1) |> group_by(in_sample) |> count() -->
-
 <!-- DK: Should this be in terms of p or number of white marbles or both? -->
 
 ```{r}
@@ -1289,11 +1284,11 @@ Here is the 3D visualization:
 # give height.
 
 jd_marbles_plot <- jd_marbles |>
-  group_by(in_bag, in_sample) |>
-  summarize(total = n(), .groups = "drop") |> 
+  summarize(total = n(), 
+            .by = c(in_bag, in_sample)) |> 
   mutate(in_sample = as.factor(in_sample)) |> 
   mutate(in_bag = as.factor(in_bag)) |> 
-  ggplot(aes(x=in_sample, y=in_bag, color = total)) +
+  ggplot(aes(x = in_sample, y = in_bag, color = total)) +
     geom_point() +
     scale_color_continuous(limits = c(0, 3500)) +
     labs(x = "White Marbles Selected",
@@ -1475,8 +1470,8 @@ Here is the 3D version of the same plot.
 #Condese point and make rayshader plot.
 
 jd_coin_plot <- jd_coin |> 
-  group_by(p, heads) |>
-  summarize(total = n(), .groups = "drop") |> 
+  summarize(total = n(), 
+            .by = c(p, heads)) |> 
   mutate(p = as.factor(p)) |> 
   mutate(heads = as.factor(heads)) |> 
   ggplot() +
