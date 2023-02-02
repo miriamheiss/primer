@@ -39,17 +39,15 @@ Limit your code to 80 characters per line. This fits comfortably on a printed pa
 # Good
 
 iris |>
-  group_by(Species) |>
-  summarize_if(is.numeric, mean) |>
-  ungroup() |>
-  gather(measure, value, -Species) |>
-  arrange(value)
+  select(Species, Sepal.Length) |> 
+  summarise(avg = mean(Sepal.Length),
+            .by = Species) |> 
+  arrange(avg)
 
 # Bad
 
-iris |> group_by(Species) |> summarize_all(mean) |>
-ungroup |> gather(measure, value, -Species) |>
-arrange(value)
+iris |> select(Species, Sepal.Length) |> summarise(avg = mean(Sepal.Length),
+            .by = Species) |> arrange(avg)
 ```
 
 **ggplot2** code is handled in a similar fashion. All commands after the initial invocation of `ggplot()` are indented.
