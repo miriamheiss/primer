@@ -7,6 +7,14 @@
   url = {https://www.R-project.org/},
 }
 
+@Manual{R-broom.mixed,
+  title = {broom.mixed: Tidying Methods for Mixed Models},
+  author = {Ben Bolker and David Robinson},
+  year = {2022},
+  note = {R package version 0.2.9.4},
+  url = {https://github.com/bbolker/broom.mixed},
+}
+
 @Manual{R-dplyr,
   title = {dplyr: A Grammar of Data Manipulation},
   author = {Hadley Wickham and Romain François and Lionel Henry and Kirill Müller and Davis Vaughan},
@@ -23,12 +31,28 @@
   url = {https://CRAN.R-project.org/package=forcats},
 }
 
+@Manual{R-ggdist,
+  title = {ggdist: Visualizations of Distributions and Uncertainty},
+  author = {Matthew Kay},
+  year = {2023},
+  note = {R package version 3.2.1},
+  url = {https://CRAN.R-project.org/package=ggdist},
+}
+
 @Manual{R-ggplot2,
   title = {ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics},
   author = {Hadley Wickham and Winston Chang and Lionel Henry and Thomas Lin Pedersen and Kohske Takahashi and Claus Wilke and Kara Woo and Hiroaki Yutani and Dewey Dunnington},
   year = {2022},
   note = {R package version 3.4.0},
   url = {https://CRAN.R-project.org/package=ggplot2},
+}
+
+@Manual{R-ggthemes,
+  title = {ggthemes: Extra Themes, Scales and Geoms for ggplot2},
+  author = {Jeffrey B. Arnold},
+  year = {2021},
+  note = {R package version 4.2.4},
+  url = {https://github.com/jrnold/ggthemes},
 }
 
 @Manual{R-gt,
@@ -47,20 +71,12 @@
   url = {https://CRAN.R-project.org/package=gtsummary},
 }
 
-@Manual{R-magick,
-  title = {magick: Advanced Graphics and Image-Processing in R},
-  author = {Jeroen Ooms},
+@Manual{R-janitor,
+  title = {janitor: Simple Tools for Examining and Cleaning Dirty Data},
+  author = {Sam Firke},
   year = {2021},
-  note = {R package version 2.7.3},
-  url = {https://CRAN.R-project.org/package=magick},
-}
-
-@Manual{R-patchwork,
-  title = {patchwork: The Composer of Plots},
-  author = {Thomas Lin Pedersen},
-  year = {2022},
-  note = {R package version 1.1.2},
-  url = {https://CRAN.R-project.org/package=patchwork},
+  note = {R package version 2.1.0},
+  url = {https://github.com/sfirke/janitor},
 }
 
 @Manual{R-primer.data,
@@ -78,11 +94,12 @@
   url = {https://CRAN.R-project.org/package=purrr},
 }
 
-@Manual{R-rayshader,
-  title = {rayshader: Create Maps and Visualize Data in 2D and 3D},
-  author = {Tyler Morgan-Wall},
-  year = {2022},
-  note = {https://www.rayshader.com, https://github.com/tylermorganwall/rayshader},
+@Manual{R-Rcpp,
+  title = {Rcpp: Seamless R and C++ Integration},
+  author = {Dirk Eddelbuettel and Romain Francois and JJ Allaire and Kevin Ushey and Qiang Kou and Nathan Russell and Inaki Ucar and Douglas Bates and John Chambers},
+  year = {2023},
+  note = {R package version 1.0.10},
+  url = {https://CRAN.R-project.org/package=Rcpp},
 }
 
 @Manual{R-readr,
@@ -93,12 +110,12 @@
   url = {https://CRAN.R-project.org/package=readr},
 }
 
-@Manual{R-rgl,
-  title = {rgl: 3D Visualization Using OpenGL},
-  author = {Daniel Adler and Duncan Murdoch},
+@Manual{R-rstanarm,
+  title = {rstanarm: Bayesian Applied Regression Modeling via Stan},
+  author = {Jonah Gabry and Ben Goodrich},
   year = {2022},
-  note = {R package version 0.108.3.2},
-  url = {https://CRAN.R-project.org/package=rgl},
+  note = {R package version 2.21.3},
+  url = {https://CRAN.R-project.org/package=rstanarm},
 }
 
 @Manual{R-stringr,
@@ -158,6 +175,46 @@
   title = {primer.data},
   year = {2021},
   url = {https://github.com/PPBDS/primer.data},
+}
+
+@Article{Rcpp2011,
+  title = {{Rcpp}: Seamless {R} and {C++} Integration},
+  author = {Dirk Eddelbuettel and Romain Fran\c{c}ois},
+  journal = {Journal of Statistical Software},
+  year = {2011},
+  volume = {40},
+  number = {8},
+  pages = {1--18},
+  doi = {10.18637/jss.v040.i08},
+}
+
+@Book{Rcpp2013,
+  title = {Seamless {R} and {C++} Integration with {Rcpp}},
+  author = {Dirk Eddelbuettel},
+  publisher = {Springer},
+  address = {New York},
+  year = {2013},
+  note = {ISBN 978-1-4614-6867-7},
+  doi = {10.1007/978-1-4614-6868-4},
+}
+
+@Article{Rcpp2018,
+  title = {{Extending 	extit{R} with 	extit{C++}: A Brief Introduction to 	extit{Rcpp}}},
+  author = {Dirk Eddelbuettel and James Joseph Balamuta},
+  journal = {The American Statistician},
+  year = {2018},
+  volume = {72},
+  number = {1},
+  pages = {28-36},
+  doi = {10.1080/00031305.2017.1375990},
+}
+
+@Misc{rstanarm2018,
+  title = {Joint longitudinal and time-to-event models via {Stan}.},
+  author = {SL Brilleman and MJ Crowther and M Moreno-Betancur and J {Buros Novik} and R Wolfe},
+  note = {StanCon 2018. 10-12 Jan 2018. Pacific Grove, CA, USA.},
+  url = {https://github.com/stan-dev/stancon_talks/},
+  year = {2018},
 }
 
 @Article{tidyverse2019,

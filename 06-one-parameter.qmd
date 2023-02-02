@@ -560,16 +560,15 @@ There is also a third way to understand variation! We can be numerically explici
 #|   proportions red. Here, we see that standard deviation decreases with higher sample
 #|   sizes. Larger sample sizes yield more precise estimates.
 
-# Start by performing group_by(n) to get data separated
-# by our different shovel sizes. 
+# Separate data by our different shovel sizes. 
 
 comparing_n_table <- virtual_prop |> 
-  group_by(n) |> 
   
   # Take the standard deviation and mean of prop_red
   # using summarize. 
   
-  summarize(sd = sd(prop_red), .groups = 'drop_last') |> 
+  summarize(sd = sd(prop_red), 
+            .by = n) |> 
   
   # Rename using backslashes (with the desired) text
   # on the left and the existing column on the right.
@@ -638,8 +637,8 @@ expand_grid(trial_ID = c(1:1000), shovel_size = c(25, 50, 100)) |>
   mutate(shovel = map(shovel_size, ~ slice_sample(urn, n = .))) |> 
   mutate(numb_red = map_int(shovel, ~ sum(.$color == "red"))) |> 
   mutate(prop_red = numb_red/shovel_size) |>
-  group_by(shovel_size) |> 
-  summarize(st_dev_p_hat = sd(prop_red))
+  summarize(st_dev_p_hat = sd(prop_red),
+            .by = shovel_size)
   
 ```
 
@@ -654,8 +653,8 @@ shovels_100 <- expand_grid(trial_ID = c(1:1000), shovel_size = c(1:100)) |>
   mutate(shovel = map(shovel_size, ~ slice_sample(urn, n = .))) |> 
   mutate(numb_red = map_int(shovel, ~ sum(.$color == "red"))) |> 
   mutate(prop_red = numb_red / shovel_size) |> 
-  group_by(shovel_size) |> 
-  summarize(st_dev_p_hat = sd(prop_red))
+  summarize(st_dev_p_hat = sd(prop_red),
+            .by = shovel_size)
 
 glimpse(shovels_100)
 ```
@@ -1184,8 +1183,8 @@ Instead, we can work with draws from the posterior. With enough draws we create 
 ```{r}
 ppd_for_p |>
   round(digits = 2) |>
-  group_by(p) |>
-  summarize(prob = n()/nrow(ppd_for_p)) |>
+  summarize(prob = n()/nrow(ppd_for_p),
+            .by = p) |>
   arrange(desc(prob))
 ```
 
