@@ -596,14 +596,14 @@ div.csl-indent {
 <pre><code># A tibble: 8 × 1
   fruit            
   &lt;chr&gt;            
-1 redcurrant       
-2 tangerine        
-3 guava            
-4 eggplant         
-5 peach            
-6 watermelon       
-7 purple mangosteen
-8 fig              </code></pre>
+1 nectarine        
+2 redcurrant       
+3 peach            
+4 breadfruit       
+5 elderberry       
+6 jambul           
+7 kiwi fruit       
+8 purple mangosteen</code></pre>
 </div>
 </div>
 <!-- AM: Demonstrate a use of the `prop` argument? Or just delete it entirely? -->
@@ -1056,11 +1056,11 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2023-01-26"</code></pre>
+<pre><code>[1] "2023-02-02"</code></pre>
 </div>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">now</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2023-01-26 16:00:42 EST"</code></pre>
+<pre><code>[1] "2023-02-02 14:46:27 EST"</code></pre>
 </div>
 </div>
 <p>Otherwise, there are three ways you’re likely to create a date/time:</p>
@@ -1163,11 +1163,11 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode" id="cb118"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as_date.html">as_datetime</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2023-01-26 UTC"</code></pre>
+<pre><code>[1] "2023-02-02 UTC"</code></pre>
 </div>
 <div class="sourceCode" id="cb120"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as_date.html">as_date</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">now</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2023-01-26"</code></pre>
+<pre><code>[1] "2023-02-02"</code></pre>
 </div>
 </div>
 <p>Sometimes you’ll get date/times as numeric offsets from the “Unix Epoch”, 1970-01-01. If the offset is in seconds, use <code><a href="https://lubridate.tidyverse.org/reference/as_date.html">as_datetime()</a></code>; if it’s in days, use <code><a href="https://lubridate.tidyverse.org/reference/as_date.html">as_date()</a></code>.</p>
@@ -1274,7 +1274,7 @@ div.csl-indent {
 </div>
 </div>
 </div>
-<p>The <code><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows()</a></code> function is used to combine all the rows from two or more tibbles.</p>
+<p>The <code><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows()</a></code> function is used to combine all the rows from two or more tibbles.</p>
 <div class="cell">
 <div class="sourceCode" id="cb152"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,                </span>
 <span>                 y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span><span class="op">)</span> </span>
@@ -1283,7 +1283,7 @@ div.csl-indent {
 <span>                 y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"C"</span>, <span class="st">"D"</span><span class="op">)</span><span class="op">)</span> </span>
 <span></span>
 <span></span>
-<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">data_1</span>, <span class="va">data_2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">data_1</span>, <span class="va">data_2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
       x y    
@@ -1332,7 +1332,7 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode" id="cb155"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">superheroes</span>, <span class="va">publishers</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Joining, by = "publisher"</code></pre>
+<pre><code>Joining with `by = join_by(publisher)`</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 4
@@ -1353,6 +1353,12 @@ div.csl-indent {
 <p>Now compare this result to that of using <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join()</a></code> with the two datasets in opposite positions.</p>
 <div class="cell">
 <div class="sourceCode" id="cb159"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">publishers</span>, <span class="va">superheroes</span>, by <span class="op">=</span> <span class="st">"publisher"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in inner_join(publishers, superheroes, by = "publisher"): Each row in `x` is expected to match at most 1 row in `y`.
+ℹ Row 1 of `x` matches multiple rows.
+ℹ If multiple matches are expected, set `multiple = "all"` to silence this
+  warning.</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 4
   publisher yr_founded name     gender
@@ -1369,7 +1375,7 @@ div.csl-indent {
 </h4>
 <p><code>full_join(x, y)</code>: Returns all rows and all columns from both <code>x</code> and <code>y</code>. Where there are not matching values, returns <code>NA</code> for the one missing.</p>
 <div class="cell">
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">superheroes</span>, <span class="va">publishers</span>, by <span class="op">=</span> <span class="st">"publisher"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">superheroes</span>, <span class="va">publishers</span>, by <span class="op">=</span> <span class="st">"publisher"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   name     gender publisher         yr_founded
@@ -1389,7 +1395,7 @@ div.csl-indent {
 </h4>
 <p><code>left_join(x, y)</code>: Returns all rows from <code>x</code>, and all columns from <code>x</code> and <code>y</code>. If there are multiple matches between <code>x</code> and <code>y</code>, all combination of the matches are returned.</p>
 <div class="cell">
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">superheroes</span>, <span class="va">publishers</span>, by <span class="op">=</span> <span class="st">"publisher"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">superheroes</span>, <span class="va">publishers</span>, by <span class="op">=</span> <span class="st">"publisher"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 4
   name     gender publisher         yr_founded
@@ -1404,7 +1410,13 @@ div.csl-indent {
 <p>We basically get <code>x = superheroes</code> back, but with an additional variable <code>yr_founded</code>, which is unique to <code>y = publishers</code>. Hellboy, whose publisher does not appear in <code>y = publishers</code>, has an <code>NA</code> for <code>yr_founded</code>.</p>
 <p>Now compare this result to that of running <code>left_join(x = publishers, y = superheroes)</code>. Unlike <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join()</a></code> the order of the arguments has a significant effect on the resulting tibble.</p>
 <div class="cell">
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">publishers</span>, <span class="va">superheroes</span>, by <span class="op">=</span> <span class="st">"publisher"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">publishers</span>, <span class="va">superheroes</span>, by <span class="op">=</span> <span class="st">"publisher"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in left_join(publishers, superheroes, by = "publisher"): Each row in `x` is expected to match at most 1 row in `y`.
+ℹ Row 1 of `x` matches multiple rows.
+ℹ If multiple matches are expected, set `multiple = "all"` to silence this
+  warning.</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 4
   publisher yr_founded name     gender
@@ -1423,7 +1435,7 @@ div.csl-indent {
 </h4>
 <p><code>semi_join(x, y)</code>: Returns all rows from <code>x</code> where there are matching values in <code>y</code>, keeping just columns from <code>x</code>. A semi join differs from an inner join because an inner join will return one row of <code>x</code> for each matching row of <code>y</code>, whereas a semi join will never duplicate rows of <code>x</code>. This is a filtering join.</p>
 <div class="cell">
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">superheroes</span>, <span class="va">publishers</span>, by <span class="op">=</span> <span class="st">"publisher"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span><span class="va">superheroes</span>, <span class="va">publishers</span>, by <span class="op">=</span> <span class="st">"publisher"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
   name     gender publisher
@@ -1436,7 +1448,7 @@ div.csl-indent {
 </div>
 <p>Compare the result of switching the values of the arguments.</p>
 <div class="cell">
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">publishers</span>, y <span class="op">=</span> <span class="va">superheroes</span>, by <span class="op">=</span> <span class="st">"publisher"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">semi_join</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">publishers</span>, y <span class="op">=</span> <span class="va">superheroes</span>, by <span class="op">=</span> <span class="st">"publisher"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   publisher yr_founded
@@ -1451,7 +1463,7 @@ div.csl-indent {
 </h4>
 <p><code>anti_join(x, y)</code>: Return all rows from <code>x</code> where there are no matching values in <code>y</code>, keeping just columns from <code>x</code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="va">superheroes</span>, <span class="va">publishers</span>, by <span class="op">=</span> <span class="st">"publisher"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="va">superheroes</span>, <span class="va">publishers</span>, by <span class="op">=</span> <span class="st">"publisher"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   name    gender publisher        
@@ -1462,7 +1474,7 @@ div.csl-indent {
 <p>We keep only Hellboy now.</p>
 <p>Now switch the arguments and compare the result.</p>
 <div class="cell">
-<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="va">publishers</span>, <span class="va">superheroes</span>, by <span class="op">=</span> <span class="st">"publisher"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="va">publishers</span>, <span class="va">superheroes</span>, by <span class="op">=</span> <span class="st">"publisher"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   publisher yr_founded
@@ -1485,7 +1497,7 @@ div.csl-indent {
 </div>
 <p>In both the <code>flights</code> and <code>airlines</code> data frames, the key variable we want to join/merge/match the rows by has the same name: <code>carrier</code>. Let’s use <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join()</a></code> to join the two data frames, where the rows will be matched by the variable <code>carrier</code></p>
 <div class="cell">
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">flights</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">flights</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">airlines</span>, by <span class="op">=</span> <span class="st">"carrier"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 20
@@ -1510,11 +1522,11 @@ div.csl-indent {
 <p>This is our first example of using a join function with a “pipe.” <code>flights</code> is fed as the first argument to <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join()</a></code>. That is what the pipe does. The symbol is created by combining a vertical line <code>|</code> and a greater-than symbol ‘&gt;’. Cmd-Shift-M is the shortcut key for inserting a pipe.</p>
 <p>The above code is equivalent to:</p>
 <div class="cell">
-<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">flights</span>, <span class="va">airlines</span>, by <span class="op">=</span> <span class="st">"carrier"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">flights</span>, <span class="va">airlines</span>, by <span class="op">=</span> <span class="st">"carrier"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>airports</code> data frame contains the airport codes for each airport:</p>
 <div class="cell">
-<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">airports</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">airports</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,458 × 8
    faa   name                             lat    lon   alt    tz dst   tzone    
@@ -1535,7 +1547,7 @@ div.csl-indent {
 <p>However, if you look at both the <code>airports</code> and <code>flights</code> data frames, you’ll find that the airport codes are in variables that have different names. In <code>airports</code> the airport code is in <code>faa</code>, whereas in <code>flights</code> the airport codes are in <code>origin</code> and <code>dest</code>.</p>
 <p>In order to join these two data frames by airport code, our <code><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join()</a></code> operation will use <code>by = c("dest" = "faa")</code> thereby allowing us to join two data frames where the key variable has a different name.</p>
 <div class="cell">
-<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">flights</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">flights</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">airports</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"dest"</span> <span class="op">=</span> <span class="st">"faa"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 329,174 × 26
@@ -1560,10 +1572,9 @@ div.csl-indent {
 </div>
 <p>Let’s construct the chain of pipe operators <code>|&gt;</code> that computes the number of flights from NYC to each destination, but also includes information about each destination airport:</p>
 <div class="cell">
-<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">flights</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">dest</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">flights</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>num_flights <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>            .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>            .by <span class="op">=</span> <span class="va">dest</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">num_flights</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">airports</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"dest"</span> <span class="op">=</span> <span class="st">"faa"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>airport_name <span class="op">=</span> <span class="va">name</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1615,7 +1626,7 @@ div.csl-indent {
 </ol>
 <p>We will save the resulting data frame in <code>drinks_smaller</code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">drinks_smaller</span> <span class="op">&lt;-</span> <span class="va">drinks</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">drinks_smaller</span> <span class="op">&lt;-</span> <span class="va">drinks</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">country</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"USA"</span>, <span class="st">"China"</span>, <span class="st">"Italy"</span>, <span class="st">"Saudi Arabia"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">total_litres_of_pure_alcohol</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>beer <span class="op">=</span> <span class="va">beer_servings</span>, spirit <span class="op">=</span> <span class="va">spirit_servings</span>, wine <span class="op">=</span> <span class="va">wine_servings</span><span class="op">)</span></span>
@@ -1649,7 +1660,7 @@ div.csl-indent {
 <p>In this book so far, you’ve only seen data frames that were already in “tidy” format. Furthermore, for the rest of this book, you’ll mostly only see data frames that are already tidy as well. This is not always the case, however, with all datasets in the world. If your original data frame is in wide (non-“tidy”) format and you would like to use the <strong>ggplot2</strong> or <strong>dplyr</strong> packages, you will first have to convert it to “tidy” format. To do so, we recommend using the <code><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer()</a></code> function in the <strong>tidyr</strong> package <span class="citation" data-cites="R-tidyr">(<a href="references.html#ref-R-tidyr" role="doc-biblioref">Wickham, Vaughan, and Girlich 2023</a>)</span>.</p>
 <p>Going back to our <code>drinks_smaller</code> data frame from earlier:</p>
 <div class="cell">
-<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">drinks_smaller</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">drinks_smaller</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 4
   country       beer spirit  wine
@@ -1662,7 +1673,7 @@ div.csl-indent {
 </div>
 <p>We tidy it by using the <code><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer()</a></code> function from the <strong>tidyr</strong> package as follows:</p>
 <div class="cell">
-<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">drinks_smaller_tidy</span> <span class="op">&lt;-</span> <span class="va">drinks_smaller</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">drinks_smaller_tidy</span> <span class="op">&lt;-</span> <span class="va">drinks_smaller</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"type"</span>, </span>
 <span>               values_to <span class="op">=</span> <span class="st">"servings"</span>, </span>
 <span>               cols <span class="op">=</span> <span class="op">-</span><span class="va">country</span><span class="op">)</span></span>
@@ -1693,14 +1704,14 @@ div.csl-indent {
 </ol>
 <p>The third argument here of <code>cols</code> is a little nuanced, so let’s consider code that was written slightly differently but that produces the same output:</p>
 <div class="cell">
-<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">drinks_smaller</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">drinks_smaller</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"type"</span>, </span>
 <span>               values_to <span class="op">=</span> <span class="st">"servings"</span>, </span>
 <span>               cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">beer</span>, <span class="va">spirit</span>, <span class="va">wine</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that the third argument now specifies which columns we want to “tidy” with <code>c(beer, spirit, wine)</code>, instead of the columns we don’t want to “tidy” using <code>-country</code>. We use the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> function to create a vector of the columns in <code>drinks_smaller</code> that we’d like to “tidy.” Note that since these three columns appear one after another in the <code>drinks_smaller</code> data frame, we can also do the following for the <code>cols</code> argument:</p>
 <div class="cell">
-<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">drinks_smaller</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">drinks_smaller</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>names_to <span class="op">=</span> <span class="st">"type"</span>, </span>
 <span>               values_to <span class="op">=</span> <span class="st">"servings"</span>, </span>
 <span>               cols <span class="op">=</span> <span class="va">beer</span><span class="op">:</span><span class="va">wine</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1730,7 +1741,7 @@ div.csl-indent {
 
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">die</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">die</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">die</span>, size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1740,7 +1751,7 @@ div.csl-indent {
 <p>This produces one “draw” from the distribution of the possible values of one roll of fair six-sided die.</p>
 <p>Now, suppose we wanted to roll this die 10 times. One of the arguments of the <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> function is <code>replace</code>. We must specify it as <code>TRUE</code> if values can appear more than once. Since, when rolling a die 10 times, we expect that a value like 3 can appear more than once, we need to set <code>replace = TRUE</code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">die</span>, size <span class="op">=</span> <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">die</span>, size <span class="op">=</span> <span class="fl">10</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 5 6 3 3 3 4 3 6 4 5</code></pre>
 </div>
@@ -1748,7 +1759,7 @@ div.csl-indent {
 <p>In other words, rolling a 1 on the first roll should not preclude you from rolling a 1 on a later roll.</p>
 <p>What if the die is not “fair,” meaning that some sides are more likely to appear than others? The final argument of the <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> function is the <code>prob</code> argument. It takes a vector (of the same length as the initial vector <code>x</code>) that contains all of the probabilities of selecting each one of the elements of <code>x</code>. Suppose that the probability of rolling a 1 was 0.5, and the probability of rolling any other value is 0.1. (These probabilities should sum to 1. If they don’t <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> will automatically re-scale them.)</p>
 <div class="cell">
-<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">die</span>, </span>
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">die</span>, </span>
 <span>       size <span class="op">=</span> <span class="fl">10</span>, </span>
 <span>       replace <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>       prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1759,7 +1770,7 @@ div.csl-indent {
 <!-- DK: Keep this big picture discussion? And after the plot? -->
 <p><strong>Remember: There is no real data here.</strong> We have not actually rolled a die. We have just made some assumptions about what would happen if we were to roll a die. With those assumptions we have built an urn — a <em>data generating mechanism</em> — from which we can draw as many values as we like. Let’s roll the unfair die 10,000 times.</p>
 <div class="cell">
-<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>result <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">die</span>, </span>
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>result <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">die</span>, </span>
 <span>                       size <span class="op">=</span> <span class="fl">10000</span>, </span>
 <span>                       replace <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                       prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1781,7 +1792,7 @@ div.csl-indent {
 </h4>
 <p>Consider a “uniform” distribution. This is the case in which every outcome in the range of possible outcomes has the same chance of occurring. The function <code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code> (spoken as “r-unif”) enables us to draw from a uniform contribution. <code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code> has three arguments: <code>n</code>, <code>min</code>, and <code>max</code>. <code><a href="https://rdrr.io/r/stats/Uniform.html">runif()</a></code> will produce <code>n</code> draws from between <code>min</code> and <code>max</code>, with each value having an equal chance of occurring.</p>
 <div class="cell">
-<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span>, min <span class="op">=</span> <span class="fl">4</span>, max <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10</span>, min <span class="op">=</span> <span class="fl">4</span>, max <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 5.594800 4.981960 4.601993 5.738417 4.879622 5.155263 4.319479 5.627666
  [9] 4.800110 5.634794</code></pre>
@@ -1797,14 +1808,14 @@ div.csl-indent {
 <p><em><code>n</code> is the number of values we seek to draw. </em><code>size</code> is the number of trials for each <code>n</code>. *<code>prob</code> is the probability of success on each trial.</p>
 <p>Suppose we wanted to flip a fair coin one time, and let landing on heads represent success.</p>
 <div class="cell">
-<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span> , size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span> , size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
 </div>
 <p>Do the same thing 100 times:</p>
 <div class="cell">
-<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>heads <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>heads <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">heads</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Flipping a Fair Coin 100 Times"</span>,</span>
@@ -1821,7 +1832,7 @@ div.csl-indent {
 <!-- DK: Could do a little example of that, showing the convergence to 50% as n increases. -->
 <p>Suppose instead we wanted to simulate an unfair coin, where the probability of landing on Heads was 0.75 instead of 0.25.</p>
 <div class="cell">
-<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>heads <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>heads <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, size <span class="op">=</span> <span class="fl">1</span>, prob <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">heads</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Flipping a Fair Coin 100 Times"</span>,</span>
@@ -1838,7 +1849,7 @@ div.csl-indent {
 <p>Each value for <span class="math inline">\(y\)</span> is drawn from a binomial distribution with parameters <span class="math inline">\(n\)</span> for the number of trials and <span class="math inline">\(p\)</span> for the probability of success.</p>
 <p>Instead of each <code>n</code> consisting of a single trial, we could have situation in which we are, 10,000 times, flipping a coin 10 times and summing up, for each experiment, the number of heads. In that case:</p>
 <div class="cell">
-<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">9</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">9</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>heads <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html">rbinom</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">10000</span>, size <span class="op">=</span> <span class="fl">10</span>, prob <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">heads</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1899,7 +1910,7 @@ div.csl-indent {
 <span class="header-section-number">2.8.2</span> Combinations</h3>
 <p>We often need to create a tibble with all the possible combinations of two or more variables. <code><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid()</a></code> is the easiest approach.</p>
 <div class="cell">
-<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html">expand_grid</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 2
   x         y
@@ -1919,7 +1930,7 @@ div.csl-indent {
 <span class="header-section-number">2.8.3</span> Matrices</h3>
 <p>Recall that a “matrix” in R is a rectangular array of data, shaped like a data frame or tibble, but containing only one type of data, e.g., numeric. Large matrices also print out ugly. (There are other differences, none of which we care about here.) Example:</p>
 <div class="cell">
-<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">8</span>, <span class="fl">9</span>, <span class="fl">12</span>, <span class="fl">13</span>, <span class="fl">0</span>, <span class="fl">15</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">8</span>, <span class="fl">9</span>, <span class="fl">12</span>, <span class="fl">13</span>, <span class="fl">0</span>, <span class="fl">15</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">m</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3]
@@ -1930,7 +1941,7 @@ div.csl-indent {
 </div>
 <p>The easiest way to pull information from a matrix is to use <code>[ ]</code>, the subset operator. Here is how we grab the second and third columns of <code>m</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2]
 [1,]    9    0
@@ -1940,7 +1951,7 @@ div.csl-indent {
 </div>
 <p>Note, however, that matrices with just one dimension “collapse” into single vectors:</p>
 <div class="cell">
-<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">m</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  9 12 13</code></pre>
 </div>
@@ -1950,7 +1961,7 @@ div.csl-indent {
 <span class="header-section-number">2.8.4</span> Missing Values</h3>
 <p>Some observations in a tibble are blank. These are called missing values, and they are often marked as <code>NA</code>. We can create such a tibble as follows:</p>
 <div class="cell">
-<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
 <span>  <span class="op">~</span> <span class="va">a</span>, <span class="op">~</span> <span class="va">b</span>, <span class="op">~</span> <span class="va">c</span>,</span>
 <span>    <span class="fl">2</span>,   <span class="fl">3</span>,   <span class="fl">5</span>,</span>
 <span>    <span class="fl">4</span>,  <span class="cn">NA</span>,   <span class="fl">8</span>,</span>
@@ -1969,7 +1980,7 @@ div.csl-indent {
 </div>
 <p>The presence of <code>NA</code> values can be problematic.</p>
 <div class="cell">
-<div class="sourceCode" id="cb217"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>avg_a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
@@ -1980,7 +1991,7 @@ div.csl-indent {
 </div>
 <p>Fortunately, most R functions take an argument, <code>na.rm</code>, which, when set to <code>TRUE</code>, removes NA values from any calculations.</p>
 <div class="cell">
-<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>avg_a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">a</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
@@ -1991,7 +2002,7 @@ div.csl-indent {
 </div>
 <p>Another approach is to use <code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb221"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
@@ -2003,7 +2014,7 @@ div.csl-indent {
 </div>
 <p>However, be careful! If you use <code><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na()</a></code> without a specific variable provided, you will remove all rows with a missing value for any variable in the tibble.</p>
 <div class="cell">
-<div class="sourceCode" id="cb223"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
@@ -2014,7 +2025,7 @@ div.csl-indent {
 </div>
 <p>A final approach is to use <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> to explicitly determine if a value is missing.</p>
 <div class="cell">
-<div class="sourceCode" id="cb225"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>a_missing <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
@@ -2029,7 +2040,7 @@ div.csl-indent {
 <span class="header-section-number">2.8.5</span> Working by rows</h3>
 <p>Tibbles and the main Tidyverse functions are designed to work by columns. You do something to all the values for variable <code>a</code>. But, sometimes, we want to work <code>across</code> the tibble, comparing the value for <code>a</code> in the first row to the value of <code>b</code> in the first row, and so on. To do that, we need two tricks. First, we use <code><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise()</a></code> to inform R that the next set of commands should be executed across the rows.</p>
 <div class="cell">
-<div class="sourceCode" id="cb227"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
@@ -2043,11 +2054,19 @@ div.csl-indent {
 </div>
 <p>Note how “# Rowwise:” is printed out. Having set up the pipe to work across rows, we need to pass <code><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across()</a></code> to whichever function we are using, generally specifying the variables we want to use. If we don’t provide any arguments to <code><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across()</a></code>, it will use all the columns in the tibble.</p>
 <div class="cell">
-<div class="sourceCode" id="cb229"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tbl</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>sum_a_c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">c</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>largest <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>largest_na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/c_across.html">c_across</a></span><span class="op">(</span><span class="op">)</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `largest = max(c_across())`.
+ℹ In row 1.
+Caused by warning:
+! Using `c_across()` without supplying `cols` was deprecated in dplyr 1.1.0.
+ℹ Please supply `cols` instead.</code></pre>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 6
 # Rowwise: 
@@ -2064,7 +2083,7 @@ div.csl-indent {
 <p>The <strong><code>skimr</code></strong> package offers a very useful function known as the <code><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim()</a></code> function, allowing you to get valuable information from the data set in one glance. This is similar to the <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> function, but it’s a little more detailed and offers some preliminary analysis of the topic.</p>
 <p>Let’s try skimming the <code>nhanes</code> dataset.</p>
 <div class="cell">
-<div class="sourceCode" id="cb231"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="va">nhanes</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://docs.ropensci.org/skimr/reference/skim.html">skim</a></span><span class="op">(</span><span class="va">nhanes</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
 <caption>Data summary</caption>

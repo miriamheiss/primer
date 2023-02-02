@@ -416,16 +416,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 33 × 4
    group           red_beads prop_red group_ID
    &lt;chr&gt;               &lt;dbl&gt;    &lt;dbl&gt;    &lt;int&gt;
- 1 Katie, Anthony         20     0.4         1
- 2 Ian, Iman              18     0.36        2
- 3 Aayush, Karen          15     0.3         3
- 4 Damani, Melissa        15     0.3         4
- 5 Yao, Kate              23     0.46        5
- 6 Maddie, Brent          19     0.38        6
- 7 Maeve, Josh            18     0.36        7
- 8 Yuki, Harry            21     0.42        8
- 9 Caroline, Edna         15     0.3         9
-10 Frank, Clara           21     0.42       10
+ 1 Claire, Cloud          16     0.32        1
+ 2 Maeve, Josh            18     0.36        2
+ 3 Mark, Ramses           21     0.42        3
+ 4 Esther, Henry          17     0.34        4
+ 5 Conrad, Vlad           16     0.32        5
+ 6 Sophie, Brian          21     0.42        6
+ 7 Griffin, Mary          18     0.36        7
+ 8 Dohyun, Estel          18     0.36        8
+ 9 Ian, Iman              18     0.36        9
+10 Ellie, Terrance        17     0.34       10
 # … with 23 more rows</code></pre>
 </div>
 </div>
@@ -752,7 +752,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span><span class="co"># of samples taken. This makes our data easier to interpret and prevents</span></span>
 <span><span class="co"># duplicate elements.</span></span>
 <span></span>
-<span><span class="va">virtual_prop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">virtual_samples_25</span> <span class="op">|&gt;</span> </span>
+<span><span class="va">virtual_prop</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">virtual_samples_25</span> <span class="op">|&gt;</span> </span>
 <span>                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">25</span><span class="op">)</span>, </span>
 <span>                          <span class="va">virtual_samples_50</span> <span class="op">|&gt;</span> </span>
 <span>                            <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>, </span>

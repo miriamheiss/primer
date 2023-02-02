@@ -866,9 +866,8 @@ Let's construct the chain of pipe operators `|>` that computes the number of fli
 
 ```{r}
 flights |>
-  group_by(dest) |>
   summarize(num_flights = n(),
-            .groups = "drop") |>
+            .by = dest) |>
   arrange(desc(num_flights)) |>
   inner_join(airports, by = c("dest" = "faa")) |>
   rename(airport_name = name)

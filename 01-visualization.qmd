@@ -524,8 +524,8 @@ Whites are over-represented in the Control group even though the `treatment` was
 
 ```{r}
 trains |> 
-  group_by(race,treatment) |>
-  summarize(count = sum(n())) |> 
+  summarize(count = n(),
+            .by = c(race, treatment)) |> 
   ggplot(mapping = aes(x = race,
                        y = count,
                        fill = treatment)) +
@@ -652,9 +652,7 @@ We can't use all the beautiful plots that we learned in the previous chapter unt
 
 * `mutate()`: to create new columns.
 
-* `group_by()`: to assign each row in a tibble to a "group." This allows statistics to be calculated for each group *separately*. You will usually use `group_by()` with `summarize()`.
-
-* `summarize()`: to create a new tibble comprised of summary statistics for one (or more) rows for each grouped variable, or for the tibble as a whole if it is ungrouped. 
+* `summarize()`: to create a new tibble comprised of summary statistics for one (or more) rows, depending on the use of the `.by` argument. 
 
 ### The pipe operator: `|>`
 
@@ -919,52 +917,34 @@ The interval between these two percentiles includes 95% of all the values in the
 
 If there is an `NA` value in the variable, any statistical function like `mean()` will return `NA`. You can fix this by using `na.rm = TRUE` within the statistical function.
 
+#### Summaries by group
 
-### `group_by()` variables
-
-<!-- Liam: Better explanation of .drop. What is it and why do we need it? -->
-
-We can the use `mean()` with `summarize()` to calculate the average age for all the people in `trains`, as we did above.
+Instead of calculating statistics for the entire tibble, we often want to do so "by" group. For example, here is the mean age for both genders in the data.
 
 ```{r}
 trains |> 
-  summarize(avg = mean(age))
+  summarize(mn_age = mean(age),
+            .by = gender)
 ```
 
-What if we want the mean `age` for each `gender`? Consider:
-
+The `.by` argument can take more than one variable.
 
 ```{r}
 trains |> 
-  group_by(gender)
+  summarize(mn_age = mean(age),
+            .by = c(gender, race))
 ```
 
-The data is the same as before, but note the "Groups" message at the top. R is informing you that this tibble has been grouped so that any operation you perform now will be done for each `gender`. 
-
-```{r}
-trains |> 
-  group_by(gender) |> 
-  summarize(avg = mean(age))
-```
-
-Notice the message R sends us. The warning means that the tibble which issues forth from the end of the pipe has been "ungrouped". This means the group attribute we applied with `group_by()` has been removed. This behavior is the (sensible) default.
-
-The proper way to handle the situation, here and everywhere else that we use `group_by()` and `summarize()`, is to specify the `.groups` argument.
+Older code often uses `group_by()` to achieve the same result.
 
 ```{r}
 trains |> 
   group_by(gender) |> 
-  summarize(mean = mean(age),
-            .groups = "drop")
+  summarize(mn_age = mean(age))
 ```
 
-This code does the same thing as the first version, but does not issue a message, since we have made an affirmative decision to drop any grouping variables.
+Do not use `group_by()` unless you have an extremely good reason to do so. Use the `.by` argument.
 
-The `group_by()` function doesn't change data frames by itself. Rather it changes the *meta-data*, or data about the data, specifically the grouping structure. It is only after we apply the `summarize()` function that the tibble changes.
-
-If you have a tibble which has been grouped, you can remove the grouping variable by using `ungroup()`. 
-
-** When your R code is behaving in a weird way, especially when it is "losing" rows, the problem is often solved by using `ungroup()` in the pipeline. **
 
 ### Other useful commands
 
