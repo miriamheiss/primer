@@ -1,5 +1,7 @@
 # Functions {-}
 
+<!-- Needs a major update, given changes in dplr 1.1. -->
+
 <!-- Get rid of nhanes example as too confusing? -->
 
 <!-- Get rid of anonymous function section as too confusing? Or save it for final section of Advanced stuff? -->
@@ -188,53 +190,41 @@ Let's practice with the `nhanes` dataset from the **primer.data** package. How c
 library(primer.data)
 ```
 
-Select the relevant variables, and group by `gender`. We are grouping because we are curious as to how `height` is distributed in between `gender`. We drop any rows with missing data.
+Select the relevant variables and drop any rows with missing data.
 
 ```{r}
 nhanes |>
   select(gender, height) |>
-  drop_na() |> 
-  group_by(gender)
+  drop_na() 
 ```
 
-There are two approaches. In the first, we are happy to have an output tibble with just two rows:
+We are interested in the quantiles of height, for each gender. We are happy to have an output tibble with just two rows:
 
 
 ```{r}
 nhanes |>
   select(gender, height) |>
   drop_na() |> 
-  group_by(gender) |> 
   summarise(q_height = list(quantile(height)),
-            .groups = "drop")
+            .by = gender)
 ```
 
-Note that there was no need to use `map_*` functions in this case. The simple **dplyr** approach works fine. The only "trick" is the use of `list()` to wrap the output of `quantile()`. Use `str()` to examine the exact values.
+Note that there was no need to use `map_*` functions in this case. The simple **dplyr** approach works fine. The only "trick" is the use of `list()` to wrap the output of `quantile()`. 
+
+Use `str()` to examine the exact values.
 
 ```{r}
 nhanes |>
   select(gender, height) |>
   drop_na() |> 
-  group_by(gender) |> 
   summarise(q_height = list(quantile(height)),
-            .groups = "drop") |> 
+            .by = gender) |> 
   str()
 ```
 
-Men are taller than women throughout the distribution, but the smallest individual (child) in the data, see the 0% quantile, happens to be male.
+Men are taller than women throughout the distribution, but the smallest individual (child) in the data --- see the 0% quantile --- happens to be male.
 
-The second case involves a scenario in which we do not want to "lose" any rows in our tibble. We want a `q_height` column for all the rows, even if the values included are repetitive.  A common scenario is that we want to use `q_height` to perform a calculation for each individual. To do this, we need a `map_*` function.
 
-```{r}
-nhanes |>
-  select(gender, height) |>
-  drop_na() |> 
-  group_by(gender) |> 
-  summarize(q_height = map(height, ~ quantile(.)),
-            .groups = "drop")
-```
-
-The first four lines of the pipe are the same in both cases. The only difference is the use of `list(quantile(height))` in the first and `map(height, ~ quantile(.)` in the second.
 
 Until now, we have practiced using `map_*` functions with built-in R functions. Sometimes, however, there is not an R function which does what we want. When that happens, we need to create our own function.
 
