@@ -22,6 +22,14 @@ library(gtsummary)
 library(patchwork)
 ```
 
+<!-- Perhaps change the joint and conditional distribution section to use gender/height from NHANES? It is true that this is a discrete and continuous joint distribution, but that is probably fine. Certainly connects nicely with the male height example. Certainly works well with the joint and conditional together. Certainly would be nice to do the empirical/mathematical/posterior trypycht as in the first three examples. Posterior could be for a WNBA practice session. Most of the women will be tall, but the men will be of more typical height. -->
+
+<!-- Shouldn't we have a question which we anwer with a dgm for each distribution example, as we do with three heads in a row? -->
+
+<!-- Should we discuss more the interplay of the use of data and math? For example, in the Presidential election example, we recognize that the (naive) mathematical distribution is inconsistent with the data. So, we need to change the math. And then see if the new math is more consistent with the data. Perhaps an important point worth repeating. -->
+
+<!-- Need more clarity on when/whether a distribution is empirical, meaning it is a histogram of the whole population (or a sample from it), and when it is an expection, like what we expect to happen if we sample one more person. Not even sure that this distinction is sensible . . . -->
+
 <!-- Remove last couple of sloppy uses of group_by(). -->
 
 <!-- Major change is that each example needs to have a simple question. Then it needs a DGM. Then we use the DGM to answer the question.  -->
@@ -523,16 +531,18 @@ Someone less suspicious of the casino would have a posterior distribution which 
 
 ### Presidential elections
 
-Consider the probability distributions for political events, like a presidential election. We want to know the probability that Democratic candidate wins X electoral votes, where X comes from the range of possible outcomes: 0 to 538. (The total number of electoral votes in US elections since 1964 is 538.)
+Consider the probability distribution for a political event, like a presidential election. We want to know the probability that Democratic candidate wins X electoral votes, where X comes from the range of possible outcomes: 0 to 538. (The total number of electoral votes in US elections since 1964 is 538.)
 
-The *empirical distribution* in this case could involve looking into past elections in the United States and counting the number of electoral votes that the Democrats won in each. For the empirical distribution, we create a tibble with electoral vote results from past elections. Looking at elections since 1964, we can observe that the number of electoral votes that the Democrats received in each one is different. Given that we only have 15 observations, it is difficult to draw conclusions or make predictions based off of this empirical distribution.
+<!-- DK: Need to discuss why we are using data since 1964 but not before? -->
+
+The *empirical distribution* in this case would involve counting the number of electoral votes that the Democratic candidate won in each of the Presidential elections in the last 50 years or so. For the empirical distribution, we create a tibble with electoral vote results from past elections. Looking at elections since 1964, we can observe that the number of electoral votes that the Democratic candidate received in each election is different. 
 
 
 ```{r}
 #| echo: false
 # Votes are since 1964, for Democratic candidate
 
-mydata <- tibble(electoral_votes = c(486, 191, 17, 297, 49, 13, 111, 
+mydata <- tibble(electoral_votes = c(486, 191,  17, 297, 49, 13, 111, 
                                      370, 379, 266, 251, 365, 332, 
                                      227, 306))
 
@@ -546,19 +556,32 @@ ggplot(mydata, aes(x = electoral_votes)) +
        subtitle = "Electoral votes from 16 previous elections",
        x = "Outcome\nElectoral Vote Total for Democratic Candidate",
        y = "Probability") +
+  scale_x_continuous(breaks = seq(0, 500, 100)) +
   scale_y_continuous(labels = 
                        scales::percent_format(accuracy = 1)) +
   theme_classic()
 
 ```
 
+Given that we only have 15 observations, it is difficult to draw conclusions or make predictions based off of this empirical distribution. But "difficult" does not mean "impossible." For example, if someone, more than a year before the election, offered to bet us 50/50 that the Democratic candidate was going to win more than 475 electoral votes, we would take the bet. After all, this outcome has only happened once in the last 15 elections, so a 50/50 bet seems like a great deal.
 
-We can build a *mathematical distribution* for X which assumes that the chances of the Democratic candidate winning any given state's electoral votes is 0.5 and the results from each state are independent.
+
+We can build a *mathematical distribution* for X which assumes that the chances of the Democratic candidate winning any given state's electoral votes is 0.5 and that the results from each state are independent.
 
 ```{r}
 #| echo: false
-# rep(3,8) means there are 8 states that have 3 electoral votes, via the same for the rest of the code chunck.
-# We use c() to make the rep() functions together, so that we can use it in tibble(). 
+#| warning: false
+
+# Code currently produces a warning about missing values. Not sure why? Maybe an
+# interaction with the hard-coded limits in the x-axis? 
+
+# We want the hard-coded limits because we want to make it obvious that the
+# mathematical results suggest that outcomes < 100 or > 400 are essentially
+# impossible. Text could make that more clear.
+
+# rep(3,8) means there are 8 states that have 3 electoral votes, via the same
+# for the rest of the code chunck. We use c() to make the rep() functions
+# together, so that we can use it in tibble().
 
 # I think these electoral votes are for 2016. Probably should update them for post 2020 census.
 
@@ -572,31 +595,34 @@ result <- tibble(total = (matrix(rbinom(sims*length(ev),
                  ncol = length(ev)) %*% ev)[,1])
 
 ggplot(data = result, aes(total)) +
-  geom_histogram(aes(y= after_stat(count/sum(count))), 
+  geom_histogram(aes(y = after_stat(count/sum(count))), 
                  binwidth = 1) +
   labs(title = "Mathematical Probability Distribution",
        subtitle = "Presidential elections with each state being 50/50 and independent",
        y = "Probability",
        x = "Outcome\nElectoral Vote Total for Democratic Candidate") +
+  scale_x_continuous(breaks = seq(0, 500, 100), limits = c(0, 540)) +
   scale_y_continuous(labels = 
                        scales::percent_format()) +
   theme_classic()
 
 ```
 
-If our assumptions about this mathematical distribution are correct (they are not!), then as the sample size increase, the empirical distribution should look more and more similar to the our mathematical distribution. 
+If our assumptions about this mathematical distribution are correct --- they are not! --- then, as the sample size increase, the empirical distribution should look more and more similar to our mathematical distribution. 
 
-However, the data from past elections is more than enough to demonstrate that the assumptions of the mathematical probability distribution above do not work for electoral votes. The model assumes that the Democrats have a 50% chance of receiving each of the 538 votes. Just looking at the mathematical probability distribution, we can observe that receiving 13 or 17 or 486 votes out of 538 would be extreme and almost impossible if the mathematical model were accurate. However, our empirical distribution shows that such extreme outcomes are quite common. Presidential elections have resulted in much bigger victories or defeats than this mathematical distribution seems to allow for, thereby demonstrating that our assumptions are false.
+However, the data from past elections is more than enough to demonstrate that the assumptions of our mathematical probability distribution do not work for electoral votes. The model assumes that the Democrats have a 50% chance of receiving each of the 538 votes. Just looking at the mathematical probability distribution, we can observe that receiving 13 or 17 or 486 votes out of 538 would be extreme and almost impossible if the mathematical model were accurate. However, our empirical distribution shows that such extreme outcomes are quite common. Presidential elections have resulted in much bigger victories or defeats than this mathematical distribution seems to allow for, thereby demonstrating that our assumptions are false.
 
 
 The *posterior distribution* of electoral votes is a popular topic, and an area of strong disagreement, among data scientists. Consider this posterior from *FiveThirtyEight*.
 
 ```{r}
 #| echo: false
-# DK: Some comments about this. Where did you get this data from? Why those
-# columns? 
 
-# Have to include these cols type, otherwise it will shows up this "Column specification", thing on the primer, not pretty.
+# DK: Some comments about this. Where did you get this data from? Why those
+# columns?
+
+# Have to include these cols type, otherwise it will shows up this "Column
+# specification", thing on the primer, not pretty.
 
 read_csv("./05-probability/data/election-forecasts-2020/prez_1.csv",
          col_types = cols(cycle = col_double(),
@@ -629,7 +655,7 @@ read_csv("./05-probability/data/election-forecasts-2020/prez_1.csv",
 ```
 
 
-Below is a posterior probability distribution from the FiveThirtyEight website for August 13, 2020. This was created using the same data as the above distribution, but simply displayed differently. For each electoral result, the height of the bar represents the probability that a given event will occur. However, there are no lablels on the y-axis telling us what the specific probability of each outcome is. And that is OK! The specific values are not that useful. If we removed the labels on our y-axes, would it matter?
+Below is a posterior probability distribution from the FiveThirtyEight website for August 13, 2020. This was created using the same data as the above distribution, but is displayed differently. For each electoral result, the height of the bar represents the probability that a given event will occur. However, there are no labels on the y-axis telling us what the specific probability of each outcome is. And that is OK! The specific values are not that useful. If we removed the labels on our own y-axes, would it matter? Probably not. Anytime there are many possible outcomes --- 539, in this case --- we stop looking at specific outcomes and, instead, look at where most of the "mass" of the distribution lies.
 
 ```{r}
 #| echo: false
@@ -682,7 +708,7 @@ The *empirical distribution* involves using data from the National Health and Nu
 
 ```{r}
 #| echo: false
-# Use nhanes dataset for this exercise, filter for Adult Male.
+# Use nhanes dataset for this exercise, filter for adult and male.
 
 nhanes |>
   filter(gender == "Male", age >= 18) |>
@@ -693,8 +719,8 @@ nhanes |>
                  binwidth = 1, 
                  color = "white")+
   labs(title = "Empirical Probability Distribution",
-       subtitle = "Height for male by NHANES",
-       x = "Height",
+       subtitle = "Height for adult men",
+       x = "Height (cm)",
        y = "Probability",caption = "Source:NHANES") +
   scale_y_continuous(labels =
                       scales::percent_format(accuracy = 1)) +
@@ -703,7 +729,7 @@ nhanes |>
 ```
 
 
-*Mathematical distribution* is complete based on mathematical formula and assumptions like in the Flipping a coin session we assume that the coin is an perfectly fair coin where where the probability landing on heads or tails is equal. In this case, we assume that the average hight of men is 175 cm, as well as the standard deviation for height is around 9 cm. When we have these two values, the average which we also called the mean, and standard deviation (sd), we can create an normal distribution using the `rnorm()` function. And an normal distribution is an good approximation and generalization for height in our scenario.
+*Mathematical distribution* is completely based on mathematical formula and assumptions, as in the coin flip example. We assumed that the coin is a perfectly fair, meaning that the probability of landing on heads or tails is equal. In this case, we assume that the average hight of men is 175 cm, as well as the standard deviation for height is around 9 cm. When we have these two values, the average which we also called the mean, and standard deviation (sd), we can create an normal distribution using the `rnorm()` function. And a normal distribution is a good approximation and generalization for height in our scenario.
 
 
 Mathematical Distribution:
@@ -719,8 +745,8 @@ tibble(height = rnorm(1000000, mean = 175, sd = 9)) |>
                  binwidth = 1, 
                  color = "white")+
   labs(title = "Mathematical Probability Distribution",
-       subtitle = "Expectations for an random male's height",
-       x = "Height",
+       subtitle = "Expectations for a random adult man's height",
+       x = "Height (cm)",
        y = "Probability") +
   scale_y_continuous(labels =
                       scales::percent_format(accuracy = 1)) +
@@ -732,7 +758,9 @@ Again, the Normal distribution which is an probability distribution that is symm
 
 $$y_i \sim N(\mu, \sigma^2)$$
 
-Each value $y_i$ is drawn from a normal distribution with parameters $\mu$ for the mean and $\sigma$ for the standard deviation. If the mathematical assumptions are correct in this case the two parameters $\mu$ and $\sigma$, then as our sample size increases, the empirical probability distribution will look more and more like the mathematical distribution. 
+<!-- DK: Awk. -->
+
+Each value $y_i$ is drawn from a normal distribution with parameters $\mu$ for the mean and $\sigma$ for the standard deviation. If the mathematical assumptions are correct, in this case the two parameters $\mu$ and $\sigma$, then, as our sample size increases, the empirical probability distribution will look more and more like the mathematical distribution. 
 
 
 The *posterior distribution* for heights depends on the context. Are we considering all the adult men in America? In that case, our posterior would probably look a lot like the empirical distribution using NHANES data. If we are being asked about the distribution of heights among players in the NBA, then our posterior might look like:
@@ -740,7 +768,9 @@ The *posterior distribution* for heights depends on the context. Are we consider
 ```{r}
 #| echo: false
 
-# Manually select the height, because it's posterior, could change base on belief
+# Manually select the height, because it's posterior, could change base on belief. 
+
+# DK: But this plot seems bad. Posteriors are mostly smooth, right? Change this.
 
 tibble(height = c(rep(170, 2), rep(173, 3), rep(175, 8), 
                   rep(177, 9), rep(178, 9), rep(182, 8),
@@ -753,8 +783,8 @@ tibble(height = c(rep(170, 2), rep(173, 3), rep(175, 8),
                    binwidth = 5, 
                    color = "white")+
     labs(title = "Posterior Probability Distribution",
-         subtitle = "One's belief about NBA baskectball players",
-         x = "Height",
+         subtitle = "My belief about the heights of NBA basketball players",
+         x = "Height (cm)",
          y = "Probability") +
     scale_y_continuous(labels =
                            scales::percent_format(accuracy = 1)) +
@@ -763,7 +793,7 @@ tibble(height = c(rep(170, 2), rep(173, 3), rep(175, 8),
 ```
 
 
-Comments:
+Caveats:
 
 * *Continuous variables are a myth.* Nothing that can be represented on a computer is [truly continuous](https://cs.stackexchange.com/questions/71648/why-is-data-in-computer-science-considered-to-be-discrete). Even something which appears continuous, like height, actually can only take on a (very large) set of discrete variables. 
 
