@@ -67,6 +67,9 @@ library(patchwork)
 
 <!-- Kant quote is OK, but not great. Would be nicer to start and end with a video, as in Chapters 4 and 6. -->
 
+<!-- Consider how we might better connect the two model, three model, n model sections to the distribution sections. In all those cases, we are setting up a joint distribution and then marginalizing it (?) to create a conditional distribution, which looks a lot like a simple one dimensional distribution. -->
+
+
 > The usual touchstone of whether what someone asserts is mere persuasion or at least a subjective conviction, i.e., firm belief, is betting. Often someone pronounces his propositions with such confident and inflexible defiance that he seems to have entirely laid aside all concern for error. A bet disconcerts him. Sometimes he reveals that he is persuaded enough for one ducat but not for ten. For he would happily bet one, but at ten he suddenly becomes aware of what he had not previously noticed, namely that it is quite possible that he has erred. -— Immanuel Kant, *Critique of Pure Reason*
 
 The central tension, and opportunity, in data science is the interplay between the *data* and the *science*, between our empirical observations and the models which we use to understand them. Probability is the language we use to explore that interplay; it connects models to data, and data to models.
@@ -285,7 +288,11 @@ Pay attention to notation. Recall that when we are talking about a specific prob
 
 ### Flipping a coin
 
-Data science problems start with a question. Example: *What are the chances of getting three heads in a row when flipping a fair coin?* Questions are answered with the help of probability distributions.
+Data science problems start with a question. Example: 
+
+*What are the chances of getting three heads in a row when flipping a fair coin?* 
+
+Questions are answered with the help of probability distributions.
 
 
 An *empirical distribution* is based on data. Think of this as the probability distribution created by collecting data in the real world or by running a simulation on your computer. In theory, if we increase the number of coins we flip (either in reality or via simulation), the empirical distribution will look more and more similar to the mathematical distribution. The mathematical distribution is the Platonic form. The empirical distribution will often look like the mathematical probability distribution, but it will rarely be exactly the same.
@@ -437,6 +444,10 @@ This is our first example of using a *data generating mechanism* --- meaning `rb
 
 ### Rolling two dice
 
+Data science begins with a question:
+
+*What is the probability of rolling a 7 or an 11 with a pair of dice?*
+
 We get an *empirical distribution* by rolling two dice a hundred times, either by hand or with a computer simulation. The result is not identical to the mathematical distribution because of the inherent randomness of the real world and/or of simulation. 
 
 ```{r}
@@ -527,9 +538,53 @@ tibble(results = c(rep(2, 15), rep(3, 15), rep(4, 7),
 
 Someone less suspicious of the casino would have a posterior distribution which looks more like the mathematical distribution.
 
-<!-- Add a question and then the solution here. -->
+We began this section with a question about the probability (or odds) of rolling a 7 or 11 --- i.e., a "natural" --- with a pair of dice. The answer to the question depends on whether or not we think the dice are fair. In other words, we need to know which distribution to use to answer the question. 
+
+Assume that the dice are fair. In that case, we can create a data generating mechanism by hand. (Alas, there is not a built-in R function for dice like there is for coin flips with `rbinom()`.)
+
+```{r}
+set.seed(7)
+
+# Creating a variable like rolls makes our code easier to read and modify. Of
+# course, we could just hard code the 4 into the size argument for each of the
+# two calls to sample, but that is much less convenient.
+
+rolls <- 4
+
+# The details of the code matter. If we don't have replace = TRUE, sample will
+# only use each of the 6 possible values once. That might be OK if we are just
+# rolling the dice 4 times, but it won't work for thousands of rolls.
+
+tibble(dice_1 = sample(x = 1:6, size = rolls, replace = TRUE),
+       dice_2 = sample(x = 1:6, size = rolls, replace = TRUE)) |> 
+  mutate(result = dice_1 + dice_2) |> 
+  mutate(natural = ifelse(result %in% c(7, 11), TRUE, FALSE))
+  
+```
+
+This code is another *data generating mechanism* or *dgm*. It allows us to simulate the distribution of the results from rolling a pair of fair dice. To answer our question, we simply increase the number of rolls and calculate the proportion of rolls which result in a 7 or 11.
+
+```{r}
+rolls <- 100000
+
+# We probably don't need 100,000 rolls, but this code is so fast that it does
+# not matter. Generally 1,000 (or even 100) draws from the data generating
+# mechanism is enough for most practical purposes.
+
+tibble(dice_1 = sample(x = 1:6, size = rolls, replace = TRUE),
+       dice_2 = sample(x = 1:6, size = rolls, replace = TRUE)) |> 
+  mutate(result = dice_1 + dice_2) |> 
+  summarize(natural_perc = mean(result %in% c(7, 11)))
+```
+
+
+The probability of rolling either a 7 or an 11 with a pair of fair dice is about 22%.
 
 ### Presidential elections
+
+Data science begins with a question:
+
+*What is the probability that the Democratic candidate will win the Presidential election?*
 
 Consider the probability distribution for a political event, like a presidential election. We want to know the probability that Democratic candidate wins X electoral votes, where X comes from the range of possible outcomes: 0 to 538. (The total number of electoral votes in US elections since 1964 is 538.)
 
@@ -695,7 +750,7 @@ There are many questions you could explore with posterior distributions. They ca
 
 ### Height
 
-<!-- This section is poorly written, but at least it begins with a question. -->
+<!-- DK: This section is poorly written, but at least it begins with a question. Alas, we don't answer it! -->
 
 Question: *What is the height of the next adult male we will meet?*
 
@@ -729,10 +784,8 @@ nhanes |>
 ```
 
 
-*Mathematical distribution* is completely based on mathematical formula and assumptions, as in the coin flip example. We assumed that the coin is a perfectly fair, meaning that the probability of landing on heads or tails is equal. In this case, we assume that the average hight of men is 175 cm, as well as the standard deviation for height is around 9 cm. When we have these two values, the average which we also called the mean, and standard deviation (sd), we can create an normal distribution using the `rnorm()` function. And a normal distribution is a good approximation and generalization for height in our scenario.
+*Mathematical distribution* is completely based on mathematical formula and assumptions, as in the coin flip example. In the coin-flip example, we assumed that the coin was perfectly fair, meaning that the probability of landing on heads or tails was equal. In this case, we make three assumptions. First, a male height follows a Normal distribution. Second, the average height of men is 175 cm. Third, the standard deviation for male height is 9 cm. We can create a Normal distribution using the `rnorm()` function with these two parameter values. 
 
-
-Mathematical Distribution:
 
 ```{r}
 #| echo: false
@@ -745,7 +798,7 @@ tibble(height = rnorm(1000000, mean = 175, sd = 9)) |>
                  binwidth = 1, 
                  color = "white")+
   labs(title = "Mathematical Probability Distribution",
-       subtitle = "Expectations for a random adult man's height",
+       subtitle = "Male height assuming a normal distribution with a mean of 175 cm and sd of 9 cm",
        x = "Height (cm)",
        y = "Probability") +
   scale_y_continuous(labels =
@@ -754,13 +807,13 @@ tibble(height = rnorm(1000000, mean = 175, sd = 9)) |>
   
 ```
 
-Again, the Normal distribution which is an probability distribution that is symmetric about the mean is described by this formula. 
+Again, the Normal distribution which is a probability distribution that is symmetric about the mean described by this formula. 
 
 $$y_i \sim N(\mu, \sigma^2)$$
 
 <!-- DK: Awk. -->
 
-Each value $y_i$ is drawn from a normal distribution with parameters $\mu$ for the mean and $\sigma$ for the standard deviation. If the mathematical assumptions are correct, in this case the two parameters $\mu$ and $\sigma$, then, as our sample size increases, the empirical probability distribution will look more and more like the mathematical distribution. 
+Each value $y_i$ is drawn from a Normal distribution with parameters $\mu$ for the mean and $\sigma$ for the standard deviation. If the assumptions are correct, then, as our sample size increases, the empirical probability distribution will look more and more like the mathematical distribution. 
 
 
 The *posterior distribution* for heights depends on the context. Are we considering all the adult men in America? In that case, our posterior would probably look a lot like the empirical distribution using NHANES data. If we are being asked about the distribution of heights among players in the NBA, then our posterior might look like:
@@ -768,22 +821,13 @@ The *posterior distribution* for heights depends on the context. Are we consider
 ```{r}
 #| echo: false
 
-# Manually select the height, because it's posterior, could change base on belief. 
-
-# DK: But this plot seems bad. Posteriors are mostly smooth, right? Change this.
-
-tibble(height = c(rep(170, 2), rep(173, 3), rep(175, 8), 
-                  rep(177, 9), rep(178, 9), rep(182, 8),
-                  rep(186, 10), rep(190, 18), rep(193, 23), 
-                  rep(197, 20),rep(200, 21), rep(205, 20), 
-                  rep(207, 15),rep(210, 15), rep(213, 16), 
-                  rep(218, 14),rep(220, 8), rep(228, 4)))|> 
+tibble(height = rnorm(100000, 200, 6)) |> 
     ggplot(aes(x = height)) +
     geom_histogram(aes(y = after_stat(count/sum(count))), 
-                   binwidth = 5, 
+                   binwidth = 1, 
                    color = "white")+
     labs(title = "Posterior Probability Distribution",
-         subtitle = "My belief about the heights of NBA basketball players",
+         subtitle = "My belief about the heights of professional basketball players",
          x = "Height (cm)",
          y = "Probability") +
     scale_y_continuous(labels =
@@ -817,7 +861,7 @@ Recall that $P(\text{coin})$ is the probability distribution for the result of a
 
 <!-- DK: Use of "outcome" is sloppy. Does a single dice roll have one outcome or 6? -->
 
-Joint distributions are also mathematical objects that cover a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1 and the sum of all chances must equal 1. The key to a joint distribution is it measures the chance that both events A and B will occur. The notation is $P(A, B)$.
+Joint distributions are also mathematical objects that cover a set of outcomes, where each distinct outcome has a chance of occurring between 0 and 1 and the sum of all chances must equal 1. The key to a joint distribution is that it measures the chance that both outcome $a$ from the set of events A *and* outcome $b$ from the set of events B will occur. The notation is $P(A, B)$.
 
 Let's say that you are rolling two six-sided dice simultaneously. Dice 1 is weighted so that there is a 50% chance of rolling a 6 and a 10% chance of each of the other values. Dice 2 is weighted so there is a 50% chance of rolling a 5 and a 10% chance of rolling each of the other values. Let's roll both dice 1,000 times. In previous examples involving two dice, we cared about the sum of results and not the outcomes of the first versus the second dice of each simulation. With a joint distributions, the outcomes for individual dice matter; so instead of 11 possible outcomes on the x-axis of our distribution plot (ranging from 2 to 12), we have 36 outcomes. Furthermore, a 2D probability distribution is not sufficient to represent all of the variables involved, so the joint distribution for this example is displayed using a 3D plot.
 
@@ -1776,7 +1820,7 @@ As you may have noticed, if you calculated the value using the first method, you
 ## Working with probability distributions
 
 
-<!-- DK: Does this really belong here? Maybe at the end? -->
+<!-- DK: Does this really belong here? Maybe at the end? Maybe after Height example above? -->
 
 
 
