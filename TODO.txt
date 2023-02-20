@@ -2,6 +2,7 @@
 
 Update Setting Up section to make clear that the first job is to submit a PR demonstrating that Sarah is here.
 
+
 -3) Update Trump/Biden data in chapter 1.
 
 -2) https://mc-stan.org/rstanarm/reference/stan_polr.html Add some examples with ordinal dependent variables. Of course, what we really want is multinomial regression.
@@ -14,7 +15,7 @@ Update Setting Up section to make clear that the first job is to submit a PR dem
 
 2) Fix this warning:
 
-[WARNING] Citeproc: Citation with no printed form: 
+[WARNING] Citeproc: Citation with no printed form:
 
 3) Need to list all packages used in the book. Not sure how.
 
@@ -34,7 +35,7 @@ Might be cool to figure out all the places which, implicitly, mention the curren
 
 PDF version. Allowing students to read offline.
 
-More details _quarto.yml. 
+More details _quarto.yml.
 
 Github Actions. Fourth, can we build it automatically on the web after accepting.
 
