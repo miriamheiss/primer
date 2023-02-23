@@ -12,6 +12,18 @@ library(gt)
 library(gtsummary)
 ```
 
+<!-- For MH: -->
+
+<!-- ID is just another column name. It should look the same, and be placed the same, as something like Height. To do so, we might need to insert an empty tab spanner, matching up with the tab spanners like "Outcome" which are often above Height. -->
+
+<!-- The column names which require math text, like Y_t, do not line up with the column names which don't use math, like gender. They should look the same. Maybe we use $$\text{gender}$$ to achieve that? -->
+
+<!-- Simplify tables. Do they really need `$$`, for example? -->
+
+<!-- Make all tables look the same. -->
+
+<!-- Reinforce the definitions of the Preceptor Table and the Population Table throughout. They are key! Note that the all the columns of the Preceptor Table fit within the Population Table. It is just that the Population Table also includes some extra columns, maining Source. -->
+
 
 <!-- Assumptions section needs work, especially representativeness. Unconfoundedness is not great either. -->
 
@@ -951,12 +963,12 @@ tibble(source = c("Population", "Population", "...",
   
   gt() %>%
     tab_header(title = "Population Table") %>% 
-    cols_label(source = md("Source"),
-               year = md("Year"),
-               sex = md("Sex"),
-                  ytreat = md("$$Y_t(u)$$"),
-                  ycontrol = md("$$Y_c(u)$$"),
-                  ydiff = md("$$Y_t(u) - Y_c(u)$$")) %>%
+    cols_label(source = md("$$\\text{Source}$$"),
+               year = md("$$\\text{Year}$$"),
+               sex = md("$$\\text{Sex}$$"),
+               ytreat = md("$$Y_t(u)$$"),
+               ycontrol = md("$$Y_c(u)$$"),
+               ydiff = md("$$Y_t(u) - Y_c(u)$$")) %>%
     cols_move(columns = c(ytreat, ycontrol), after = c(source)) %>%
     tab_style(cell_borders(sides = "right"),
               location = cells_body(columns = c(source))) %>%
@@ -966,7 +978,7 @@ tibble(source = c("Population", "Population", "...",
     cols_align(align = "left", columns = c(source)) %>%
     tab_spanner(label = "Outcomes", c(ytreat, ycontrol)) %>%
     tab_spanner(label = "Causal Effect", c(ydiff)) %>% 
-    tab_spanner(label = "$$\\text{Covariates}$$", c(sex))
+    tab_spanner(label = "Covariates", c(sex))
 ```
 
 The rows from our data have covariates and one potential outcome. (By definition, no real data can include more than one potential outcome.) The rows from the Preceptor Table include covariates, but not outcomes. The rows from our greater population include no data, as we know nothing about these units. 

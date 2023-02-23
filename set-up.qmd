@@ -13,10 +13,7 @@ The *test* which ensures that you have successfully completed this set up is to 
 
 ## Computer Set Up
 
-1) [Install](https://happygitwithr.com/install-r-rstudio.html) the latest released versions of R and RStudio. Install the **usethis** package.
-
-
-Read the Getting Started and Tools sections of [The Primer](https://ppbds.github.io/primer/) and make sure your Git/Github is working. Read  (and watch the videos from) [*Getting Used to R, RStudio, and R Markdown*](https://ismayc.github.io/rbasics-book/) by Chester Ismay and Patrick C. Kennedy. Check out [RStudio Essentials Videos](https://rstudio.com/collections/rstudio-essentials/). Most relevant for us are ["Writing code in RStudio"](https://resources.rstudio.com/wistia-rstudio-essentials-2/rstudioessentialsprogrammingpart1-2), ["Projects in RStudio"](https://rstudio.com/resources/webinars/managing-part-1-projects-in-rstudio/) and ["Github and RStudio"](https://rstudio.com/resources/webinars/managing-part-2-github-and-rstudio/). The best reference for R/RStudio/Git/Github issues is always [*Happy Git and GitHub for the useR*](https://happygitwithr.com/).
+1) Read the [Getting Started](https://ppbds.github.io/primer/00-getting-started.html) chapter from [The Primer](https://ppbds.github.io/primer/). Follow the instructions, including installing [Rtools](https://cran.r-project.org/bin/windows/Rtools/) if you are using Windows. Read  (and watch the videos from) [*Getting Used to R, RStudio, and R Markdown*](https://ismayc.github.io/rbasics-book/) by Chester Ismay and Patrick C. Kennedy. Note that [R Markdown](https://rmarkdown.rstudio.com/) is the predecessor to [Quarto](https://quarto.org/). Check out [RStudio Essentials Videos](https://rstudio.com/collections/rstudio-essentials/). Most relevant for us are ["Writing code in RStudio"](https://resources.rstudio.com/wistia-rstudio-essentials-2/rstudioessentialsprogrammingpart1-2), ["Projects in RStudio"](https://rstudio.com/resources/webinars/managing-part-1-projects-in-rstudio/) and ["Github and RStudio"](https://rstudio.com/resources/webinars/managing-part-2-github-and-rstudio/). The best reference for R/RStudio/Git/Github issues is always [*Happy Git and GitHub for the useR*](https://happygitwithr.com/).
 
 
 2) Make sure that your Git/Github connections are good. If you have gone through the key chapters in [Happy Git with R](https://happygitwithr.com/) --- as you should have --- then these may already be OK. If not (or, even if you have), then you need to run `usethis::git_sitrep().`
@@ -42,14 +39,12 @@ GitHub
 
 I left out the end of the output.
 
-If the first part --- Git config --- seems messed up, execute:
+If the first part --- Git config --- seems messed up, execute (with your information):
 
 
 ```{r, eval = FALSE}
 use_git_config(user.name = "David Kane", user.email = "dave.kane@gmail.com")
 ```
-
-
 
 If the second part seems messed up, try:
 
@@ -66,14 +61,13 @@ It is not critical to understand all the details of how **renv** works. The big 
 
 4) At this point, you should have all the tools you need to contribute. If you have never done a pull request, however, you will need to learn more. Start by reading the [help page](https://usethis.r-lib.org/articles/articles/pr-functions.html). Read the whole thing! Don't just skim it. These are important concepts for professional-level workflow. The **usethis** package is mostly providing wrappers around the underlying git commands. If you want to understand what is happening at a lower level, read [this](https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project), but doing so is optional.
 
-
 Again, with luck, you will only have to do these steps once.
 
-5) Prove to yourself (and to me) that your set up is working by submittimg a pull request to me which simply adds your name to the top of one of the TODO.txt files. (See below for how to do this.)
+5) Prove to yourself (and to me) that your set up is working by submitting a pull request to me which simply adds your name to the top of the **all.primer.tutorials** TODO.txt file. (See below for how to do this.) Email me to set up our next meeting after you do this.
 
 ## Project Set Up
 
-You will need to do the below steps at least one time. It is more likely, however, that you will do them dozens of times. If things are working, great! If they start not working, you can try to diagnose the problem. But, if you can't, then you are in a [nuke it from orbit](https://knowyourmeme.com/memes/nuke-it-from-orbit) scenario, which means that you start by deleting the current version of the package from two places: your computer, and your Github account. To delete the primer from your computer, put the R Studio project directory in the Trash. Make sure to also close out of the R Studio session after you delete it. If for some reason you cannot completely remove it, consider using the command `$sudo rm -r dirname` where you replace "dirname" with the path to primer on your computer! `sudo` and `rm` can be extremely dangerous when used together, so make sure to double check the command and/or do additional research. After you successfully remove it from your computer, go to your Github account and then go to Settings to delete the repo. 
+You will need to do the below steps at least one time. It is more likely, however, that you will do them dozens of times. If things are working, great! If they start not working, you can try to diagnose the problem. But, if you can't, then you are in a [nuke it from orbit](https://knowyourmeme.com/memes/nuke-it-from-orbit) scenario, which means that you start by deleting the current version of the package from two places: your computer, and your Github account. To delete a project from your computer, put the R Studio project directory in the Trash. Make sure to also close out of the R Studio session after you delete it. If for some reason you cannot completely remove it, consider using the command `$sudo rm -r dirname` where you replace `dirname` with the path to the project on your computer. `sudo` and `rm` can be extremely dangerous when used together, so make sure to double check the command and/or do additional research. After you successfully remove the R project from your computer, go to your Github account and then go to Settings to delete the repo. 
 
 Key steps: 
 
