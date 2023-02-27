@@ -917,7 +917,7 @@ The interval between these two percentiles includes 95% of all the values in the
 
 If there is an `NA` value in the variable, any statistical function like `mean()` will return `NA`. You can fix this by using `na.rm = TRUE` within the statistical function.
 
-#### Summaries by group
+#### Summaries by a group
 
 Instead of calculating statistics for the entire tibble, we often want to do so "by" group. For example, here is the mean age for both genders in the data.
 
@@ -943,7 +943,7 @@ trains |>
   summarize(mn_age = mean(age))
 ```
 
-Do not use `group_by()` unless you have an extremely good reason to do so. Use the `.by` argument.
+Do not use `group_by()` unless you have an extremely good reason to do so. Use the `.by` argument, most commonly with `summarize(), although it also works with other *Tidyverse* functions.
 
 
 ### Other useful commands

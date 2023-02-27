@@ -320,7 +320,7 @@ GitHub
 </ol>
 <p>Again, with luck, you will only have to do these steps once.</p>
 <ol start="5" type="1">
-<li>Prove to yourself (and to me) that your set up is working by submitting a pull request to me which simply adds your name to the top of the <strong>all.primer.tutorials</strong> TODO.txt file. (See below for how to do this.) Email me to set up our next meeting after you do this.</li>
+<li>Prove to yourself (and to me) that your set up is working by submitting a pull request to me which simply adds your name to the top of the <strong>all.primer.tutorials</strong> <code>TODO.txt</code> file. (See below for how to do this.) Email me to set up our next meeting after you do this.</li>
 </ol></section><section id="project-set-up" class="level2"><h2 class="anchored" data-anchor-id="project-set-up">Project Set Up</h2>
 <p>You will need to do the below steps at least one time. It is more likely, however, that you will do them dozens of times. If things are working, great! If they start not working, you can try to diagnose the problem. But, if you can’t, then you are in a <a href="https://knowyourmeme.com/memes/nuke-it-from-orbit">nuke it from orbit</a> scenario, which means that you start by deleting the current version of the package from two places: your computer, and your Github account. To delete a project from your computer, put the R Studio project directory in the Trash. Make sure to also close out of the R Studio session after you delete it. If for some reason you cannot completely remove it, consider using the command <code>$sudo rm -r dirname</code> where you replace <code>dirname</code> with the path to the project on your computer. <code>sudo</code> and <code>rm</code> can be extremely dangerous when used together, so make sure to double check the command and/or do additional research. After you successfully remove the R project from your computer, go to your Github account and then go to Settings to delete the repo.</p>
 <p>Key steps:</p>
@@ -412,11 +412,9 @@ GitHub
 <li><p>R code, anything you might type in the console, is always within backticks. Example: <code>mtcars</code> is a built-in dataset.</p></li>
 <li><p>Function names always include the parentheses: we write <code>pivot_wider()</code>, not <code>pivot_wider</code>.</p></li>
 <li><p>Add lots of memes and videos and cartoons.</p></li>
-<li><p>Do not use code chunk names because it messes up building the book because of limits in <strong>bookdown</strong>.</p></li>
 <li><p>Make ample use of comments, placed with the handy CMD-Shift-/ shortcut. These are notes for everyone else working on the chapter, and for future you.</p></li>
 <li><p>All tables should be created with the <strong>gt</strong> package.</p></li>
 <li><p>All images and gifs are loaded with <code>knitr::include_graphics().</code></p></li>
-<li><p>Only code chunk options allowed are include = FALSE, echo = FALSE, fig.cap = “This is my cap” and message = FALSE when loading packages like ggplot2 since it prevents all the messages from printing out.</p></li>
 <li><p>Interim data sets should be called <code>x</code> or something sensible to the situation, like <code>ch7</code> for a data set you are working with in Chapter 7. Do not use names like <code>data</code> and <code>df</code>, both of which are R commands.</p></li>
 <li><p>Students are sometimes tentative. Don’t be! Edit aggressively. If you don’t like what is there, delete it. (If I disagree with your decision, I can always get the text back from Github.) Move things around. Make the chapter yours, while keeping to the style of the other chapters. Note that 90% of the prose here was not written by me. Cut anything you don’t like.</p></li>
 <li><p>If you make an mp4, you can convert it to .gif using https://convertio.co/mp4-gif.</p></li>
