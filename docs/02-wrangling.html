@@ -256,6 +256,11 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./style-guide.html" class="sidebar-item-text sidebar-link">Style Guide</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
   </div>
 </li>
@@ -596,14 +601,14 @@ div.csl-indent {
 <pre><code># A tibble: 8 × 1
   fruit      
   &lt;chr&gt;      
-1 durian     
-2 grapefruit 
-3 coconut    
-4 olive      
-5 boysenberry
-6 pamelo     
-7 cranberry  
-8 tangerine  </code></pre>
+1 bell pepper
+2 breadfruit 
+3 fig        
+4 kiwi fruit 
+5 grape      
+6 elderberry 
+7 coconut    
+8 jujube     </code></pre>
 </div>
 </div>
 <!-- AM: Demonstrate a use of the `prop` argument? Or just delete it entirely? -->
@@ -1056,11 +1061,11 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2023-02-02"</code></pre>
+<pre><code>[1] "2023-02-27"</code></pre>
 </div>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">now</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2023-02-02 15:41:46 EST"</code></pre>
+<pre><code>[1] "2023-02-27 16:11:33 EST"</code></pre>
 </div>
 </div>
 <p>Otherwise, there are three ways you’re likely to create a date/time:</p>
@@ -1163,11 +1168,11 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode" id="cb118"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as_date.html">as_datetime</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">today</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2023-02-02 UTC"</code></pre>
+<pre><code>[1] "2023-02-27 UTC"</code></pre>
 </div>
 <div class="sourceCode" id="cb120"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as_date.html">as_date</a></span><span class="op">(</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">now</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2023-02-02"</code></pre>
+<pre><code>[1] "2023-02-27"</code></pre>
 </div>
 </div>
 <p>Sometimes you’ll get date/times as numeric offsets from the “Unix Epoch”, 1970-01-01. If the offset is in seconds, use <code><a href="https://lubridate.tidyverse.org/reference/as_date.html">as_datetime()</a></code>; if it’s in days, use <code><a href="https://lubridate.tidyverse.org/reference/as_date.html">as_date()</a></code>.</p>

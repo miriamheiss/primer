@@ -686,38 +686,43 @@ As you can see, these tables both have a common column: the `ArtistId` column. H
 
 Here is the [full relationship diagram](http://schemaspy.org/sample/diagrams/summary/relationships.real.large.png) of the database that we're using.
 
-Let's go over some of the operations that you can do on a SQLite database.
+<!-- Let's go over some of the operations that you can do on a SQLite database. -->
 
-#### Using dbplyr
+<!-- #### Using dbplyr -->
 
-We've already seen how you can use the **dbpylr** package to get a table from a database, but let's look at how you can also use it to do operations on databases as well.
+<!-- We've already seen how you can use the **dbpylr** package to get a table from a database, but let's look at how you can also use it to do operations on databases as well. -->
 
-The **dbpylr** package allows you to use many of the same functions from the **tidyverse** like `select()`, `filter()`, `mutate()` without any issues, making it the easiest to do operations with.
+<!-- The **dbpylr** package allows you to use many of the same functions from the **tidyverse** like `select()`, `filter()`, `mutate()` without any issues. -->
 
-Here's an example of using the **dbpylr** package to get the number of albums each artist has created.
+<!-- Here's an example of using the **dbpylr** package to get the number of albums each artist has created. -->
 
 ```{r} 
+# DK: This code used to work. It now fails. So, for now, I am commenting out
+# this whole section. The error arises in the last select(). Why does that not
+# work? Perhaps the class, which is tbl_SQLiteConnection, makes for trouble . .
+# .
+
 # You can keep a column during the summarize() if you just put the name equal to
 # itself. This code is deliberately long in order to show the common functions
 # that we use.
 
-band_albums <- tbl(con, "albums") |>
-                 inner_join(tbl(con, "artists"), by = "ArtistId") |>
-                 select("AlbumId", "ArtistId", "Title", "Name") |>
-                 summarize(Name = Name, 
-                           num_albums = n(),
-                           .by = ArtistId) |>
-                 mutate(artist_name = Name) |>
-                 mutate(artist_id = ArtistId) |>
-                 filter(num_albums > 3) |>
-                 arrange(desc(num_albums)) |>
-                 select(artist_id, artist_name, num_albums)
-band_albums
+# band_albums <- tbl(con, "albums") |>
+#                  inner_join(tbl(con, "artists"), by = "ArtistId") |>
+#                  select("AlbumId", "ArtistId", "Title", "Name") |>
+#                  summarize(Name = Name, 
+#                            num_albums = n(),
+#                            .by = ArtistId) |>
+#                  mutate(artist_name = Name) |>
+#                  mutate(artist_id = ArtistId) |>
+#                  filter(num_albums > 3) |>
+#                  arrange(desc(num_albums)) |>
+#                  select(artist_id, artist_name, num_albums)
+# band_albums
 ```
 
-These are the functions that we're already familiar with using, and they work just as well on database tables as well.
+<!-- These are the functions that we're already familiar with using, and they work just as well on database tables as well. -->
 
-However, there are cases where you will have to use SQL code to accomplish certain tasks.
+<!-- However, there are cases where you will have to use SQL code to accomplish certain tasks. -->
 
 ```{r}
 #| echo: false

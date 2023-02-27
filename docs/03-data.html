@@ -237,6 +237,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./style-guide.html" class="sidebar-item-text sidebar-link">Style Guide</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
   </div>
 </li>
@@ -630,10 +635,10 @@ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 <pre><code>[1] 1 1 1</code></pre>
 </div>
 </div>
-<p>But that can still cause problems down the line and it’s just annoying to use the backticks every time you want a column name. This is when we can use the <code><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names()</a></code> function from the <strong>janitor</strong> package. It essentially formats the column names so that they follow the <a href="https://en.wikipedia.org/wiki/Snake_case">underscore separated naming convention</a> and are all unique.</p>
+<p>But that can still cause problems down the line and it’s just annoying to use the backticks every time you want a column name. This is when we can use the <code><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names()</a></code> function from the <strong>janitor</strong> package. It essentially formats the column names so that they follow the <a href="https://en.wikipedia.org/wiki/Snake_case">underscore separated naming convention</a> and are all unique.</p>
 <div class="cell">
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">file_4_tibble</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   one_powers two_powers_2 x3_powers two_powers_4
@@ -1202,50 +1207,38 @@ dbl (1): population
 </div>
 <p>As you can see, these tables both have a common column: the <code>ArtistId</code> column. However, they all have different information linked to that ID, such as “albums” having the albums that artist produced and “artists” having the name of that artist.</p>
 <p>Here is the <a href="http://schemaspy.org/sample/diagrams/summary/relationships.real.large.png">full relationship diagram</a> of the database that we’re using.</p>
-<p>Let’s go over some of the operations that you can do on a SQLite database.</p>
-<section id="using-dbplyr" class="level4" data-number="3.3.2.1"><h4 data-number="3.3.2.1" class="anchored" data-anchor-id="using-dbplyr">
-<span class="header-section-number">3.3.2.1</span> Using dbplyr</h4>
-<p>We’ve already seen how you can use the <strong>dbpylr</strong> package to get a table from a database, but let’s look at how you can also use it to do operations on databases as well.</p>
-<p>The <strong>dbpylr</strong> package allows you to use many of the same functions from the <strong>tidyverse</strong> like <code><a href="https://dplyr.tidyverse.org/reference/select.html">select()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate()</a></code> without any issues, making it the easiest to do operations with.</p>
-<p>Here’s an example of using the <strong>dbpylr</strong> package to get the number of albums each artist has created.</p>
+<!-- Let's go over some of the operations that you can do on a SQLite database. -->
+<!-- #### Using dbplyr -->
+
+<!-- We've already seen how you can use the **dbpylr** package to get a table from a database, but let's look at how you can also use it to do operations on databases as well. -->
+<!-- The **dbpylr** package allows you to use many of the same functions from the **tidyverse** like `select()`, `filter()`, `mutate()` without any issues. -->
+<!-- Here's an example of using the **dbpylr** package to get the number of albums each artist has created. -->
 <div class="cell">
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># You can keep a column during the summarize() if you just put the name equal to</span></span>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># DK: This code used to work. It now fails. So, for now, I am commenting out</span></span>
+<span><span class="co"># this whole section. The error arises in the last select(). Why does that not</span></span>
+<span><span class="co"># work? Perhaps the class, which is tbl_SQLiteConnection, makes for trouble . .</span></span>
+<span><span class="co"># .</span></span>
+<span></span>
+<span><span class="co"># You can keep a column during the summarize() if you just put the name equal to</span></span>
 <span><span class="co"># itself. This code is deliberately long in order to show the common functions</span></span>
 <span><span class="co"># that we use.</span></span>
 <span></span>
-<span><span class="va">band_albums</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html">tbl</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"albums"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html">tbl</a></span><span class="op">(</span><span class="va">con</span>, <span class="st">"artists"</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"ArtistId"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="st">"AlbumId"</span>, <span class="st">"ArtistId"</span>, <span class="st">"Title"</span>, <span class="st">"Name"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span>Name <span class="op">=</span> <span class="va">Name</span>, </span>
-<span>                           num_albums <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>                           .by <span class="op">=</span> <span class="va">ArtistId</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>artist_name <span class="op">=</span> <span class="va">Name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>artist_id <span class="op">=</span> <span class="va">ArtistId</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">num_albums</span> <span class="op">&gt;</span> <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">num_albums</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">artist_id</span>, <span class="va">artist_name</span>, <span class="va">num_albums</span><span class="op">)</span></span>
-<span><span class="va">band_albums</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># Source:     SQL [?? x 3]
-# Database:   sqlite 3.38.5 [/Users/dkane/Desktop/projects/primer/chinook.db]
-# Ordered by: desc(num_albums)
-   artist_id artist_name     num_albums
-       &lt;int&gt; &lt;chr&gt;                &lt;int&gt;
- 1        90 Iron Maiden             21
- 2        22 Led Zeppelin            14
- 3        58 Deep Purple             11
- 4        50 Metallica               10
- 5       150 U2                      10
- 6       114 Ozzy Osbourne            6
- 7       118 Pearl Jam                5
- 8        21 Various Artists          4
- 9        82 Faith No More            4
-10        84 Foo Fighters             4
-# … with more rows</code></pre>
+<span><span class="co"># band_albums &lt;- tbl(con, "albums") |&gt;</span></span>
+<span><span class="co">#                  inner_join(tbl(con, "artists"), by = "ArtistId") |&gt;</span></span>
+<span><span class="co">#                  select("AlbumId", "ArtistId", "Title", "Name") |&gt;</span></span>
+<span><span class="co">#                  summarize(Name = Name, </span></span>
+<span><span class="co">#                            num_albums = n(),</span></span>
+<span><span class="co">#                            .by = ArtistId) |&gt;</span></span>
+<span><span class="co">#                  mutate(artist_name = Name) |&gt;</span></span>
+<span><span class="co">#                  mutate(artist_id = ArtistId) |&gt;</span></span>
+<span><span class="co">#                  filter(num_albums &gt; 3) |&gt;</span></span>
+<span><span class="co">#                  arrange(desc(num_albums)) |&gt;</span></span>
+<span><span class="co">#                  select(artist_id, artist_name, num_albums)</span></span>
+<span><span class="co"># band_albums</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p>These are the functions that we’re already familiar with using, and they work just as well on database tables as well.</p>
-<p>However, there are cases where you will have to use SQL code to accomplish certain tasks.</p>
+
+<!-- These are the functions that we're already familiar with using, and they work just as well on database tables as well. -->
+<!-- However, there are cases where you will have to use SQL code to accomplish certain tasks. -->
 <div class="cell">
 
 </div>
@@ -1422,7 +1415,7 @@ dbl (1): population
 <!-- - they provide security to keep data safe -->
 <!-- For example, [there are billions of Google searches conducted daily](https://www.internetlivestats.com/google-search-statistics/).  -->
 <!-- This makes databases extremely useful for a business where they'll have employees doing thousands or millions of operations daily. This makes knowing what SQL databases are extremely vital from both a data science and a general usage perspective. -->
-</section></section></section><section id="webscraping" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="webscraping">
+</section></section><section id="webscraping" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="webscraping">
 <span class="header-section-number">3.4</span> Webscraping</h2>
 <div class="cell">
 <div class="cell-output-display">
@@ -1447,7 +1440,7 @@ dbl (1): population
 </div>
 <p>Websites are coded in a language called <em>HTML</em>, or <em>H</em>yper<em>T</em>ext <em>M</em>arkup <em>L</em>anguage. This is the code that puts all of the information on the website, such as the numbers and text. These are the files created when we “knit” our .Rmd files and it’s what makes them put information on the screen. When we’re webscraping, we can look at the information on the website by looking at the HTML code. You can try this out by yourself! Just go to any website and right-click, then press “Inspect”. You’ll be able to see the HTML code behind the website and even edit it to your liking!</p>
 <div class="cell">
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"03-data/images/html_inspect.gif"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html">include_graphics</a></span><span class="op">(</span><span class="st">"03-data/images/html_inspect.gif"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure"><p><img src="03-data/images/html_inspect.gif" class="img-fluid figure-img"></p>
@@ -1457,13 +1450,13 @@ dbl (1): population
 </div>
 </div>
 <p>HTML uses many nested “tags” to organize the structure. For example, an HTML file like this:</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- This is using the HTML language. You don't actually put this in a chunk if </span></span>
-<span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a><span class="co">you want to put this in an Rmarkdown file, you can just type it straight in.--&gt;</span></span>
-<span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
-<span id="cb99-4"><a href="#cb99-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span></span>
-<span id="cb99-5"><a href="#cb99-5" aria-hidden="true" tabindex="-1"></a>    Hello World</span>
-<span id="cb99-6"><a href="#cb99-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/p&gt;</span></span>
-<span id="cb99-7"><a href="#cb99-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- This is using the HTML language. You don't actually put this in a chunk if </span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="co">you want to put this in an Rmarkdown file, you can just type it straight in.--&gt;</span></span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span></span>
+<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a>    Hello World</span>
+<span id="cb98-6"><a href="#cb98-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb98-7"><a href="#cb98-7" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>looks like this in the result:</p>
 <!-- These are CSS rules that allow you to draw a box around HTML elements. This helps to make them stand out from the rest of the primer and actually look like an output from a program rather than just plain text. -->
 <div class="cell">
@@ -1496,12 +1489,12 @@ Hello World
 <p>Now, we’re doing data science. And let’s say you find some really cool website off of the internet that has a lot of really useful data, but there’s no download file (and <a href="#legal-to-scrape">it’s legal to scrape from that website</a>). That means that you have to pull the information from the HTML code.</p>
 <p>We can do this by using the <strong>rvest</strong> package like I talked about earlier. This is essentially a package that allows you to scrape information from HTML code, allowing you to scrape the information off of the complete website.</p>
 <div class="cell">
-<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvest.tidyverse.org/">rvest</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rvest.tidyverse.org/">rvest</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Let’s try scraping the <code>Hello World</code> from the earlier HTML code.</p>
 <p>First off, we need to use the <code><a href="https://rvest.tidyverse.org/reference/minimal_html.html">minimal_html()</a></code> function so that we can get an R object that we can then work on. This is a temporary use because we’re trying to Think about it like changing the information from HTML code into something that R can understand.</p>
 <div class="cell">
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_1</span> <span class="op">&lt;-</span> <span class="st">"&lt;html&gt;</span></span>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_1</span> <span class="op">&lt;-</span> <span class="st">"&lt;html&gt;</span></span>
 <span><span class="st">                 &lt;p&gt;</span></span>
 <span><span class="st">                   Hello World</span></span>
 <span><span class="st">                 &lt;/p&gt;</span></span>
@@ -1517,7 +1510,7 @@ Hello World
 </div>
 <p>Then we need to filter by the elements that the HTML file contains. In this case, we’re looking for the paragraph tag, or <code>&lt;p&gt;</code>. That means that we can just use <code><a href="https://rvest.tidyverse.org/reference/html_element.html">html_element()</a></code> to get the first paragraph element.</p>
 <div class="cell">
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Only use the letter part of the tag, not the &lt;, &gt;, or /</span></span>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Only use the letter part of the tag, not the &lt;, &gt;, or /</span></span>
 <span></span>
 <span><span class="va">raw_html_1</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/minimal_html.html">minimal_html</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1529,7 +1522,7 @@ Hello World
 </div>
 <p>This returns an HTML node, or the specific element that we chose. If we had more paragraphs in our HTML code, this would return more HTML nodes. Now, the interesting thing about these nodes is that they contain information that we can access using <code><a href="https://rvest.tidyverse.org/reference/html_text.html">html_text2()</a></code>. This lets us parse through the code without any problems.</p>
 <div class="cell">
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># html_text2() is different from the normal html_text() because it returns an</span></span>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># html_text2() is different from the normal html_text() because it returns an</span></span>
 <span><span class="co"># actual string. This is normally what we want.</span></span>
 <span></span>
 <span><span class="va">raw_html_1</span> <span class="op">|&gt;</span></span>
@@ -1542,29 +1535,29 @@ Hello World
 </div>
 <p>But websites, especially ones with useful data, don’t just exist to state “Hello World”. They’re much more complex than that. By layering different elements, you can create a website that contains a lot more information.</p>
 <p>For example, doing this in HTML:</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb107-1"><a href="#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
-<span id="cb107-2"><a href="#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;table&gt;</span></span>
-<span id="cb107-3"><a href="#cb107-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;tr&gt;</span></span>
-<span id="cb107-4"><a href="#cb107-4" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td&gt;</span></span>
-<span id="cb107-5"><a href="#cb107-5" aria-hidden="true" tabindex="-1"></a>        This is some important info.</span>
-<span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
-<span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td&gt;</span></span>
-<span id="cb107-8"><a href="#cb107-8" aria-hidden="true" tabindex="-1"></a>        This is some unimportant info.</span>
-<span id="cb107-9"><a href="#cb107-9" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
-<span id="cb107-10"><a href="#cb107-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/tr&gt;</span></span>
-<span id="cb107-11"><a href="#cb107-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;tr&gt;</span></span>
-<span id="cb107-12"><a href="#cb107-12" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td&gt;</span></span>
-<span id="cb107-13"><a href="#cb107-13" aria-hidden="true" tabindex="-1"></a>        This is really important info.</span>
-<span id="cb107-14"><a href="#cb107-14" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
-<span id="cb107-15"><a href="#cb107-15" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td&gt;</span></span>
-<span id="cb107-16"><a href="#cb107-16" aria-hidden="true" tabindex="-1"></a>        This is some other unimportant information.</span>
-<span id="cb107-17"><a href="#cb107-17" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
-<span id="cb107-18"><a href="#cb107-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/tr&gt;</span></span>
-<span id="cb107-19"><a href="#cb107-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/table&gt;</span></span>
-<span id="cb107-20"><a href="#cb107-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span></span>
-<span id="cb107-21"><a href="#cb107-21" aria-hidden="true" tabindex="-1"></a>    This is so useless, you shouldn't even be reading it.</span>
-<span id="cb107-22"><a href="#cb107-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/p&gt;</span></span>
-<span id="cb107-23"><a href="#cb107-23" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;table&gt;</span></span>
+<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;tr&gt;</span></span>
+<span id="cb106-4"><a href="#cb106-4" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td&gt;</span></span>
+<span id="cb106-5"><a href="#cb106-5" aria-hidden="true" tabindex="-1"></a>        This is some important info.</span>
+<span id="cb106-6"><a href="#cb106-6" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb106-7"><a href="#cb106-7" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td&gt;</span></span>
+<span id="cb106-8"><a href="#cb106-8" aria-hidden="true" tabindex="-1"></a>        This is some unimportant info.</span>
+<span id="cb106-9"><a href="#cb106-9" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb106-10"><a href="#cb106-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/tr&gt;</span></span>
+<span id="cb106-11"><a href="#cb106-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;tr&gt;</span></span>
+<span id="cb106-12"><a href="#cb106-12" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td&gt;</span></span>
+<span id="cb106-13"><a href="#cb106-13" aria-hidden="true" tabindex="-1"></a>        This is really important info.</span>
+<span id="cb106-14"><a href="#cb106-14" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb106-15"><a href="#cb106-15" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td&gt;</span></span>
+<span id="cb106-16"><a href="#cb106-16" aria-hidden="true" tabindex="-1"></a>        This is some other unimportant information.</span>
+<span id="cb106-17"><a href="#cb106-17" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb106-18"><a href="#cb106-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/tr&gt;</span></span>
+<span id="cb106-19"><a href="#cb106-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/table&gt;</span></span>
+<span id="cb106-20"><a href="#cb106-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span></span>
+<span id="cb106-21"><a href="#cb106-21" aria-hidden="true" tabindex="-1"></a>    This is so useless, you shouldn't even be reading it.</span>
+<span id="cb106-22"><a href="#cb106-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb106-23"><a href="#cb106-23" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Creates a table and a paragraph that looks like this:</p>
 <div class="artificial-html-div">
 
@@ -1595,7 +1588,7 @@ This is so useless, you shouldn’t even be reading it.
 <p>Now, let’s say we want to get all of the information in the table but we don’t want to get the useless description at the end.</p>
 <p>We can do this by only looking at the table (the <code>&lt;table&gt;</code> tag) and then getting the cells (the <code>&lt;td&gt;</code> tag). We’ll also save this to a variable for later.</p>
 <div class="cell">
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_2</span> <span class="op">&lt;-</span> <span class="st">"&lt;html&gt;</span></span>
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_2</span> <span class="op">&lt;-</span> <span class="st">"&lt;html&gt;</span></span>
 <span><span class="st">                 &lt;table&gt;</span></span>
 <span><span class="st">                   &lt;tr&gt;</span></span>
 <span><span class="st">                     &lt;td&gt;</span></span>
@@ -1622,7 +1615,7 @@ This is so useless, you shouldn’t even be reading it.
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "&lt;html&gt;\n                 &lt;table&gt;\n                   &lt;tr&gt;\n                     &lt;td&gt;\n                       This is some important info.\n                     &lt;/td&gt;\n                     &lt;td&gt;\n                       This is some unimportant info.\n                     &lt;/td&gt;\n                   &lt;/tr&gt;\n                   &lt;tr&gt;\n                     &lt;td&gt;\n                       This is really important info.\n                     &lt;/td&gt;\n                     &lt;td&gt;\n                       This is some other unimportant information.\n                     &lt;/td&gt;\n                   &lt;/tr&gt;\n                 &lt;/table&gt;\n                 &lt;p&gt;\n                   This is so useless, you shouldn't even be reading it.\n                 &lt;/p&gt;\n               &lt;/html&gt;"</code></pre>
 </div>
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># We use html_elements() to get all of the elements in the HTML file.</span></span>
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># We use html_elements() to get all of the elements in the HTML file.</span></span>
 <span></span>
 <span><span class="va">td_tags</span> <span class="op">&lt;-</span> <span class="va">raw_html_2</span> <span class="op">|&gt;</span></span>
 <span>             <span class="fu"><a href="https://rvest.tidyverse.org/reference/minimal_html.html">minimal_html</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1639,7 +1632,7 @@ This is so useless, you shouldn’t even be reading it.
 </div>
 <p>Notice that this actually outputs a list of the elements and their text. That means that we can use the this output like a list in order to get the information that we want. Just use the <code>[[]]</code> syntax.</p>
 <div class="cell">
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">td_tags</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">td_tags</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_text.html">html_text2</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "This is some unimportant info."</code></pre>
@@ -1652,17 +1645,17 @@ This is so useless, you shouldn’t even be reading it.
 <p><em>CSS</em>, or <em>C</em>ascading <em>S</em>tyle <em>S</em>heets, is a coding language that defines the style of webpages. You may have noticed earlier that the HTML code we output earlier was just black and white. But websites aren’t black and white, they have colors and other cool things. They do this by using CSS to add special rules to specific elements.</p>
 <p>Now, there are a number of ways to do this. The first one is by using a <em>class</em> to tell the webpage that you want all of these elements to have the same style. CSS classes are a way for multiple elements to have the same style, rather than being limited to a unique ID. We can see an example of this below, where we set the elements with the class <code>good-info</code> to be green and the class <code>amazing-info</code> to have a pale red background.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*This uses the `css` language instead of the R language. You can use this</span></span>
-<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="co">  code in an Rmarkdown file by substituting the "r" for "css" in the top </span></span>
-<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a><span class="co">  brackets*/</span></span>
-<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a><span class="fu">.good-info</span> {</span>
-<span id="cb114-6"><a href="#cb114-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span>: <span class="cn">green</span></span>
-<span id="cb114-7"><a href="#cb114-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb114-8"><a href="#cb114-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb114-9"><a href="#cb114-9" aria-hidden="true" tabindex="-1"></a><span class="fu">.amazing-info</span> {</span>
-<span id="cb114-10"><a href="#cb114-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span>: <span class="cn">lightpink</span></span>
-<span id="cb114-11"><a href="#cb114-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="co">/*This uses the `css` language instead of the R language. You can use this</span></span>
+<span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="co">  code in an Rmarkdown file by substituting the "r" for "css" in the top </span></span>
+<span id="cb113-3"><a href="#cb113-3" aria-hidden="true" tabindex="-1"></a><span class="co">  brackets*/</span></span>
+<span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb113-5"><a href="#cb113-5" aria-hidden="true" tabindex="-1"></a><span class="fu">.good-info</span> {</span>
+<span id="cb113-6"><a href="#cb113-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span>: <span class="cn">green</span></span>
+<span id="cb113-7"><a href="#cb113-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb113-8"><a href="#cb113-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb113-9"><a href="#cb113-9" aria-hidden="true" tabindex="-1"></a><span class="fu">.amazing-info</span> {</span>
+<span id="cb113-10"><a href="#cb113-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-color</span>: <span class="cn">lightpink</span></span>
+<span id="cb113-11"><a href="#cb113-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <style type="text/css">
 /*This uses the `css` language instead of the R language. You can use this
   code in an Rmarkdown file by substituting the "r" for "css" in the top 
@@ -1678,29 +1671,29 @@ This is so useless, you shouldn’t even be reading it.
 </style>
 </div>
 <p>We can then use that class in the HTML code.</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
-<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;table&gt;</span></span>
-<span id="cb115-3"><a href="#cb115-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;tr&gt;</span></span>
-<span id="cb115-4"><a href="#cb115-4" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td</span> <span class="er">class</span> <span class="ot">=</span> <span class="st">'good-info'</span><span class="kw">&gt;</span></span>
-<span id="cb115-5"><a href="#cb115-5" aria-hidden="true" tabindex="-1"></a>        This is some important info.</span>
-<span id="cb115-6"><a href="#cb115-6" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
-<span id="cb115-7"><a href="#cb115-7" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td&gt;</span></span>
-<span id="cb115-8"><a href="#cb115-8" aria-hidden="true" tabindex="-1"></a>        This is some unimportant info.</span>
-<span id="cb115-9"><a href="#cb115-9" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
-<span id="cb115-10"><a href="#cb115-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/tr&gt;</span></span>
-<span id="cb115-11"><a href="#cb115-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;tr&gt;</span></span>
-<span id="cb115-12"><a href="#cb115-12" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td</span> <span class="er">class</span> <span class="ot">=</span> <span class="st">'good-info amazing-info'</span><span class="kw">&gt;</span></span>
-<span id="cb115-13"><a href="#cb115-13" aria-hidden="true" tabindex="-1"></a>        This is really important info.</span>
-<span id="cb115-14"><a href="#cb115-14" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
-<span id="cb115-15"><a href="#cb115-15" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td&gt;</span></span>
-<span id="cb115-16"><a href="#cb115-16" aria-hidden="true" tabindex="-1"></a>        This is some other unimportant information.</span>
-<span id="cb115-17"><a href="#cb115-17" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
-<span id="cb115-18"><a href="#cb115-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/tr&gt;</span></span>
-<span id="cb115-19"><a href="#cb115-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/table&gt;</span></span>
-<span id="cb115-20"><a href="#cb115-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span></span>
-<span id="cb115-21"><a href="#cb115-21" aria-hidden="true" tabindex="-1"></a>    This is so useless, you shouldn't even be reading it.</span>
-<span id="cb115-22"><a href="#cb115-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/p&gt;</span></span>
-<span id="cb115-23"><a href="#cb115-23" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;table&gt;</span></span>
+<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;tr&gt;</span></span>
+<span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td</span> <span class="er">class</span> <span class="ot">=</span> <span class="st">'good-info'</span><span class="kw">&gt;</span></span>
+<span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a>        This is some important info.</span>
+<span id="cb114-6"><a href="#cb114-6" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb114-7"><a href="#cb114-7" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td&gt;</span></span>
+<span id="cb114-8"><a href="#cb114-8" aria-hidden="true" tabindex="-1"></a>        This is some unimportant info.</span>
+<span id="cb114-9"><a href="#cb114-9" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb114-10"><a href="#cb114-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/tr&gt;</span></span>
+<span id="cb114-11"><a href="#cb114-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;tr&gt;</span></span>
+<span id="cb114-12"><a href="#cb114-12" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td</span> <span class="er">class</span> <span class="ot">=</span> <span class="st">'good-info amazing-info'</span><span class="kw">&gt;</span></span>
+<span id="cb114-13"><a href="#cb114-13" aria-hidden="true" tabindex="-1"></a>        This is really important info.</span>
+<span id="cb114-14"><a href="#cb114-14" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb114-15"><a href="#cb114-15" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;td&gt;</span></span>
+<span id="cb114-16"><a href="#cb114-16" aria-hidden="true" tabindex="-1"></a>        This is some other unimportant information.</span>
+<span id="cb114-17"><a href="#cb114-17" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;/td&gt;</span></span>
+<span id="cb114-18"><a href="#cb114-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/tr&gt;</span></span>
+<span id="cb114-19"><a href="#cb114-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/table&gt;</span></span>
+<span id="cb114-20"><a href="#cb114-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;p&gt;</span></span>
+<span id="cb114-21"><a href="#cb114-21" aria-hidden="true" tabindex="-1"></a>    This is so useless, you shouldn't even be reading it.</span>
+<span id="cb114-22"><a href="#cb114-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb114-23"><a href="#cb114-23" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="artificial-html-div">
 
 
@@ -1730,7 +1723,7 @@ This is so useless, you shouldn’t even be reading it.
 <p><br></p>
 <p>Now, there’s a really clever trick that we can use here. Let’s say that we only want the table cells that are important, but we don’t know exactly where they are (we only know their class). Well in most cases, the data you want will be a different color, like what we see in the data above. Think about it like making <em>important information</em> have an italic font to make it stand out. CSS makes all of the <em>information</em> italic by assigning it a specific class, so we can just look for everything that has that class and pull it out so that we only get the <em>important</em> information. We can do this by using <code><a href="https://rvest.tidyverse.org/reference/html_element.html">html_elements()</a></code>. Just plug in the class of the element that you want with a <code>.</code> in front to tell R that it’s an class.</p>
 <div class="cell">
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_3</span> <span class="op">&lt;-</span> <span class="st">"&lt;html&gt;</span></span>
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_3</span> <span class="op">&lt;-</span> <span class="st">"&lt;html&gt;</span></span>
 <span><span class="st">                 &lt;table&gt;</span></span>
 <span><span class="st">                   &lt;tr&gt;</span></span>
 <span><span class="st">                     &lt;td class = 'good-info'&gt;</span></span>
@@ -1764,7 +1757,7 @@ This is so useless, you shouldn’t even be reading it.
 </div>
 <p>You can sort by multiple classes by just chaining them together.</p>
 <div class="cell">
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_3</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_3</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/minimal_html.html">minimal_html</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_elements</a></span><span class="op">(</span><span class="st">".good-info.amazing-info"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_text.html">html_text2</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1774,19 +1767,19 @@ This is so useless, you shouldn’t even be reading it.
 </div>
 <p>Webpages will also use something called an <em>ID</em> to change the color of a specific element. Do the same thing but this time with a “#” at the beginning to signify that it’s a symbol.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.red-id</span> {</span>
-<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span>: <span class="cn">red</span></span>
-<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode css code-with-copy"><code class="sourceCode css"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.red-id</span> {</span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">color</span>: <span class="cn">red</span></span>
+<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <style type="text/css">
 .red-id {
   color: red
 }
 </style>
 </div>
-<div class="sourceCode" id="cb121"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
-<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">"red-id"</span><span class="kw">&gt;</span> This is red! <span class="kw">&lt;/p&gt;</span></span>
-<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span> This is not red. <span class="kw">&lt;/p&gt;</span></span>
-<span id="cb121-4"><a href="#cb121-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p</span> <span class="er">id</span> <span class="ot">=</span> <span class="st">"red-id"</span><span class="kw">&gt;</span> This is red! <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p&gt;</span> This is not red. <span class="kw">&lt;/p&gt;</span></span>
+<span id="cb120-4"><a href="#cb120-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="artificial-html-div">
 
 <p id="red-id" class="artificial-paragraph">
@@ -1799,11 +1792,11 @@ This is not red.
 </div>
 <p><br></p>
 <p>So far, we’ve covered 3 ways to find the parts of a website through it’s HTML code: the element (<code>&lt;p&gt;</code>), the ID (<code>#red-id</code>), and the class (<code>.red-class</code>). However, we can also mix-and-match these tags. Take the following HTML element:</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
-<span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">"https://ppbds.github.io/primer/index.html"</span> <span class="er">id</span><span class="ot">=</span><span class="st">"abcd1234"</span> <span class="er">class</span><span class="ot">=</span><span class="st">"hello hi"</span><span class="kw">&gt;</span></span>
-<span id="cb122-3"><a href="#cb122-3" aria-hidden="true" tabindex="-1"></a>link to primer</span>
-<span id="cb122-4"><a href="#cb122-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/a&gt;</span></span>
-<span id="cb122-5"><a href="#cb122-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;html&gt;</span></span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">"https://ppbds.github.io/primer/index.html"</span> <span class="er">id</span><span class="ot">=</span><span class="st">"abcd1234"</span> <span class="er">class</span><span class="ot">=</span><span class="st">"hello hi"</span><span class="kw">&gt;</span></span>
+<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a>link to primer</span>
+<span id="cb121-4"><a href="#cb121-4" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/a&gt;</span></span>
+<span id="cb121-5"><a href="#cb121-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="artificial-html-div">
 
 <a href="https://ppbds.github.io/primer/index.html" id="abcd1234" class="hello hi artificial-paragraph"> link to primer </a>
@@ -1812,7 +1805,7 @@ This is not red.
 <p><br></p>
 <p>We can try accessing it through the normal methods, like so:</p>
 <div class="cell">
-<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">&lt;-</span> <span class="st">'&lt;a href = "https://ppbds.github.io/primer/index.htm" id="abcd1234" class="hello hi"&gt;link to primer&lt;/a&gt;'</span></span>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">&lt;-</span> <span class="st">'&lt;a href = "https://ppbds.github.io/primer/index.htm" id="abcd1234" class="hello hi"&gt;link to primer&lt;/a&gt;'</span></span>
 <span></span>
 <span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/minimal_html.html">minimal_html</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1821,14 +1814,14 @@ This is not red.
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "link to primer"</code></pre>
 </div>
-<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/minimal_html.html">minimal_html</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_element</a></span><span class="op">(</span><span class="st">"#abcd1234"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_text.html">html_text2</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "link to primer"</code></pre>
 </div>
-<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/minimal_html.html">minimal_html</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_element</a></span><span class="op">(</span><span class="st">".hello"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_text.html">html_text2</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1838,7 +1831,7 @@ This is not red.
 </div>
 <p>Or we can mix and match them to make an even more narrow search by chaining them together.</p>
 <div class="cell">
-<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Keep in mind that IDs (the # part) are usually unique to that element only, so</span></span>
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Keep in mind that IDs (the # part) are usually unique to that element only, so</span></span>
 <span><span class="co"># there's not really a point in filtering it even more when it's already unique.</span></span>
 <span></span>
 <span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
@@ -1848,28 +1841,28 @@ This is not red.
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "link to primer"</code></pre>
 </div>
-<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/minimal_html.html">minimal_html</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_element</a></span><span class="op">(</span><span class="st">"a.hello"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_text.html">html_text2</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "link to primer"</code></pre>
 </div>
-<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/minimal_html.html">minimal_html</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_element</a></span><span class="op">(</span><span class="st">"a.hello#abcd1234"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_text.html">html_text2</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "link to primer"</code></pre>
 </div>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/minimal_html.html">minimal_html</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_element</a></span><span class="op">(</span><span class="st">".hello#abcd1234"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_text.html">html_text2</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "link to primer"</code></pre>
 </div>
-<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/minimal_html.html">minimal_html</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_element</a></span><span class="op">(</span><span class="st">"a.hello.hi#abcd1234"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_text.html">html_text2</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1879,7 +1872,7 @@ This is not red.
 </div>
 <p>We can also get the link that the node refers to rather than the text. In this case, the link is stored in the <code>href</code> attribute, so we use <code><a href="https://rvest.tidyverse.org/reference/html_attr.html">html_attr()</a></code> to access it.</p>
 <div class="cell">
-<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_html_5</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/minimal_html.html">minimal_html</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_element</a></span><span class="op">(</span><span class="st">"a.hello.hi#abcd1234"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_attr.html">html_attr</a></span><span class="op">(</span><span class="st">"href"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1960,7 +1953,7 @@ This is not red.
 <span class="header-section-number">3.4.2.2</span> Scraping from actual websites</h4>
 <p>Now, earlier we only scraped from pre-written HTML code, but you can do this from websites as well. We can do this just by plugging in the URL to the website and using <code><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html()</a></code> instead of <code><a href="https://rvest.tidyverse.org/reference/minimal_html.html">minimal_html()</a></code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">web_url</span> <span class="op">&lt;-</span> <span class="st">"https://www.opensecrets.org/political-action-committees-pacs/foreign-connected-pacs/2020"</span></span>
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">web_url</span> <span class="op">&lt;-</span> <span class="st">"https://www.opensecrets.org/political-action-committees-pacs/foreign-connected-pacs/2020"</span></span>
 <span></span>
 <span><span class="va">web_url</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1973,7 +1966,7 @@ This is not red.
 </div>
 <p>In this case, we can use Selector Gadget to find the correct CSS selector “table.DataTable-Partial”. We then just proceed as normal, but we need to use <code><a href="https://rvest.tidyverse.org/reference/html_table.html">html_table()</a></code> because we’re trying to bring in a table and use it as a tibble.</p>
 <div class="cell">
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">web_url</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">web_url</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_element</a></span><span class="op">(</span><span class="st">"table.DataTable-Partial"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_table.html">html_table</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1999,7 +1992,7 @@ This is not red.
 <p>Let’s try this by using a Wikipedia page about <a href="https://en.wikipedia.org/wiki/Gun_violence_in_the_United_States_by_state">gun violence in the United States</a>.</p>
 <p>First, we need to save the URL and read the HTML code from it into R.</p>
 <div class="cell">
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">wiki_url</span> <span class="op">&lt;-</span> <span class="st">"https://en.wikipedia.org/w/index.php?title=%22,%22Gun_violence_in_the_United_States_by_state%22,%22&amp;direction=prev&amp;oldid=810166167"</span></span>
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">wiki_url</span> <span class="op">&lt;-</span> <span class="st">"https://en.wikipedia.org/w/index.php?title=%22,%22Gun_violence_in_the_United_States_by_state%22,%22&amp;direction=prev&amp;oldid=810166167"</span></span>
 <span></span>
 <span><span class="va">wiki_url</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2013,7 +2006,7 @@ This is not red.
 <p>We can then use SelectorGadget to find the correct CSS selector. If you can’t easily click on the table, you can also find a selector by reading the HTML code itself. You can do this by highlighting the table, right clicking, and pressing “Inspect”. While you’ll have to dig through the HTML in order to find the correct selector, this is a perfectly viable way to find selectors.</p>
 <p>We can then save the table provided into a variable known as <code>raw_data_wiki</code>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_data_wiki</span> <span class="op">&lt;-</span> <span class="va">wiki_url</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">raw_data_wiki</span> <span class="op">&lt;-</span> <span class="va">wiki_url</span> <span class="op">|&gt;</span></span>
 <span>                   <span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html">read_html</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>                   <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_element.html">html_element</a></span><span class="op">(</span><span class="st">"table.wikitable.sortable"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>                   <span class="fu"><a href="https://rvest.tidyverse.org/reference/html_table.html">html_table</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -2041,7 +2034,7 @@ This is not red.
 <!-- DK: Awkwardly written. Not an interesting plot. -->
 <p>Past this point, you can work with the data just like you would normal data. Here’s an example graph of how states that have a denser population experience more consistent gun deaths than states with a less dense population.</p>
 <div class="cell">
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">clean_data</span> <span class="op">&lt;-</span> <span class="va">raw_data_wiki</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">clean_data</span> <span class="op">&lt;-</span> <span class="va">raw_data_wiki</span> <span class="op">|&gt;</span></span>
 <span>                <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span><span class="st">"population"</span> <span class="op">=</span> <span class="st">"Population (total inhabitants) (2015) [1]"</span>,</span>
 <span>                       <span class="st">"death_rate"</span> <span class="op">=</span> <span class="st">"Murder and Nonnegligent\nManslaughter Rate(per 100,000 inhabitants) (2015)"</span>,</span>
 <span>                       <span class="st">"total_deaths"</span> <span class="op">=</span> <span class="st">"Murders and Nonnegligent\nManslaughter(total deaths) (2015) [2]"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -2099,10 +2092,10 @@ This is not red.
 <p>To get a certain set of weather data from the Iowa Environmental Mesonet, you can send an HTTP request specifying a base URL, <em>https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py/</em>, as well as some parameters describing the subset of dataset you want (e.g., date ranges, weather variables, output format). Once you know the rules for the names and possible values of these parameters (more on that below), you can submit an HTTP GET request using the function<code><a href="https://httr.r-lib.org/reference/GET.html">GET()</a></code> from the <strong>httr</strong> package.</p>
 <p>When you are making an HTTP request using the <code><a href="https://httr.r-lib.org/reference/GET.html">GET()</a></code> or <code><a href="https://httr.r-lib.org/reference/POST.html">POST()</a></code> functions from the <strong>httr</strong> package, you can include the key-value pairs for any query parameters as a list object in the <code>query</code> argument of the function. For example, suppose you want to get wind speed in miles per hour (data = “sped”) for Denver, CO, (station = “DEN”) for the month of June 2016 (year1 = “2016”, month1 = “6”, etc.) in Denver’s local time zone (tz = “America/Denver”) and in a comma-separated file (format = “comma”). To get this weather dataset, you can run:</p>
 <div class="cell">
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr.r-lib.org/">httr</a></span><span class="op">)</span></span>
 <span><span class="va">meso_url</span> <span class="op">&lt;-</span> <span class="st">"https://mesonet.agron.iastate.edu/cgi-bin/request/asos.py/"</span></span>
 <span><span class="va">denver</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://httr.r-lib.org/reference/GET.html">GET</a></span><span class="op">(</span>url <span class="op">=</span> <span class="va">meso_url</span>,</span>
 <span>                    query <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>station <span class="op">=</span> <span class="st">"DEN"</span>,</span>
@@ -2128,7 +2121,7 @@ dttm (1): valid
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># There are 9,106 rows of data to look at! Let's just look at subset for our</span></span>
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># There are 9,106 rows of data to look at! Let's just look at subset for our</span></span>
 <span><span class="co"># purposes.</span></span>
 <span></span>
 <span><span class="va">denver</span> <span class="op">|&gt;</span> </span>
@@ -2188,7 +2181,7 @@ dttm (1): valid
 </h4>
 <p>The first step to creating a website is by using the <code><a href="https://pkgs.rstudio.com/distill/reference/create_website.html">create_website()</a></code> function. This creates the entire distill website and should be the first function that you run whenever you want to make one. Just use the following syntax:</p>
 <div class="cell">
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/distill">distill</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/distill">distill</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://pkgs.rstudio.com/distill/reference/create_website.html">create_website</a></span><span class="op">(</span>dir <span class="op">=</span> <span class="st">"."</span>, title <span class="op">=</span> <span class="st">"title-of-your-website"</span>, gh_pages <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This essentially creates a distill website in your current R project, titles it “title-of-your-website” and formats it so that we can publish it on <a href="https://pages.github.com/">Github Pages</a> (Github’s website publishing service). After you run this, you should see an <code>index.Rmd</code> and an <code>about.Rmd</code> file in your project, as well as some other miscellaneous files. These are the “Home” and “About” pages that you can use on your website.</p>
@@ -2197,7 +2190,7 @@ dttm (1): valid
 </h4>
 <p>But what if I want more pages than that? Only being restricted to a Home and About page is pretty bad, especially when you want to have a bibliography. This is when we use <code><a href="https://pkgs.rstudio.com/distill/reference/create_article.html">create_article()</a></code> to create a new page within our website. Just run the function with the title of the file and it’ll automatically create the .Rmd file for you to code in.</p>
 <div class="cell">
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pkgs.rstudio.com/distill/reference/create_article.html">create_article</a></span><span class="op">(</span><span class="st">"sources.Rmd"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pkgs.rstudio.com/distill/reference/create_article.html">create_article</a></span><span class="op">(</span><span class="st">"sources.Rmd"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Then, you need to put it into your website. Just go to the <code>_site.yml</code> file and add the page in using <code>text: "Sources"</code> and <code>"href: sources.html"</code>. This is what the <code>_site.yml</code> file should look like after you add the page.</p>
 <pre><code>name: "."
