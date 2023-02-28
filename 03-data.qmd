@@ -4,8 +4,6 @@
 
 ## Introduction
 
-<!-- Add one paragraph Distill section, including links, like from Bootcamp page. Point toward tutorial. DONE -->
-
 <!-- Any inspiration to be drawn from this: https://ubc-dsci.github.io/introduction-to-datascience/reading.html -->
 
 <!-- Add these?  -->
@@ -16,11 +14,6 @@
 
 <!-- Add Google sheets example. -->
 
-<!-- Investigate this error, which appears when knitting the chapter: -->
-<!-- * Output created: docs/index.html -->
-<!-- Warning message: -->
-<!-- In readLines(file) : -->
-<!--   incomplete final line found on '/var/folders/mk/lh99bg295msg8myvcf5yczkc0000gn/T//RtmpgXdsMq/file171757d88bd09' -->
  
 Getting data into and out of R is a major part of any real world data science project. There are multiple data formats that you use to transport this data, each with their own positives and negatives.
 
@@ -100,10 +93,11 @@ read_csv("my_csv.csv")
 When you want to remove a file from your system, use `file.remove()`.
 
 ```{r}
+#| output: false
 file.remove("my_csv.csv")
 ```
 
-Sometimes, CSV files will not be what you want. Maybe they have the wrong column names, have information at the top of the file, or have comments interspersed within the file.
+Sometimes, CSV files will be inconveniently formatted. Maybe they have the wrong column names, have information at the top of the file, or have comments interspersed within the file.
 
 #### `skip`
 
@@ -118,7 +112,7 @@ Consider the following csv file: `test_2.csv`. Here's what it looks like as a te
 
 file_2 <- paste0(github_url, "test_2.csv")
 
-readLines(file_2)
+cat(readLines(file_2), sep = "\n")
 ```
 
 As you can see, there is text at the top of this file. Often times information about how data was collected, or other relevant information, is included at the top of the data file. However, `read_csv()` can't differentiate between this text and the data that we want to read, causing it to fail and output gibberish.
@@ -192,11 +186,13 @@ read_csv(file_3)
 ```
 
 We can fix this by changing the `col_names` argument.
+
 ```{r}
 read_csv(file_3, col_names = c("a", "b", "c"))
 ```
 
-You can also create names automatically by setting `col_names` to FALSE
+You can also create names automatically by setting `col_names` to `FALSE`.
+
 ```{r}
 read_csv(file_3, col_names = FALSE)
 ```
@@ -214,20 +210,21 @@ file_4_tibble <- read_csv(file_4)
 file_4_tibble
 ```
 
-As you can see, while the function does compile the names aren't easy to access. It's possible to access the column by using the ` tickmark like below:
+
+The function runs but the column names are not easy to work with. It is possible to access the column by using a  backticks (\`) around the name.
 
 ```{r}
 file_4_tibble$`one powers`
 ```
 
-But that can still cause problems down the line and it's just annoying to use the backticks every time you want a column name. This is when we can use the `clean_names()` function from the **janitor** package. It essentially formats the column names so that they follow the [underscore separated naming convention](https://en.wikipedia.org/wiki/Snake_case) and are all unique.
+But that can still cause problems down the line and it's just annoying to use backticks every time you want a column name. The `clean_names()` function from the **janitor** package formats the column names so that they follow the [underscore separated naming convention](https://en.wikipedia.org/wiki/Snake_case) and are all unique.
 
 ```{r}
 file_4_tibble |> 
   clean_names()
 ```
 
-This cleans the column names, saving you time when your file has a large amount of columns or you need to type a lot of column names. These issues are more common when you're pulling data off of the internet as that's normally dirty data and can have a lot of columns formatted in weird ways.
+These issues are more common when you're pulling data off of the internet as that's normally dirty data and can have a lot of columns formatted in weird ways.
 
 <!-- The tutorial includes a lot of arguments like na and comment, but that makes the book feel like it's really long once it's actually put into text form with paragraphs and stuff. -->
 
