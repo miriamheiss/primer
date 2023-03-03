@@ -1,3 +1,16 @@
+# Sections to swap out for R4DS sections:
+
+Chapter 2
+
+
+Chapter 3
+Web scraping for Web scraping
+Data Import (includes rds) for Reading and Writing Files
+Spreadsheets for Excel files
+Databases for Databases (seems quite different?)
+Hierarchical Data covers JSON, and mentions APIs
+
+
 # Priorities
 
 -3) Update Trump/Biden data in chapter 1.
