@@ -12,6 +12,8 @@
 
 site_libs/
 
+.DS_Store
+
 renv
 
 primer.Rproj

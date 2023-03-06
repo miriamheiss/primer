@@ -42,7 +42,7 @@ library(gtsummary)
 
 <!-- Put the Glossary at the start the summary. -->
 
-```{=html}
+
 <!-- Clean up the weird text in some of the tables. See this
 
 https://mpopov.com/blog/2020/05/22/strings-in-r-4.x/ 
@@ -52,7 +52,7 @@ for discussion. I think that something like c("$$13 - \\tau_M$$") could become c
 
 
 <!-- Replace Sliding Doors in Summary with something from Wonderful Life that references "An angel gets his wings."  Every time a predictive model is interpreted causally, a devil gets his pitchfork. -->
-```
+
 <!-- Confounding is done twice in Complications, once with noise and once with parties. Needs to be unified. -->
 
 <!-- The entire Complications sections is filled with good stuff. But it all needs to be re-organized and rewritten. Key idea: What are the 3 or 4 key items that we want students to get out of this? What are the key lessons/concerns? What themes do we expect to revisit in the Temperance sections of later chapters? These key points should also go in the Summary. -->
