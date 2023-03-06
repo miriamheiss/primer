@@ -14,6 +14,20 @@ library(gtsummary)
 
 <!-- For MH: -->
 
+<!-- Add two more rows from the Preceptor Table to the first Population Table, at least one with a missing outcome. -->
+
+<!-- Write a bunch of comments about the issue of the Preceptor Table being, or not being, a subset of the Population Table, following our discussion. -->
+
+<!-- Reality Preceptor Tables and Fantasy Preceptor Tables. The former shows data that you might plausibly see. The latter is shows data which it is impossible for you to ever know for sure. When we are looking at Population Tables, should they include Reality Preceptor Tables or Fantasy Preceptor Tables? Or doesn't it matter?  -->
+
+<!-- Change the Multiple Units Preceptor Table to only show reality. That means, for both Data and for Preceptor, we can only see one of treatment and control values and never the causal effect. -->
+
+<!-- Change (or delete) the -1 and the 2 for Cassidy since this score must be between 3 and 15. -->
+
+<!-- In the Data source rows never show data that we can't possibly have, like both the treated and control outcomes. Same rule for the Preceptor Table? Not sure! -->
+
+<!-- Can't we make math text bolded, and thereby get Y_t(U) on the same level as "Source" and "ID"? If so, fix all the later tables. -->
+
 <!-- ID is just another column name. It should look the same, and be placed the same, as something like Height. To do so, we might need to insert an empty tab spanner, matching up with the tab spanners like "Outcome" which are often above Height. -->
 
 <!-- The column names which require math text, like Y_t, do not line up with the column names which don't use math, like gender. They should look the same. Maybe we use $$\text{gender}$$ to achieve that? -->
@@ -450,49 +464,12 @@ All of the variables calculated in the Preceptor and Population Tables are examp
 
 What does our real-world Preceptor Table look like?
 
-```{r}
-#| echo: false
-causal_table <- tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
-       ytreat = c("13", "14", "?", "?", "3"),
-       ycontrol = c("?", "?", "6", "12", "?"),
-       ydiff = c("?", "?", "?", "?", "?")) |>
-  
-  # Then, we use the gt function to make it pretty
-  
-  gt() |>
-    tab_header(title = "Causal Preceptor Table") |> 
-    cols_move(columns = c(ytreat, ycontrol), after = c(subject)) |>
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) |>
-    tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
-              locations = cells_column_labels(columns = c(subject))) |>
-    cols_align(align = "center", columns = everything()) |>
-    cols_align(align = "left", columns = c(subject)) |>
-    fmt_markdown(columns = everything())  |>
-    tab_spanner(label = "Outcomes", c(ytreat, ycontrol))  |>
-    tab_spanner(label = "Causal Effect", c(ydiff))
 
-predictive_table <- tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Diego"),
-       yall = c("13", "14", "6", "12", "3")) |> 
-gt() |>
-    tab_header(title = "Predictive Preceptor Table") |> 
-    cols_move(columns = c(yall), after = c(subject)) |>
-    tab_style(cell_borders(sides = "right"),
-              location = cells_body(columns = c(subject))) |>
-    tab_style(style = cell_text(align = "left", v_align = "middle", size = "large"), 
-              locations = cells_column_labels(columns = c(subject))) |>
-    cols_align(align = "center", columns = everything()) |>
-    cols_align(align = "left", columns = c(subject)) |>
-    fmt_markdown(columns = everything())|> 
-  tab_style(style = cell_text(v_align = "bottom"),
-            locations = cells_column_labels())
 
-```
 
-```{=html}
-<!-- SZ: Can't seem to make GT tables appear side by side, can only find working versions for Kable tables. Thoughts?  
+<!-- Can't seem to make GT tables appear side by side, can only find working versions for Kable tables. Thoughts?  
 See: https://stackoverflow.com/questions/65835639/arrange-gt-tables-side-by-side-or-in-a-grid-or-table-of-tables -->
-```
+
 ```{r}
 #| echo: false
 # First, we create a tibble with the values we want for the table
@@ -528,7 +505,7 @@ predictive_table <- tibble(subject = c("Yao", "Emma", "Cassidy", "Tahmid", "Dieg
 gt() |>
     tab_header(title = "Predictive Preceptor Table") |> 
     cols_label(subject = md("ID"),
-                  yall = md("$$Y(u)$$")) |>
+                  yall = md("$$Y_t(u)$$")) |>
     cols_move(columns = c(yall), after = c(subject)) |>
     tab_style(cell_borders(sides = "right"),
               location = cells_body(columns = c(subject))) |>
@@ -545,7 +522,7 @@ predictive_table
   
 ```
 
-<!-- This section ends awkwardly! -->
+<!-- This section ends awkwardly! Add some words. This is important! -->
 
 ## Simple models
 
