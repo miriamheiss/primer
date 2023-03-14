@@ -2,9 +2,27 @@
 
 Chapter 2
 
+These are the (rough) matches for where material covered by the Primer appears in R4DS. But maybe we should reorganize the chapter to better match R4DS. Pull out the most important functions into the main text, and overview tutorial, and then have other tutorials which go into all the details.
+
+Indeed, why not start a collection of tutorials, like "R4DS: Logical vectors" which always begin with R4DS and then the chapter title. (No chapter number.) Then, teachers could assign them as they see fit. Once those are built, we can 
+
+
+* https://r4ds.hadley.nz/data-import.html#data-entry for 2.1 Tibbles
+
+* https://r4ds.hadley.nz/rectangling.html#lists for 2.2 Lists
+
+* https://r4ds.hadley.nz/strings.html#letters for 2.3 Characters (but there is a lot of other material there as well)
+
+
+* https://r4ds.hadley.nz/factors.html for 2.4 Factors (matches well)
+
+* https://r4ds.hadley.nz/datetimes.html for 2.5 Date-Times (matches well but could skip durations and tz)
+
+* https://r4ds.hadley.nz/joins.html for 2.6 Combining Data
+
+* https://r4ds.hadley.nz/data-tidy.html for 2.7 Tidy data
 
 Chapter 3
-Web scraping for Web scraping
 Data Import (includes rds) for Reading and Writing Files
 Spreadsheets for Excel files
 Databases for Databases (seems quite different?)

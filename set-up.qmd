@@ -1,6 +1,6 @@
 # Set Up for Working on The Primer {-}
 
-This document provides a guide in setting up R/RStudio to work on *[The Primer](https://ppbds.github.io/primer/)*, both the book itself, [PPDBS/primer](https://github.com/PPBDS/primer), and the associated tutorial and data packages: [PPDBS/all.primer.tutorials](https://github.com/PPBDS/all.primer.tutorials) and [PPDBS/primer.data](https://github.com/PPBDS/primer.data). There are three steps:
+This document provides a guide in setting up R/RStudio to work on *[The Primer](https://ppbds.github.io/primer/)*, both the book itself, [PPDBS/primer](https://github.com/PPBDS/primer), and the associated tutorial and data packages: [PPDBS/all.primer.tutorials](https://github.com/PPBDS/all.primer.tutorials), [PPDBS/primer.data](https://github.com/PPBDS/primer.data), [PPDBS/r4ds.tutorials](https://github.com/PPBDS/r4ds.tutorials) and [PPDBS/tutorial.helpers](https://github.com/PPBDS/tutorial.helpers). There are three steps:
 
 * The first part ensures that you have the knowledge and computer settings to be successful. With luck, you will only need to do this once. 
 
