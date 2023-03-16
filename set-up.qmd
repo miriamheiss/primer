@@ -89,7 +89,7 @@ This may seem like overkill, but, as [*Pro Git*](https://git-scm.com/book/en/v2)
 
 Note that this command should automatically put you in a new RStudio session with the `primer` (or `all.primer.tutorials` or `primer.data`) RStudio project which resides on your computer
 
-2) The next step is to get **renv** setup so that you are running the same package versions as everyone else. Run this once:
+2) The next step is to get **renv** setup so that you are running the same package versions as everyone else. (This does not apply to the **all.primer.tutorials** package, which does not use **renv**.) Run this once:
 
 
 ```{r, eval=FALSE}
@@ -109,6 +109,7 @@ However, there are three other **renv** commands you might issue:
 
 `renv::snapshot()` should only be issued if you know what you are doing. This changes the `renv.lock` file, which is something that, usually, only I do. Most common case for use would be if you need to add a new package to the project.
 
+Because the **all.primer.tutorials** does not use **renv**, we need to take care that we are using up to date versions of all the packages.
 
 3) Create a branch to work from:
 

@@ -344,7 +344,7 @@ GitHub
 <p>This may seem like overkill, but, as <a href="https://git-scm.com/book/en/v2"><em>Pro Git</em></a> explains, it is how (essentially) all large projects are organized. With luck, you only have to issue this command once. After that, you are always connected, both to your fork and to the true repos, which live at github/com/PPBDS. Also, note that, if something ever gets totally messed up on your computer, you can just delete the project folder on your computer and the repo on your Github account and then start again. (If you have made changes that you don’t want to lose, just save the files with those changes to one side and then move them back after you have recreated the project.)</p>
 <p>Note that this command should automatically put you in a new RStudio session with the <code>primer</code> (or <code>all.primer.tutorials</code> or <code>primer.data</code>) RStudio project which resides on your computer</p>
 <ol start="2" type="1">
-<li>The next step is to get <strong>renv</strong> setup so that you are running the same package versions as everyone else. Run this once:</li>
+<li>The next step is to get <strong>renv</strong> setup so that you are running the same package versions as everyone else. (This does not apply to the <strong>all.primer.tutorials</strong> package, which does not use <strong>renv</strong>.) Run this once:</li>
 </ol>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/renv/">renv</a></span><span class="op">)</span></span>
@@ -356,6 +356,7 @@ GitHub
 <p><code><a href="https://rstudio.github.io/renv/reference/status.html">renv::status()</a></code> just reports if anything is messed up. It won’t hurt anything.</p>
 <p><code><a href="https://rstudio.github.io/renv/reference/restore.html">renv::restore()</a></code> looks at the <code>renv.lock</code> file and installs the packages it specifies. You will need to do this when I make a change to <code>renv.lock</code>, e.g., if I upgrade our version of <strong>ggplot2</strong> or add a new package.</p>
 <p><code><a href="https://rstudio.github.io/renv/reference/snapshot.html">renv::snapshot()</a></code> should only be issued if you know what you are doing. This changes the <code>renv.lock</code> file, which is something that, usually, only I do. Most common case for use would be if you need to add a new package to the project.</p>
+<p>Because the <strong>all.primer.tutorials</strong> does not use <strong>renv</strong>, we need to take care that we are using up to date versions of all the packages.</p>
 <ol start="3" type="1">
 <li>Create a branch to work from:</li>
 </ol>
