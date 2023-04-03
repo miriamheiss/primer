@@ -175,11 +175,11 @@ Our Population rows contain no data. These are subjects which fall within our po
 #| echo: false
 tibble(source = c("Population", "...",  "Data", "Data", 
                   "...", "Population", "...", 
-                  "Preceptor Table", "...", "Population"),
+                  "Preceptor Table", "...", "Population", "Preceptor Table", "Preceptor Table"),
        year = c("2010", "...", "2015", "2015", 
-                "...","2018", "...", "2022", "...", "2025"),
-       age = c("?", "...", "18", "23","...", "?","...","19", "...","?"),
-       height = c("?", "...", "180", "163", "...", "?", "...","?", "...", "?")) |> 
+                "...","2018", "...", "2022", "...", "2025", "?", "?"),
+       age = c("?", "...", "18", "23","...", "?","...","19", "...","?", "?", "?"),
+       height = c("?", "...", "180", "163", "...", "?", "...","?", "...", "?", "172", "...")) |> 
   
   # Then, we use the gt function to make it pretty
   
