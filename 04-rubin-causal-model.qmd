@@ -12,9 +12,11 @@ library(gt)
 library(gtsummary)
 ```
 
+<!-- Link for MathJax: https://www.mathjax.org/#demo (good for testing if math stuff looks good)-->
+
 <!-- For MH: -->
 
-<!-- Add two more rows from the Preceptor Table to the first Population Table, at least one with a missing outcome. -->
+<!-- Add two more rows from the Preceptor Table to the first Population Table, at least one with a missing outcome. MH: Done-->
 
 <!-- Write a bunch of comments about the issue of the Preceptor Table being, or not being, a subset of the Population Table, following our discussion. -->
 
@@ -26,9 +28,7 @@ library(gtsummary)
 
 <!-- In the Data source rows never show data that we can't possibly have, like both the treated and control outcomes. Same rule for the Preceptor Table? Not sure! -->
 
-<!-- Can't we make math text bolded, and thereby get Y_t(U) on the same level as "Source" and "ID"? If so, fix all the later tables. -->
-
-<!-- ID is just another column name. It should look the same, and be placed the same, as something like Height. To do so, we might need to insert an empty tab spanner, matching up with the tab spanners like "Outcome" which are often above Height. -->
+<!-- Can't we make math text bolded, and thereby get Y_t(U) on the same level as "Source" and "ID"? If so, fix all the later tables. MH: Math text cannot be bolded-->
 
 <!-- The column names which require math text, like Y_t, do not line up with the column names which don't use math, like gender. They should look the same. Maybe we use $$\text{gender}$$ to achieve that? -->
 
@@ -463,9 +463,6 @@ Consider these examples:
 All of the variables calculated in the Preceptor and Population Tables are examples of estimands we might be interested in. One estimand is important enough that it has its own name: the **average treatment effect**, often abbreviated as **ATE**. The average treatment effect is the mean of all the individual causal effects. Here, the mean is $+1.6$.
 
 What does our real-world Preceptor Table look like?
-
-
-
 
 <!-- Can't seem to make GT tables appear side by side, can only find working versions for Kable tables. Thoughts?  
 See: https://stackoverflow.com/questions/65835639/arrange-gt-tables-side-by-side-or-in-a-grid-or-table-of-tables -->
